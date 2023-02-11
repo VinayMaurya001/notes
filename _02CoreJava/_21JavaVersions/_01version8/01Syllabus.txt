@@ -1,0 +1,32 @@
+Introduction
+Lambda Expression
+	Introduction
+		Anonymous inner classes vs Lambda Expressions
+	Lambda Expressions with Collections.sort() 
+Method Reference & Constructor Reference by Double Colon(::) Operator
+Default & static methods in Interface
+Date & Time API (Joda API), joda.org
+Optional class
+StringJoiner class
+Concurrency API Enhancement
+Collections improvements
+Nashorn,JavaScript Engine	
+
+Functional Interface
+	Introduction
+	Functional Interface And Lambda Expression
+	Predefined Functional Interfaces
+		Predicate
+		Function	
+		Consumer
+		Supplier		
+Stream API
+
+
+
+
+
+
+Resources
+	http://tutorials.jenkov.com/java/lambda-expressions.html
+	Udemy

@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Notes {
 
@@ -16,7 +17,8 @@ public class Notes {
 	private static final String SPACES = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 
 	private static final String FILENAME = REPO_NAME + ".html";
-	private static int i = 0;
+
+	static String path = "";
 
 	public static void main(String[] args) throws Exception {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -26,32 +28,35 @@ public class Notes {
 		}
 	}
 
-	public static void walk(String path, int i, StringBuilder stringBuilder) {
-
-		File root = new File(path);
+	public static void walk(String basePath, int i, StringBuilder stringBuilder) {
+		File root = new File(basePath);
 		File[] list = root.listFiles();
-
 		if (list == null)
 			return;
-
 		i++;
 		for (File f : list) {
 			if (!isIgnoreDirOrFile(f, REPO_NAME)) {
 				for (int n = 0; n < i; n++) {
-
 					stringBuilder.append(SPACES);
 				}
-				String path2 = f.getAbsoluteFile().toString().substring(29);
+				path = f.getAbsoluteFile().toString().substring(26);
 				if (f.isDirectory()) {
-					String direPath = "<span>Dir:" + path2 + "<span><br>";
+					removePrefix();
+					String direPath = "<span>" + path + "<span><br>";
 					stringBuilder.append(direPath).append("\n");
 					walk(f.getAbsolutePath(), i, stringBuilder);
 				} else {
-					String filePath = PREFIX + path2 + "\">" + f.getName() + SUFFIX;
+					String filePath = PREFIX + path + "\">" + f.getName().substring(2) + SUFFIX;
 					stringBuilder.append(filePath).append("\n");
 				}
 			}
 		}
+	}
+
+	private static void removePrefix() {
+		IntStream.rangeClosed(0, 100).forEach(num -> {
+			path = path.replaceAll(String.format("_%02d", num), " ");
+		});
 	}
 
 	private static boolean isIgnoreDirOrFile(File f, String repoName) {
@@ -66,6 +71,7 @@ public class Notes {
 		switch (repoName) {
 		case "notes":
 			ignorePaths.add(".class");
+			ignorePaths.add("Notes.java");
 			break;
 		case "coreJava":
 			ignorePaths.add("abhinav");
