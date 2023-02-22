@@ -1,0 +1,18 @@
+
+
+
+
+
+
+
+
+Database Migration Library
+	Liquibase
+	Flyway
+
+
+
+
+
+Resources
+	https://blog.devart.com/difference-between-schema-database.html

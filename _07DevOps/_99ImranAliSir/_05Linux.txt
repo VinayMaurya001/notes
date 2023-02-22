@@ -1,0 +1,390 @@
+1. Intro to Linux
+2. Basic CLI Commands
+3. Understanding files in Linux
+4. Filters & Redirection
+5. Users & Group
+6. Sudo
+7. Software management
+	RPM, Debian, yum, apt
+8. Services & Processes	
+9. Good to know commands
+10. Server Management
+
+
+/allNotes/7DevOps/imranAliSir/5Linux/LinuxSlides.pdf
+/allNotes/7DevOps/imranAliSir/5Linux/LinuxQuickstartV5.pdf
+
+Linux Commands
+	/notes/_07DevOps/_99ImranAliSir/5Linux/
+	
+	
+	
+	
+	
+Open Source
+	Open source software is software with source code that anyone can inspect, modify, and enhance.
+	Common Misconception :"open source" just mean something is free of charge
+		
+Linux Origins
+	1984: The GNU Project and the Free Software Foundatior
+		Creates open source version of UNIX utilities
+		Creates the General Public License (GPL)
+			Software license enforcing open source principles
+
+	1991: Linus Torvalds
+		Creates open source, UNIX-like kernel, released under the GPL license
+		Ports some GNU utilities, solicits assistance online
+	Today:
+		Linux kernel + GNU utilities = complete, open source, UNI X-like operating system
+			Packaged for targeted audiences as distributions
+ 
+Linux Principles
+	Everything is a file (Including Hardware)
+	Small Single purpose Programs
+	Ability to chain programs together for complex operations
+	Avoid Captive User Interface
+	Configuration data stored in text file
+
+
+Why Linux
+	Opensource
+	Community Support
+	Support Wide Variety of Hardware
+	Customization
+	Most Servers runs on Linux
+	Automation
+	Security
+	
+Architecture of linux
+	Hardware>Kernel>Shell(on which we execute command)>Applications
+	
+Popular Linux Distos
+	https://en.wikipedia.org/wiki/List_of_Linux_distributions
+	Desktop OS
+		Ubuntu Linux
+		Linux Mint
+		Arch Linux
+		Fedora
+		Debian
+		OpenSuse
+	Server OS (don't have UI)
+		Red Hat Enterprise Linux(Not Open Source)
+		Ubuntu Server
+		Centos
+		SUSE Enterprise Linux
+		
+Most used Linux distros currently in IT industry.
+	RPM based:- RHEL, Centos, Oracle Linux, Amazon Linux
+		For Servers
+		DEB or .deb (Debian based softwares)
+		DEB was developed by Bedian.
+		Package Manager-YUM
+	Debian based :- Ubuntu Server, Kali Linux
+		For devops
+		RPM or .rpm (Red Hat based softwares.)
+		RPM was developed by Community & Red Hat.
+		
+Diffrence between RPM based and Debian based.
+	From user’s point of view, there isn’t much difference in these tools. 
+	The RPM and DEB formats are both just archive files, with some metadata attached to them. 
+	They are both equally arcane, have hardcoded install paths and only differ in subtle details. 
+	DEB files are installation files for Debian based distributions. 
+	RPM files are installation files for Red Hat based distributions. 
+	Ubuntu is based on Debian’s package manage based on APT and DPKG. 
+	Red Hat, CentOS and Fedora are based on the old Red Hat Linux package management system, RPM.		
+		
+		
+Some Important Directories
+	Home Directories: /root,/home/username
+	User Executable: /bin, /usr/bin, /usr/local/bin
+	System Executables: /sbin, /usr/sbin,/usr/local/sbin
+	Other Mountpoints: /media, /mnt
+	Configuration: /etc
+	Temporary Files: /tmp
+	Kernels and Bootloader: /boot
+	Server Data: /var, /srv
+	System Information: /proc, /sys
+	Shared Libraries: /1ib, /usr/1ib, /usr/local/lib	
+		
+		
+		
+		
+		
+		
+		
+
+Practice Linux & Vagrant
+	Website
+		On Centos7 Httpd service & HTML Templates
+	Wordpress
+		On Ubuntu 18 Apache2, mysql & PHP Wordpress Template
+	Automation
+		Vagrant provisioning
+		
+		
+		
+		
+Basic commands & FIle System
+	command --help
+		cp --help
+	whoami
+	pwd
+	ls 
+		ls dir/
+		ls -l
+		ls -a
+		ls /home/vagrant/
+	cat /etc/os-release
+	clear
+	sudo -i
+		switch to root user
+	exit
+		logout
+	[root@localhost ~]# 
+	[vagrant@localhost ~]$
+	history
+	cd
+	cd /  
+		top level direcotry
+	cd ~ or cd
+		home directory for logged in user
+	cd /root
+	cat /etc/hostname
+		
+	cd username
+	uptime
+		since when system started
+		cd/proc/uptime
+	free -m
+
+	Absolute path and Relative path
+		An absolute path is defined as the specifying the location of a file or directory from the root directory(/)
+		Relative path is defined as path related to the present working directory(pwd).
+		
+More Commands(mkdir, cp, mv, touch etc)
+	mkdir abc
+		mkdir abc{1..10}
+		mkdir abc xyz
+	touch abc.txt
+		touch abc.txt xyz.txt //either will create empty file or will update file timestamp
+		touch xy{1..10}.txt
+	cd
+		cd ~
+		to go home directory
+	cp  
+		copy-paste
+		cp srcFileWithPath destDirPath/ 
+			absolute & relative both path
+		cp -r srcDirPath/ destDirPath/
+		cp -rvfp srcDirPath/ destDirPath/
+			Here 
+				cmmands		cp
+				options		-r
+				arguments	srcDirPath destDirPath
+		cp --help
+	mv
+		move or cut-paste
+			mv srcFileWithPath destDirPath/
+				absolute & relative both path
+			mv srcDirPath destDirPath/
+			mv srcFileWithPath destFileWithPath
+				mv abc.txt dir/
+				mv abc.txt xyz.txt dir/
+			mv *.txt textDir/
+		rename
+			mv abc.txt xyz.txt
+			
+	rm
+		rm fileWithPath
+		rm -r destDirPath
+		rm -r *  
+			dangerous command- remove everything from current working directory with no-trash/recycle-bin/rolling-back 
+				but we have harddisk restoration which is not 100% assurance option
+			rm -rf *  - force
+		
+		
+VIM EDITOR
+	VI Visual display editor
+	VIM Visual display editor improved
+		This is command mode editor for files. Other editors in Linux are emacs, gedit, nano 
+		vi editor is most popular.	
+	It has 3 modes:
+		1 Command Mode
+			When you open the vim editor, it will be in the command mode by default.
+		2 Insert mode (edit mode)
+			using i
+		3 extended command mode
+			using : for save(s) or quit(q) the file
+
+Vim Editor
+	sudo yum install vim -y
+	vim abc.txt
+		create/open file in command mode
+	i/o
+		to go in insert/edit mode*/
+			now we can wrtie in a file
+		o move cursor to next line
+		
+	escape
+		to go in command mode
+		:
+			to go in extended mode
+			now we can save/write, quit file
+			w
+				save/write
+			q
+				quit
+	`			escape :q!  - quit forcefully with saving the change
+			Esc+: se nu To set the line numbers to the file !
+			Esc+:se nonu To Remove the set line numbers
+	cat abc.txt
+		read file
+		
+		
+
+	yy & p
+		copy paste in vim editor
+		4yy
+			copy the 4line
+		p
+			paste the line above the cursor line
+		P
+			paste the line below the cursor line
+		d
+			delete the line
+		u
+			undo the line
+	/
+		forward slash
+		search in a file
+
+		
+	Command Mode:
+		gg To go to the beginning of the page
+		G To go to end of the page
+		w To move the cursor forward, word by word
+		b To move the cursor backward, word by word
+		nw To move the cursor forward to n words (SW)
+		nb To move the cursor backward to n words {SB)
+		u To undo last change (word)
+		U To undo the previous changes (entire line)
+		Ctrl+R To redo the changes
+		VY To copy a line
+		nyy To copy n lines (Syy or 4yy)
+		p To paste line below the cursor position
+		P To paste line above the cursor position
+		dw To delete the word letter by letter {likeBackspace}
+		X To delete the world letter by letter (like DEL Key) IÂ·,
+		dd To delete entire line \' --
+		ndd To delete n no. of lines from cursor position{Sdd) ,:::::,-
+		/ I To search a word in the file
+		
+		
+	Extended Mode: ( Colon Mode)
+		Extended Mode is used for save and quit or save without quit using "Esc" Key with":"
+		Esc+:w To Save the changes 
+		Esc+:q To quit (Without saving)
+		Esc+:wq To save and quit 
+		Esc+:w! To save forcefully 
+		Esc+wq! To save and quit forcefully 
+		Esc+:x To save and quit
+		Esc+:X To give password to the file and remove password
+		Esc+:20(n) To go to line no 20 or n
+		Esc+: se nu To set the line numbers to the file !
+		Esc+:se nonu To Remove the set line numbers
+	
+ 
+ls command options
+	Options	Description
+	-l		Long listing format of files and directories, one per line
+	-a 		List all hidden files and directories started with '.â€™
+	-F		Add a '/' classification at the end of each Directory
+	-g 		List all files and directories with the group name
+	-i 		Print index number of each files and directories
+	-m 		List all file and directories separated by comma,â€™
+	-n 		List numeric UID and GID of Owner and Groups
+	-r 		List all files and directories in reverse order
+	-R 		Short list all directories
+	-t		Sorted by modified time, started with the newest file
+	
+	ls -ltr
+	ls -ltr /dir
+
+Types of files in Linux
+	File Type 	First Character 	Description
+				in File Listing 
+	Regular fle 	~				Normal files such as text, data, or executable files
+	Directory. 		d				Files that are lists of other fies
+	Link			l				A shortcut that points to the location of the actual fle
+	Special file	c				Mechanism used for input and output, such as fies in /dev
+	Socket 			a				A special ile that provides inter-process networking protected by he fle system's access contol
+	Pipe			p				A special file that allows processes to communicate with each other without using network socket semantics
+
+	file abc.txt
+		return file type
+		
+	ln -s <orignalFilePath> <LinkFilePath> command is used to create soft link.
+
+
+
+	
+	
+	Symbolic links
+		Symbolic links are like desktop shortcuts we use in windows.
+		Create a soft link for /var/log directory in our current working directory.
+	
+	
+	
+Filter & IO redirectioncommand.
+	Grep
+		grep command is used to find texts from any text input.
+		Passwd file: stores information about all the users in the system
+		
+		grep "this" abc.txt
+			grep "this" < abc.txt  (here < is for input redirection)
+			grep "this" *     (search all files in current directory)
+		-R option
+			grep -R "this" *  (will search in directory also) 
+			grep -R "this" /etc/* 
+		-i option	
+			grep -i "this" abc.txt (-i for case insensitive)
+		-v option
+			grep -v "this" abc.txt (search negation of this)
+	less
+		less abc.txt
+			less /etc/passwd
+		it is a reader of file but different from cat command
+		We can search using /
+		We can go top & bottom using G & gg
+	more
+		more abc.txt
+		shows % of remaining read file
+	head
+		read first -n line
+		head abc.txt (-10 is added by default)
+		head -20 abc.txt
+	tail
+		read last -n line
+		tail abc.txt (-10 is added by default)
+		tail -20 abc.txt		
+		
+		tail -f abc.txt(shows dynamic content)
+			tail -2f /var/log/auth.log
+			
+	cut
+		cut -d: -f1 /etc/passwd (-d: for delimeter : , -f1 for field 1)
+	awk
+		awk -F':' '{print $1}' /etc/passwd
+		
+	search & replace
+		vim abc.txt
+		:%s/Note/MyNot (first place in every line )
+		:%s/Note/MyNot/g (every place in every line)		
+			:%s/Note//g  (replace with empty string)
+						
+       sed  's/Note/mynote2/g' /tmp/practice1/locale.alias (will search only , will not replace & save in file)
+       sed -i 's/mynote/mynote2/g' /tmp/practice1/locale.alias (-i for replace & save in file)
+		
+ 		
+		
+	

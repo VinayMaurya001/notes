@@ -1,0 +1,33 @@
+Introduction
+Junit4
+Junit5
+Mockito
+Code Coverage
+Basic Practices And Patterns
+Power Mock
+	Limitations of Mockito
+	PowerMock
+Spring Testing
+TestContainers
+	testcontainers.org
+	For providing containers for testing like mongodb etc
+	@TestContainers
+	@Containers
+	@DynamicPropertiesSource
+Resources
+	JavaBrains
+		https://www.youtube.com/playlist?list=PLqq-6Pq4lTTa4ad5JISViSb2FVG8Vwa4o
+	Udemy
+		https://www.udemy.com/course/junitandmockitocrashcourse/
+	
+
+
+
+
+https://www.youtube.com/playlist?list=PLD0011D00849E1B79
+https://stackoverflow.com/questions/67299/is-unit-testing-worth-the-effort
+https://www.baeldung.com/mockito-2-java-8
+
+
+
+https://stackoverflow.com/questions/44584487/improve-lombok-data-code-coverage

@@ -1,0 +1,62 @@
+
+
+
+
+
+multithreading
+generic & collection
+Devops -imran telli
+java8
+	java11
+
+
+
+
+Spring
+	https://spring.io/projects/spring-cloud
+spring boot configuration 
+rest template & webclient reactive
+	 InventoryResponse[] inventoryResponsArray = webClientBuilder.build().get()
+                    .uri("http://inventory-service/api/inventory",
+                            uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+                    .retrieve()
+                    .bodyToMono(InventoryResponse[].class)
+                    .block();
+     <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+microservice
+
+Hibernate 
+	Mapping
+
+design pattern
+	Builder
+	Singleton
+	service discovery design pattern
+			observable pattern
+angular
+docker 
+kumernates
+aws
+
+resume 
+profile linkedin/naukari
+
+https://spring.io/projects/spring-cloud
+
+CICD
+
+Testing
+	Junit
+	TestCOntainers
+
+
+Tools
+	https://app.diagrams.net/
+	
+	
+	 : What is Java's Metaspace ?
+Q : What are ACID properties
+	

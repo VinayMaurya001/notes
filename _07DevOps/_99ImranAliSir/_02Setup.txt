@@ -1,0 +1,61 @@
+Tools 
+	https://github.com/devopshydclub/vprofile-project/blob/prereqs/Prereqs_doc.pdf
+	For mac using Homebrew
+		https://brew.sh/
+	For windows using Chocolatey
+		Chocolatey for window
+			Chocolatey is a free software management automation tool for Windows, 
+			which can be used to install programs, and deploy runtime binaries or zipped files
+			https://chocolatey.org/install
+			https://docs.chocolatey.org/en-us/choco/setup
+			https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-executionpolicy?view=powershell-7.3
+			choco
+			Find your software in Chocolatey
+				https://community.chocolatey.org/packages
+		choco install virtualbox --version=6.1.40
+		choco install vagrant
+		choco install git
+		choco install jdk8
+		choco install maven
+		choco install awscli
+		choco install intellijidea-community
+		choco install sublimetext3.app
+	
+	For Ubuntu 20
+		Install Virtualbox
+			$ sudo apt update
+			$ sudo apt install virtualbox 
+		Install Vagrant
+			$ curl -O https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb
+			$ sudo apt install ./vagrant_2.2.9_x86_64.deb
+			$ apt install git
+		Install jdk8
+			$ sudo apt-get install openjdk-8-jdk
+			$ sudo apt-get install maven
+			$ sudo apt-get install awscli
+			$ sudo snap install intellij-idea-community --classic
+		Install Sublime Text
+			$ sudo apt update
+			$ sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+			$ curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+			$ sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
+			$ sudo apt install sublime-text
+	
+		
+Signup
+	Github
+	Dockerhub
+	Domain Purchase(Go Daddy)
+	Sonarcloud
+		https://sonarcloud.io/welcome
+		https://www.sonarsource.com/products/sonarcloud/
+	AWS
+		Free tier Account
+		IAM with MFA
+			Users>user>Security Credentials>Assigned MFA device
+		Billing Alarm
+			Billing Dashboards>Bills
+			Billing Dashboards>Billing Preferences> enter email address
+			CloudWatch> Create Alarm
+		Certificate Setup	
+			AWS Certificate Manager(ACM)

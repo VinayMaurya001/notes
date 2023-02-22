@@ -46,7 +46,12 @@ public class Notes {
 					stringBuilder.append(direPath).append("\n");
 					walk(f.getAbsolutePath(), i, stringBuilder);
 				} else {
-					String filePath = PREFIX + path + "\">" + f.getName().substring(2) + SUFFIX;
+					String filePath = null;
+					if (f.getName().contains(".java")) {
+						filePath = PREFIX + path + "\">" + f.getName() + SUFFIX;
+					} else {
+						filePath = PREFIX + path + "\">" + f.getName().substring(3) + SUFFIX;
+					}
 					stringBuilder.append(filePath).append("\n");
 				}
 			}

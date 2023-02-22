@@ -1,0 +1,12 @@
+
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+
+@RequiredArgsConstructor
+@Slf4j
+
+@Getter
+@Setter

@@ -1,0 +1,65 @@
+VM Management Problems
+	 OS Installations
+	 Time Consuming
+	 Manual setup
+	 Tough Replication for Multi VM
+	 Documentations for Multi VM
+
+Vagrant for VM
+	 No OS Installations separately
+	 VM Setup through Images(vagrant boxes)
+	 Images/Boxes available in Vagrant cloud
+	 Manage VM with a file (Vagrantfile)
+	 VM changes automatic through Vagrantfile
+	 Vagrant commands to manage VM
+	 Provisioning VM/Executing commands & scripts
+	 Etc
+
+Vagrant 
+	A VM automation tool 
+	Vagrant Manages/Automates VM Lifecycle
+	Vagrant is an open-source software product for building and maintaining portable virtual software development environments;
+	 e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. 
+	 It tries to simplify the software configuration management of virtualization in order to increase development productivity. 
+	 Vagrant is written in the Ruby language, but its ecosystem supports development in a few other languages.
+	 
+
+Vagrant tool Setup
+	 VT (Virtualization Technology) Enabled in BIOS
+	 Install Vagrant tool
+	 Hypervisor like Oracle Virtualbox
+	 CLI (Command Line Interface) like GIT Bash, Cygwin, CMD prompt
+	etc
+
+VM SETUP WITH VAGRANT tool
+	 Vagrant Box Name from https://app.vagrantup.com/boxes/search (Vagrant CLoud)
+	 Project Directory (Folder/Directory at any location of your choice)
+	 vagrant init geerlingguy/centos7 or ubuntu/bionic64
+		Created Vagrantfile in Project Directory
+			VM Info
+			BoxName
+			Network
+			Provisioning
+			Sync Dir
+			Memory/CPU
+			Disk Size
+	 Vagrant commands like vagrant up
+		vagrant halt
+			power off
+		vagrant reload
+			restart
+		vagrant destroy
+	 Login with vagrant ssh command for Linux vm
+		whoami
+		exit
+		history
+
+
+1. Intro to Vagrant
+2. Create VM Automatically
+3. Vagrant Commands
+4. Vagrant Networking
+5. Provisioning
+6. RAM, CPU & Disk
+7. Multi VM Vagrantfile
+8. Documentation

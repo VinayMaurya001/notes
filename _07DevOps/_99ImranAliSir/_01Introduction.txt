@@ -1,0 +1,122 @@
+SDLC
+	Waterfall
+	Agile
+	Spiral
+	BigBang
+	
+Steps in SDLC
+	Requirement
+	Design
+	Implementation
+	Testing
+	Maintainance
+	Monitoring
+	
+Devops
+	It is a philosophy of combining Dev & Ops team at culture, practice & tools level. 
+	
+DevOps Lifecycle
+	Code
+		Developers commits code
+	Code bUild
+		Deployable Software:Artifact
+	Code Test
+		Unit & Integration Test
+	Code Analysis
+		Vunerability, Bast Practices
+	Delivery
+		Deploy Changes to staging
+	DB/Security/OS Changes
+		Every other Ops changes
+	Software Testing
+		QA/Functional, load, performance tests
+	Deploy to prod
+	Go Live
+		User traffic diverted to new changes
+	User Approval
+		User feedback
+	Keep Monitoring
+	
+
+	
+
+
+CI
+	Continious Integration
+		Code Commit -> Build => Test -> Artifactory Repo & Feedback/Notification
+	
+	Goal of CI
+		The goal of CI is to detect defects at very early stage so it does not multiply.
+	
+	https://aws.amazon.com/devops/continuous-integration/
+	Continuous integration is a DevOps software development practice 
+		where developers regularly merge their code changes into a central repository, 
+		after which automated builds and tests are run
+	
+	IDE
+		Eclipse
+		Visual Studio
+		Atom
+		Pycharm
+
+	VCS
+		 Git
+		 SVN
+		 TFS
+		 Perforce
+		
+	Build Tools
+		Maven, Ant, Gradle
+		MSBuild,Visual Build
+		IBM Urban Code
+		Make
+		Grunt
+	
+	
+	Software Repository
+		Sonatype Nexus
+		Jfrog Artifactory
+		Archiva
+		Cloudsmith Package 
+		Grunt
+	
+	CI Tools
+		Jenkins
+		Circle CI
+		Teamcity
+		Bamboo CI
+		Cruise Control	
+	
+CD
+	Continious Deployment
+	https://aws.amazon.com/devops/continuous-delivery/
+	Continuous delivery is a software development practice where code changes are automatically prepared for a release to production.
+	
+	Deployment
+		Server Provisioning
+		Dependencies
+		Config Changes
+		Network
+		Artifact Deploy
+		& Many More
+		
+		
+	Tools
+		Ansible , Puppet, Chef (For System Automation)
+		Terraform, Cloud Fromation(For cloud infrastructure automation)
+		Jenkins, OctopusDeploy (For CICD Automation)	
+		Helm Charts
+		Code Depeloy
+		
+		
+	Test Automation
+		Functional 
+		Load
+		Performance
+		DB
+		Security
+		Any other test
+	
+	Automation Test written by Testers
+
+https://www.atlassian.com/whitepapers/devops-survey-2020

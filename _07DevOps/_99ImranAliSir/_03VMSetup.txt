@@ -1,0 +1,97 @@
+Life before Virtualization
+	One service- One Server(Isolation)
+	Servers are always over-provisioned
+		Server provisioning is the process of setting up a server to be used in a network based on required resources. 
+			Provisioning can encompass all of the operations needed to create a new machine and bring it to a working state, 
+				and includes defining the desired state of the system
+	Server resources mostly underutilized
+	Huge Capital & Operational Expenditure
+	
+Life after Virtualization
+	Enter VMWare
+	Allows one computer to run multiple OS
+	Partition physical resource into virtual resource
+	Virtual Machines runs in Isolated Environment
+	Each VM needs it own OS
+	Server virtualization is the most common virtualization
+	Hardware> Hypervisor> VM1(Guest OS1+Applications1) +VM2(Guest OS2+Applications2)+ VM3(Guest OS3+Applications3)
+	
+	Terminologies	
+		VM
+			Virtual Machine
+		Hypervisor
+			Tool/software that let us create VM
+			It enable Virtualization
+			Type of Hypervisor
+				Type1
+					Bare Metal
+					Runs as a base OS
+					Only for Production
+					It won't let you use this computer for other purposes 
+					Ex: VMware esxi, Xen Hypervisor, HyperV
+					Hardware> Hypervisor> VM1 +VM2+ VM3
+				Type2
+					Runs a software
+					For learning & testing
+					Ex: 
+						Oracle Virtualbox
+						Vmware Server	
+					Hardware> Native OS>(Applications+Type2Hypervisor)>	VM1(Guest OS1+Applications1) +VM2(Guest OS2+Applications2)+ VM3(Guest OS3+Applications3)	
+		Host OS
+		Guest OS
+			OS of VM
+		Snapshot
+			Way for Backup of VM
+			
+			
+
+If you want to automate anything, you should know how to do it manually.
+	If you're trying to automate something that you don't know how to do manually, then trust me, you will be struggling a lot.
+
+
+Oracle Virtualbox
+	https://www.vmware.com/topics/glossary/content/hypervisor.html
+	It is a Hypervisor to manage vm locally(Laptop/Desktop)
+
+Vagrant
+	https://www.vagrantup.com/intro
+	It is a VM automation tool which uses hypervisor like Oracle VM virtualbox to manage vm's on our Laptop/Desktop
+			
+Enable Virtualization on windows
+	Enable Virtualization in BIOS for Windows
+		 VTx
+		 Secure virtual machine
+		 Virtualization
+	
+	Turn on/off window features
+		https://support.microsoft.com/en-us/windows/enable-virtualization-on-windows-11-pcs-c5578302-6e43-4b4b-a449-8ced115f58e1
+		 Microsoft Hyperv
+			Windows Hypervisor platform
+		 Windows Subsystem for linux
+		 Docker Desktop
+		 Virtual Machine Platform
+
+Ubuntu server doesn't include a graphical user interface, while Ubuntu Desktop does 	
+
+VM Setup
+	Setup Hardware
+		Ubuntu-
+	Settings
+		Storage
+			iso file
+		System
+			Processor
+		Network
+			Enable Adapter2>Bridge Adapter>Wireless Network Adapter
+	Install OS	
+	Remove ISO file 
+	
+	ifconfig
+	pwd
+	ls
+	
+	Connect new VM using 
+		ssh user@IP
+			Putty
+			GItbash
+		

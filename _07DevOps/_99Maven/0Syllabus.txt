@@ -1,0 +1,26 @@
+https://www.java67.com/2018/02/6-free-maven-and-jenkins-online-courses-for-java-developers.html
+
+Introduction
+SetUp
+Maven Indetails
+Maven in Eclipse
+Maven With Servlet
+Multi Module Project
+Scopes 
+Profiles
+
+Demendency vs Dependency Management tag
+	https://stackoverflow.com/questions/2619598/differences-between-dependencymanagement-and-dependencies-in-maven
+
+
+Multi-Module Project in intellij
+
+maven clean verify command
+
+Further to study
+	Dependency Managment
+	import scope
+
+https://dzone.com/articles/mavens-non-resolvable-parent
+https://maven.apache.org/guides/mini/guide-repository-ssl.html
+https://maven.apache.org/settings.html

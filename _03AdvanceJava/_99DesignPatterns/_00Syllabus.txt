@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+Builder Design Pattern
+
+Service Discovery Design Pattern
+Circuit Breaker Pattern

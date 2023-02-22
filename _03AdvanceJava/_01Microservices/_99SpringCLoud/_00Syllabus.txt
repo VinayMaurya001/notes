@@ -1,0 +1,102 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MICROSERVICES INTERVIEW QA
+Microservices components
+Microservice Spring Cloud Config Server
+Microservice Netflix Eureka Naming Server
+Microservice Hystrix Server : Circuit breaker
+Microservice Netflix Zuul API Gateway Server
+Microservices Advantages
+Microservices Disadvantages
+Microservice Netflix Ribbon : Load balancer
+Microservice Zipkin/Seluth Distributed Tracing Server
+ELK stack trace
+Rest endpoints + Message Queue
+https://www.youtube.com/watch?v=y32DkgmWE1c
+https://www.youtube.com/watch?v=UU0MoXDNFyY
+
+
+
+https://www.youtube.com/@Java.Brains/playlists
+
+https://javarevisited.blogspot.com/2018/02/top-5-spring-microservices-courses-with-spring-boot-and-spring-cloud.html#axzz7SVpYcDpl
+https://microservices.io/
+Microservice with spring cloud
+	Introduction
+	Setup
+	REST client Feign
+	Load balancing with Ribbon and Feign
+	
+	Implement naming server with Eureka
+	Implementing API gateway with Zuul
+	
+	Spring Cloud SLEUTH
+	
+	Message Broker RabbitMQ
+	Distributed tracing with Zipkin
+	
+	Fault tolerance with Hystrix
+	
+	Spring cloud config server and BUS
+	
+Github 
+	Spring - Microservices
+	https://github.com/in28minutes/spring-microservices/tree/master/03.microservices
+
+https://microservices.io/patterns/index.html
+https://microservices.io/patterns/microservices.html
+https://microservices.io/patterns/reliability/circuit-breaker.html
+
+
+More Reading about Microservices
+Design and Governance of Microservices
+https://martinfowler.com/microservices/
+12 Factor App
+https://12factor.net/
+https://dzone.com/articles/the-12-factor-app-a-java-developers-perspective
+Spring Cloud
+http://projects.spring.io/spring-cloud/
+
+
+
+google- 12-factor design principles
+https://dzone.com/articles/12-factor-app-principles-and-cloud-native-microser
+
+Load balancer
+api gateway
+Service discovery
+Microservices
+Resilience4j , Histrix for fault tolerance
+Databasess
+
+
+	consul vs eureka vs zookeeper
+
+Load balancer vs api gateway
+Monitor microservices- Actuator, Spring boot admin
+Logging Microserices-ELK, splunk
+
+Resources
+	https://www.youtube.com/playlist?list=PLSVW22jAG8pBnhAdq9S8BpLnZ0_jVBj0c

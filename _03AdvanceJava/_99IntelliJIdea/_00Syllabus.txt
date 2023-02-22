@@ -1,0 +1,4 @@
+
+
+Edit COnfiguration
+	Allow Parallel Run checkbox for running multiple instance of a application
