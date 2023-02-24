@@ -1,0 +1,62 @@
+Docker Networking
+	Bridge(default)
+		Bridge network is a private internal network created by docker on the host.
+		All containers attached to this network by default and they get an internal IP address usually in the range 172.17 series.
+		The containers can access each other using this internal IP 
+		If required to access any of these containers from the outside world map the ports of these containers to ports on the docker host 
+	None
+		Isolated
+		--netowrk=none
+		With the none network the containers are not a test to any network and doesn't have any access to the external network or
+			other containers. They run in an isolated network.
+	Host
+		--network=host
+		Another way to access the containers externally is to associate the container to the host network.
+		This takes out any network isolation between the docker host and the docker container.
+		Meaning if you were to run a web server on Port 5000 in a web container it is automatically as accessible
+		on the same port externally without requiring any port mapping as the web container uses the hosts network.
+		This would also mean that unlike before you will now not be able to run multiple web containers on the
+		same host on the same port as the ports are now common to all containers in the host network 
+		
+
+
+	Custom Network
+		So we just saw the default bridge network with the network id 172.17.0.1
+		So all containers associated to this default network will be able to communicate to each other.
+		But what if we wish to isolate the containers within the docker host for example the first two web containers
+		on internal network 172 and the second two containers on a different internal network like 182 by default
+		Docker only creates one internal bridge network.
+
+		We could create our own internal network using the command 
+			docker network create \
+				--driver bridge \
+				--subnet 182.18.0.0/16
+				custom-isolated-network
+
+
+
+docker network ls 
+			to list all networks 
+
+docker inspect cId/cName
+	so how do we see the network settings and the IP address assigned to an existing container run the 
+
+Embedded DNS
+	Containers can reach each other using their names.
+	For example in this case I have a web server and MySQL database container running on the same
+	note how can I get my web server to access the database on the database container.
+	One thing I could do is to use the internal IP address assigned to the MySQL container which in
+	this case is 172.70.0.3 but that is not very ideal because it is not guaranteed
+	that the container will get the same IP when the system reboots the right way to do it is to use the
+	container name.
+
+	All containers in a docker host can resolve each other with the name of the container.
+	Docker has a built in DNS server that helps the containers to resolve each other using the container name.
+	Note that the built in DNS server always runs at address 127.0.0.11.
+
+	So how does Docker implement networking.
+	What's the technology behind it.
+	How were the containers isolated within the host Docker users network.
+	Name spaces.
+	That creates a separate namespace for each container.
+	It then uses virtual Ethernet pairs to connect containers together.

@@ -1,0 +1,77 @@
+Getting Started with Docker
+	Docker Editions
+		Community Edition
+			Linux, Cloud(AWS/Azure), Mac, Window
+		Enterprize Edition
+		
+Setup & install Docker
+	https://docs.docker.com/install/
+	https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+	Docker Setup on Linux
+		cat /etc/*release* (to see the Linux version)
+		https://docs.docker.com/engine/install/ubuntu/
+		docker version
+		ssh user@ip_address  
+		ls -la
+		https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+		https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+	
+	Docker on Mac
+		Docker on Mac using DOcker toolbox
+		Docker Desktop forMac
+		
+	Docker Setup on window
+		1. Docker on Windows using Docker Toolbox - Docker on Linux VM on Oracle Virtual Box on Windows(For older windows)
+			Docker Toolbox Requirements
+				64-bit operating system
+				Windows 7 or Higher
+				Virtualization enabled on Windows
+			Docker Toolbox Contents
+				Oracle Virtualbox
+				Docker Engine
+				Docker Machine
+				Docker Compose	
+				Kitematic GUI
+			Quick Tip for Windows 10 : 
+				If you are using Window 10 and are using docker toolbox, Use 192.168.99.100 instead of localhost.
+				If 192.168.99.100 does not work, you can find the IP by using the command docker-machine ip.
+				In Window 10 when using docker toolbox , docker is configured to use the default machine with IP 192.168.99.100
+		2. Docker For Windows - Docker on Linux VM on Windows Hyper-V on Windows
+			Docker For Windows Requirements
+				Windows 10 Enterprise/Professional Edition
+				Windows Server 2016
+			Docker For Windows supports Linux Containers (Default) and Windows Containers
+			Docker For Windows Container Types:
+				Windows Server Core: Windows container on native windows server core
+				Hyper-V Isolation: Windows container on an isolated hyper-v kernel
+	References and Links:
+		Docker on Windows Documentation: https://docs.docker.com/docker-for-windows/
+		Docker For Windows Download: https://www.docker.com/docker-windows
+		Docker Toolbox Download: https://www.docker.com/products/docker-toolbox
+
+	
+docker version
+	docker --version
+	docker info
+docker COMMAND --help
+	docker run --help
+systemctl start docker
+	
+
+Docker Editor Plugin - https://marketplace.eclipse.org/content/docker-editor
+
+
+kodecloud.com lab
+	Link: https://udlabs.kodekloud.com/courses/udemy-labs-docker-for-the-absolute-beginner/
+		Coupon code: udemystudent1118vinay
+	labs: https://udlabs.kodekloud.com/topic/labs-basic-docker-commands-beta-5/
+		  https://udlabs.kodekloud.com/topic/labs-docker-run-commands-5/
+		  https://udlabs.kodekloud.com/topic/labs-docker-images-5/
+		  https://udlabs.kodekloud.com/topic/labs-environment-variables-5/
+		  https://udlabs.kodekloud.com/topic/labs-command-entrypoint-3/
+		  https://udlabs.kodekloud.com/topic/labs-docker-compose-6/ 
+		  ‎https://udlabs.kodekloud.com/topic/lab-docker-registry-3/
+		  https://udlabs.kodekloud.com/topic/labs-docker-networking-5/
+		  https://udlabs.kodekloud.com/topic/labs-docker-storage-4/
+		  ‎

@@ -1,0 +1,50 @@
+
+Playing with Docker Commands
+docker stats
+	this would show all the stats regarding the containers which are running.
+	gives us the stats for each of the containers which is running: 
+	How much memory is it making use of, how much CPU is making use of, and all that stuff.
+
+docker system df
+docker system df -v
+It helps us to look at all the different things that your Docker daemon manages. 
+So, Docker daemon manages your images, your containers. 
+
+docker events
+	To see the events like any container start, stop, volume creation etc.
+	Used to monitor the events which are happening with your Docker engine or the Docker daemon.
+
+docker top <containerId>
+	to see all the processes which are running in a specific container.
+
+
+
+
+
+
+Docker Volume COmmand
+	docker volume create todo-db
+	docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+	docker volume inspect todo-db
+[
+    {
+        "CreatedAt": "2019-09-26T02:18:36Z",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/todo-db/_data",
+        "Name": "todo-db",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+
+	docker run -v /opt/datadir:/var/lib/mysql mysql
+	docker run mysql
+	docker stop mysql
+	docker rm mysql
+
+
+Docker Network COmmand
+	docker network ls
+	docker network create web-app-mysql-network
+	docker inspect web-app-mysql-network

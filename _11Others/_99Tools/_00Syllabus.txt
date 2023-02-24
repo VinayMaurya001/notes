@@ -1,6 +1,20 @@
 
 
-FOr Screenshot
+For image to text
+	https://www.ocr2edit.com/convert-to-txt
+For Screenshot
 	Shutter
-FOr grpah/file storing online
+For grpah/file storing online
 	https://app.diagrams.net/
+	
+Personal Website 
+	https://linktr.ee/s/pricing/
+Online IDE for shareable code
+	https://stackblitz.com/ 
+	https://codepen.io/
+	https://www.typescriptlang.org/play
+Free API
+	https://restcountries.com/
+	
+Free fake API for testing and prototyping.
+	https://jsonplaceholder.typicode.com/

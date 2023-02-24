@@ -1,0 +1,61 @@
+docker --version
+docker ps /docker container ls 
+	You can see that a name was also assigned to this specific container;
+	And it's also assigned a id.
+docker ps -a /docker container ls -a
+clear 
+
+docker pull in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+docker container run in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker run in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+docker run -p 8080:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE
+	-p 8080:5000 == HostPort:ContainerPort
+	http://localhost:8080/hello-world
+	http://localhost:8080/jpa/users/in28minutes/todos
+	We had to publish the container port to a host port to be able to access the application.
+	By default, any container that you run is part of something called a bridge network in Docker.
+	You can kind of think of it like an internal Docker network.
+	Nobody will be able to access it, unless you specifically expose it onto the host, onto the system where your container is running.
+	So, what we are doing in here is, we are saying, I'd want to take the internal port, the container port 5000
+	and map it to a host port, through a port on the system where the container is running, which is 5001.
+	So, now I would be able to access the application on port 5001. 
+
+	Which of the below ports are the exposed on the CONTAINER?
+		Run the command docker ps and look under the PORTS column.Ports on the right(after ->) are exposed on the container
+	Which of the below ports are published on Host?
+		Run the command docker ps and look under the PORTS column.Ports on the left(before ->) are published on the host
+	Run an instance of kodekloud/simple-webapp with a tag blue and map port 8080 on the container to 38282 on the host.
+		docker run -p 38282:8080 kodekloud/simple-webapp:blue
+        clear
+	exit
+	
+docker run -p 5002:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE
+	we can run multiple containers from the same image
+
+https://chankongching.wordpress.com/2017/03/17/docker-what-is-the-different-between-run-and-exec/
+
+Detached mode
+docker run -p 8080:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+	It returns container id.
+	-d stands for detached mode.
+	We would want to run the container in the background.
+	We don't we don't want to tie up the terminal to the lifecycle of the container.
+	So, we would want to detach it from that.
+	docker attach myDockerName/ID
+
+Logs of Container
+	docker logs cId
+		docker logs <containerId/subsetOfContainerId>
+	docker logs cId -f
+		docker logs -f <containerId/subsetOfContainerId>
+		If you'd want to keep following the logs
+		This would start tailing the logs; it would start following the logs of that specific application.
+		
+		
+docker container stop cId
+
+
+Docker With Spring Boot and MySQL: Introduction
+	https://dzone.com/articles/all-about-hibernate-manytomany-association

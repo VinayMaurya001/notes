@@ -1,0 +1,139 @@
+Containerizing Java Spring Boot Todo Web Application with Docker
+Setting up 02 Spring Boot Todo Web Application in Local
+Create Docker Image for Spring Boot Todo Web Application
+Understanding ENTRYPOINT, CMD, COPY and ADD instructions
+Pushing 02 Spring Boot Todo Web Application to Docker Hub
+
+
+Containerizing Java Spring Boot Todo Web Application as a war in tomcat  with Docker
+
+Setting up 02 Spring Boot Todo Web Application in Local
+http://localhost:8080/todo-web-application-h2/h2-console
+jdbc:h2:mem:testdb
+
+@SpringBootApplication
+@ComponentScan("com.in28minutes.springboot.web")
+public class SpringBootFirstWebApplication extends SpringBootServletInitializer {
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(SpringBootFirstWebApplication.class);
+	}
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootFirstWebApplication.class, args);
+	}
+}
+<packaging>war</packaging>
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+</dependency>
+
+<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap-datepicker</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+
+Create Docker Image for Spring Boot Todo Web Application
+Dockerfile
+FROM tomcat:8.0.51-jre8-alpine
+EXPOSE 8080
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY tempWar1/*.war /usr/local/tomcat/webapps/ROOT.war
+#COPY ./tempWar1/*.war /usr/local/tomcat/webapps/ROOT.war
+CMD ["catalina.sh","run"]
+
+#FROM openjdk:8-jdk-alpine
+#EXPOSE 8080
+#ADD tempJar3/hello-world-rest-api.jar hello-world-rest-api.jar
+#ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
+
+
+Understanding ENTRYPOINT, CMD, COPY and ADD instructions
+COPY vs ADD
+COPY - copy form local directory
+ADD- copy from local & from url both, even can unzip it
+Best practice is to use COPY always
+
+CMD vs ENTRYPOINT
+CMD- default parameter
+	When you pass parameter form command line , your default parameters are overridden
+	docker run -p 8080:8080 in28min/hello-world-rest-api:manual11 ping google.com
+	
+ENTRYPOINT-It can also be overridden using --entrypoint
+	Best practice is to use ENTRYPOINT, wherever possible
+
+
+Copy docker file & war
+ docker build -t in28min/todo-web-app-h2:dockerfile1 .(dot)
+ docker images
+ docker run -p 8080:8080 25d8_imageId_Or_in28min/todo-web-app-h2:dockerfile1
+
+ docker container exec dockerId ls /usr/local/tomcat/webapps
+
+
+
+Spring Boot Todo Web Application to Docker Hub manually
+
+Without Plugin: Manually
+	docker build -t vinaymaurya001/todo-web-app-h2:dockerfile1 .(dot)
+	docker login
+		username
+		password 
+	docker push vinaymaurya001/todo-web-app-h2:dockerfile1 
+	docker run -p 8083:8080 vinaymaurya001/todo-web-app-h2:dockerfile1
+
+Spring Boot Todo Web Application to Using Dockerfile Spotify Plugin to Create Docker Images & push to Docker hub
+	This plugin integrates with the maven build process that means now during maven build process , docker build image will happen.
+		maven package -Dskiptests
+	https://github.com/spotify/dockerfile-maven
+	<plugin>
+	<groupId>com.spotify</groupId>
+	<artifactId>dockerfile-maven-plugin</artifactId>
+	<version>1.4.10</version>
+	<executions>
+		<execution>
+			<id>default</id>
+			<goals>
+				<goal>build</goal>
+				<!-- If we want to push mage on Docker registry -->
+							<!-- <servers>
+								<server>
+									<id>docker-repo.example.com:8080</id>
+									<username>docker_usernaem</username>
+									<password>docker_password</password>
+								</server>
+			    </servers> -->
+			</goals>
+		</execution>
+	</executions>
+	<configuration>
+		<!-- If we want to push mage on Docker registry -->
+		<!--<repository>vinaymaurya001/${project.name}</repository>-->
+		<repository>in28min/${project.name}</repository>
+		<tag>${project.version}</tag>
+		<skipDockerInfo>true</skipDockerInfo>
+	</configuration>
+	</plugin>

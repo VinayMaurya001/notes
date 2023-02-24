@@ -1,0 +1,160 @@
+Docker Overview
+	Why do we need Docker?
+		Compatibility/Dependency
+			A matrix of Hell version matching
+		Long Environment Setup time for developer
+		Diff dev/test/prod environments
+	What can a Docker do?
+		Containerize Application
+		Run each components with its own dependecies in separate containers
+		Docker uses LXC containers (not LXCFS, LXD).
+		Docker runs on Docker host/engine.
+	What are containers?
+		Containers are completely isolated environments.
+			As in they can have their own processes or services, their own networking interfaces, their own mounts just like virtual machines.
+			Except they all share the same OS Kernel.
+		Unlike a virtual machine, containers share OS Kernel & are small in size.
+		Container is running instance of image.
+	OS
+		Software+Kernel
+		
+	Containers vs Virtual machines
+		Utilization, Size, Boot up time better for container
+		Docker has less isolation while VM has complete isolation
+		Containers 
+			Container1/Container2(Application,Libs,Dependencies)
+			Docker
+			OS
+			Hardware Infrastructure
+		Virtual machines
+			Virtual machine1/Virtual machine2 (Application,Libs,Dependencies,OS)
+			Hypervisor
+			Hardware Infrastructure
+	Containers and Virtual machines together
+	        Virtual machine1/Virtual machine2
+	        	Container1/Container2
+	        		Application
+	        		Libs
+	        		Dependencies
+	        	Docker
+	        	OS
+			Hypervisor
+			Hardware Infrastructure
+			
+	Unlike hypervisors docker is not meant to virtualize and run different operating systems and kernels on the same hardware.
+	The main purpose of docker is to containerize applications and to ship them and run them.
+
+	Public Docker Registry- Docker hub
+		For docker images
+		https://hub.docker.com/
+	Containers vs image
+		Container is a running instance of image.
+		docker run nodejs
+		docker run redis
+		docker run ansible
+	DevOps=Developer+Operation
+	
+	
+Docker Architecture
+	Docker CLient
+		responsible for just sending the commands to the Docker Daemon
+		The place we were running the commands in is called a Docker Client.
+	Docker Client->Commands(Rest API)->Docker Daemon/Engine	
+	Dockerfile  > (Build) >  Image  > (Run) >  Container
+	Docker Daemon/Engine
+		for managing local containers, 
+		for managing local images, 
+			for pulling images from the image registry, 
+				nginx,mysql,eureka,myApp
+			for creating images
+			for pushing out images to the image registry.
+So, even the local installation of Docker uses a client-server kind of architecture.
+So, when we installed Docker Desktop, we were installing both the Docker Client and the Docker Daemon.
+		
+Why Docker is popular?
+	Autoscaling in microservices is easy
+	Fast boot up
+	Lightweight
+	
+	
+	
+Deployments Using Docker
+	Container1|Container2|Container3
+	DockerEngine
+	HostOS: Ubuntu
+	CloudInfrastructure: Server
+
+	Installing Docker on our local machine is very very easy. So, developers can use Docker easily.
+	We can install Docker on cloud also very very easily.
+	Most of the cloud providers actually provide container-based services. 
+	So, they provide services where you just need to tell, run this container and it would automatically run on the cloud.
+
+
+Deployments Using Virtual Machines
+	Application1|Application2|Application3
+	Software1|Software2|Software3
+	GuestOS1|GuestOS2|GuestOS3
+	Hypervisor
+		to manage your virtual machines
+	BaseOs
+	Hardware
+
+	Before Docker, virtual machines were very very popular.
+	One of the major problems with these virtual machine architecture was typically, these are heavyweight.
+	We had two operating systems: host operating system and guest operating system; and that makes the whole thing a little heavy.
+
+	And that's where Docker comes in. If you have some infrastructure and if you have some host operating system installed on top of it, all
+	you need to do is, install the Docker engine for that specific operating system and Docker would take care of managing these containers.
+	
+	The Docker image contains all that is needed to run a container: all the libraries, all the software are directly part of these containers. 
+	Because there is just one OS, the host OS, Docker is relatively lightweight and therefore, it is very very efficient.
+	And that's why you would see that all the cloud providers provide a number of services around Docker.
+
+	Today, as we speak, it's very very easy to deploy something related to Docker onto any of the cloud providers. 
+	Azure provides a service called Azure Container Service.
+	AWS, Amazon Web Services, provides a service called Elastic Container Service.
+
+
+Default Docker registry
+	https://hub.docker.com/
+Docker repository
+	https://hub.docker.com/r/in28min/todo-rest-api-h2
+	Tag
+		1.0.0.RELEASE
+
+Repository
+	in28min/todo-rest-api-h2
+Tag
+	1.0.0.RELEASE
+	
+Image
+	A static Template
+Container
+	A dynamic runing version of image
+	
+	
+Docker Engine
+	Docker CLI
+	REST API Server
+	Docker Deamon
+
+If Docker CLI & (REST API Server+Docker Deamon) are on different host
+	docker -H=remote-docker-engine:2375
+	docker -H=10.123.2.1:2375 run nginx
+
+Containerization
+	Docker uses namespace to isolate processIds, unixTimesharing etc.
+
+To see the processes on Linux system
+	ps
+	ps-la
+	ps -eaf
+	ps -eaf | grep docker-java-home
+
+cgroups
+	Underlying DOcker Host & COntainers share the same system resources such as CPU & Memory
+	docker run --cpus=.5 ubuntu   //50%
+	docker run --memory=100m ubuntu
+	https://docs.docker.com/config/containers/resource_constraints/
+
+	

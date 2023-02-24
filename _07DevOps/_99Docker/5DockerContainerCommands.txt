@@ -1,0 +1,96 @@
+Docker Container
+
+docker ps    /docker container ls
+docker ps -a /docker container ls -a
+
+docker pull in28min/todo-rest-api-h2:1.0.0.RELEASE
+	//Only pull but not run
+docker container run in28min/todo-rest-api-h2:1.0.0.RELEASE
+	docker run in28min/todo-rest-api-h2:1.0.0.RELEASE
+	docker run nginx
+        default docker repository folder for official image (library/nginx)
+
+Run specific Version
+	docker run redis  //tag or version
+	docker run redis:4.0
+	
+docker run --name webapp nginx:1.14-alpine
+	Run a container with the nginx:1.14-alpine image and name it webapp
+				
+docker run -p 8080:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker run -p 4306:3306 mysql
+Every docker container get an IP assigned to it by default. By it is only accessible inside the docker host.It is internal IP.
+For external access, we need to docker host IP. But we need to map port.
+
+docker run -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+	-d for detached mode
+	docker attach myDockerName/ID
+
+docker run -p  5001:5000 -d --restart=always in28min/todo-rest-api-h2:1.0.0.RELEASE
+	Restart policy:always|NO, default is no
+	After restarting Docker desktop, Restart policy will come into picture.
+
+docker run -p  5001:5000 -m 512m --cpu-quota 50000 -d  in28min/todo-rest-api-h2:1.0.0.RELEASE
+	Maximum 512mb memory for this specific container
+	--cpu-quota 5000 means 5%(100%==100000)
+	
+docker run -t --link docker-mysql:mysql -p 10222:10222 book_manager_app 
+
+
+docker run ubuntu - when docker do nothing it existed
+		-container run until process inside it run
+	docker run ubuntu sleep 30
+
+Interactive mode
+docker run 	folderName/myWebAppName
+docker run 	-i folderName/myWebAppName  //interactive mode
+docker run -it kodecloud/simple-prompt-docker
+docker run 	-it folderName/myWebAppName //terminal
+
+docker run --it ubuntu bash - go inside docker container
+		cat /etc/*release*
+
+docker exec containerName/id cat /etc/hosts  =exec a command(cat /etc/hosts) on running container
+
+docker container exec <dockerId> ls /usr/local/tomcat/webapps
+docker container exec -it <dockerId> bash
+		docker exec -i docker-mysql mysql -uroot -proot book_manager <book_manager.sql 
+		 docker exec <containerId> cat /etc/*release*
+		
+docker container pause <containerId>
+docker container unpause <containerId>
+
+docker container inspect <containerId>   //in json format
+docker inspect <containerNameOrId> | grep '"IPAddress"' | head -n 1
+
+docker container logs <containerId>
+docker container logs -f <containerId>
+
+docker container stop <containerId>
+	docker stop ->SIGTERM->graceful shutdown
+	Recommended to use
+docker container kill <containerId>
+	docker container kill ->->SIGKILL->Immediately terminates the process
+		
+docker container rm <containerId>
+        docker rm myDockerName1/ID1 myDockerName2/ID2
+docker container prune
+	delete all stopped container
+
+
+
+docker run jenkins/jenkins
+docker run -p 8080:8080 jenkins/jenkins
+docker run -p 8080:8080 -v /mydata/mydatadir:/var/jenkins_home jenkins/jenkins
+docker run -p 8080:8080 -v /mydata/mydatadir:/var/jenkins_home -u root jenkins/jenkins
+https://www.jenkins.io/blog/2018/12/10/the-official-Docker-image/
+
+
+
+
+
+
+
+
+
+

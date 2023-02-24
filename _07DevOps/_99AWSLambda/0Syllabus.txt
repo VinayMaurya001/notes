@@ -1,0 +1,32 @@
+use of sns & sqs
+	https://examples.javacodegeeks.com/spring-boot-and-sns-mobile-notification-example/
+	https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbnV1M2ZmOFEzVG95aTNXSmpPb0NhQ3lRUDhTZ3xBQ3Jtc0trR0RKTEdrS3IwZktpYlNOYnZNODFfOXA0QnNPMUZybm83cGowYWdtUDJWenZHZmhaX0tuMFFja3paWjVrTVNLc1lCN3hDOUxWMzBGTkdmeS11R1ZOZy1qTlBHZ241bU94T0N1S0tHRVd1ZHVON1Y2cw&q=https%3A%2F%2Fstackabuse.com%2Fspring-cloud-aws-sns%2F&v=lF7Ba4-8ER4
+	
+	
+dyanamo db
+	what kind of db?
+	Amazon DynamoDB is a fully managed, serverless, key-value NoSQL database designed to run high-performance applications at any scale.
+diff ecs & ec2
+option for running dockerize appl in aws
+	AWS services such as AWS Fargate, Amazon ECS, Amazon EKS, and AWS Batch make it easy to run and manage Docker containers at scale.
+
+
+
+https://medium.com/@pratik.sathe1987/deploying-spring-boot-microservice-on-aws-lambda-b86b52dca03b
+https://www.baeldung.com/java-aws-lambda
+https://www.baeldung.com/java-enterprise-aws-lambda
+spring-cloud-function
+apache-camel
+dropwizard
+micronaut
+https://ben-foster.dev/2021/08/from-spring-boot-microservices-to-lambda-functions-a-journey/
+	https://cloudinfrastructureservices.co.uk/aws-lambda-vs-containers-whats-the-difference/
+
+how can we write lambda code?
+	https://www.youtube.com/watch?v=A1rYiHTy9Lg
+how many ways aws lambda can used?
+how lamda secure my code?
+do lambda based function stay avaliable after the code or configuration change?? yes
+
+Knowledge of Cloudformation, Terraform, EC2, S3 , RDS ,ECS, Fargate,
+

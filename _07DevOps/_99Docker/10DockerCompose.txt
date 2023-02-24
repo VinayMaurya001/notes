@@ -1,0 +1,157 @@
+https://www.javainuse.com/devOps/docker/docker-compose-tutorial
+
+
+docker-compose --version
+
+docker-compose up 
+	This will execute Dockerfile commands and will run services defined in the docker-compose file.
+docker-compose down 
+	This will stop and remove all containers that were running by docker-compose file.
+docker-compose up --build 
+	If we do an update on the Dockerfile, the war/jar file, or the docker-compose file, 
+		then we have to execute this command to get updated data on the Docker machine.
+		
+		
+Docker Compose
+docker run mmumshad/simple-webapp
+docker run mongodb
+docker run redis:alpline
+docker run ansible
+
+docker-compose.yml
+services:
+	web:
+		image:"mmumshad/simple-webapp"
+	database:
+		image:"mongodb"
+	messaging:
+		image:"redis:alpline"
+	orchestration:
+		image:"ansible"
+		
+docker-compose up
+
+
+https://github.com/dockersamples/example-voting-app
+docker run -d --name=redis_name redis
+docker run -d --name=db_name postgres:9.4
+docker run -d --name=vote -p 5000:80 --link redis_name:redis voting-app
+	it create an entry into /etc/host file , adding an entry with host name redis with internal ip of redis container	
+docker run -d --name=result -p 5001:80 --link db_name:db result-app
+docker run -d --name=worker --link redis_name:redis --link db_name:db worker
+
+docker-compose.yml
+redis_name:
+	images:redis
+db_name:
+	images:postgres:9.4
+vote:
+	images:voting-app  =If already build 
+	build:./vote  =if build needed
+	posts:
+		-5000:80
+	links:
+		-redis_name
+result:
+	images:result-app
+	posts:
+		-5001:80
+	links:
+		-db_name
+worker:
+	images:worker
+	links:
+		-redis_name
+		-db_name
+
+Docker-compose up
+
+Docker compose -build
+vote:
+	images:voting-app  =If already build 
+	build:./vote  =if build needed
+	posts:
+		-5000:80
+	links:
+		-redis
+
+
+
+Docker compose versions
+1)
+redis:
+	images:redis
+db:
+	images:postgres:9.4
+vote:
+	images:voting-app
+	posts:
+		-5000:80
+	links:
+		-redis
+2)
+version:2
+services:
+	redis:
+		images:redis
+	db:
+		images:postgres:9.4
+	vote:
+		images:voting-app
+		posts:
+			-5000:80
+		depended_on:
+			-redis
+ Must have to specify version:2
+ Services tag introduced
+ --Links not needed: All docker can communicate using dedicated bridge network created 
+ Introduced depended_on option
+
+3)
+version:3
+services:
+	redis:
+		images:redis
+	db:
+		images:postgres:9.4
+		environment:
+			POSTGRES_USER: postgres
+			POSTGRES_PASSWORD: postgres
+	vote:
+		images:voting-app
+		posts:
+			-5000:80
+		depended_on:
+			-redis
+
+
+Docker compose Network
+version:2
+services:
+	redis:
+		images:redis
+		networks:
+			 back-end:
+	db:
+		images:postgres:9.4
+		networks:
+			 back-end:
+	vote:
+		images:voting-app
+		posts:
+			-5000:80
+		depended_on:
+			-redis
+		networks:
+			 front-end:
+			 back-end:
+		
+networks:
+	front-end:
+	back-end:
+
+https://docs.docker.com/compose/
+https://docs.docker.com/engine/reference/commandline/compose/
+https://github.com/dockersamples/example-voting-app
+
+		

@@ -1,0 +1,161 @@
+Docker Image Commands
+	docker search mysql
+	
+	docker pull <image>
+		used to pull images from the registry to your local
+		If you don't specify a colon tag, it would pull the  tag with named latest(it may or may not be latest tag or even may not exist). 
+		
+	docker images
+			for seeing the repository and the tag
+	docker image ls
+	
+	docker image history <imageId|repositoryName:tag>
+		to see the steps involved in creating that specific image. 
+			commands: entrypoint, env, add, expose, volume. 
+	docker image history --no-trunc <imageId|repositoryName:tag>
+	
+	docker image inspect <imageId|repositoryName:tag>
+		you can see the entrypoint, which is basically the command which would be run when you create a container out of this image and launch it,
+		You can see the Docker version which was used to create it.
+		You can see the exposed port.
+		You can see all the environment variables which were set: path, Java_home, Java_version, java_alpine_version,and all that stuff,
+		and you can see a lot of information about the folder structure, the different layers which are present, and all that stuff.
+
+	docker image remove <imageId|repositoryName:tag>
+		You can also remove a image from the local. So, I can say, image remove.
+		The important thing is, this will only remove the image from your local machine.
+		It will not really delete it from the Docker registry.
+	dokcer rmi <imageId>
+			docker rmi busybox//remove images , must stop & remove all container then remove the image using this command
+		
+	
+	docker build -t demolocal:file1 .(dot)
+	docker build -f Dockerfile -t book_manager_app .(dot)
+	docker build -t in28min/hello-world-rest-api:dockerfile1 .(dot)
+	
+	docker tag in28min/todo-rest-api-h2:1.0.0.RELEASE in28min/todo-rest-api-h2:newTag
+		So, to the same image(Image with same imageId),we can give multiple tags
+		
+Official image
+	The repository name for mysql image is very very simple because it's an official image.
+	Basically, Docker official images are a curated set of Docker repositories.
+	Basically, Docker has a team which looks at these images, make sure that they're meeting certain standards,
+	and they publish all these content in the official images.
+	So, whenever you'd want to use a image for some software, let's say, you'd want to use a MySQL image
+	or let's say, you'd want to use a Tomcat image, or you'd want to use a Java image, make sure that you are
+	using an official image.
+
+
+
+
+
+
+
+ 
+
+
+Docker Images
+Why we create docker images
+ 	1)Not found image on https://hub.docker.com/
+ 	2)As a team we dicide to docerized of our application
+
+ How to create my own image?
+ 	1)OS ubuntu
+ 	2)Update apt repo (update source repository)
+ 	3)Install dependencies using apt command
+ 	4)Install Python dependencies using pip command
+ 	5)Copy source code to folder like /opt 
+ 	6)Run the web server using flask command
+
+	Create a file Dockerfile & put content inside this:
+ 		Layer 1)FROM Ubuntu
+ 		Layer 2)RUN apt-get update
+ 		RUN apt-get install -y python python-pip
+
+ 		Layer 3)RUN pip install flask
+ 		RUN pip install flask-mysql
+
+ 		Layer 4)COPY .  /opt/source-code/app.py
+
+ 		Layer 5)ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
+ 	docker build .
+	docker build . -f Dockerfile -t kodekloud/simple-webapp
+ 	docker push kodekloud/simple-webapp
+ 	docker push mmumshad/my-custom-app
+
+ 	Each command create a new layer build on previous layer. Each layer is cached.
+	If build failed , rebuild will from failed layered. 
+
+ 	docker history imageName 
+
+ 	What can we Containerize?
+ 		Almost any application
+
+Demo-Create a new Docker Image
+	docker run -it ubuntu bash
+	apt-get update
+	apt-get install -y python
+	python
+	apt-get install python-pip
+	pip install flask
+	cat > /opt/app.py
+		paste source code 
+	FLASK_APP=/opt/app.py flask run --host=0.0.0.0
+
+	history
+
+	docker build .
+	docker build  . -t mmumshad/my-custom-app
+	
+	docker login
+	docker push mmumshad/my-custom-app
+
+Environemnt Variables
+	export APP_COLOR=blue; python app.py
+	docker run -e APP_COLOR=blue simple-webapp-color
+
+	docker inspect simple-webapp-color
+		Config.Env........
+
+Entrypoint vs Command 
+	docker run ubuntu
+	doceker ps // empty
+	docker ps -a // 1 container
+	Container are not meant to host OS. Container are meant to run especific process or task.
+
+	Container only live as long as process inside it in running.Once the task completes, container exists.
+
+	docker run ubuntu sleep 15
+		CMD sleep 15
+		CMD ["sleep" "15"]
+
+	docker build -t ubuntu-sleeper
+	docker run ubuntu-sleeper
+	docker run ubuntu-sleeper sleep 15
+
+	ENTRYPOINT ["sleep"] 
+	docker run ubuntu-sleeper 15
+
+	In case of the CMD instruction the command line parameters passed will get replaced entirely whereas
+		in case of entry point the command line parameters will get appended.
+
+	ENTRYPOINT ["sleep"]
+	CMD ["15"]
+	docker run ubuntu-sleeper 
+
+	docker run --entrypoint sleepv2.0 ubuntu-sleeper 15   =override entrypoint & command
+			
+	
+
+
+
+
+
+
+
+
+
+
+
+
+

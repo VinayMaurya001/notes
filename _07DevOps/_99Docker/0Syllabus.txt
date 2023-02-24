@@ -1,0 +1,45 @@
+Revision
+	https://www.udemy.com/course/learn-docker/
+Next to read
+	https://www.udemy.com/course/docker-kubernetes-the-practical-guide/
+
+Multistage docker build	
+	https://www.alibabacloud.com/help/en/container-registry/latest/build-an-image-for-a-java-application-by-using-a-dockerfile-with-multi-stage-builds
+	https://www.alibabacloud.com/help/en/container-registry/latest/build-an-image-for-a-java-application-by-using-a-dockerfile-with-multi-stage-builds
+
+https://www.udemy.com/course/learn-docker/
+
+https://www.docker.com/play-with-docker
+https://labs.play-with-docker.com/
+www.codekloud.com
+https://www.kodekloud-engineer.com/#!/login
+https://www.youtube.com/watch?v=CnqjHRCZEt0
+
+
+Join our slack channel for support and discussions:
+	https://join.slack.com/t/kodekloud/shared_invite/zt-1b97gvpgx-Tyyl5IExtnwIrj9aK_PZbA
+
+www.play-with-k8s.com
+		Play with Kubernetes is a labs site provided by Docker and created by Tutorius.
+
+
+YAML Course
+`https://kodekloud.com/p/json-path-quiz
+
+
+https://www.youtube.com/watch?v=CnqjHRCZEt0
+
+Work on project
+	https://www.kodekloud-engineer.com/#!/login
+
+
+https://cloudinfrastructureservices.co.uk/docker-alternatives/
+https://cloudinfrastructureservices.co.uk/aws-lambda-vs-containers-whats-the-difference/
+
+
+Resources
+https://github.com/in28minutes/docker-crash-course
+
+https://www.udemy.com/course/docker-course-with-java-and-spring-boot-for-beginners/
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+https://www.udemy.com/course/learn-docker/

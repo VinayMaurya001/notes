@@ -1,0 +1,294 @@
+Short Notes
+docker build -t in28min/hello-world-rest-api:dockerfile1 .(dot)
+DockerFIle
+	FROM openjdk:8-jdk-alpine
+	WORKDIR /app
+	COPY target/app.jar .
+	EXPOSE 8080
+	ENTRYPOINT java $JAVA_OPTIONS -jar app.jar
+
+DockerFile
+	FROM adoptopenjdk:11-jre-hotspot
+	RUN mkdir /opt/app
+	WORKDIR /opt/app/workspace
+	COPY target/demolocal-0.0.1-SNAPSHOT.jar /opt/app
+	EXPOSE 8080
+	ENTRYPOINT java $JAVA_OPTIONS -jar /opt/app/demolocal-0.0.1-SNAPSHOT.jar
+	
+Building an Docker Image
+	Build a Jar in /target/hello-world-rest-api.jar
+		maven build>clean package
+		maven install
+	Setup the Prerequisites for Running the JAR - openjdk:8-jdk-alpine
+		scp abc.txt user@serverIp:'~'
+			scp hello-world-rest-api.jar root@1232.21.27.32:'~'
+			cp from to
+		
+		docker run -dit openjdk:8-jdk-alpine
+			-d-detached mode
+			-i=--interactive 
+			-t=-tty
+			In combination. -it allows you to run commands on a runnung container.
+		docker container exec a21c ls /tmp
+		docker container cp hello-world-rest-api.jar  a21c:/tmp
+		docker container exec cName ls /tmp
+		
+		docker container commit a21c in28min/hello-world-rest-api:manual5   //will create image
+		docker images
+		
+		docker run in28min/hello-world-rest-api:manual5
+		docker container ls
+		docker container commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' df9e in28min/hello-world-rest-api:manual6
+		docker iamges
+		
+		docker run -p 8080:8080 in28min/hello-world-rest-api:manual6
+		docker-machine ip default 192.168.99.100.
+		
+	Copy the jar
+	Run the jar
+	 
+	
+Use dockerfile to build Docker image
+Dockerfile
+	FROM openjdk:8-jdk-alpine
+	EXPOSE 8080
+	ADD target/hello-world-rest-api2.jar hello-world-rest-api.jar
+	ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
+
+//At current folder Dockerfile and target/hello-world-rest-api2.jar should be present
+docker build -t in28min/hello-world-rest-api:dockerfile1 .(dot)
+	-t for tag
+	. for current folder- build context
+docker run -p 8080:8080 in28min/hello-world-rest-api:dockerfile3
+	Here p for publish
+Docker layers are cached until any modification happens
+	docker build -t in28min/hello-world-rest-api:dockerfile2 .(dot)
+	
+	
+Using Dockerfile Spotify Plugin to Create Docker Images
+	This plugin integrates with the maven build process that means now during maven build process , docker build image will happen.
+		maven package -Dskiptests
+	https://github.com/spotify/dockerfile-maven
+	<plugin>
+	<groupId>com.spotify</groupId>
+	<artifactId>dockerfile-maven-plugin</artifactId>
+	<version>1.4.10</version>
+	<executions>
+		<execution>
+			<id>default</id>
+			<goals>
+				<goal>build</goal>
+				<!-- If we want to push mage on Docker registry -->
+							<!-- <servers>
+								<server>
+									<id>docker-repo.example.com:8080</id>
+									<username>docker_usernaem</username>
+									<password>docker_password</password>
+								</server>
+			    </servers> -->
+			</goals>
+		</execution>
+	</executions>
+	<configuration>
+		<!-- If we want to push mage on Docker registry -->
+		<!--<repository>vinaymaurya001/${project.name}</repository>-->
+		<repository>in28min/${project.name}</repository>
+		<tag>${project.version}</tag>
+		<skipDockerInfo>true</skipDockerInfo>
+	</configuration>
+	</plugin>
+
+
+			
+Create a generic reusable Dockerfile
+FROM openjdk:8-jdk-alpine
+EXPOSE 8080
+ADD tempJar3/*.jar app.jar
+ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
+
+
+DockerFIle
+FROM openjdk:8-jdk-alpine
+WORKDIR /app
+COPY target/app.jar .
+EXPOSE 8080
+ENTRYPOINT java $JAVA_OPTIONS -jar app.jar
+	
+
+Improving Caching of Docker Images by Adding Libraries in a Separate Step
+Current Situation
+	Fat Jar 
+	JDK
+Desired Situation
+	Classes
+	Dependencies
+	JDK
+Maven Dependency Plugin
+<plugin>	
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-dependency-plugin</artifactId>
+	<executions>
+		<execution>
+			<id>unpack</id>
+			<phase>package</phase>
+			<goals>
+				<goal>unpack</goal>
+			</goals>
+			<configuration>
+				<artifactItems>
+					<artifactItem>
+						<groupId>${project.groupId}</groupId>
+						<artifactId>${project.artifactId}</artifactId>
+						<version>${project.version}</version>
+					</artifactItem>
+				</artifactItems>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+
+Docker File
+FROM openjdk:8-jdk-alpine
+ARG DEPENDENCY=target/dependency
+COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY ${DEPENDENCY}/META-INF /app/META-INF
+COPY ${DEPENDENCY}/BOOT-INF/classes /app
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication"]
+
+
+
+
+
+
+
+Using JIB Plugin to Create Docker Images
+https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#quickstart
+	Docker image is an implementation of OCI.
+https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md
+<plugin>
+	<groupId>com.google.cloud.tools</groupId>
+	<artifactId>jib-maven-plugin</artifactId>
+	<version>1.6.1</version>
+	<configuration>
+		<container>
+			<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+		</container>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>dockerBuild</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+No need of Dockerfile
+
+"useCurrentTimestamp - true" discussion
+	https://github.com/GooleContainerTools/jib/blob/master/docs/faq.md#why-is-my-image-created-48-years-ago
+	https://github.com/GoogleContainerTools/jib/issues/413
+We can also put following configuration:
+<configuration>
+	<from>
+		<image>openjdk:alpine</image>
+	</from>
+	<to>
+		<image>in28min/${project.name}</image>
+		<tags>
+			<tag>${project.version}</tag>
+			<tag>latest</tag>
+		</tags>
+	</to>
+	<container>
+		<jvmFlags>
+			<jvmFlag>-Xms512m</jvmFlag>
+		</jvmFlags>
+		<mainClass>com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication</mainClass>
+		<ports>
+			<port>8100</port>
+		</ports>
+	</container>
+</configuration>
+JIB is Java Specific
+JIB  follows best practices like Improve Caching of Images using Layers
+
+
+
+
+Using Fabric8 Docker Maven Plugin to Create Docker Images
+fabric8io/docker-maven-plugin
+	https://dmp.fabric8.io/
+	Remove Spotify Maven and JIB Plugins. Add the plugin shown below and configure property for jar file.
+Supports
+	Dockerfile
+	Defining Dockerfile contents in POM XML.
+
+Using Dockerfile
+<!-- To build the image - "mvn clean package" -->
+<!-- Successfully tagged webservices/01-hello-world-rest-api -->
+<!-- docker run -p 8080:8080 webservices/01-hello-world-rest-api -->
+<plugin>
+	<groupId>io.fabric8</groupId>
+	<artifactId>docker-maven-plugin</artifactId>
+	<version>0.26.0</version>
+	<executions>
+		<execution>
+			<id>docker-build</id>
+			<phase>package</phase>
+			<goals>
+				<goal>build</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+<properties>
+...
+ <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
+</properties>
+
+Using XML Configuration
+<!-- To build the image - "mvn clean package" -->
+<!-- TAG - 01-hello-world-rest-api:latest -->
+<!-- docker run -p 8080:8080 01-hello-world-rest-api:latest -->
+<plugin>
+   <groupId>io.fabric8</groupId>
+   <artifactId>docker-maven-plugin</artifactId>
+   <version>0.26.0</version>
+   <extensions>true</extensions>
+   <configuration>
+      <verbose>true</verbose>
+      <images>
+         <image>
+            <name>${project.artifactId}</name>
+            <build>
+               <from>java:8-jdk-alpine</from>
+               <entryPoint>
+                  <exec>
+                     <args>java</args>
+                     <args>-jar</args>
+                     <args>/maven/${project.build.finalName}.jar</args>
+                  </exec>
+               </entryPoint>
+               <assembly>
+                  <descriptorRef>artifact</descriptorRef>
+               </assembly>
+            </build>
+         </image>
+      </images>
+   </configuration>
+   <executions>
+	<execution>
+		<id>docker-build</id>
+		<phase>package</phase>
+		<goals>
+			<goal>build</goal>
+		</goals>
+	</execution>
+   </executions>
+</plugin>
+
+
+Normally now in 99% projects uses Dockerfile. 
+	Because it provide better control over creation of image.
+	Dockerfile is platform/language independent.

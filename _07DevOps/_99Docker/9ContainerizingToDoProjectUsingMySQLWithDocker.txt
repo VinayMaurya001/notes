@@ -1,0 +1,157 @@
+https://www.javainuse.com/devOps/docker/docker-mysql
+
+Containerizing Java Spring Boot Todo Web Application using MySQL with Docker
+04 Step 01 - Code Review of 03 Todo Web Application MySQL
+04 Step 02 - Running MySQL as Docker Container on Local
+04 Step 03 - Connect Spring Boot Todo Web App to MySQL on Local
+04 Step 04 - Create Docker Image for 03 Todo Web Application and Use Link to connect
+04 Step 05 - Exploring Docker Networking - HOST, BRIDGE and NONE
+04 Step 06 - Creating a Custom Network and Connect MySQL and WebApplication to the network
+04 Step 07 - Using Docker Volumes to Persist Data
+04 Step 08 - Playing with Docker Compose
+
+1)Code Review of 03 Todo Web Application MySQL
+com.in28minutes.springboot.web.security.SecurityConfiguration contains the in memory security credential configuration.
+pom.xml
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+</dependency>
+
+src/main/resources/application.properties
+#spring.h2.console.enabled=true
+#spring.h2.console.settings.web-allow-others=true
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL55Dialect
+spring.datasource.url=jdbc:mysql://localhost:3306/todos
+spring.datasource.username=todos-user
+spring.datasource.password=dummytodos
+
+src/test/resources/application.properties
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+spring.datasource.username=sa
+spring.datasource.password=sa
+#Application uses h2 database to run the tests.s
+
+Create Todo Table for Production
+create table hibernate_sequence (next_val bigint) engine=InnoDB
+insert into hibernate_sequence values ( 1 )
+create table todo (id integer not null, description varchar(255), is_done bit not null, target_date datetime(6), user varchar(255), primary key (id)) engine=InnoDB
+
+2)Running MySQL as Docker Container on Local
+
+Launching MySQL using Docker
+	docker pull mysql:5.7
+	docker run --detach --env MYSQL_ROOT_PASSWORD=vinay --env MYSQL_USER=vinay --env MYSQL_PASSWORD=vinay --env MYSQL_DATABASE=demo --name mysql --publish 3306:3306 mysql:latest
+
+Install MySQL client
+	sudo apt-get update
+	sudo apt-get install mysql-client
+	sudo apt-get install mysql-shell
+	telnet 127.0.0.1 3306 
+	mysql -h 127.0.0.1 -P 3306 -u root -p 
+		mysql -h 127.0.0.1 -P 3306 -u todos-user -p
+		/connect todos-user@localhost:3306
+
+	https://dev.mysql.com/downloads/shell/
+	Install on mac using brew install caskroom/cask/mysql-shell.
+	User-MacBook-Air:projects userName$ mysqlsh
+	MySQL  JS > \connect todos-user@localhost:3306
+	MySQL  localhost:3306 ssl  JS > \sql
+	MySQL  localhost:3306 ssl  SQL > use todos
+ 	MySQL  localhost:3306 ssl  todos  SQL > select * from todo ;
+	 
+3)Connect Spring Boot Todo Web App to MySQL on Local
+
+4)Create Docker Image for 03 Todo Web Application and Use Link to connect
+
+	Copy Dockerfile & war file
+	docker build -t in28min/todo-web-application-mysql:0.0.1-SNAPSHOT .(dot)
+
+	Launching Web App using Docker
+	Default networking mode in Docker is something called Bridge network. 
+		In this mode communication b/w two container not happened without proper configuration.
+	Using Link
+		docker container run -p 8080:8080 --link=mysql -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+		Using link to communicate b/w container is not a recommended way. It is deprecated.
+		
+	spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+		spring.jpa.hibernate.ddl-auto=update
+		spring.datasource.url=jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:todos}
+		spring.datasource.username=${RDS_USERNAME:todos-user}
+		spring.datasource.password=${RDS_PASSWORD:dummytodos}
+		spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL57Dialect
+
+
+5)Exploring Docker Networking - HOST, BRIDGE and NONE
+	docker network ls
+		Bridge (default)
+		Host (only work on Linux)
+		None
+		CustomNetworkName(We have to create it manually)
+	
+	docker inspect bridge
+	
+	docker container run -p 8080:8080 --link=mysql -e RDS_HOSTNAME=mysql in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+	docker container run -p 8080:8080   		--network=host   		 in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+	
+	Host Networking in Docker for Mac
+		https://docs.docker.com/network/host/
+		The host networking driver only works on Linux hosts, 
+			and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
+
+6)Creating a Custom Network and Connect MySQL and WebApplication to the network
+   Playing with custom networks
+		docker network ls
+		docker network create web-application-mysql-network
+		docker inspect web-application-mysql-network
+   Using Custom Network MySQL
+   		Add --network=web-application-mysql-network
+		docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 --network=web-application-mysql-network mysql:5.7
+	
+   Using Custom Network Project
+	   	Add --network=web-application-mysql-network
+		Remove --link=mysql
+		docker container run -p 8080:8080 --network=web-application-mysql-network -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1
+		
+	docker container restart cId //data will not be lost.
+	But without configuring Docker Volumes, we will lost all data, when container removed.
+
+
+7)Using Docker Volumes to Persist Data
+	Using a Volume
+		Add --volume mysql-database-volume:/var/lib/mysql  
+		docker run --detach --env MYSQL_ROOT_PASSWORD=root --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=root --env MYSQL_DATABASE=todos 
+			--name mysql --publish 3306:3306 --network=web-application-mysql-network --volume mysql-database-volume:/var/lib/mysql  mysql:5.7
+
+		docker run --detach --env MYSQL_ROOT_PASSWORD=root --env MYSQL_USER=javauser --env MYSQL_PASSWORD=root --env MYSQL_DATABASE=testDb --name mysql --publish 3306:3306 --volume mysql-database-volume:/home/java/mydata/mysql  mysql
+		
+	docker stop cId
+	docker rm cId
+		docker container prune
+	docker run imageId:tag
+	docker container logs cId
+		docker logs cId
+	
+	
+8)
+	docker run --detach --env MYSQL_ROOT_PASSWORD=root --env MYSQL_USER=javauser --env MYSQL_PASSWORD=root --env MYSQL_DATABASE=testDb --name mysql2 --publish 3306:3306 --volume mysql-database-volume:/home/java/mydata/mysql --network web-app-mysql-network mysql:5.7
+	docker container logs -f <dockerId>
+	docker container exec -it <dockerId> bash
+		docker exec -i docker-mysql mysql -uroot -proot book_manager <book_manager.sql 
+		mysql -uroot -proot	
+	docker inspect <containerNameOrId> | grep '"IPAddress"' | head -n 1
+	dig <id>
+
+
+	
+	

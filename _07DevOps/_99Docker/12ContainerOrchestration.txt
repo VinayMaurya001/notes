@@ -1,0 +1,26 @@
+Container Orchestration
+	It is a solution that consists of a set of tools and scripts that can help host containers in a production environment.
+
+	Kubernetes
+		Difficult to set up but support advanced features 
+	Docker Swarm
+		Easy to set up but lack features like autoscaling
+	MESOS
+		Difficult to set up but support advanced features
+
+
+Docker Swarm
+	On Swarm Manager
+		docker swarm init
+		docker service create --replicas=3 my-web-server
+	On Worker Node
+		docker swarm join --token <token>	
+
+	
+
+
+Kubernetes
+	kubectl run --replicas=1000 my-web-server
+	kubectl scale --replicas=2000 my-web-server
+
+	

@@ -1,0 +1,44 @@
+Docker Storage
+
+File System
+Layered Architecture
+
+	
+Image Layer(Read Only)
+	app.py
+Container Layer(Read Write)
+	temp.txt
+	app.py (copy from image layer- Copy-ON-Write Mechanism)
+	delete once container deleted
+
+
+Volumes
+	docker volume ls
+	docker volume create data_volume
+	
+	Volume Mount
+		docker run -v data_volume:/var/lib/mysql mysql
+		volume mount mounts a volume from the volumes directory
+
+	Bind Mount
+		docker run -v /data/data_volume:/var/lib/mysql mysql
+		Bind mount mounts a directory from any location on the docker host
+
+	docker run \	
+	--mount type=bind, source=/data/data_volume, target=/var/lib/mysql mysql
+
+
+	/var/lib/docker/volumes/asdasdasdqw1232e
+	
+	du -sh
+		show size of files
+		
+Storage driver
+	Dockery uses storage drivers to enable layered architecture.
+	Some of the common storage drivers are 
+		AUFS, 
+		BTRFS, 
+		ZFS, 
+		Device-mapper, 
+		Overlay and 
+		Overlay 2

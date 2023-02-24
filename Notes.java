@@ -1,7 +1,7 @@
-
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -13,7 +13,7 @@ public class Notes {
 
 	private static final String PREFIX = "<a target='_blank' href=\"https://raw.githubusercontent.com/VinayMaurya001/"
 			+ REPO_NAME + "/master/";
-	private static final String SUFFIX = "</a><br>";
+	private static final String SUFFIX = "</a>";
 	private static final String SPACES = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 
 	private static final String FILENAME = REPO_NAME + ".html";
@@ -26,6 +26,7 @@ public class Notes {
 		try (PrintWriter out = new PrintWriter(FILENAME)) {
 			out.println(stringBuilder);
 		}
+		System.out.println("Ended");
 	}
 
 	public static void walk(String basePath, int i, StringBuilder stringBuilder) {
@@ -42,15 +43,19 @@ public class Notes {
 				path = f.getAbsoluteFile().toString().substring(26);
 				if (f.isDirectory()) {
 					removePrefix();
-					String direPath = "<span>" + path + "<span><br>";
+					String direPath = "<span>" + path + "<span>" + "("
+							+ new Date(f.lastModified()).toLocaleString().substring(0, 11) + ")<br>";
 					stringBuilder.append(direPath).append("\n");
 					walk(f.getAbsolutePath(), i, stringBuilder);
 				} else {
 					String filePath = null;
+					String fileName = null;
 					if (f.getName().contains(".java")) {
-						filePath = PREFIX + path + "\">" + f.getName() + SUFFIX;
+						fileName = f.getName();
+						filePath = PREFIX + path + "\">" + fileName + SUFFIX + "</br>";
 					} else {
-						filePath = PREFIX + path + "\">" + f.getName().substring(3) + SUFFIX;
+						fileName = f.getName().substring(3);
+						filePath = PREFIX + path + "\">" + fileName + SUFFIX + "</br>";
 					}
 					stringBuilder.append(filePath).append("\n");
 				}
@@ -66,6 +71,15 @@ public class Notes {
 
 	private static boolean isIgnoreDirOrFile(File f, String repoName) {
 		String path = f.getAbsolutePath();
+		List<String> ignorePaths = buildIgnorePathList(repoName);
+		long ignoreCount = ignorePaths.stream().filter(iPath -> {
+			return path.contains(iPath);
+		}).count();
+		return ignoreCount > 0;
+
+	}
+
+	private static List<String> buildIgnorePathList(String repoName) {
 		List<String> ignorePaths = new ArrayList<>();
 		ignorePaths.add(".git");
 		ignorePaths.add(".classpath");
@@ -83,11 +97,7 @@ public class Notes {
 			ignorePaths.add("bin");
 			ignorePaths.add("lib");
 		}
-		long ignoreCount = ignorePaths.stream().filter(iPath -> {
-			return path.contains(iPath);
-		}).count();
-		return ignoreCount > 0;
-
+		return ignorePaths;
 	}
 
 }
