@@ -1,0 +1,36 @@
+Without Kafka
+	4 Source System ->  24 Integrations -> 6 Target Systems
+	Each integration comes with dificulties around
+		Protocol-how the data is transported(TCP,HTTP,REST,FTP,JDBC etc...)
+		Data format- How data is parsed(Binary, CSV, JSON, Avro, Protobuf...)
+		Data Schema & evolution- How the data is shaped & may change
+	Each source system will have an increased load from the connections
+	
+Kafka
+	More scalable
+	
+	
+Why Kafka?
+	Decoupling of data streams & systems
+	Created by Linkedin Now Open-source mainly maintained by Confluent, IBM, Cloudera
+	Distributed, resilient architecture, fault tolerant
+	Horizontal Scalability
+		Can scale to 100s brokers
+		Can scale to millions of messages per second
+	High performance
+		latency of <10ms, real time
+	Used by 2000+ firms, 80% of the Fortune 100
+		Linkedin
+		Uber
+		Netflix
+		Walmart etc
+		
+Apache Kafka: Use cases
+	Messaging System
+	Activity Tracking
+	Application Logs Gathering
+	Decoupling of system dependencies
+	Integration with Spark, FLink, Storm, Hadoop, & many other big data technologies
+	
+		
+	

@@ -1,4 +1,5 @@
-package _7Collection._3Set;
+package _02CoreJava._7Collection._03Set;
+
 
 import java.util.HashSet;
 import java.util.Iterator;

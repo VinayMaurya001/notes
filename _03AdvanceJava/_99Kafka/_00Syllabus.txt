@@ -1,0 +1,27 @@
+https://www.udemy.com/course/apache-kafka/
+	Section 4 :Kafka Theory
+	
+/allNotes/3AdvanceJava/kafka/Install+Kafka+Diagram.pdf
+https://developer.confluent.io/quickstart/kafka-docker/
+	
+Kafka for beginners, 
+	which is going to give you a very strong base for Kafka learn basic operations and write your first consumers and producers.
+Kafka Connect API
+	Understand how to import/export from/to Kafka
+Kafka Streams API
+	Learn how to process & transform data within Kafka
+ksqIDB
+	Write Kafka Streams applications using SQL
+Confluent Components
+	REST proxy & Schema Registry
+Kafka Security
+	
+Kafka Monitoring and Operations
+	Use Prometheus & Grafana to monitor Kafka, learn operations
+Kafka Cluster Setup and Administration 
+	How to setup Kafka & Various Administration tasks
+
+Certifications
+	Confluent Certification for Developers
+		Certified Developer for Apache Kafka
+	Confluent Certification for Operators.

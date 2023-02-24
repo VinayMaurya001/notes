@@ -1,0 +1,170 @@
+Kafka Extended APIs
+	Kafka Consumers & Producers have existed for a long time, & they are considered low-level
+	Kafka & ecosystem has introduced over time some new API that are high level that solves specific set of problems:
+		Kafka Connect: solves External Source->Kafka and Kafka ->External Sink
+		Kafka Stream: solve transformations Kafka=>kafka
+		Schema Registry: helps using schema in Kafka
+
+	
+
+Kafka COnnect Introduction
+	Do you feel you are not the first person in the world
+		to write a way to get data out of Twitter?
+		to send data from Kafka to PostgreSQL/ElasticSearch/MOngoDB?
+	Additionally, the bugs you will have, won't someone have fixed them already?
+	Kafka COnnect is all about code & connectors re-use!
+
+
+	Why Kafka COnnect
+		Programmers always want to import data from the same sources:
+			Databases, JDBC,Couchbase, Goldenbase, SAP HANA, Blockchain, Cassandra, DynamoDB, FTP, IOT, MongoDB, MQTT, RethinkDB, Salesforce, Solr, SQS, Twitter.....
+		Programmers always want to store data in same sinks:
+			S3, ElasticSearch, HDFS, JDBC, SAP HANA, DOcumentDB, Cassandra, DynamoDB, HBase, MongoDB, Redis, Solr, Splunk, Twitter....
+
+	Kafka Connect-Architecture Design
+		Sources => Connect Cluster(Worker1,Worker2,....) =>Kafka Cluster(Broker1,Broker2....)
+		Kafka Cluster(Broker1,Broker2....) => Connect Cluster(Worker1,Worker2,....) =>Sinks
+
+
+	Kafka COnnect-High Level
+		Source Connectors to get data from Common Data Sources
+		Sink COnnectors to publish that data in Common Data Stores
+		Make it easy for non-experienced dev to quickly get their data reliably into Kafka.
+		Part of your ETL pipeline
+		Scaling made easy from small pipelines to company-wide pipelines
+		Other programmers may already have done a very good job: re-usable code
+		Connectors achieve fault-tolerance, idempotence, distribution, ordering
+		https://www.confluent.io/hub/
+			https://www.confluent.io/product/connectors/
+				More than 200+ connectors has been available
+	
+
+
+Kafka Connect Demo- Wikimedia Workflow
+	https://github.com/conduktor/kafka-connect-wikimedia/releases
+		Download jar in folder kafkaConnectors/kafka-connect-wikimedia
+		https://github.com/conduktor/kafka-connect-wikimedia/blob/main/connector/wikimedia.properties
+			name=wikimedia-source-connector
+			tasks.max=1
+			connector.class=io.conduktor.demos.kafka.connect.wikimedia.WikimediaConnector
+			topic=wikimedia.recentchange.connect
+			url=https://stream.wikimedia.org/v2/stream/recentchange
+			errors.tollerance=all
+			errors.deadletterqueue.topic.name=wikimedia.connect.dlq
+	https://www.confluent.io/hub/confluentinc/kafka-connect-elasticsearch		
+		Download
+	connect-standalone config/connect-standalone.properties config/wikimedia.properties
+	# get data from our producer into ElasticSearch
+	connect-standalone config/connect-standalone.properties config/elasticsearch.properties
+	GET wikimedia.recentchange/_search
+	{
+	 "query": {
+	   "match_all": {}
+	 }
+	}
+	
+	
+	
+	
+Kafka Streams
+	You want to do the following from the wikimedia.recentchnage topic:
+		Count the number of times a change was created by a bot versus a human
+		Analyze the number of changes per website(ru.wikipedia.org vs wikipedia.org)
+		Number of edits per 10 seconds as a time series
+	With the Kafka Producer & COnsumer, we can achieve that but it is very low level & not developer friendly
+
+	What is Kafka Streams?
+		Easy data processing & transformation library within Kafka
+	
+		Kafka=>Kafka
+
+		Data Transformations
+		Data Enrichment
+		Fraud Detection
+		Monitoring & Alerting
+
+		Standard Java Application
+		No need to create a separate cluster
+		Highly Scalable, elastic,& fault tolerance
+		Exactly-once Capabilities
+		One record at a time processing(No Batching)
+		Works a=for any application size
+
+
+		Kafka Streams Hands-on
+			// https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams
+    			implementation 'org.apache.kafka:kafka-streams:3.2.0'	
+    			
+    			
+    			
+    			
+    			
+Kafka Schema Registry
+
+Need
+	Kafka takes bytes as an input & publishes them
+	No data verification
+	What if the producer sends bad data?
+		What if a field gets renamed?
+		What if the data format changes from one day to another?
+	The COnsumers break!
+
+	We need data to be self describable
+	We need to be able to evolve data without breaking downstream consumers
+	We need schemas & a schema registry.
+
+	What if the Kafka Brokers were verifying the messages they recieve?
+		It would break what makes Kafka so goog:
+			Kafka doesn't parse or even read your data(no cpu usage)
+			Kafka takes bytes as in input without even loading them into memory(that's called zero memory)
+			Kafka distributes  bytes
+		As for as Kafka is concerned, it doesn't even know if your data is an integer, a string etc.
+	
+	The Schema Registry must be a separate component
+		Producers & consumers need to be able to talk to it
+		The Schema Registry must be able to reject bad data
+		A cmmon data format must be agreed upon:
+			It needs to support schemas
+			It needs to support schema evolution
+		It needs to be lightweight
+	
+	
+	Apache Avro as data format
+		Protobuf, 
+		JSON Schema
+		
+		
+	Pipeline without registry
+		Source=> Producer=>Kafka
+		Kafka=>COnsumer=>Target
+	
+	Pipeline with registry
+
+
+	Schema Registry Purpose:
+		Store & retrieve schemas for Producers/Consumers
+		Enforce Backwar/Forward/Full compatibility on topics if we want evolve our schemas
+		Decrease the size of payload of data sent ot Kafka
+
+		Utilizing a schema registry has a lot of benefits
+		But it implies you need to
+			Set it up well
+				It takes time to setup
+			Make sure it is highly available
+			Partially change the producer & consumer code
+		Apache Avro as a format is awesome but has a learning curve
+			Other formats include Protobuf and JSON format
+		The COnfluent Schema Registry is free & source available but it is not a open-source
+			Other open-source alternatives may exist		
+			
+			
+			
+Which Kafka Api Should I Use?
+	Source Database-> Kafka Connect Source=> Kafka
+	Kafka-> Kafka Connect Sink=> Target Database
+
+	
+	Kafka to Kafka Transformation we need Kafka Stream or KSQL
+
+	
+		

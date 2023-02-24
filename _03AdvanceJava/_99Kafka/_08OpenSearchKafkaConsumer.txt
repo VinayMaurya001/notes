@@ -1,0 +1,229 @@
+
+
+Setup an OpenSearch(open-source fork for ElasticSearch) cluster:
+	Free Tier/managed OpenSearch available at bonsai.io
+	Run locally (for example using Docker) 
+
+Use Java Libraries
+	OpenSearch REST High Level Client
+		//https://search.maven.org/artifact/org.opensearch.client/opensearch-rest-high-level-client/1.2.4/jar
+		implementation 'org.opensearch.client:opensearch-rest-high-level-client:1.3.2'
+	
+	
+	
+Setting up OpenSearch on Docker
+
+
+Setting up OpenSearch on the Cloud
+		bonsai.io
+		
+		
+https://opensearch.org/docs/latest/#docker-quickstart
+
+
+OpenSearch Consumer Implementation
+
+
+
+
+
+
+
+
+
+
+
+
+
+Consumer Delivery Semantics
+	At most once:
+		offsets are committed as soon as the message batch is received.
+		If the processing goes wrong, the message will be lost(it won't be read again)
+	At least once
+		offsets are committed after message is processed.
+		If the processing goes wrong, the message will be read again.
+		This can result in duplicate processing of messages.
+		Make sure your processing is idempotent(i.e. processing again the messages won't impact your systems)
+	Exactly once
+		Can be achieved for Kafka=>Kafka workflow, using the Transactional APi(easy with Kafka Stream API)
+		For Kafka=>Sink workflow, use an idempotent consumer	
+	Bottom line: For most applicationwe should use At least once processing & ensure transformations/processing are idempotent
+	
+
+	OpenSearch Consumer Implementation-Idempotence
+		Pass unique id when pushing data in OpennSearch, so duplicate entry will not be present in OpenSearch
+	
+	
+	
+	
+	
+	
+Consumer Offset Commit Strategies
+	2 strategies
+	.(easy) enable.auto.commit=true & synchronous processing of batches
+	.(medium)enable.auto.commit=false & manual commit of offsets
+		enable.auto.commit=false & synchronous processing of batches
+		enable.auto.commit=false & storing offsets externally
+		
+	Kafka Consumer- Auto Offset Commit Behaviour
+		In the Java Consumer API, offsets are regularly committed
+		Enable at-least once reading scenario by default(under conditions)
+		Offsets are committed when we call poll() & auto.commit.interval.ms has elapsed
+		Example: auto.commit.interval.ms=5000 & enable.auto.commit=true will commit
+		Make sure messages are all successfully processed before we call poll() again
+			If we don't, we will not be in at-least once scenario
+			In that(rare)case, we must disable enable.auto.commit & most likely most processing to a separate thread 
+				& then from time to time call .commitSync() or commitAsync() with the correct offsets manually(advanced)
+	
+	enable.auto.commit=true & synchronous processing of batches
+			while(true){
+				List<Records> batch=consumer.poll(Duration.ofMillis(100));
+				doSomethingSynchronous(batch);
+			}
+			With auto-commit, offset will be committed automatically for you at regular interval(by default auto.commit.interval.ms=5000), every-time you call poll().
+			If you don't use synchronous processing, you will be in "at-most-once" behaviour because offsets will be committed before your data is processed
+	.	
+	enable.auto.commit=false & synchronous processing of batches
+		while(true){
+			batch += consumer.poll(Duration.ofMillis(100));
+			if(isReady(batch)){
+				doSomethingSynchronous(batch);
+				consumer.commitAsync();
+			}
+		}
+		You control  when you commit offsets & what is the condition for committing them.
+		Example: accumulating records into a buffer & then flushing the buffer to a database+ committing offsets asynchronously then.
+
+	enable.auto.commit=false & storing offsets externally
+		This ia advanced
+		You need to assign partitions to your consumers at launch manually using seek() api
+		You need to model & store your offsets in a database table for example
+		You need to handle the cases where rebalances happen(ConsumerRebalanceListener interface)
+		Example: If you need exactly once processing & can't find any way to do idempotent processing , then you "process data"+ "commit offsets" as part of a single transaction
+		
+		
+		
+	OpenSearch Consumer Implementation-Delivery Semantics
+		 properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+		 consumer.commitSync();
+
+	OpenSearch Consumer Implementation-Batch Data
+		BulkRequest bulkRequest = new BulkRequest();
+		bulkRequest.add(indexRequest);
+		bulkRequest.add(indexRequest);
+		if (bulkRequest.numberOfActions() > 0){
+	          BulkResponse bulkResponse = openSearchClient.bulk(bulkRequest, RequestOptions.DEFAULT);             
+		}
+	
+	
+	
+	
+Consumer Offset Reset Behaviour
+	A consumer is expected to read from a log continuously
+	But if application has a bug, consumer can be down
+	If Kafka has a retention of 7 days, & consumer is down for more than 7 days , the offsets are "invalid".
+
+	The behaviour for the consumer is to then use:
+		auto.offset.reset=latest
+			will read from the end of the log
+		auto.offset.reset=earliest
+			will read from the start of the log
+		auto.offset.reset=none
+			will throw exception if no offset is found
+
+	Aditionally, consumer offsets can be lost,
+		If a consumer hasn't read new data in 1 days(Kafka<2.0)
+		If a consumer hasn't read new data in 7 days(Kafka>=2.0)
+		This can be controlled by the broker setting offset.retention.minutes
+
+	Replaying data for consumers
+		TO replay data for a consumer group:
+			Take all the consumers from a specific group down
+			Use kafka-consumer-groups command to set offset to what you want
+				kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group my-first-application --reset-offsets --shift-by 2 --execute --topic first_topic
+			Restart consumers
+		Buttome line:
+			Set proper data retention period & offset retention period
+			Ensure the auto offset reset behaviour is the one you expect/want
+			Use replay capability in case of unexpected behaviour
+			
+			
+			
+Controlling consumer liveliness
+	Consumers in a group talk to a consumer group coordinator(acting broker)
+	To detect consumers that are down, there is a "heartbeat" mechanism & a "poll" mechanism
+	To avoid issues, consumers are encouraged to process data fast & poll often
+
+	
+	Consumer Hearbeat Thread
+		heartbeat.interval.ms(default 3 seconds)
+		How often to send heartbeats to the broker
+		Usually set to 1/3rd of session.timepout.ms
+			default 45seconds for Kafka3.0+, before 10 seconds		
+		Heartbeats are sent periodically to the broker
+		If no heartbeat is sent during that period, the consumer is considered dead
+		Set even lower to faster consumer rebalances
+		Take-away: This mechanism is used to detect a consumer application being down
+
+
+	Consumer poll Thread
+		max.poll.interval.ms(default 5 minutes)
+			Maximum amount of time between two poll() calls before declaring the consuder dead
+			This is relevant for BigData framework like Spark in case the processing takes time.
+			Take-away:This mechanism is used to detect a data processing issue with the consumer (consumer is "stuck")
+	
+		max.poll.records(default 500)
+			Controls how many records to recieve per poll request
+			Increase if your messages are very small & have a lot of available RAM
+			Good to monitor how many records are polled per request
+			Lower if it takes too much time to process records
+	
+		fetch.min.bytes(default 1)
+			Controls how much data you want to pull at least on each request
+			Help improving throughput & decreasing request number
+			At cost of latency
+
+		fetch.max.wait.ms(default 500)
+			The maximum amount of time the Kafka broker will block befor answering the fetch request if there is not sufficient data to immediately satisfy the requirement given by fetch.min.bytes
+			The means that until the requirement of fetch.min.bytes to be satisfied, you will have up to 500ms of latency before the fetch reeturns data to the consumer(e.g. introducing a potential delay to be more efficient in requests)
+
+		max.partittion.fetch.bytes(default 1MB)
+			The maximum amount of data per partition the server will return
+			If you read from 100 partition, you will need a lot of memory(RAM)
+	
+		fetch.max.bytes(default 55MB)
+			Maximum data returned for each request
+			If you have available memory, try increasing fetch.max.bytes to allow the consumer to read more data in each request
+	 
+		Advanced: Change these settings only if your consumer maxes out on throughput already
+		
+		
+		
+		
+		
+Consumer Replica Fetching-Rack Awareness
+	Default Consumer Behaviour with Partition Leaders
+		Kafka Consumers by defualt will read from the leader broker for a partition
+		Possibly higher latency(multiple data centre) + higher network charges($$$)	Example: Data Centre(==Availability zone in AWS), you pay cross AZ network charges
+		
+	Kafka Consumers Replica Fetching(Kafka v2.4+)
+		Since Kafka 2.4+, it is possible to configure consumers to read from the closest replica.
+		The may help improve latency & also decrease network costs if using the cloud.
+
+	Consumer Rack Awareness(v2.4+)- How to setup
+		Broker setting:
+			Must be Karka v2.4+
+			rack.id config must be set to the data centre ID(ex: AZ ID in AWS)		Example for AWS: AZ ID rack.id=usw2-az1
+			replica.selector.class must be set to 	
+				org.apache.kafka.common.replica.RackAwareReplicaSelector
+		Consumer client setting
+			Set client.rack to the data centre ID the consumer is launched on
+			
+			
+Q)if we do asynchronous operations in our consumer, it is preferable
+A)To commit offsets manually
+
+
+
+
+			

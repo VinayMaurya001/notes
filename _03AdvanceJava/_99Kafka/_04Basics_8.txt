@@ -1,0 +1,61 @@
+	
+	
+To produce data to a topic, a producer must provide the Kafka client with..
+	You only need to connect to one broker (any broker) and just provide the topic name you want to write to. 
+	Kafka Clients will route your data to the appropriate brokers and partitions for you.
+	
+Two consumers that have the same group.id (consumer group id) will read from mutually exclusive partitions
+
+
+
+Pertition Count & Replication Factor
+	The two most important parameters when creating a topic
+	They impact performance & durability of the syatem overall
+	It is best to get the parameters right the first time because:
+		If the partition count increases during a topic lifecycle, you will break your keys ordering guarantee
+		If the replication factor increases during a lifecycle, you put more pressure on your cluster, 
+			which can lead to unexpected performance decrease.
+
+	Choosing the Partition Count
+		Each partition can handle a throughput of a few MB/s(measure it for your setup)
+		More partitions implies:
+			Better parallelism, better throughput
+			Ability to run more consumers in a group to scale(max as many consumers per group as partitions)
+			Ability to leverage more brokers if you have a large cluster
+			But more elections to perform for Zookeeper(if using Zookeeper)
+			But more files opened on Kafka
+		Guidelines:
+			Partition per topic	
+				(Intuition)Small Cluster(<6 brokers): 3 * # brokers
+				(Intuition)Big Cluster(>12 brokers): 2 * # brokers
+				Adjust for number of consumers you need to run in parallel at peak throughput
+				Adjust for producer throughput(increase if super-high throughput or projected increase in the next 2 years)
+			Test! Every Kafka Cluster will have different performance
+			Don't systematically create topic with 1000 partitions
+		
+	Choosing the replication factor
+		Should be at least 2, usually 3, maximum 4
+		The higher the replication factor(N):
+			Better durability of yor system(N-1 brokers can fail)	
+			Better availability of your system(N- min.insync.replicas if producer acks=all)
+			But more replication(higher latency if acks=all)	
+			But more disk space on your system(50% more if RF is 3 instead of 2)
+		Guidelines
+			Set it to 3 to get started(You must have at least 3 brokers for that)			
+			Never set it to 1 in production	
+			If replication performance is an issue, get a better broker instead of less RF
+	
+	Cluster  guidelines
+		Total number of partitions in the cluster
+			Kafka with Zookeeper
+				Max 200,000 partitions(Nov 2018) (about 50 brokers)- Zookeeper Scaling limit
+					Still recommended a maximum of 4000 partittions PER BROKER(soft limit)
+			Kafka with KRaft: potentially millions of partitions
+	
+		If you need more partitions in your cluster, add brokers instead
+		If you need more than 200000 partitions in your cluster(it will take time to get there!), follow the Netflix model & create more Kafka clusters
+	
+		Overall, you don't need a topic with 1000 partitions to achieve high throughput . Start at a reasonable number & test the performance
+
+
+	

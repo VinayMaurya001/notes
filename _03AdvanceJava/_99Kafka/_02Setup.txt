@@ -1,0 +1,29 @@
+
+
+/allNotes/3AdvanceJava/kafka/Install+Kafka+Diagram.pdf
+https://www.conduktor.io/kafka/starting-kafka
+https://www.conduktor.io/download
+
+
+
+Setup On windows
+	https://www.conduktor.io/kafka/how-to-start-kafka-with-conduktor
+	https://www.conduktor.io/kafka/how-to-install-apache-kafka-on-windows
+		winver
+		wsl --install
+		https://kafka.apache.org/downloads
+		
+		~/kafka_2.13-3.2.0/bin/zookeeper-server-start.sh ~/kafka_2.13-3.2.0/config/zookeeper.properties
+		~/kafka_2.13-3.2.0/bin/kafka-server-start.sh ~/kafka_2.13-3.2.0/config/server.properties
+		kafka-topics --bootstrap-server localhost:9092 --list
+		
+		
+		sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+		sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+		listeners=PLAINTEXT://localhost:9092 in server.properties
+		
+
+Setup using Docker	
+	https://www.baeldung.com/ops/kafka-docker-setup
+	https://www.conduktor.io/kafka/how-to-start-kafka-using-docker
+		https://github.com/conduktor/kafka-stack-docker-compose

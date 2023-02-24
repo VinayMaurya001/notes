@@ -1,0 +1,72 @@
+Kafka Topics
+
+Topics
+	A topic is a particular stream of data
+	A topic is identified by its name
+	It supports  any kind of message format like json, text file, binary etc.
+	The sequence of messages in a topic is called a data stream. And so Kafka is called data streaming platform.
+	We can have as many topics as we want in Kafka Cluster
+	
+	A topic is like a table in database(Without all the constraints)
+	We cannot query topics, instead , use Kafka Producers to send data & Kafka Consumers to read the data.
+	
+	Kafka Topics are Immutable-Once data is written to a partition, it cannot be changed
+		We cannot delete or update data.
+		But data is kept only for a limited time(default is one week-configurable)
+	
+Partitions & Offsets
+	Topics are split in partitions(example 100 partitions)
+		Messages in each partition are ordered.
+		Each message within a partition gets an incremental id , called offset or Kafka Partition Offset.
+		Order is quaranteed only within a partition(not across partitions).
+		Offset only have a meaning for a specific partition.
+		Offset are not re-used even if previous message have been deleted.
+		Data is assigned randomly to a partition unless a key is provided.
+		We can have as many partition per topic as we want.
+		
+		
+Producers
+	Producers write data to topics(topics are made of partitions)
+	Producers know to which partition to write to (and which Kafka Broker has this partition)
+	In case of Kafka broker failures, producers will automatically recover.
+	
+	Message keys
+		Producers can choose to send a key with the message(string, number, binary etc...)
+		If key==null then , data is sent roundrobin(partition 0 then partition 1 then partition 2...)
+		If key !=null, then all messages for that key will always go to the same partition(hashing).
+			A key are typically sent if we need message ordering for a speific field.
+		
+
+Kafka Messages Anatomy
+	Key-binary
+		Can be null
+	Value-binary
+		Can be null
+	Compression type
+		none, gzip,snappy, lz4,zstd
+	Headers(Optional)
+		key value pairs
+	Partition+Offset
+	Timestamp (system or user set)
+	
+	
+Kafka Message Serializer
+	Kafka only accepts bytes as an input from producers & send bytes out as an output to consumers.
+	Message serialization means transforming objects/data into bytes.
+	
+	They are used on the value & the key.
+		Key Object(123) ->int ->Key serializer=Integer Serializer-> bytes-> Key binary
+		Value Object("Hello World!") ->string ->Value serializer=String Serializer-> bytes-> Value binary
+	Kafka Producers have common Serializers.
+		String (incl JSON)
+		Int, FLoat
+		Avro
+		Protobuf
+	
+	
+Kafka Message Key Hashing
+	A Kafka producer partitioner logic is a code logic that takes a record & determines to which partition to sent it into.
+	Key hashing is the process of determining the mapping of a key to a partition.
+	In the default Kafka Partitioner logic , the key are hashed useing the murmer2 algorithm, 
+			targetPartition=Math.abs(Utils.murmer2(keyBytes))% (numPartitions-1);
+	

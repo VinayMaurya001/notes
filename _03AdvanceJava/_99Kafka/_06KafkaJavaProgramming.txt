@@ -1,0 +1,283 @@
+
+SDK list for Kafka
+	Apache Kafka only officially provides an SDK for the Java language.
+	For the other languages, these are community based implementations. 
+		A list of recommended SDK has been compiled below to save you a little bit of time
+		https://www.conduktor.io/kafka/kafka-sdk-list
+	
+		Kafka Client Libraries SDK List
+			Java
+			C/C++
+			Scala
+			Golang
+			Python
+			.NET/C#
+			Kotlin
+			Javascript/Node.js
+			REST API
+			Ruby
+			
+			
+Creating Kafka Project
+	https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html
+	https://www.conduktor.io/kafka/creating-a-kafka-java-project-using-gradle-build-gradle
+	https://www.conduktor.io/kafka/creating-a-kafka-java-project-using-maven-pom-xml
+	
+	
+	<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+	<dependency>
+   		<groupId>org.apache.kafka</groupId>
+    	<artifactId>kafka-clients</artifactId>
+    	<version>3.2.0</version>
+	</dependency>
+	implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.2.0'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
+    
+    
+    
+Java Producer: Java API
+        //Create Producer Properties
+        Properties properties=new Properties();
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+        //Create Producer
+        KafkaProducer<String,String> kafkaProducer=new KafkaProducer<>(properties);
+
+        //Create ProducerRecord
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("java_demo4","Hello World!");
+        //Send data- Asynchronous
+        kafkaProducer.send(producerRecord);
+
+        //flush data - Synchronous
+        kafkaProducer.flush();
+        //flush & close the Pruducer
+        kafkaProducer.close();
+
+
+
+
+Java Producer Callbacks
+	Confirm the partition & offset, the message was sent to, using Callbacks
+	Default Partittioner
+		 Sticky Partitioner(Performance improvement)
+		 RoundRobin
+		 
+	kafkaProducer.send(producerRecord, new Callback() {
+                @Override
+                public void onCompletion(RecordMetadata metadata, Exception exception) {
+                    if (exception == null) {
+                        log.info("Recieved new metadata /\n" +
+                                "Topic " + metadata.topic() + "\n" +
+                                "Partition " + metadata.partition() + "\n" +
+                                "Offset " + metadata.offset() + "\n" +
+                                "Timestamp " + new Date(metadata.timestamp())
+                        );
+                    } else {
+                        log.error("Error while producing", exception);
+                    }
+                }
+     });
+     
+
+
+Java Producer with Keys
+	Send non-null keys to the Kafka topic
+	Same key means same partition
+	ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic,key,value );
+	
+	
+	
+	
+	
+Java Consumer
+	poll(Duration timeout)
+		return data immediately if possible,
+		return empty after timeout
+		
+		{
+        	log.info("Hello Consumer!");
+        	//Create Consumer Properties
+        	Properties properties=new Properties();
+        	properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+        	properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        	properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        	properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"my-second-application");
+        	properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");//none/earliest/latest
+
+	        //Create Consumer
+	        KafkaConsumer<String,String> kafkaConsumer=new KafkaConsumer<>(properties);
+
+	        //Subscribe Consumer to our topic(s)
+	        String topic="topic2";
+	        //kafkaConsumer.subscribe(Collections.singleton(topic));
+	        kafkaConsumer.subscribe(Arrays.asList(topic));
+
+	        //poll for new data
+	        while(true){
+	            log.info("Polling...");
+	            ConsumerRecords<String, String> consumerRecords=kafkaConsumer.poll(Duration.ofMillis(1000));
+	            for(ConsumerRecord<String,String> consumerRecord:consumerRecords){
+	                log.info("Key: "+consumerRecord.key()+" Value: "+consumerRecord.value());
+	                log.info("Partition: "+consumerRecord.partition()+" Offset: "+consumerRecord.offset());
+	            }
+	        }
+	    }
+	    
+	    
+	    
+	    
+Java Consumer-Graceful Shutdown
+	Ensure we have code in place to respond to termination signals
+	{
+        log.info("Hello Consumer!");
+        //Create Consumer Properties
+        Properties properties=new Properties();
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"my-second-application");
+        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");//none/earliest/latest
+
+
+        //Create Consumer
+        KafkaConsumer<String,String> kafkaConsumer=new KafkaConsumer<>(properties);
+
+
+        //get a reference to the current thread
+        final Thread mainThread=Thread.currentThread();
+
+        //Adding the shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            public void run(){
+                log.info("Detected a shutdown, let's exit by calling consumer.wakeup() ");
+                kafkaConsumer.wakeup();
+             //join the main thread to allow the executuon of the code in the main thread
+                try{
+                    mainThread.join();
+                }
+                catch (InterruptedException ex){
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
+        try {
+            //Subscribe Consumer to our topic(s)
+            String topic = "topic2";
+            //kafkaConsumer.subscribe(Collections.singleton(topic));
+            kafkaConsumer.subscribe(Arrays.asList(topic));
+
+            //poll for new data
+            while (true) {
+                log.info("Polling...");
+                ConsumerRecords<String, String> consumerRecords = kafkaConsumer.poll(Duration.ofMillis(1000));
+
+                for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
+                    log.info("Key: " + consumerRecord.key() + " Value: " + consumerRecord.value());
+                    log.info("Partition: " + consumerRecord.partition() + " Offset: " + consumerRecord.offset());
+                }
+            }
+        }catch(WakeupException wakeupException){
+                log.info("Wakeup Exception");
+        //We ignore this as it is an expected exception when closing a consumer
+        }catch(Exception exception) {
+            log.error("Unexpected Exception");
+        }finally {
+            kafkaConsumer.close();
+            //this will also commit the offset if need be
+            log.info("The consumer is now gracefully closed.");
+        }
+
+    }
+	
+	Shutdown Hook
+		A shutdown hook is simply an initialized but unstarted thread. 
+			When the virtual machine begins its shutdown sequence it will start all registered shutdown hooks in some unspecified order 
+				and let them run concurrently.
+		Registers a new virtual-machine shutdown hook.
+			The Java virtual machine shuts down in response to two kinds of events:
+				The program exits normally, when the last non-daemon thread exits or when the exit (equivalently, System.exit) method is invoked, or
+				The virtual machine is terminated in response to a user interrupt, such as typing ^C, or a system-wide event, 
+					such as user logoff or system shutdown.
+					
+					
+					
+					
+Java Consumer inside Consumer Group
+	Observe partition rebalance mechanism
+	IntelliJIdea>Edit Configuration>Modify Options> Allow Multiple Instance
+	
+Consumer Groups & Partition Rebalance Strategies
+	Moving partition between consumers is called a rebalance.
+	Reassignment of partition happens when
+		a consumer leaves or joins a group
+		if an administrator add new partitions into a topic
+	
+	Eager Rebalance
+		Default behaviour
+		All consumers stop, give up their membership of partitions
+		All consumers rejoin the consumer group & get a new partittion assignment
+		Problems
+			During a short period of time, the entire consumer group stops processing
+			Consumers don't necessarily "get back" the same partitions as they used to before rebalance
+	Cooperative rebalance(Incremental rebalance)
+		Reassignment a small subset of the partittions from one consumer to another
+		Other consumer that don't have reassigned partitions can still process uninterrupted
+		Can go through several iterations to find a stable assignment(hence incremental)
+		Avoid "stop the world" events where all consumers stop processing data
+		
+		Cooperative rebalance, how to use?
+			Kafka Consumer: partition.assignment.strategy 
+							(properties.setProperty(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, CooperativeStickyAssignor.class.getName());//none/earliest/latest)
+				RangeAssignor
+					assign partittion on a per-topic basis(can lead to imbalance)
+				RoundRobin
+					assign partittion across all topics in roundrobin fashion, optimal balance
+				StickyAssignor
+					balanced like round robin, & then minimise partition movements 
+					when consumer join/leave group in order ot minimize movements
+				CooperativeStickyAssignor
+					rebalance strategy is identical to StickyAssignor but supports Cooperative rebalances 
+					& therefore consumers can keep on consuming from the topic
+				The default assignor is [RangeAssignor,CooperativeStickyAssignor], 
+					which will use the RangeAssignor by default, 
+					but allows upgrading to the CooperativeStickyAssignor with just a single rolling bounce 
+					that removes the RangeAssignor from the list
+			Kafka Connect: Already implemented(Cooperative rebalance enabled by default)
+			Kafka Stream: Cooperative rebalance turned on by default using StreamPartitionAssignor
+			
+	Static Group Membership
+		By default, when consumer leaves a group , its partitions are revoked & re-assigned
+		If it joins back, it will have a new "member Id" & new partittion assigned
+		If we specify group.instance.id, it makes the consumer a static member
+			Upon leaving , the consumer has up to session.timeout..ms to join back & get back its partitions(else rebalance will happen), without triggering a rebalance		
+			This is helpful when consumers maintain local state & cache (TO Avoid rebuilding the cache)
+		//properties.setProperty(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, "");
+			
+		
+Java Consumer Auto offset Commit Behaviour
+	In the Java Consumer API, offsets are regularly committed
+	Enable at least once reading scenario by default(under conditions)
+	Offsets are commited when we call poll() & auto.commit.interval.ms has elapsed
+	Example: auto.commit.interval.ms=5000 & auto.commit=true will commit
+	
+	"Make sure messages are all successfully processed before we call poll() again."
+		If we dont  we will not be in at least once reading scenario
+		In that (rare) case we must disable enable.auto.commit 
+			& most likely most processing to a separate thread 
+			& then from time to time call .commitSync() or .commitASync() with the correct offsets manually(advanced).
+			
+			
+Advanced Kafka Consumer with Java
+	https://www.conduktor.io/kafka/advanced-kafka-consumer-with-java
+	 
+	
+Q)To allows consumers in a group to resume at the right offset, I need to set
+Ans: group.id
+Q)When my consumers have the same group.id
+Ans: They will read from mutually-exclusive partitions
+
+

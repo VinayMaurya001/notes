@@ -1,0 +1,21 @@
+Kafka in the Enterprise for Admins
+	Kafka Cluster Setup- High Level Architecture Overview
+		Kafka As a service
+			Amazon MSK,Confluent Cloud, Aiven, ColoudKarafka, Instaclustr, Upstash etc
+	Kafka Monitoring & Operations
+		Kafka exposes metrics through JMX
+		Common places to host the Kafka Metrices
+			ELK
+			Datadog
+			NewRelic
+			Confluent COntrol Centre
+			Promotheus
+			....	
+	Kafka Security
+		Java 11
+	Kafka Multi Cluster & MirrorMaker
+	Advertised Listeners: Kafka CLient & Server Communication Protocol
+
+	
+	
+
