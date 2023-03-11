@@ -1,3 +1,11 @@
 
 
 https://ben-foster.dev/online-resume/
+
+
+Open issue on open source
+	https://issues.apache.org/jira/projects/MSHADE/issues/MSHADE-419?filter=allopenissues
+	
+https://www.youtube.com/watch?v=pBXr1ka6OLM&list=PLUcsbZa0qzu3qzpP_mrGsdA7Nfb2jD03X
+https://www.youtube.com/watch?v=1OL1asctoZ4&list=PLUcsbZa0qzu3qzpP_mrGsdA7Nfb2jD03X
+

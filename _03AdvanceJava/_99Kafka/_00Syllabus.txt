@@ -1,3 +1,10 @@
+https://www.udemy.com/course/kafka-fundamentals-for-java-developers/learn/lecture/27511198#overview
+https://github.com/LearningJournal/Apache-Kafka-For-Absolute-Beginners
+https://www.udemy.com/course/apache-kafka-for-beginners/learn/lecture/25977596#overview
+https://www.udemy.com/course/kafka-streams-with-spring-cloud-streams/?referralCode=2E363F31009C936AB5FB
+https://www.udemy.com/course/apache-kafka-for-developers-using-springboot/learn/lecture/12852294#overview
+
+
 https://www.udemy.com/course/apache-kafka/
 	Section 4 :Kafka Theory
 	
@@ -22,6 +29,9 @@ Kafka Cluster Setup and Administration
 	How to setup Kafka & Various Administration tasks
 
 Certifications
-	Confluent Certification for Developers
-		Certified Developer for Apache Kafka
-	Confluent Certification for Operators.
+	https://blog.devgenius.io/my-experience-in-getting-the-ccdak-confluent-certified-developer-for-apache-kafka-certification-2bd6089c599c
+	1)https://training.confluent.io/learningpath/confluent-fundamentals-accreditation
+	2)
+		Confluent Certification for Developers
+			Certified Developer for Apache Kafka
+		Confluent Certification for Operators.

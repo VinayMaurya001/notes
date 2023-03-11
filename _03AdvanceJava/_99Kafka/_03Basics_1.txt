@@ -1,4 +1,22 @@
-Kafka Topics
+Kafka
+Apache Kafka is a horizontally scalable, fault-tolerant, distributed streaming platform, and it is consciously designed for building real-time streaming data architecture.
+Kafka is a messaging broker. Everything else is an API, library or a framework to either interact with the Kafka broker or work with the data in real-time.
+Primary Broker Responsibilities
+	1)Receive messages from the producers and acknowledge the successful receipt.  
+	2)Store the message in a log file to safeguard it from potential loss. 
+		Storage is also critical to ensure that the consumers can consume it later, and they do not necessarily need to read it in real-time.
+	3)Deliver the messages to the consumers when they request it.
+
+
+
+1)Kafka Message Storage Architecture
+	Some core concepts such as Kafka topics, logs, partitions, replication factor, segments, offsets, and offset-index.
+2)Kafka CLuster Architecture
+	Concepts associated with Cluster formation, Zookeeper,and the Controller.
+3)Kafka Distribution Architecture
+	We will tie up the other above two architectures and try to understand how the work is distributed in the Kafka cluster.
+	Concepts such as Leaders, Followers, In Sync Replicas, committed and uncommitted messages.
+
 
 Topics
 	A topic is a particular stream of data
@@ -13,7 +31,7 @@ Topics
 	Kafka Topics are Immutable-Once data is written to a partition, it cannot be changed
 		We cannot delete or update data.
 		But data is kept only for a limited time(default is one week-configurable)
-	
+	 
 Partitions & Offsets
 	Topics are split in partitions(example 100 partitions)
 		Messages in each partition are ordered.
@@ -24,7 +42,42 @@ Partitions & Offsets
 		Data is assigned randomly to a partition unless a key is provided.
 		We can have as many partition per topic as we want.
 		
-		
+	The partition is the smallest unit and it is going to be sitting on a single machine.You cannot break it again
+	If you want to locate a specific message, you must read 3 things. 
+		Topic name, 
+		Partition number 
+		Offset number.
+
+	Topic partitions are not only a solution to increase their storage capacity but also a method to distribute the workload.
+	Kafka topic partitions are the core idea of making Kafka are distributed and a scalable system.
+
+	Kafka doesn't allow more than one consumer to read and process data from the same partitions simultaneously.
+		And this restriction is necessary to avoid the double reading of records.
+
+	Apache Kafka creates a separate directory for each topic partition. 
+
+Classification of Partition replicas
+		Partition Leaders Partition 
+			It will be created first
+		Partition Followers Partition 
+
+Replication Factor
+	No of copies for each partition
+	No of replicas=	partitions * replication
+
+
+Kafka Log Segments
+	Log files are split into small files , are called segment (.log files).
+	By default segment size is minimum of  1 GB or 7 days data.
+
+Kafka Message Offset
+	Message in partition is identified by 64bit integer offset.
+	
+Kafka Message Index
+	WHen consumer ask message with starting offset, offset.index will will be helpful
+	Kafka also store timstamp for each message in .timeindex file.
+	
+	
 Producers
 	Producers write data to topics(topics are made of partitions)
 	Producers know to which partition to write to (and which Kafka Broker has this partition)

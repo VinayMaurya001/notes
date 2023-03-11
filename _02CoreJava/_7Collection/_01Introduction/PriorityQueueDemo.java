@@ -1,4 +1,4 @@
-package _02CoreJava._7Collection._1Introduction;
+package _02CoreJava._7Collection._01Introduction;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

@@ -1,0 +1,74 @@
+Consumers
+
+Consumers
+	Consumers read data from a topic (identified by name) - pull model
+	Example:
+		Consumer 1- reading from partition 0 from a topic truck_list
+		Consumer 2- reading from partition 1 & partition2  from a topic truck_list
+	Consumers automatically knows which broker to read from
+	In case of broker failures, consumers know how to recover
+	Data is read in order from low to high offset within each partitions.
+	
+	
+Consumers Deserializer
+	Deserialize indicates how to transform bytes into objects/data
+	They are used on the key & value of the message
+		Key binary->bytes ->Key deserializer=Integer Deserializer->int -> Key Object(123) 
+		Value binary->bytes ->Value deserializer=String deerializer-> string-> Value  Object("Hello World!") 
+	Consumers has to know in advance, what fromat will be for messages.
+	Kafka Consumers have common DeSerializers.
+		String (incl JSON)
+		Int, FLoat
+		Avro
+		Protobuf
+	The serialization/deserialization type must not change during a topic lifecycle(create a new topic instead)
+	
+Consumer groups
+	All the consumers in an application read data as a consumer groups
+	Each consumer within a group read data from exclusive partitions
+	Example:
+		consumer-group-application has 3 consumer, consumer1, consumer2 & consumer3.
+		A topic has 5 partitions, partition1,partition2,partition3,partition4 & partition5.
+		consumer1 consume data from partition1 & partition2
+		consumer2 consume data from partition3 & partition4
+		consumer3 consume data from partition5
+	If we have more consumers than partitions, some consumers will be inactive.
+	
+	In Kafka, there may be multiple consumer groups on the same topic.
+	Example:
+		A topic has 3 partitions, partition1,partition2 & partition3,
+		consumer1 from group1 consume data from partition1
+			consumer2 from group1 consume data from partition2
+			consumer3 from group1 consume data from partition3
+		consumer1 from group2 consume data from partition1 & partition2
+			consumer2 from group2 consume data from partition3
+		consumer1 from group3 consume data from partition1, partition2 & partition3
+		
+	To create distinct consumer group , use the consumer property group.id
+	
+Consumer Offsets
+	Kafka stores the offsets at which a consumer group has been reading
+	The offsets commited are in Kafka topic named __consumer_offsets
+	
+	When a consumer in a group has processed data recieved from Kafka, 
+		it should be periodically commited in offsets( the Kafka broker will write to __consumer_offsets, not the group itself)
+	If a consumer dies, it will be able to read back from where it let off , thanks to commited comnsumer offsets.
+	
+	
+Delivery semantics for consumers
+	By default, Java consumers will automatically commit offsets(at least once)
+	There are 3 delivery semantics if we choose to commit manually
+		1.At Least one (usually preferred)
+			Offsets are commited after the message is processed
+			If the processing goes wrong, the message will be read again
+			This can result in duplicate processing of messages.
+				Make sure processing is idempotent(i.e. processing again the messages won't impact your systems)
+		2.At Most once
+			Offsets are commited as soon as the message is recieved
+			If the processing goes wrong, some message will be lost(the won't  be read again)
+		3.Exactly once
+			For Kafka ->Kafka Workflows: use the transactional api(Easy with Kafka Streams api)
+			For Kafka ->External System Workflows: use the idempotent consumer
+			
+			
+	

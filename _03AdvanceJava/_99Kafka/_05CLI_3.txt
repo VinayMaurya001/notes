@@ -1,0 +1,45 @@
+Kafka Console Consumer CLI
+	1.Consume from tail of the topic
+		kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic
+	2.Consume from beginning of the topic
+		kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning
+	3.Show both key & values in the output
+		Consumer with keys
+			kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=,
+		# display key, values and timestamp in consumer
+			kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --formatter kafka.tools.DefaultMessageFormatter --property print.timestamp=true --property print.key=true --property print.value=true --from-beginning
+
+
+
+Kafka Console Consumer in Groups
+	# --group parameter
+		kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --group my-first-application
+
+	See how partitions read are divided amongst multiple CLI consumers
+	# start another consumer part of the same group. See messages being spread
+		kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --group my-first-application
+
+		It will not read from beginning if offset has been set diff point 
+		kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --group my-first-application --from-beginning
+
+	# start another consumer part of a different group from beginning
+	It will also read value from all partitions
+		kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --group my-second-application --from-beginning
+
+
+
+
+
+
+Consumer Group Management CLI
+	By default a consumer group created for a consumer & deleted if consumer stopped.
+	1.List consumer groups
+		kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+	2.Describe one consumer group
+		kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-second-application
+		kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group console-consumer-10592
+	3.Delete a consumer group
+	
+ 
+ 
+ 

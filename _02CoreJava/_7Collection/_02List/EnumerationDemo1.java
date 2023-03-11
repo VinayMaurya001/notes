@@ -1,4 +1,4 @@
-package _7Collection._2List;
+package _02CoreJava._7Collection._02List;
 
 import java.util.Enumeration;
 import java.util.Vector;

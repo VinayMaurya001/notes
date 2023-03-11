@@ -7,12 +7,12 @@ Kafka Extended APIs
 
 	
 
-Kafka COnnect Introduction
+Kafka Connect Introduction
 	Do you feel you are not the first person in the world
 		to write a way to get data out of Twitter?
 		to send data from Kafka to PostgreSQL/ElasticSearch/MOngoDB?
 	Additionally, the bugs you will have, won't someone have fixed them already?
-	Kafka COnnect is all about code & connectors re-use!
+	Kafka Connect is all about code & connectors re-use!
 
 
 	Why Kafka COnnect
@@ -26,7 +26,7 @@ Kafka COnnect Introduction
 		Kafka Cluster(Broker1,Broker2....) => Connect Cluster(Worker1,Worker2,....) =>Sinks
 
 
-	Kafka COnnect-High Level
+	Kafka Connect-High Level
 		Source Connectors to get data from Common Data Sources
 		Sink COnnectors to publish that data in Common Data Stores
 		Make it easy for non-experienced dev to quickly get their data reliably into Kafka.

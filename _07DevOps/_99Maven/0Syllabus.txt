@@ -24,3 +24,16 @@ Further to study
 https://dzone.com/articles/mavens-non-resolvable-parent
 https://maven.apache.org/guides/mini/guide-repository-ssl.html
 https://maven.apache.org/settings.html
+
+
+
+Maven Plugins
+	https://maven.apache.org/plugins/maven-shade-plugin/index.html
+		mvn clean package shade:shade
+	https://stackoverflow.com/questions/13620281/what-is-the-maven-shade-plugin-used-for-and-why-would-you-want-to-relocate-java
+		An uber-jar is something that takes all dependencies, 
+			and extracts the content of the dependencies and puts them with the classes/resources of the project itself, in one big JAR. 
+			By having such an uber-jar, it is easy for execution, 
+				because you will need only one big JAR instead of tons of small JARs to run your app. 
+				It also eases distribution in some cases.
+	

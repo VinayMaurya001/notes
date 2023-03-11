@@ -1,7 +1,6 @@
-package _7Collection._2List;
+package _02CoreJava._7Collection._02List;
 
 import java.util.Comparator;
-
 
 public class AgeComparator implements Comparator {
 
@@ -13,7 +12,7 @@ public class AgeComparator implements Comparator {
 		} else if (age1 > age2) {
 			return 1;
 		}
-		ListIterator
+
 		return 0;
 	}
 

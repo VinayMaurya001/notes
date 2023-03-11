@@ -1,6 +1,8 @@
-
-
-
+https://www.learningjournal.guru/
+https://roadmap.sh/software-architect
+https://roadmap.sh/software-design-architecture
+https://medium.com/javarevisited/the-java-programmer-roadmap-f9db163ef2c2
+https://github.com/kamranahmedse/developer-roadmap
 
 
 multithreading
@@ -56,7 +58,8 @@ Testing
 Tools
 	https://app.diagrams.net/
 	
-	
+	SOLID  SAGA 12factors
 	 : What is Java's Metaspace ?
 Q : What are ACID properties
 	
+https://medium.com/javarevisited/the-java-programmer-roadmap-f9db163ef2c2

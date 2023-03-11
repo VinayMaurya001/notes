@@ -1,4 +1,8 @@
 
 
+https://www.jpa-buddy.com/?utm_source=baeldung&utm_medium=display&utm_campaign=npi
+	https://www.baeldung.com/java-aws-lambda-hibernate
+	
+
 Edit COnfiguration
 	Allow Parallel Run checkbox for running multiple instance of a application

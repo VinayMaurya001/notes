@@ -1,0 +1,38 @@
+
+SDK list for Kafka
+	Apache Kafka only officially provides an SDK for the Java language.
+	For the other languages, these are community based implementations. 
+		A list of recommended SDK has been compiled below to save you a little bit of time
+		https://www.conduktor.io/kafka/kafka-sdk-list
+	
+		Kafka Client Libraries SDK List
+			Java
+			C/C++
+			Scala
+			Golang
+			Python
+			.NET/C#
+			Kotlin
+			Javascript/Node.js
+			REST API
+			Ruby
+			
+			
+Creating Kafka Project
+	https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html
+	https://www.conduktor.io/kafka/creating-a-kafka-java-project-using-gradle-build-gradle
+	https://www.conduktor.io/kafka/creating-a-kafka-java-project-using-maven-pom-xml
+	
+	
+	<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+	<dependency>
+   		<groupId>org.apache.kafka</groupId>
+    	<artifactId>kafka-clients</artifactId>
+    	<version>3.2.0</version>
+	</dependency>
+	implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.2.0'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
+    
+    
+ 

@@ -1,0 +1,172 @@
+https://www.udemy.com/course/apache-kafka-for-beginners/learn/lecture/17425986#overview
+
+Kafka Core Concepts
+	1)Producer
+	2)Consumer
+	3)Broker
+	4)Cluster
+	5)Topic
+	6)Partitions
+	7)Offset
+	8)Consumer Groups
+
+
+Kafka Connect Core Concepts
+	Kafka Connect 
+		Connect is a component of Kafka for connecting and moving data between Kafka and external systems.
+		We have two types of Kafka Connectors. 
+			Source Connector 
+			Sink connector
+		And together, they support a bunch of systems and offer you an out of the box data integration capability without writing a single line of code.
+
+	How Kafka Connect works?
+		Kafka Connect Source connector.
+			It is a system which you can place in between your data source and data Cluster.
+			Then all you do is to configure it to consume data from this source system and send it to the Kafka Cluster.
+			You do not need to write a single line of code.
+			Everything is already done and made available to you.
+			You'll just configure and run, and the Kafka Connect will do the job for you.
+			The Source Connector will internally use the Kafka producer API.
+		Kafka Connect Sink connector
+			The Sink Connector will internally use the Kafka consumer API.
+		
+		Kafka Connect framework
+			Source Connector 
+				SourceConnector
+				SourceTask
+			Sink connector
+				SinkConnector
+				SinkTask
+			The Kafka connect framework takes care of all the heavy lifting, scalability, fault tolerance, error handling, and bunch of other things. 
+			As a connector developer, all you need to do is to implement two Java classes.
+			The first one is SourceConnector or SinkConnector class. 
+			And the second one is the SourceTask or the SinkTask.
+
+	Kafka Connect Scalability
+		The Kafka Connect itself is a Cluster..
+		Each individual unit in the Connect Cluster is called a Connect Worker.
+		
+	Kafka Connect Transformations
+		Connect was designed to perform a plane copy our data movement between third party systems and Kafka.
+			In both the cases (Source or Sink), one side must be a Kafka Cluster.
+			However, Kafka connect also allowed some fundamental Single Message Transformations (SMTs). 
+			SMTs
+				Add a new field in your record using static data or metadata
+				Filter or rename fields
+				Mask Some fields with a Null value
+				Change the record key
+				Route the record to a different Kafka topic
+			You can chain multiple SMTs and play with it to restructure your records and route them to a different topic.
+			However, these SMTs are not good enough to perform some real life data validations and transformations.
+
+	Kafka Connect Architecture
+		Worker
+		Connector
+		Task
+
+		Reading and writing data to a Kafka Cluster is a standard activity.
+			So it is taken care of by the framework.
+		We have two things that are changing for different source and target systems.
+			How to split the input for parallel processing.
+				This is taken care of by the Connector class. 
+			How to interact with the external system.
+				This is also taken care of by the Task class. 
+			And these are the things that are connector developer needs to take care of. 
+			Most of the other stuff like interacting with Kafka, handling configurations, errors, monitoring connectors, 
+				and tasks, scaling up and down, and handling failures are standard things and are taken care of by the Kafka Connect Framework. 
+	
+	
+	
+Kafka Streams Core Concepts
+	What is real-time stream processing?
+	WHat is Kafka?
+	Kafka Stream Architecture
+	
+	What is real-time stream processing?
+		Data streams
+			no definite starting & ending 	
+			Often infinite & ever growing
+			Sequence of data in small packets(KB)
+			Example:
+				Sensors
+				Log entries
+				Click Streams
+				Transactions
+				Data feeds
+	WHat is Kafka Streams?
+		A java/scala library
+		Input data must be in Kafka topic
+		We can embeded Kafka streams in our microservices
+		Deploy anywhere(no cluster needed)
+		Out of the box parallel processing, scalability, & fault tolerance
+	What Kafka Stream offers?
+		1.Working with streams/tables & interoperating with them
+		2.Grouping & continiously updating aggregates
+		3.Join streams, tables & a combination of both
+		4.Create & manage fault-tolerant, efficientlocal state stores
+		5.Flexible windowing capability
+		6.Flexible time schemantics- Even time, Processing time, Latecomers, High Watermark, Eaxctly -once processing etc.
+		7. Interactive query-Serving other microservices
+		8.Unit testing tools
+		9.Easy to use DLS & eextensibility to create custom processors
+		10.Inherent fault tolerance & dynamic scalability
+		11.Deploy in containers & manage using Kubernates
+	Kafka Stream Architecture
+		Kafka streams is all about continuously reading a stream of data from one or more Kafka topics.
+			And then, you develop your application logic to process those streams in real-time and take necessary actions.
+		We deploy your application on a single machine. 
+			Now the Kafka streams will internally create three logical tasks because the maximum number of partitions across the input topics T1 and T2 are three.
+			
+			
+KSQL CORE CONCEPTS
+	It is a SQL interface to Kafka Streams
+	KSQL runs in 2 modes:
+		Interactive mode
+		Headless Mode	
+	KSQL Architecture
+		KSQL Server
+			KSQL engine
+			REST interface
+		KSQL Client(CLI/UI)
+	KSQL allows us to 
+		1)Grouping & aggregating on our Kafka topics
+		2)Grouping & aggregating over a time window 
+		3)Apply filters
+		4)Join twotopics
+		5)Sink the result of query into another topic
+		Those days are not too far when you might see JDBC/ODBC connectors being available for KSQL
+			and visualization tools like Tableau and QlikView to start connecting with the KSQL.
+			
+			
+			
+Kafka Solution Patterns
+	1)Data integration pattern()
+		1)Decoupling of producers from consumers
+		2)Reliability & fault tolerance
+		3)Horizontal Scalability
+		4)Time sensitivity & performance
+		5)Extensibility
+		It will use Kafka Broker, Kafka Client & Kafka Connect
+	2)Microservice architecture for stream processing
+		It will use Kafka Broker & Kafka Streams
+	3)Real-time Streaming in Data Warehouse & Data lakes
+		It will use Kafka Broker & KSQL
+		
+		
+		
+Data Ingestion/Integration 
+	Kafka Broker & internals
+	Kafka Connect & commonly used connecotrs
+Microservices Architecture
+	Kafka Borkers & internals
+	Kafka client APIs
+	Kafka Streams
+Data Engineering
+	Kafka Borkers & internals
+	Interacting with Kafka using Spark Structured streaming
+	
+Zookeeper
+	Zookeeper is a kind of database where Kafka brokers would stored a bunch of shared information.
+		And it is used as a shared system among multiple Kafka brokers to coordinate among themselves for various things.
+			
+			

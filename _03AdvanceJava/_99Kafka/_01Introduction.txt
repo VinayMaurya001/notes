@@ -7,9 +7,10 @@ Without Kafka
 	Each source system will have an increased load from the connections
 	
 Kafka
-	More scalable
-	
-	
+	Apache Kafka is a highly scalable and distributed platform 
+		for creating and processing streams in real time.
+	 Kafka works as a Pub/Sub messaging system
+ 
 Why Kafka?
 	Decoupling of data streams & systems
 	Created by Linkedin Now Open-source mainly maintained by Confluent, IBM, Cloudera
@@ -33,4 +34,31 @@ Apache Kafka: Use cases
 	Integration with Spark, FLink, Storm, Hadoop, & many other big data technologies
 	
 		
+Kafka History
+	Created in Linkedin & open sources in 2011.
+	In the beginning Kafka was designed to handle the data integration problem.
 	
+	How Kafka Evolved?	
+		1)Server Software-Broker
+		2)Client API-Java Library
+			a)Producer API
+			b)Consumer API
+
+		But later, Kafka aspired to become a full fledged real-time streaming platform. 
+			And to achieve that objective, they augmented Kafka with three more components.
+			1)Kafka Broker
+			2)Kafka Client
+			3)Kafka Connect, 
+				which addresses the initial data integration problem for which Kafka was initially designed
+			4)Kafka Streams
+				This one is another library for creating real time stream processing applications.
+			5)KSQL. 
+				With KSQL Kafka is now aiming to become a real time database and capture some market sharing Databases and DW/BI space.
+			Kafka connect and Kafka Streams are still open source components, and they are available with Apache 2.0 license.
+			However KSQL is available with some licensing restrictions and offered by Confluent Inc as a commercial tool.
+
+
+Kafka in Enterprise Application Ecosystem?
+By adopting Pub/Sub semantics, Apache Kafka is becoming the circulatory system of your data ecosystem.
+In this case, just like your circulatory system carries blood.
+

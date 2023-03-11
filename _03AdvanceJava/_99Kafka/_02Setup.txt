@@ -1,8 +1,72 @@
+Kafka CLuster
+	1)Open SOurce
+		Apache Kafka
+	2)Commercial Distribution
+		confluent.io
+	3)Managed Device
+		confluent, amazon,aiven.io
+
+Installing Single Node Kafka CLuster
+	Download zip from confluent.io
+	Add following code to kafka-run-class.bat file for windows 10
+		rem Classpath addition for LSB style path
+		if exist %BASE_DIR%\share\java\kafka\* (
+			call :concat %BASE_DIR%\share\java\kafka\*
+		)
+	 bin/windows/zookeeper-server-start.bat etc/kafka/zookeeper.properties
+	 bin/windows/server-server-start.bat etc/kafka/server.properties
+	
+Using Command Line Producer & Consumer
+	1)Sending Data File to Kafka
+		Create topic using kafka-topics
+			kafka-topics --bootstrap-server localhost:9092--create --topic test-topic --partitions 1 --replication-factor 1 
+			No of Partition decision
+				Storage requirement
+				Parallel Processing Requirement
+		Sending data file using kafka-console-producer
+			bin/windows/kafka-console-producer.bat --broker-list localhost:9092 --topic test-topic < c://workspace/kafka-demo-data/sample1.csv
+	2)Reading Kafka Topic
+		Using kafka-console-consumer
+			bin/windows/kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --from-beginning
+
+Installing Multi Node Kafka CLuster
+	bin/windows/zookeeper-server-start.bat etc/kafka/zookeeper.properties
+	bin/windows/server-server-start.bat etc/kafka/server-0.properties
+	bin/windows/server-server-start.bat etc/kafka/server-1.properties
+	bin/windows/server-server-start.bat etc/kafka/server-2.properties
+
+Using Consumer Groups
+	bin/windows/kafka-topics.bat --bootstrap-server localhost:9092 --create --topic test-topic4 --partitions 3 --replication-factor 1
+	
+	bin/windows/kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic3 --from-beginning --group group1
+	bin/windows/kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic3 --from-beginning --group group1
+
+	bin/windows/kafka-console-producer.bat --broker-list localhost:9092 --topic test-topic4 < c://workspace/kafka-demo-data/sample1.csv
+	
+	kafka-dump-log.bat --files c:\tmp\kafka.logs 
+	
+Configuring your Development IDE
+	log.dirs=../tmp/kafka-log-0
+	Set environment variable
+		setx KAFKA_HOME C:\tools\kafka-confluent-53
+	Batch Scripts Support plugin in IntellijIdea
+
+
+
+
+
+
+
+
+
 
 
 /allNotes/3AdvanceJava/kafka/Install+Kafka+Diagram.pdf
 https://www.conduktor.io/kafka/starting-kafka
 https://www.conduktor.io/download
+
+
+
 
 
 

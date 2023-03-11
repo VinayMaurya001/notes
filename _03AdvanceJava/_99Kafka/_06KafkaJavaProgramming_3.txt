@@ -1,96 +1,3 @@
-
-SDK list for Kafka
-	Apache Kafka only officially provides an SDK for the Java language.
-	For the other languages, these are community based implementations. 
-		A list of recommended SDK has been compiled below to save you a little bit of time
-		https://www.conduktor.io/kafka/kafka-sdk-list
-	
-		Kafka Client Libraries SDK List
-			Java
-			C/C++
-			Scala
-			Golang
-			Python
-			.NET/C#
-			Kotlin
-			Javascript/Node.js
-			REST API
-			Ruby
-			
-			
-Creating Kafka Project
-	https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html
-	https://www.conduktor.io/kafka/creating-a-kafka-java-project-using-gradle-build-gradle
-	https://www.conduktor.io/kafka/creating-a-kafka-java-project-using-maven-pom-xml
-	
-	
-	<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
-	<dependency>
-   		<groupId>org.apache.kafka</groupId>
-    	<artifactId>kafka-clients</artifactId>
-    	<version>3.2.0</version>
-	</dependency>
-	implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.2.0'
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
-    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
-    
-    
-    
-Java Producer: Java API
-        //Create Producer Properties
-        Properties properties=new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
-        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
-        //Create Producer
-        KafkaProducer<String,String> kafkaProducer=new KafkaProducer<>(properties);
-
-        //Create ProducerRecord
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("java_demo4","Hello World!");
-        //Send data- Asynchronous
-        kafkaProducer.send(producerRecord);
-
-        //flush data - Synchronous
-        kafkaProducer.flush();
-        //flush & close the Pruducer
-        kafkaProducer.close();
-
-
-
-
-Java Producer Callbacks
-	Confirm the partition & offset, the message was sent to, using Callbacks
-	Default Partittioner
-		 Sticky Partitioner(Performance improvement)
-		 RoundRobin
-		 
-	kafkaProducer.send(producerRecord, new Callback() {
-                @Override
-                public void onCompletion(RecordMetadata metadata, Exception exception) {
-                    if (exception == null) {
-                        log.info("Recieved new metadata /\n" +
-                                "Topic " + metadata.topic() + "\n" +
-                                "Partition " + metadata.partition() + "\n" +
-                                "Offset " + metadata.offset() + "\n" +
-                                "Timestamp " + new Date(metadata.timestamp())
-                        );
-                    } else {
-                        log.error("Error while producing", exception);
-                    }
-                }
-     });
-     
-
-
-Java Producer with Keys
-	Send non-null keys to the Kafka topic
-	Same key means same partition
-	ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic,key,value );
-	
-	
-	
-	
-	
 Java Consumer
 	poll(Duration timeout)
 		return data immediately if possible,
@@ -135,15 +42,10 @@ Java Consumer-Graceful Shutdown
         //Create Consumer Properties
         Properties properties=new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
-        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"my-second-application");
-        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");//none/earliest/latest
-
+        .....
 
         //Create Consumer
         KafkaConsumer<String,String> kafkaConsumer=new KafkaConsumer<>(properties);
-
 
         //get a reference to the current thread
         final Thread mainThread=Thread.currentThread();
@@ -153,7 +55,7 @@ Java Consumer-Graceful Shutdown
             public void run(){
                 log.info("Detected a shutdown, let's exit by calling consumer.wakeup() ");
                 kafkaConsumer.wakeup();
-             //join the main thread to allow the executuon of the code in the main thread
+             //join the main thread to allow the execution of the code in the main thread
                 try{
                     mainThread.join();
                 }
@@ -238,7 +140,7 @@ Consumer Groups & Partition Rebalance Strategies
 					assign partittion across all topics in roundrobin fashion, optimal balance
 				StickyAssignor
 					balanced like round robin, & then minimise partition movements 
-					when consumer join/leave group in order ot minimize movements
+					when consumer join/leave group in order to minimize movements
 				CooperativeStickyAssignor
 					rebalance strategy is identical to StickyAssignor but supports Cooperative rebalances 
 					& therefore consumers can keep on consuming from the topic

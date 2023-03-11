@@ -18,3 +18,9 @@ Free API
 	
 Free fake API for testing and prototyping.
 	https://jsonplaceholder.typicode.com/
+	
+	
+https://www.programiz.com/sql/online-compiler/	
+
+Short Address
+	https://what3words.com/goes.pepper.fence

@@ -18,3 +18,6 @@ Saga DP
 	https://medium.com/design-microservices-architecture-with-patterns/saga-pattern-for-microservices-distributed-transactions-7e95d0613345
 	https://www.baeldung.com/cs/saga-pattern-microservices
 	https://www.udemy.com/course/spring-boot-microservices-cqrs-saga-axon-framework/
+	
+	
+https://martinfowler.com/articles/microservices.html#SmartEndpointsAndDumbPipes

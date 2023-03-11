@@ -1,0 +1,15 @@
+Kafka Producer API
+	Kafka Client for 
+		Java
+			https://kafka.apache.org/documentation/#producerapi
+		Beased on C kafka client library https://github.com/confluentinc/librdkafka
+			Python
+				https://github.com/confluentinc/confluent-kafka-python
+			Node.js
+				https://github.com/Blizzard/node-rdkafka
+			Go
+				https://github.com/confluentinc/confluent-kafka-go
+			C++
+				https://github.com/mfontanini/cppkafka
+			.NET
+				https://github.com/confluentinc/confluent-kafka-dotnet

@@ -1,0 +1,162 @@
+   
+Java Producer: Java API
+        //Create Producer Properties
+        String applicationId="HellpProducer";
+        Properties properties=new Properties();
+        properties.setProperty(ProducerConfig.CLIENT_ID_CONFIGS,applicationId);
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092,127.0.0.1:9093");
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+        //Create Producer
+        KafkaProducer<String,String> kafkaProducer=new KafkaProducer<>(properties);
+
+        //Create ProducerRecord
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("java_demo4","keyid","Hello World!");
+        //Send data- Asynchronous
+        kafkaProducer.send(producerRecord);
+
+        //flush data - Synchronous
+        kafkaProducer.flush();
+        //flush & close the Pruducer
+        kafkaProducer.close();
+
+
+
+		ProducerRecord->
+			->send()
+			->Serializer
+			->Partitioner
+			->Buffer1(TopicA,Partition0) & Buffer2(TopicA,Partition1) & so on			
+			->I/O Thread
+			->Kafka Broker
+			->RecordMetadata(Partition,Offset,Timestamp)
+			
+		Producer Record
+			Topic (Mandatory)
+			Partition
+			Timestamp
+			Message Key
+			Message Value(Mandatory)
+			
+		Kafka Producer Serializer
+			Kafka gives you an option to use a generic serialization library like Avro or Thrift.
+			Alternatively, you have a choice to create custom serializer like JSON Serializer. 
+			
+		Producer Partitioner
+			1)Supply a partitioner no in ProducerRecord
+			2)Supply a partitioner class in config
+				properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,MyPartitioner.class.getName());
+			3)Defualt Partitioner: Mostly we used this only
+				a)Hash Key Partitioning
+					At a later stage we can not increase/decrease the no of partition
+				b)Round Robin Partitioning
+					When message key is null this method will be used
+		
+		Kafka Message Timestamp
+			Only one out of the below two can be used.
+			1)Create time 
+					of message produced
+					message.timestamp.type=0
+					default timestamp
+					Useful when at producer level we have option to set
+			2)Log Append time 
+					of message recieved at Kafka broker
+					message.timestamp.type=1
+					Useful when we don't have control on producer
+					
+		Producer Message Buffer
+			Why Buffer?
+				1)Asynchronous
+				2)Network Optimization
+			Problem
+				Buffer may exhaust if full
+				If Send method throws a TimeoutException (I/O thread takes too long time)
+					 you may want to increase the producer memory. 
+					 The default producer memory size is 32MB
+						buffer.memory in producer configuration
+					
+		Producer I/O Thread & Retries
+			When the background I/O thread receives an error or does not receive an acknowledgment, 
+				it may retry sending the message a few more times before giving up and throwing back an error.
+				You can control the number of read drives by setting the retries producer configuration 
+		
+		
+		
+		
+Java Producer Callbacks
+	Confirm the partition & offset, the message was sent to, using Callbacks
+	Default Partittioner
+		 Sticky Partitioner(Performance improvement)
+		 RoundRobin
+		 
+	kafkaProducer.send(producerRecord, new Callback() {
+                @Override
+                public void onCompletion(RecordMetadata metadata, Exception exception) {
+                    if (exception == null) {
+                        log.info("Recieved new metadata /\n" +
+                                "Topic " + metadata.topic() + "\n" +
+                                "Partition " + metadata.partition() + "\n" +
+                                "Offset " + metadata.offset() + "\n" +
+                                "Timestamp " + new Date(metadata.timestamp())
+                        );
+                    } else {
+                        log.error("Error while producing", exception);
+                    }
+                }
+     });
+     
+
+
+Java Producer with Keys
+	Send non-null keys to the Kafka topic
+	Same key means same partition
+	ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic,key,value );
+	
+	
+	
+	
+	
+Advanced Kafka Producers
+	Horizontal vs Vertical Scalability
+		Horizontal  scaling ->no of broker increases
+	Producer Multi-threading Scenario
+		Kafka Producer is thread-safe.
+		So in a application we should use one producer multiple times
+	At least once 
+		By default
+	At most once
+		Retries=0
+	Exactly Once- Producer Idempotence
+		enable.idempotence=true
+		1)Internal id for Producer instance
+		2)Message sequence number
+	Transactions in Kafka Producer
+		All or nothing meassage in diff partitions of diff topics
+			1)Replication factor>=3
+			2)min.insync.replicas >=2
+		Implementing transactions	
+			properties.put(TRANSACTIONAL_ID_CONFIG, "transactionID");
+			1)Transaction depends on idempotence(automatically enabled)
+			2)transactional_id_config must be unique for each producer instance
+	
+	
+	
+Type & Serialization
+	Working with complex Types?
+		1)How to create Java Types(POJOs)
+			1)Use a schema definition language
+			2)Auto-generate Java class definition
+			
+			1)JSON schema to POJO
+			2)Avro schema to POJO		
+		2)How to serialize your Java Types(POJOs)
+			1)JSON Serialization
+			2)AVRO Serialization	
+		
+ 		Using JSON Schema
+			https://github.com/joelittlejohn/jsonschema2pojo
+		Using Avro Schema
+			https://avro.apache.org/
+			https://avro.apache.org/docs/1.11.1/
+
+

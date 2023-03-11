@@ -1,3 +1,16 @@
+https://aws.amazon.com/blogs/opensource/java-apis-aws-lambda/
+https://www.baeldung.com/java-aws-lambda
+	https://github.com/eugenp/tutorials/tree/master/aws-modules/aws-lambda
+	https://www.baeldung.com/aws-lambda-dynamodb-java
+https://www.baeldung.com/spring-cloud-function
+https://medium.com/javarevisited/7-best-serverless-and-aws-lambda-courses-to-learn-in-2021-de1820111c85
+https://www.baeldung.com/java-enterprise-aws-lambda
+https://www.baeldung.com/spring-cloud-function
+https://www.sebastianhesse.de/2021/02/14/using-spring-boot-on-aws-lambda-clever-or-dumb/
+GraalVM or Quarkus
+Micronaut
+https://blog.thundra.io/migrating-spring-boot-applications-to-aws-lambda-with-no-code-change
+
 use of sns & sqs
 	https://examples.javacodegeeks.com/spring-boot-and-sns-mobile-notification-example/
 	https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbnV1M2ZmOFEzVG95aTNXSmpPb0NhQ3lRUDhTZ3xBQ3Jtc0trR0RKTEdrS3IwZktpYlNOYnZNODFfOXA0QnNPMUZybm83cGowYWdtUDJWenZHZmhaX0tuMFFja3paWjVrTVNLc1lCN3hDOUxWMzBGTkdmeS11R1ZOZy1qTlBHZ241bU94T0N1S0tHRVd1ZHVON1Y2cw&q=https%3A%2F%2Fstackabuse.com%2Fspring-cloud-aws-sns%2F&v=lF7Ba4-8ER4

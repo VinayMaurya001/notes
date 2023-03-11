@@ -1,0 +1,74 @@
+Kafka CLI
+	They come bundled with the Kafka Binaries.
+	If we setup $PATH variable correctly(from the Kafka setup part), then we should be able to invoke the CLI from anywhere on our computer.
+	
+	kafka-topics.sh (If we installed Kafka using binaries)
+	kafka-topics.bat(Windows non WSL2)
+	kafka-topics (homebrew, apt...)
+	
+	use the --bootstrap-server option everywhere , not --zookeeper
+		kafka-topics --bootstrap-server localhost:9092
+		kafka-topics --zookeeper        localhost:2181	
+		
+		
+	WINDOWS NON-WSL2 USERS PLEASE READ
+		In the next lecture, do not run the command to DELETE topics
+		Because of a bug here: https://issues.apache.org/jira/browse/KAFKA-1194, it doesn't work. 
+			I'm actively working with the Kafka Dev team to see if I can get this fixed.
+		
+	
+Kafka Topic Management
+	Create Kafka Topics
+	List Kafka Topics
+	Describe Kafka Topics
+	Increase partitions in Kafka Topics
+	Delete Kafka Topics
+	
+	kafka-topics command
+		kafka-topics is a shell script on linux machine & bash script on window machine.
+		https://www.geeksforgeeks.org/bash-script-difference-between-bash-script-and-shell-script/
+		
+		As of Kafka 2.2, instead of --zookeeper 127.0.0.1:2181, we can use : --bootstrap-server 127.0.0.1:9092
+		kafka-topics --zookeeper 127.0.0.1:2181 --list 
+		kafka-topics --bootstrap-server 127.0.0.1:9092 --list
+
+		kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --create
+		
+		kafka-topics --bootstrap-server 127.0.0.1:9092 --list 
+		kafka-topics --bootstrap-server 127.0.0.1:9092 --topic first_topic --describe
+
+		#We cannot create a topic replication-factor greater than no of broker available
+		kafka-topics --bootstrap-server 127.0.0.1:9092 --topic second_topic --create --partitions 3 --replication-factor 1
+
+		By default delete.topic.enable is true.
+		This command should not be used in window environment.
+		kafka-topics.sh ---bootstrap-server 127.0.0.1:9092 --topic first_topic --delete
+
+		https://cnr.sh/essays/how-paint-bike-shed-kafka-topic-naming-conventions
+	
+		Topic Naming Conventions
+			Naming a topic is free-for-all
+			It is better to enforce guidelines in cluster to ease management
+			You are free to come up with your guideline
+
+			A blog post
+			https://cnr.sh/essays/how-paint-bike-shed-kafka-topic-naming-conventions
+			<messageType>.<datasetName>.<dataName>.<dataFormat>
+			Message Type
+				logging
+				queuing
+				tracking
+				etl/db
+				streaming
+				push
+				user
+
+			The dataset name is analogous to a database name in traditional RDBS systems. It is used as a category to group topics together
+			The data name field is analogous to a table name in traditional RDBMS systems, 
+				though it is fine to include further dotted notation if developers wish to impose their own heirarchy within the dataset namespace.
+
+			The data format for example .avro, .json, .text, .protobuf, .csv, .log
+			Use snake_case
+	
+			Realtime topic name in project: ???????????
+			
