@@ -1,0 +1,73 @@
+#Arrays
+num=3
+names=[1,2,num]
+puts names
+puts names[0]
+puts names[names.length-1]
+
+cities=["Atr","Azm", names]
+puts cities
+puts cities[2]
+puts cities[2][1]
+cities=["Atr","Azm", [1,2,num]]
+puts cities[2][1]
+
+
+#While loop
+num=1;
+while num<10
+    print "\t"+num.to_s
+    num+=1
+end
+#Each Loop
+puts ""
+(1..5).each do |num|
+print "\t"+num.to_s
+end
+puts ""
+names=["Vinay","Abhi"]
+names.each do |name|
+    print "\t"+name.to_s
+end
+
+
+
+#Hashes
+student_record={
+    "id"=>123,
+    "name"=>"Vinay"
+}
+puts student_record
+puts student_record["id"]
+
+
+
+#Building FizzBuzz
+(1..100).each do |num|
+    if num%3==0 && num%5==0
+       puts "#{num}. FIZZBUZZ!"
+elsif num%3==0
+    puts "#{num}. FIZZ!"
+elsif num%5==0
+    puts "#{num}. BUZZ!"
+end
+end
+
+
+#Methods
+def hello()
+    puts "Hello Method!"
+end
+hello()
+hello
+
+def helloPerson(name,age)
+    puts "Hello #{name} of age #{age}!"
+end
+helloPerson("Vinay",30)
+
+def helloPerson(name,age)
+    return "Hello #{name} of age #{age}!"
+end
+result = helloPerson("Vinay",30)
+puts result.upcase

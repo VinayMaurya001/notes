@@ -1,0 +1,22 @@
+Font in CSS
+	Web Safe font
+		Web safe fonts are typefaces that come pre-installed as default fonts on the majority of computers and devices, regardless of operating system
+	Web font
+		https://fonts.google.com/
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    	<style>
+    	    p{  font-family:'Ubuntu', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		</style>
+		
+	Font stack
+		p{ 
+			font-family: ‘Franklin Gothic Medium’, ‘Aerial Narrow’, Aerial, sans-serif;
+		}
+
+	p{
+    	font-family:'Arial Narrow', Arial, sans-serif;
+        font-size: 33px; /* 1/96th of an inch */
+		font-weight: bold;
+        font-style: italic;
+        line-height: 1.3em;/* times parent line height */ 
+    }

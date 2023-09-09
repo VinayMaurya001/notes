@@ -3,10 +3,12 @@ What is Cloud Computing?
 	https://aws.amazon.com/what-is-cloud-computing/
 	
 	Type of CLoud Computing
-		IAAS
-		PAAS
-		SAAS
+		IaaS- Infrastructure as a Service
+		PaaS- Platform as a Service
+		SaaS- Software as a Service
 		
+		FaaS- Function as a Service
+		Serverless
 	
 AWS
 	Region( 30)
@@ -40,6 +42,7 @@ EC2
 	curl http://localhost
 	
 	Elastic IP 
+	
 	AWS CLI
 		aws --version
 		aws configure
@@ -52,15 +55,15 @@ EC2
 	EBS
 		Elastic Block Storage
 		EBS Types
-			● General Purpose (SSD)  
+			General Purpose (SSD)  
 				Most Work Loads 
-			● Provisioned IOPS 
+			Provisioned IOPS 
 				Large Databases 
-			● Throughput Optimized HD 
+			Throughput Optimized HD 
 				Big Data & Data Warehouses 
-			● Cold HDD 
+			Cold HDD 
 				File Servers 
-			● Magnetic 
-				○ Backups & Archives
+			Magnetic 
+				Backups & Archives
 	EBS Snapshots
 		

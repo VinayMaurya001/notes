@@ -1,0 +1,230 @@
+Netowrking
+	Components of Networks
+	OSI Model
+	Understanding Networks & IP
+	Protocols, Ports etc
+	Networking COmmands
+	Quiz
+	
+	
+Components of Networks
+	2 or more computer/devices
+	Cables
+	A network interfacing card(NIC) on each device
+	Switches
+	Routers
+	Operating system
+
+
+OSI Model
+	ISO-International Oraganization of Standardization
+	OSI-Open Systems Interconnection model
+	ISO-OSI model-
+		Developed in 1984
+	Basic elements of Layers
+		Services
+			A set of actions that a layer offers to higher layer
+		Protocols
+			A set of rules that a layer uses to exchange information
+		Interfaces
+			Communication b/w layers
+	
+	7 Layers
+		Applications
+			Host layers
+			Data Unit-data
+			Netowrk process to application
+			Devices/apps-webserver, mailserver, browser
+			Protocols-http, https,ftp, ssh, telnet, dns, pop3, dhcp, ntpsnmp
+		Presentation
+			Host layers
+			Data Unit-data
+			Data representation & Encryption
+			Devices/apps-webserver, mailserver, browser
+			Protocols-http, https,ftp, ssh, telnet, dns, pop3, dhcp, ntpsnmp
+		Session
+			Host layers
+			Data Unit-data
+			Interhost communication
+			Devices/apps-webserver, mailserver, browser
+			Protocols-http, https,ftp, ssh, telnet, dns, pop3, dhcp, ntpsnmp
+		Transport
+			Host layers
+			Data Unit-segments
+			End-to-End connections & Reliability
+			Devices/apps-gateway
+			Protocols-tcp, udp
+		Network
+			Media Layers
+			Data Unit-packets
+			Path determination & Logical Addressing(IP)
+			Devices/apps-router, firewall, layer 3 switch
+			Protocols-ip,icmp, igmp
+		Data Link
+			Media Layers
+			Data Unit-frames
+			Physical Addressing(MAC && LLC)
+			Devices/apps-bridge, layer 2 switch
+			Protocols-rarp,arp(mac)
+		Physical
+			Media Layers	
+			Data Unit-bits
+			Media, Signal & Binary Transmission
+			Devices/apps-hub
+			Protocols-ethernet, token ring
+
+
+Understanding Networks & IP
+	Classification of network
+		PAN
+			Personal Area Network
+			Bluetooth, Hotspot
+		LAN
+			Local area network
+			In a room or floor
+		CAN
+			Campus Area Network
+			Intranet
+		MAN
+			Metropolitan area network
+			Metro train
+		WAN
+			Wide Area Network
+			Internet
+	
+	
+	Switch
+		It helps sharing of resources in a small newrok
+		Multiple switch help in high availability
+	Routers
+		It connect multiple networks
+	
+	Subnet
+		Part of the Datacenter
+	
+	
+	
+	IPV4
+		32 bit(8bit.8bit.8bit.8bit)
+		IPV4 range
+			0.0.0.0 -255.255.255.255(00000000.00000000.00000000.00000000-11111111.11111111.11111111.11111111)
+		
+		Public IP
+		Private IP
+			Private IP Ranges
+				Class A- 10.0.0.0 -10.255.255.255
+				Class B- 172.16.0.0- 172.31.255.255.255
+				Class C-192.168.0.0-192.168.255.255
+				Class D & E - Used for R&D
+		
+
+Protocols
+	A set of rules or formal specification to transmitting or receiving data
+	It defines
+		Format
+		Timing
+		sequence
+		Error checking
+		etc
+
+	TCP			
+		Reliable protocol
+		Connection oriented
+		Performas 3 ways handshake
+		Provision of error detaction & retransmission
+		FTP,HTTP, HTTPS
+	UDP
+		Unreliablle protocol
+		COnnectionless
+		Much faster than TCP
+		No acknowledgement waits
+		No proper seqnecing of data units
+		SUitable where speed matters more than reliability
+		DNS, DHCP,TFTP,ARP,RARP
+
+
+	Protocols & default port numbers
+		DNS		Domain Name Service-UDP		UDP 53
+		DNS TCP	Domain Name Service-TCP		TCP 53
+		Http		Web					TCP 80
+		Https		Secure Web(SSL)			TCP 443
+		SMTP		Simple Mail Transport		TCP 25
+		POP		Post Office Protocol		TCP 109,110
+		SNMP		Simple Network Management	TCP 161,162, UDP 161,162
+		TELNET	Telnet terminal			TCP 23
+		FTP		File transfer protocol		TCP 20,21
+		SSH		Secure shell(terminal)		TCP 22
+		AFP IP	Apple File Protocol/IP		TCP 447,548
+
+	
+Networking Commands
+	ifconfig
+		ip addr show
+	ping 192.168.40.12
+		ping google.com
+	
+	/etc/hosts
+		102.168.40.12 db01
+			ping db01	
+
+	tracert www.google.in
+		see the latency b/w 2 server
+		mtr www.google.com - dynamic
+
+	netstat -antp
+		all tcp open port
+			ps -ef | grep apache2
+			netstat -antp | grep apache2
+		ss -tunlp
+		telnet 192.168.0.11
+		nmap
+			banned in few country
+			nmap 192.168.0.1
+			to check whether port is open or not on some machine
+
+	dig www.google.com
+		 To check DNS resolution from our computer is working or not
+
+		nslookup www.google.com
+	
+	route -n
+		to show gateways
+		
+	arp
+		Ip addresses & mac addresses
+		
+	
+	
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Quiz

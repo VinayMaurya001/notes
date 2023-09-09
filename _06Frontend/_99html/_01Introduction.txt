@@ -1,0 +1,206 @@
+
+
+Html- Hyper Text Markup Language
+HTML is a markup language that web developers use to structure and describe the content of a webpage (not a programming language)
+
+In html, in head tag, meta information helps to SEO(Search Engine Optimation)
+
+<p>content or element</p>
+
+
+<!DOCTYPE html>
+
+!- Enter :Default html page
+
+
+<!DOCTYPE html>
+<!-- Comment -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <meta name= “description” content = “This is a description”>
+
+    <meta name= “keywords” content= “html tutorial, css tutorial”>
+    <meta name= “robots” content= “INDEX, FOLLOW”>
+
+    <link rel= “stylesheet” href= “index.css”>
+    <script src = “index.js”></script>
+
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+
+
+
+We should use <strong> tag instead of <b> tag
+We should use <em> tag instead of <i> tag
+
+
+
+<a href="https://www.google.com/" target="_blank">Goggle</a>
+<img src="https://source.unsplash.com/user/erondu/1600x900"  alt="" width="" height="">
+	Recommended way to set Width & height  is in CSS not in img tag
+	
+<ol>
+	<li>A</li>
+	<li>B</li>
+</ol>
+<ul type="circle">
+    <li>A</li>
+    <li>B</li>
+</ul>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Accountant</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    
+    
+    
+    
+    
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forms</title>
+</head>
+
+<body>
+    <h2>This is HTML forms tutorial</h2>
+    <form action="backend.php">
+        <label for="name"> Name</label>
+        <div>
+            <input type="text" name="myName" id="name">
+        </div>
+        <br>
+        <div>
+            Role: <input type="text" name="myRole">
+        </div>
+        <br>
+        <div>
+            Email: <input type="email" name="myEmail">
+        </div>
+
+        <br>
+        <div>
+            Date: <input type="date" name="myDate">
+        </div>
+        <br>
+        <div>
+            Bonus: <input type="number" name="myBonus">
+        </div>
+        <br>
+        <div>
+            Are you eligible?: <input type="checkbox" name="myEligibility" checked>
+        </div>
+        <br>
+        <div>
+            Gender: Male <input type="radio" name="myGender"> Female <input type="radio" name="myGender">
+            Other <input type="radio" name="myGender">
+        </div>
+
+        <br>
+        <div>
+            Write about yourself: <br><textarea name="myText" cols="90" rows="10"></textarea>
+        </div>
+
+        <br>
+        <div>
+            <label for="car">Car</label>
+            <select name="myCar" id="car">
+                <option value="ind">Indica</option>
+                <option value="swf" selected>Swift</option>
+            </select>
+        </div>
+        <br>
+
+        <div>
+            <input type="submit" value="Submit Now">
+            <input type="reset" value="Reset Now">
+        </div>
+    </form>
+</body>
+
+</html>
+    
+    
+<details>
+	<summary>
+    </summary>
+</details>
+    
+    
+    
+    
+    
+    
+Block vs Inline element
+	Block element takes all the available width
+	We can convert block to inline element using CSS.
+	
+	Block Element
+		p,div
+	Inline element
+		span, strong, a, em, img
+		
+		
+	li, ul
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+Id & class
+	 <div class="redBg blackBorder anotherClass"></div>
+	 
+	 
+Html Entities
+	&nbsp; not recommended to use(Use should use css for spaces)
+	&lt; &gt;  for < & >
+	We can also use entity for characters that are not available in keyboard. Like &copy;
+	
+Semantic Tags in HTML
+	<header>
+	<nav>
+	<section>
+	<article>
+	<aside>
+	<footer>
+	We should use <strong> tag insted of <b> to make text bold
+	We should use <em> tag insted of <i> to make text italic
+	
+	
+	
+	

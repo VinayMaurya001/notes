@@ -32,10 +32,11 @@ Life after Virtualization
 					Hardware> Hypervisor> VM1 +VM2+ VM3
 				Type2
 					Runs a software
-					For learning & testing
+					For learning & testing & not for production 
 					Ex: 
 						Oracle Virtualbox
-						Vmware Server	
+						Vmware Server
+						Vmware Workstation	
 					Hardware> Native OS>(Applications+Type2Hypervisor)>	VM1(Guest OS1+Applications1) +VM2(Guest OS2+Applications2)+ VM3(Guest OS3+Applications3)	
 		Host OS
 		Guest OS
@@ -75,16 +76,20 @@ Ubuntu server doesn't include a graphical user interface, while Ubuntu Desktop d
 
 VM Setup
 	Setup Hardware
-		Ubuntu-
+		new-> select name, ram, hard disk type etc
 	Settings
-		Storage
-			iso file
 		System
 			Processor
+				CPU 1 to 2 for Ubuntu
+		Storage
+			iso file
 		Network
 			Enable Adapter2>Bridge Adapter>Wireless Network Adapter
 	Install OS	
 	Remove ISO file 
+		SO it does not boot from iso file next time when we boot 
+		Storage
+			iso file
 	
 	ifconfig
 	pwd

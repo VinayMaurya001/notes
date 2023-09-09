@@ -1,0 +1,222 @@
+Basic commands & File System
+	command --help
+		cp --help
+	whoami
+	pwd
+	ls 
+		ls dirName/
+			ls /home/vagrant/
+		ls -l
+		ls -a
+	cat /etc/os-release
+	clear
+	history
+	sudo -i
+		switch to root user
+	exit
+		logout
+	[root@localhost ~]# 
+	[vagrant@localhost ~]$
+	history
+	cd
+	cd /  
+		top level direcotry
+	cd ~ or cd
+		home directory for logged in user
+	cd /root
+	cat /etc/hostname
+		
+	cd username
+	uptime
+		since when system started
+		cd/proc/uptime
+	free -m
+
+	Absolute path and Relative path
+		An absolute path is defined as the specifying the location of a file or directory from the root directory(/)
+		Relative path is defined as path related to the present working directory(pwd).
+	cd
+		cd ~
+			to go home directory
+		
+More Commands(mkdir, cp, mv, touch etc)
+	mkdir abc
+		mkdir abc xyz
+		mkdir abc{1..10}
+	touch abc.txt
+		touch abc.txt xyz.txt //either will create empty file or will update file timestamp
+		touch xy{1..10}.txt
+	cp  
+		copy-paste
+		cp srcFileWithPath destDirPath/ 
+			absolute & relative both path
+		cp -r srcDirPath/ destDirPath/
+		cp -rvfp srcDirPath/ destDirPath/
+			Here 
+				cmmands		cp
+				options		-r
+				arguments	srcDirPath destDirPath
+		cp --help
+	mv
+		move or cut-paste
+			mv srcFileWithPath(or srcDirPath)  destDirPath/(or destFileWithPath)
+				mv srcFileWithPath destDirPath/
+					absolute & relative both path
+	 				mv abc.txt dir/
+					mv abc.txt xyz.txt dir/
+					mv *.txt textDir/
+				mv srcDirPath destDirPath/
+					mv dir1 dir2/
+				mv srcFileWithPath destFileWithPath
+		rename
+			mv abc.txt xyz.txt
+			
+	rm
+		rm fileWithPath
+			rm abc.txt
+		rm -r destDirPath
+			rm -r dir1
+		rm -r *  
+			rm -rf *  - force
+			dangerous command- remove everything from current working directory with no-trash/recycle-bin/rolling-back 
+				but we have harddisk restoration which is not 100% assurance option
+		
+		
+VIM EDITOR
+	VI Visual display editor
+	VIM Visual display editor improved
+		This is command mode editor for files. Other editors in Linux are emacs, gedit, nano 
+		vi editor is most popular.	
+	It has 3 modes:
+		1 Command Mode
+			When you open the vim editor, it will be in the command mode by default.
+		2 Insert mode (edit mode)
+			using i
+		3 extended command mode
+			using : for save(s) or quit(q) the file
+
+	sudo yum install vim -y
+	vim abc.txt
+		create/open file in command mode
+	i/o
+		to go in insert/edit mode*/
+			now we can wrtie in a file
+		o 
+			move cursor to next line
+		
+	escape
+		to go in command mode
+		:
+		  to go in extended mode
+		  now we can save/write, quit file
+			w
+				write/save
+			q
+				quit
+	`			escape :q!  - quit forcefully with saving the change
+			Esc+: se nu To set the line numbers to the file !
+			Esc+:se nonu To Remove the set line numbers
+
+	cat abc.txt
+		read file
+		
+	https://stackoverflow.com/questions/14948441/vim-cant-save-file-e212
+
+		
+	Command Mode(Escape Mode):
+		gg To go to the beginning of the page
+		G To go to end of the page
+		w To move the cursor forward, word by word
+		b To move the cursor backward, word by word
+		nw To move the cursor forward to n words (SW)
+		nb To move the cursor backward to n words {SB)
+		u To undo last change (word)
+		U To undo the previous changes (entire line)
+		Ctrl+R To redo the changes
+		VY To copy a line
+		nyy To copy n lines (Syy or 4yy)
+		p To paste line below the cursor position
+		P To paste line above the cursor position
+		dw To delete the word letter by letter {likeBackspace}
+		X To delete the world letter by letter (like DEL Key) I·,
+		dd To delete entire line \' --
+		ndd To delete n no. of lines from cursor position{Sdd) ,:::::,-
+		/ I To search a word in the file
+			/
+				forward slash in command mode
+				search in a file
+				n 
+					for next search
+		
+		yy & p
+			copy paste in vim editor
+			4yy
+				copy the 4line
+			p
+				paste the line above the cursor line
+			P
+				paste the line below the cursor line
+			d
+				delete the line
+			u
+				undo the line
+		
+	Extended Mode: ( Colon Mode)
+		Extended Mode is used for save and quit or save without quit using "Esc" Key with":"
+		Esc+:w To Save the changes 
+		Esc+:q To quit (Without saving)
+		Esc+:wq To save and quit 
+		Esc+:w! To save forcefully 
+		Esc+wq! To save and quit forcefully 
+		Esc+:x To save and quit
+		Esc+:X To give password to the file and remove password
+		Esc+:20(n) To go to line no 20 or n
+		Esc+: se nu To set the line numbers to the file !
+		Esc+:se nonu To Remove the set line numbers
+	
+ 
+ls command options
+	Options	Description
+	-l		Long listing format of files and directories, one per line
+	-a 		List all hidden files and directories started with '.’
+	-F		Add a '/' classification at the end of each Directory
+	-g 		List all files and directories with the group name
+	-i 		Print index number of each files and directories
+	-m 		List all file and directories separated by comma,’
+	-n 		List numeric UID and GID of Owner and Groups
+	-r 		List all files and directories in reverse order
+	-R 		Short list all directories
+	-t		Sorted by modified time, started with the newest file
+	
+	ls -ltr
+	ls -ltr /dir
+
+
+
+
+
+
+Types of files in Linux
+	File Type 	First Character 	Description
+				in File Listing 
+	Regular fle 	~				Normal files such as text, data, or executable files
+	Directory. 		d				Files that are lists of other fies
+	Link			l				A shortcut that points to the location of the actual fle
+	Special file	c				Mechanism used for input and output, such as fies in /dev
+	Socket 			a				A special ile that provides inter-process networking protected by he fle system's access contol
+	Pipe			p				A special file that allows processes to communicate with each other without using network socket semantics
+
+	file abc.txt
+		return file type
+		
+	ln -s <orignalFilePath> <LinkFilePath> command is used to create soft link.
+
+
+
+	
+	
+	Symbolic links
+		Symbolic links are like desktop shortcuts we use in windows.
+		Create a soft link for /var/log directory in our current working directory.
+	
+	

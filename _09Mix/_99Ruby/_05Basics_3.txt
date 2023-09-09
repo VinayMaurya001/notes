@@ -1,0 +1,108 @@
+class Square
+    def initialize(side_length)
+        @side_length=side_length
+    end
+    def side_length
+        return @side_length
+    end
+    def side_length=(side_length)
+        @side_length=side_length
+    end
+
+    def perimeter
+        return @side_length*4
+    end
+
+    def area
+        return @side_length*@side_length
+    end
+
+    def details
+        return " Side Length: #{side_length},\n Perimeter: #{perimeter},\n Area: #{area}"
+    end
+
+end
+
+square_obj=Square.new(10)
+puts square_obj
+puts square_obj.inspect
+puts square_obj.side_length
+square_obj.side_length=20
+puts square_obj.side_length
+puts square_obj.perimeter
+puts square_obj.area
+puts square_obj.details
+
+class Square2
+    #attr_reader  For getter 
+    #attr_writer    For setter
+    attr_accessor :side_length, :name   #For Getter & Setter both
+    def initialize(side_length)
+        @side_length=side_length
+    end
+    
+
+    def perimeter
+        return @side_length*4
+    end
+
+    def area
+        return @side_length*@side_length
+    end
+
+    def details
+        return " Side Length: #{side_length},\n Perimeter: #{perimeter},\n Area: #{area}"
+    end
+
+    def draw
+        puts "*" * @side_length
+        (@side_length-2).times do
+            print "*" +(" " * (@side_length-2))+"*\n"
+        end 
+        puts "*" * @side_length
+    end
+end
+
+square_obj=Square2.new(10)
+puts square_obj
+puts square_obj.inspect
+puts square_obj.side_length
+square_obj.side_length=20
+puts square_obj.side_length
+puts square_obj.perimeter
+puts square_obj.area
+puts square_obj.details
+square_obj.side_length=10
+puts square_obj.draw
+
+
+Output:
+PS C:\workspace\ruby> ruby .\hello.rb
+#<Square:0x00000226ffd45418>
+#<Square:0x00000226ffd45418 @side_length=10>
+10
+20
+80
+400
+ Side Length: 20,
+ Perimeter: 80,
+ Area: 400
+#<Square2:0x00000226ffd44950>
+#<Square2:0x00000226ffd44950 @side_length=10>
+10
+20
+80
+400
+ Side Length: 20,
+ Perimeter: 80,
+ Area: 400
+**********
+*        *
+*        *
+*        *
+*        *
+*        *
+*        *
+*        *
+*        *
+**********

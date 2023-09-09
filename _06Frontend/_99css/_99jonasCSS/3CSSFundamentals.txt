@@ -1,0 +1,220 @@
+CSS
+	Csacading Style Sheets
+CSS Rule
+	Selector
+	{		//Declaration Block
+			Property:value   /Declaration/Style
+	}
+	
+	
+	
+	
+	
+Inline CSS
+	<h1 style="color: blue">The Code Magazine</h1>
+	We should never use it.
+Internal CSS
+  <head>
+	<style>
+      h1 {
+        color: blue;
+      }
+    </style>
+  </head>
+  Separation of Concerns
+  		Keep different things at separate places		
+External CSS
+	<head>
+    	<link href="style.css" rel="stylesheet" />
+    </head>
+	Inside style.css
+		      h1 {
+       			 color: blue;
+      		  }	
+
+	
+
+
+
+Styling Text
+h1 {
+  color: blue;
+  font-size: 26px;
+  font-family: sans-serif;
+  font-style: italic;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+}	
+p {
+  font-size: 22px;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+Comment
+body {
+  /* background-color: blue; */
+}
+
+
+
+Combining Selectors
+h1,h2,h3,h4,p,li {
+  font-family: sans-serif;
+}
+article header p { //decendent selector
+  font-style: italic;
+}
+This essentially encodes the HTML structure into our CSS selector, and that is not a good idea. 
+	And thats why we should use id & class selectors.
+	In the real world we simply always use classes (not even id )even if we only use the class name once.
+		Because by doing that, we are making our code ready for the future and ready for potential changes.
+
+Id & class Selectors
+/* footer p {
+  font-size: 20px;
+} */
+#copyright {
+  font-size: 16px;
+}
+We are not allowed to repeat Id names in a html page, while we may repeat class name.
+.related-author {
+  font-size: 18px;
+  font-weight: bold;
+}
+.related-list {
+  list-style: none; // remove bullet points before the list items
+}
+
+
+Working with Colors in CSS
+1)Using Name
+2)RGB/RGBA notation(0 to 255)
+	Regular RGB model
+		rgb(0,255,255)
+		black- rgb(0,0,0)
+		grey- rgb(183,183,183)
+		white- rgb(255,255,255)
+	RGB with Transparency("alpha")
+		rgba(0,255,255,0.3)
+3)Hexadecimal Notation(0 to ff)
+		#00ffff
+		#0ff
+In practice, we mostly use hexadecimal colors & rgbs when we need transparency
+In VSC, we can pick color  from color pallete
+h3 {
+  color: #1098ad;
+}
+aside {
+  background-color: #f7f7f7;
+  border-top: 5px dashed #1098ad;
+  border-bottom: 5px dashed #1098ad;
+  border-left: 5px solid #1098ad;
+  border-right: 5px solid #1098ad;
+}
+
+
+
+
+
+Pseudo-classes
+li:first-child {
+  font-weight: bold;
+}
+li:last-child {
+  font-weight: lighter;
+}
+li:nth-child(2) {
+  color: blue;
+}
+li:nth-child(odd) {
+  color: blue;
+}
+article p:first-child{  /* Here p should be firstchild of article otherwise it won't work*/
+  color: blue;
+}
+
+
+
+
+
+Styling Hyperlinks
+a:link { /* a tag with href attribute*/
+  color: #1098ad;
+  text-decoration: none;
+}
+a:visited {
+  /* color: #ff0000; */
+  color: #1098ad;
+}
+a:hover {
+  color: orangered;
+  font-weight: bold;
+  text-decoration: underline dotted orangered;
+}
+a:active {
+  background-color: green;
+  font-style: italic;
+}
+
+
+
+
+
+CSS Theory1:Conflicts Between Selectors
+Declaration marked !important
+> inline style 
+> id(#)selector 
+> class(.) or pseudo-class(:) selector  
+> element (p,h1) selector > universal(*) selector
+
+If same priority, then it is the last one that applies
+
+footer p {
+  color: green !important;  /*!important sholud be used only as last resort */
+} 
+
+//cascade and selector specificity
+Selector Specificity: (1, 0, 0)
+Selector Specificity: (0, 0, 2)
+
+
+
+
+
+CSS Theory2: Inheritance & the Universal Selector
+Not all properties get inherited. It’s mostly ones related to text: 
+	font-family, font-size, font-weight, fontstyle, color, line-height, letter-spacing, text-align, text-transform, text-shadow, list-style, etc.
+body {
+  font-family: sans-serif;
+  color: #444;
+  border-top: 10px solid #1098ad;
+}
+Universal selector
+The universal selector simply selects every single element on the page.
+And so this is useful if we actually want a certain property applied to all elements, but which does not get inherited.
+*{
+color: #444;
+  border-top: 10px solid #1098ad;
+}
+Universal selector vs body selector.
+	The universal selector simply applies to all the elements, and there is no inheritance involved,
+		and therefore, this is perfect if you want to apply a certain property that does not automatically get inherited to all the elements.
+	On the other hand, any style that we put here in the body gets inherited.
+		And so that's simply a completely different mechanism than using the universal selector.
+
+
+
+
+
+Challenge1
+https://codepen.io/jonasschmedtmann/pen/zYNyMJL/256706a9de79baf1bd19abcb68e820d9
+
+
+
+
+
+CSS Theory 3: The CSS Box Model
+
+
+

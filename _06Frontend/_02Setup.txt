@@ -1,0 +1,21 @@
+Visual Studio Code
+	https://www.youtube.com/watch?v=TeZdo8mx0gc&list=PLu0W_9lII9agiCUZYRsvtGTXdxkzPyItg&index=2
+	Live Server extention
+	Zoom setting
+	Setting>Command Palette > Toggle Word Wrap		
+	Emmet Plugin
+		!(exclamation+Enter)  
+			In Visual studio code for default html content
+		Lorem4 +enter
+			4 words
+		p*2 +enter
+			<p></p>
+    		<p></p>
+    		
+    		
+    ctrl+enter to jump to the new line
+    
+    
+    
+Developer tools
+	rightclick+inspect

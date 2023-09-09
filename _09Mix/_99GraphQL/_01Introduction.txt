@@ -1,0 +1,49 @@
+GraphQL
+	GraphQL is a query language.
+	GraphQL queries an API, not a database.
+	
+	
+GraphQL
+	Query
+		GET request
+	Mutation
+		Put, Post, Delete request
+		
+		
+GraphQL vs REST
+	One endpoint
+		/graphql
+			/user
+			/followers
+			/posts
+	Overfetching/underfetching
+	
+Ways to use GraphQL
+	1)Create GraphQL api 
+	2)Use GraphQL to call REST api in middle of frontend & backend
+	
+Basic Types & Queries
+	https://github.com/trevorblades/countries
+		https://countries.trevorblades.com/
+	
+	ID
+	String
+	Int 
+	Float
+	Boolean
+	[List of ...]
+	
+	
+	name:String!  //! makes required field
+	
+	
+	
+	 query GetCountry {
+	  country(code: "BR") {
+	    name
+	    currency
+	    languages {
+	      code      
+    	}
+	   }
+	  }

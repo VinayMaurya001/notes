@@ -1,0 +1,9 @@
+Selectors in CSS
+	Element Selector
+	Id Selector
+	Class Selector
+	Grouping Selector
+	Advance Selectors
+	
+	selector{property:value;}
+	p{color:blue;}

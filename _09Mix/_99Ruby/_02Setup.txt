@@ -1,0 +1,25 @@
+Tools
+	Text editor
+		sublime text
+		visualstudio code	
+	Git bash as a command tool
+	Download Ruby
+		https://rubyinstaller.org/downloads/
+		https://www.ruby-lang.org/en/downloads/
+	Ruby Documentation
+		https://ruby-doc.org/3.2.2/
+	
+ruby --version
+
+file hello.rb
+	#This is a comment
+	puts "puts end with a new line character "
+	puts "Hello Ruby!"
+ruby hello.rb
+
+
+Sometimes Git Bash has issues with gets
+	to get around them, run your program like this:
+	winpty ruby program_name.rb
+	
+	

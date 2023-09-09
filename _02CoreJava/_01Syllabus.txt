@@ -28,3 +28,8 @@ Resources
 	https://javarevisited.blogspot.com/2018/04/top-5-spring-cloud-courses-for-java.html#axzz7SVpYcDpl
 	https://javarevisited.blogspot.com/2019/10/the-java-developer-roadmap.html#axzz7cex6gtRM
 	http://durgajobs.com/onlineexams/DisplayTopics.php?sub_id=1
+	
+	
+	
+	https://stackoverflow.com/questions/4732544/why-are-only-final-variables-accessible-in-anonymous-class
+		https://en.wikipedia.org/wiki/Closure_(computer_programming)

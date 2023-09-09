@@ -1,0 +1,113 @@
+1. Intro to Linux
+2. Basic CLI Commands
+3. Understanding files in Linux
+4. Filters & Redirection
+5. Users & Group
+6. Sudo
+7. Software management
+	RPM, Debian, yum, apt
+8. Services & Processes	
+9. Good to know commands
+10. Server Management
+
+
+/allNotes/7DevOps/imranAliSir/5Linux/LinuxSlides.pdf
+/files/files/devops/LinuxQuickstartV5.pdf
+
+Linux Commands
+	/notes/_07DevOps._99ImranAliSir._99LinuxCommands
+		
+Open Source
+	Open source software is software with source code that anyone can inspect, modify, and enhance & redistribute.
+	Common Misconception :"open source" just mean something is free of charge
+		Some opensource software are not free. ?????
+	
+Linux Origins
+	1984: The GNU Project and the Free Software Foundation
+		Creates open source version of UNIX utilities
+		Creates the General Public License (GPL)
+			Software license enforcing open source principles
+
+	1991: Linus Torvalds
+		Creates open source, UNIX-like kernel, released under the GPL license
+		Ports some GNU utilities, solicits assistance online
+	Today:
+		Linux kernel + GNU utilities = complete, open source, UNIX-like operating system
+			Packaged for targeted audiences as distributions
+ 
+Linux Principles
+	Everything is a file (Including Hardware)
+	Small Single purpose Programs
+	Ability to chain programs together for complex operations
+	Avoid Captive User Interface
+	Configuration data stored in text file
+
+
+Why Linux
+	Opensource
+	Community Support
+	Support Wide Variety of Hardware
+	Customization
+	Most Servers runs on Linux
+	Automation
+	Security
+	
+Architecture of linux
+	Hardware>Kernel>Shell(on which we execute command)>Applications
+	
+Popular Linux Distos
+	https://en.wikipedia.org/wiki/List_of_Linux_distributions
+	Desktop OS
+		Ubuntu Linux
+		Linux Mint
+		Arch Linux
+		Fedora
+		Debian
+		OpenSuse
+	Server OS (don't have UI)
+		Red Hat Enterprise Linux(Not Open Source)
+		Ubuntu Server
+		Centos
+		SUSE Enterprise Linux
+		
+Most used Linux distros currently in IT industry.
+	RPM based:- RHEL, Centos, Oracle Linux, Amazon Linux
+		RPM or .rpm (Red Hat based softwares.)
+		RPM was developed by Community & Red Hat.
+	Debian based :- Ubuntu Server, Kali Linux
+		DEB or .deb (Debian based softwares)
+		DEB was developed by Bedian.
+		Package Manager-YUM
+		
+Diffrence between RPM based and Debian based.
+	From user’s point of view, there isn’t much difference in these tools. 
+	The RPM and DEB formats are both just archive files, with some metadata attached to them. 
+	They are both equally arcane, have hardcoded install paths and only differ in subtle details. 
+	DEB files are installation files for Debian based distributions. 
+	RPM files are installation files for Red Hat based distributions. 
+	Ubuntu is based on Debian’s package manage based on APT and DPKG. 
+	Red Hat, CentOS and Fedora are based on the old Red Hat Linux package management system, RPM.		
+	RPM based Preferred for Servers-RHEL
+	Debian based Preferred for devops-Ubuntu 
+		
+		
+Some Important Directories
+	Home Directories: /root,/home/username
+	User Executable: /bin, /usr/bin, /usr/local/bin
+	System Executables: /sbin, /usr/sbin,/usr/local/sbin
+	Other Mountpoints: /media, /mnt
+	Configuration: /etc
+	Temporary Files: /tmp
+	Kernels and Bootloader: /boot
+	Server Data: /var, /srv
+	System Information: /proc, /sys
+	Shared Libraries: /1ib, /usr/1ib, /usr/local/lib	
+		
+		
+		
+		
+		
+		
+		
+
+	

@@ -1,0 +1,65 @@
+
+Type ! and hit tab or enter:
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	  <meta charset="UTF-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>Document</title>
+	</head>
+	<body>
+	</body>
+	</html>
+
+
+<h1></h1> to <h6></h6> for heading. 
+	In a page we should have only one h1 & multiple h2 to h6 tags.
+<p></p> for paragraph
+We should use <strong> tag instead of <b>. Semantic Html (tag name should have meaning or purpose attached to it)
+We should use <em> tag instead of <i>. Semantic Html
+
+Advantage of Semantic Html 
+	search engine optimization,which basically means that search engines,such as Google will be able to understand the structure of your content, 
+		and therefore, they will be better able to analyze what your content and what your webpage is all about.
+	important for accessibility, and especially for people who rely on screen readers to consume our webpages.
+
+
+<ul>- unorderedlist
+<ol>- ordered list
+<li>- list item
+
+<img
+      src="post-img.jpg"
+      alt="HTML code on screen"
+      width="500"
+      height="200"
+/> - image with src attribute
+	alt attribute will be used by search engine & screen reader for blind people
+
+<a href="blog.html">Blog</a>
+    <a href="#">Nowhere</a>
+    attribute target ="_blank"- in a new tab
+    
+<header>
+	<nav></nav>
+</header>
+<article>
+      <header>   
+      		
+      </header>
+      <p></p>
+      <img/>
+</article>
+<aside>The aside element is usually used for some secondary information that complements the information in the main part of the page.
+		Now visually, many times we use the aside element as a sidebar, but it doesn't have to be that way.
+</aside>
+<footer>Copyright &copy; 2027 by The Code Magazine</footer>
+
+<div></div>- general tag
+
+ <button>Add to cart</button>
+ 
+ 
+ 
+

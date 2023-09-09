@@ -1,5 +1,6 @@
 Tools 
 	https://github.com/devopshydclub/vprofile-project/blob/prereqs/Prereqs_doc.pdf
+	https://github.com/VinayMaurya001/vprofile-project/tree/prereqs/Prereqs_doc.pdf
 	For mac using Homebrew
 		https://brew.sh/
 	For windows using Chocolatey
@@ -56,6 +57,6 @@ Signup
 		Billing Alarm
 			Billing Dashboards>Bills
 			Billing Dashboards>Billing Preferences> enter email address
-			CloudWatch> Create Alarm
+			CloudWatch service> Create Alarm
 		Certificate Setup	
 			AWS Certificate Manager(ACM)

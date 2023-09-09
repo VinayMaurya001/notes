@@ -1,0 +1,24 @@
+IDE
+	VisualStudioCode
+		Extentions
+			Prettier- Code formatter
+			color theme- one monokai theme
+			image preview
+			color highlight- useful for css code
+			auto rename tag- rename closing tag when we change opening tag name
+				settings>settings>search auto closing tags
+			live server
+				http://127.0.0.1:5500/starter/02-HTML-Fundamentals/index.html
+			
+		Setting
+			color theme- preinstalled themes
+			file icon theme-Seti
+			setting
+				default formatter- Prettier- Code formatter
+				format on save
+				auto save- on focus change
+				tab size -2
+				
+				
+Chrome Devtools(Developer tools)
+	 	 				

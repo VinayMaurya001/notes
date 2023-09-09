@@ -18,7 +18,7 @@ Devops
 DevOps Lifecycle
 	Code
 		Developers commits code
-	Code bUild
+	Code build
 		Deployable Software:Artifact
 	Code Test
 		Unit & Integration Test
@@ -92,6 +92,9 @@ CD
 	https://aws.amazon.com/devops/continuous-delivery/
 	Continuous delivery is a software development practice where code changes are automatically prepared for a release to production.
 	
+	Deploy Automation->DB/Security Changes->Software Testing->Schedule PROD Deployment
+	
+	
 	Deployment
 		Server Provisioning
 		Dependencies
@@ -114,7 +117,7 @@ CD
 		Load
 		Performance
 		DB
-		Security
+		Network & Security
 		Any other test
 	
 	Automation Test written by Testers

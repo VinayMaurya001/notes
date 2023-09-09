@@ -24,3 +24,8 @@ https://www.programiz.com/sql/online-compiler/
 
 Short Address
 	https://what3words.com/goes.pepper.fence
+	
+Pdf sign doc
+	https://acrobat.adobe.com/link/home/
+EMI calculator
+	https://emicalculator.net/

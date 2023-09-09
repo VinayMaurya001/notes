@@ -1,0 +1,258 @@
+1. Intro to Vagrant
+2. Create VM Automatically
+3. Vagrant Commands
+4. Vagrant Networking
+5. Provisioning
+6. RAM, CPU & Disk
+7. Multi VM Vagrantfile
+8. Documentation
+
+VM Management Problems
+	 OS Installations
+	 Time Consuming
+	 Manual setup
+	 Tough Replication for Multi VM
+	 Documentations for Multi VM
+
+Vagrant for VM
+	 No OS Installations separately
+	 VM Setup through Images(vagrant boxes)
+	 Images/Boxes available in Vagrant cloud
+	 Manage VM with a file (Vagrantfile)
+	 VM changes automatic through Vagrantfile
+	 Vagrant commands to manage VM
+	 Provisioning VM/Executing commands & scripts
+	 Etc
+
+Vagrant 
+	A VM automation tool 
+	Vagrant Manages/Automates VM Lifecycle
+	Vagrant is an open-source software product for building and maintaining portable virtual software development environments;
+	 e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. 
+	 It tries to simplify the software configuration management of virtualization in order to increase development productivity. 
+	 Vagrant is written in the Ruby language, but its ecosystem supports development in a few other languages.
+	 
+	Default hypervisor for Vagrant is Oracle Virtualbox.
+	
+
+Vagrant tool Setup
+	 VT (Virtualization Technology) Enabled in BIOS
+	 Install Vagrant tool
+	 Hypervisor like Oracle Virtualbox
+	 CLI (Command Line Interface) like GIT Bash, Cygwin, CMD prompt
+	etc
+
+VM SETUP WITH VAGRANT tool
+	 Vagrant Box Name from 
+	 	https://app.vagrantup.com/boxes/search (Vagrant CLoud)
+	 Project Directory (Folder/Directory at any location of your choice)
+	 vagrant init geerlingguy/centos7 or ubuntu/bionic64
+		Created Vagrantfile in Project Directory written in Ruby
+			VM Info
+			BoxName
+			Network
+			Provisioning
+			Sync Dir
+			Memory/CPU
+			Disk Size
+	 Vagrant commands like vagrant up
+		vagrant halt
+			power off VM
+		vagrant reload
+			restart VM
+		vagrant destroy
+	 	vagrant ssh
+		vagrant global-status --prune
+		vagrant global-status
+		vagrant status (inside vm/centos directory)
+	 Login with vagrant ssh command for Linux vm
+		whoami
+		exit
+		history
+		ls -a
+			hidden file start with .(dot)
+	
+	
+	
+Vagrant IP, RAM & CPU
+	free -m
+		ram details	
+	ifconfig
+
+	In Vagrantfile
+		config.vm.network "private_network", ip: "192.168.33.10"  (static ip)
+	  	config.vm.network "public_network"  (dynamic ip getting from wifi-router)
+	     vb.memory = "2024"
+         vb.cpus= 2
+         
+	vagrant reload
+	
+
+Vagrant Sync directories 
+	Default sync direcotry
+		the directory where Vagrantfile is present
+		Mounting shared folders.
+			/vagrant => C:/workspace/vagrant/vms/centos7
+	
+	# Share an additional folder to the guest VM. The first argument is the path on the host to the actual folder. 
+	# The second argument is the path on the guest to mount the folder. 
+	# And the optional third argument is a set of non-required options.
+    config.vm.synced_folder "../data", "/vagrant_data"
+	   config.vm.synced_folder "C:\\workspace\\vagrant\\vms\\centos7\\host-dir", "/tmp/guest_dir"
+		/tmp/guest_dir => C:/workspace/vagrant/vms/centos7/host-dir
+	
+	Common use cases, 
+	 	1) you want to preserve your files in the VM, where there is a chance vm getting corrupted or deleted.
+		2) We can use graphical editor to edit file in case of host is window os & guest is not having gui
+		
+Provisioning
+	Provisioning in vagrant means executing your commands or scripts when your VM comes up. 
+		In some other technologies, these things are also called as a bootstrapping.
+
+	# Enable provisioning with a shell script. Additional provisioners such as
+    # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+    # documentation for more information about their specific syntax and use.
+    # config.vm.provision "shell", inline: <<-SHELL
+    # For ubuntu
+    #   apt-get update
+    #   apt-get install -y apache2
+    # SHELL
+
+	 config.vm.provision "shell", inline: <<-SHELL
+	 #for centos
+    	yum install httpd wget unzip -y
+    	sudo systemctl enable httpd
+		sudo systemctl start httpd
+    	free -m
+    	uptime
+     SHELL
+	
+	vagrant reload --provision
+
+	ifconfig
+	http://192.168.160.57/
+	http://192.168.33.33/
+	
+	
+	
+Website Setup
+	vagrant init geerlingguy/centos7 
+	In Vagrantfile
+		config.vm.network "private_network", ip: "192.168.33.10"
+		config.vm.network "public_network"
+	vagrant up
+	vagrant ssh
+		sudo -i
+		yum install httpd wget unzip -y
+		systemctl start httpd
+		systemctl enable httpd
+		ifconfig
+		ip addr show
+		cd /var/www/html/
+			index.html
+		systemctl restart httpd
+
+ 		cd /tmp
+   			wget https://www.tooplate.com/zip-templates/2132_clean_work.zip
+   			ls -a
+   			unzip 2132_clean_work.zip
+   	 		cd 2132_clean_work
+   			cp -r * /var/www/html/
+   			systemctl restart httpd
+   			systemctl status httpd
+   
+			http://192.168.33.10/
+			
+	Website Setup
+		Automate
+			Iaac-Infrastructure as a code
+			Vagrantfile
+			 config.vm.network "private_network", ip: "192.168.33.15"
+		     config.vm.network "public_network"				
+			 config.vm.provision "shell", inline: <<-SHELL
+			     yum install httpd wget unzip -y
+				 systemctl start httpd
+				 systemctl enable httpd
+				 cd /tmp/
+				 wget https://www.tooplate.com/zip-templates/2119_gymso_fitness.zip
+				 unzip -o 2119_gymso_fitness.zip
+				 cp -r 2119_gymso_fitness/* /var/www/html/
+				 systemctl restart httpd
+			 SHELL
+			
+			http://192.168.33.10/
+			
+	Wordpress Setup
+		https://ubuntu.com/tutorials/install-and-configure-wordpress#1-overview
+		Automate
+			Iaac-Infrastructure as a code
+	
+
+
+Multi VM Vagrant file	
+	
+	https://developer.hashicorp.com/vagrant/docs/multi-machine	
+		https://vagrantup.com/docs
+			https://developer.hashicorp.com/vagrant/docs
+	
+	vagrant ssh vm1
+		vagrant ssh web01
+			vagrant ssh db01
+		vagrant halt web01
+			vagrant halt 
+		
+	Vagrantfile
+			Vagrant.configure("2") do |config|
+			  config.vm.define "web01" do |web01|
+			    web01.vm.box = "ubuntu/bionic64"
+				web01.vm.network "private_network", ip: "192.168.40.11"
+				web01.vm.provider "virtualbox" do |vb|
+			      vb.memory = "1024"
+				 vb.cpus = 2
+			      end
+			   web01.vm.provision "shell", inline: <<-SHELL
+			     apt update
+				 apt install apache2 wget unzip -y
+				 systemctl start apache2
+				 systemctl enable apache2
+				 cd /tmp/
+				 wget https://www.tooplate.com/zip-templates/2119_gymso_fitness.zip
+				 unzip -o 2119_gymso_fitness.zip
+				 cp -r 2119_gymso_fitness/* /var/www/html/
+				 systemctl restart apache2
+			   SHELL
+			  end
+			
+			  config.vm.define "db01" do |db01|
+			    db01.vm.box = "centos/7"
+			    db01.vm.network "private_network", ip: "192.168.40.12"
+			    db01.vm.provider "virtualbox" do |vb|
+			     vb.memory = "1024"
+				 vb.cpus = 2
+			    end
+			    db01.vm.provision "shell", inline: <<-SHELL
+			    yum install mariadb-server -y
+			    systemctl start mariadb
+			    systemctl enable mariadb
+			
+			    mysql -u root -e 'CREATE DATABASE wordpress;'
+			    mysql -u root -e 'GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER ON wordpress.* TO wordpress@localhost IDENTIFIED BY "admin123";'
+			    mysql -u root -e 'FLUSH PRIVILEGES;'
+			   SHELL
+			  end
+			  
+			end
+
+Infrastructure as code (IaC) 
+	is the process of managing and provisioning infrastructure (networks, virtual machines, load balancers, and connection topology) through CODE/Config Files.
+	Ex:
+		Vagrant for local
+		Terraform for Cloud
+		Ansible for Servers
+		Cloudformation for AWS etc
+	Provisioning is the process of configuring and deploying an information technology (IT) system resource either locally or in the cloud. 
+	In enterprise computing, the term is often associated with virtual machines (VMs) and cloud resource instances.
+	
+	
+	
+	

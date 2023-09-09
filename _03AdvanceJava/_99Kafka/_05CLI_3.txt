@@ -26,8 +26,8 @@ Kafka Console Consumer in Groups
 	It will also read value from all partitions
 		kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --group my-second-application --from-beginning
 
-
-
+	bin//kafka-consumer-groups.sh --all-topics --bootstrap-server localhost:9092 --list
+	bin/kafka-consumer-groups --bootstrap-server host:9092 --describe --group foo
 
 
 

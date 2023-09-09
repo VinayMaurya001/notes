@@ -1,0 +1,11 @@
+		
+Color in CSS
+		#firstPara{
+            color:blueviolet; /* Color by name */
+        }
+        #secondPara{
+            color: rgb(223, 130, 54); /* Color by rgb value */
+        }
+        #thirdPara{
+            background-color: #ff4532; /* Color by hex value */
+        }

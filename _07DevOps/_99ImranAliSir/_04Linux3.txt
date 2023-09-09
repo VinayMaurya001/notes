@@ -1,0 +1,68 @@
+Filter & IO re-direction command.
+	Grep
+		grep command is used to find texts from any text input.
+		Passwd file: stores information about all the users in the system
+		
+		grep "this" abc.txt
+			grep "this" < abc.txt  (here < is for input redirection)
+			grep "this" *     (search all files in current directory)
+		-R option
+			grep -R "this" *  (will search in directory also) 
+			grep -R "this" /etc/* 
+		-i option	
+			grep -i "this" abc.txt (-i for case insensitive)
+		-v option
+			grep -v "this" abc.txt (search negation of this)
+	less
+		less abc.txt
+			less /etc/passwd
+		it is a reader of file but different from cat command
+		We can search using /
+		We can go top & bottom using G & gg
+	more
+		more abc.txt
+		shows % of remaining read file
+	head
+		read first -n line
+		head abc.txt (-10 is added by default)
+		head -20 abc.txt
+	tail
+		read last -n line
+		tail abc.txt (-10 is added by default)
+		tail -20 abc.txt		
+		
+		tail -f abc.txt(shows dynamic content)
+			tail -2f /var/log/auth.log
+			
+	cut
+		cut -d: -f1 /etc/passwd (-d: for delimeter : , -f1 for field 1)
+	awk
+		awk -F':' '{print $1}' /etc/passwd
+		
+	search & replace
+		vim abc.txt
+		:%s/Note/MyNot (first place in every line )
+		:%s/Note/MyNot/g (every place in every line)		
+			:%s/Note//g  (replace with empty string)
+						
+       sed  's/Note/mynote2/g' /tmp/practice1/locale.alias (will search only , will not replace & save in file)
+       sed -i 's/mynote/mynote2/g' /tmp/practice1/locale.alias (-i for replace & save in file)
+		
+ 		
+		
+
+
+
+Practice Linux & Vagrant
+	Website
+		On Centos7 Httpd service & HTML Templates
+	Wordpress
+		On Ubuntu 18 Apache2, mysql & PHP Wordpress Template
+	Automation
+		Vagrant provisioning
+		
+		
+		
+
+
+	
