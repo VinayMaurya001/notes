@@ -1,0 +1,10 @@
+
+Install groovy plugin in eclipse/STS
+	spring.io/tools
+	
+	
+Create a Groovy Project
+Create a Groovy file Hello.groovy (groovyType file , kind as script)
+	package com.vinay
+	println("Groovy is dynamic & Cool")
+Run as run

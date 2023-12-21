@@ -1,0 +1,14 @@
+Local Variable Type Inference
+	Java compiler infers the type of the variable at compile time
+	Introduced in Java 10
+	You can add final if you want
+	var can also be used in loops
+	Remember:
+		You cannot assign null
+		var is NOT a keyword
+		CANNOT be used for member variables, method parameters or return types
+	Best Practices:
+		Good variable names
+		Minimize Scope
+		
+		

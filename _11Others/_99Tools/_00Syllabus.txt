@@ -29,3 +29,10 @@ Pdf sign doc
 	https://acrobat.adobe.com/link/home/
 EMI calculator
 	https://emicalculator.net/
+	
+For emoji picker
+	Control command space on the Mac and windows + dot on Windows 10.
+	
+Grammerly extension for English grammer check 
+	https://chromewebstore.google.com/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen
+	

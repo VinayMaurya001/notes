@@ -1,0 +1,59 @@
+public free apis
+	https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/
+	https://api.agify.io/?name=bella
+	https://mocktarget.apigee.net/user
+	https://api.github.com/users/vinaymaurya001
+	https://gorest.co.in/
+	
+
+Create account on GCP 
+CREATE APIGEE account free trail
+https://apigee.google.com/edge
+https://34.111.237.106.nip.io/hello-world
+
+Create Proxy for 
+	1)GET https://gorest.co.in/public/v2/comments
+	2)POST https://reqres.in/api/login
+		{    "email": "eve.holt@reqres.in", "password": "cityslicka"}
+		{    "token": "QpwL5tke4Pnpja7X4"}
+Create API Products
+	Add proxies in it
+
+Export zip of revision
+Import zip 
+
+
+Create Developers
+	Internal & External
+Create app
+	Subscribe Products    
+
+Add policy 
+	Verify Api key
+	JSON-to-XML Policy
+	Quota Policy
+		Policied get deployed & executed in multiple Message Processors.
+		We don't have control over routing to Message processors.
+		Synchronous Message Processors, maintains single count for Quota Policy.
+			<distribted>true</distributed>
+			 <synchronous>true</synchronous>
+
+	
+Policy can be applied on request or response.
+Policy instance
+	New
+	Existing
+
+Type of Policy
+	Traffic Management
+	Security 
+	Mediation
+	Extension policy 
+		Java,Java Script,Python
+	Dialog Flow
+
+Debugging/Tracing
+	Export & Import debug file
+
+
+

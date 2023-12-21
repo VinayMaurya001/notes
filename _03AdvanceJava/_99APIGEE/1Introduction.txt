@@ -1,0 +1,70 @@
+An Introduction to Apigee Edge
+Learn about the central role that APIs play in innovation, and 
+	how Apigee Edge enables you to manage APIs to power that innovation. 
+There are three basic categories of capability in the API Management Platform:
+- Support for your Developer ecosystems, to let people discover and 
+	understand your APIs and rapidly build applications that use them.
+- Monitoring and analytics, so that your API program managers can see which APIs are being used, 
+	and how, or so they can get alerted when appropriate.
+- An API runtime, so that you can expose usable, friendly, efficient, secure APIs.
+
+
+Apigee API Management Trial Episode 1: Welcome!
+With APIGEE
+	Securely expose bare APIs with API keys or OAuth or JWT
+	Modernize existing SOAP services
+	Publish your APIs to developers, through your own custom API portal
+	Get visibility into usage of your APIs via API analytics.
+
+
+Create Your First Proxy
+How to create an API Proxy
+How to add a policy to a Proxy
+How to find documentation on a policy
+	https://docs.apigee.com/api-platform/reference/policies/quota-policy
+How to naviagate to the APIgee community
+	https://community.apigee.com/index.html
+	
+How to Add Verify API Key
+	Add a policy Verify API Key
+	Publish>API Products> +API Product> add proxies
+	Publish>Developers>+Developers
+	Publish>Apps>+App > Add developer & Producer
+	
+	Developrs Own Apps> Apps has API key > Api Key are authorize for specific API Product >Product wraps API  Proxies
+	?apikey=qzPUyyMzC2MLF49M44wwRl1eitSaZxQ8
+	
+	
+Using Apigee Trace Tool
+	Trace>Start Trace Session
+	Not for logging, for that Message Logging Policy
+	
+    Assign Message Policy
+		Multipurpose policy for changing the part of message
+		Like Adding & removing header and query parameters
+		
+		
+Building and Publishing Your Developer Portal
+	An elegant web experience
+	Clear, interactive API documentation
+	Self-service ways to get credential & keys
+	
+	Portal>+Portal
+		Theme,Pages,Assets,Menus
+		Apis
+		Users
+		Settings
+
+
+Publishing APIs
+
+
+API Analytics
+	Exposure Api
+	Consumption APi
+	Visibility
+
+
+Apigee API Management Trial Episode 8: Life After Trial
+
+

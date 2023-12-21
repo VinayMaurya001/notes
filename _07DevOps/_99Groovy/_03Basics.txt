@@ -1,0 +1,60 @@
+
+
+Datta types
+Closures
+Collection Types
+Sets & Maps
+Methods
+Classes & Objects
+
+Data types
+	Java Data types & More
+
+HelloDataTypes.groovy	
+package com.vinay
+println("Groovy is dynamic & Cool")
+def a=10   
+println(a) //10
+println a  //10
+println a.class//class java.lang.Integer
+
+a=10.7
+println a.class //class java.math.BigDecimal
+
+float f=9.6
+println f   //9.6
+println f.class//class java.lang.Float
+
+s='Hello'
+println s       //Hello
+println s.class //class java.lang.String
+
+s2="${s} Vinay!"    //Groovy String
+println s2       //Hello Vinay!
+println s2.class //class org.codehaus.groovy.runtime.GStringImpl
+
+s='''          //no need of \n
+            All the power is within us.
+We can do all thing & everything.
+'''
+println s       //            All the power is within us.
+				//We can do all thing & everything.
+println s.class //class java.lang.String
+
+s="""
+            All the power is within us.
+We can do all thing & everything.
+"""
+println s       //            All the power is within us.
+				//We can do all thing & everything.
+println s.class //class java.lang.String
+
+
+emailPattern = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+/
+println emailPattern.class					//class java.lang.String
+println "test@gmail.com" ==~ emailPattern     //true  // ==~ is find or pattern operator
+println "test@gmail.com@s1" ==~ emailPattern     //false
+
+	
+
+Closures

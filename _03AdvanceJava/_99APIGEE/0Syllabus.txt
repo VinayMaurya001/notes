@@ -1,0 +1,55 @@
+https://www.youtube.com/playlist?list=PLDgaYAoSDVg0hheloUWKQhXYfcFXEraPX
+An Introduction to Apigee Edge
+Apigee API Management Trial Episode 1: Welcome!
+
+
+
+Here are the courses I took to gain understanding of the Apigee platform.  I recommend taking the whole Coursera course and parts of the Youtube play list, as needed.
+
+
+https://www.coursera.org/learn/api-design-apigee-gcp
+ 	API Design and Fundamentals of Google Cloud's Apigee API Platform | Coursera
+Learn API Design and Fundamentals of Google Cloud's Apigee API Platform from Google Cloud. This course gives you an introductory look at the Apigee API Platform and API Design in general. We'll cover topics such as how to properly navigate ...
+www.coursera.org
+
+https://www.youtube.com/watch?v=yq2_IiNkU3o&list=PLsWqc60hQz4e-dV4sXOmmqAdB_JIfpl2M
+ 	Apigee - 4MV4D - Digital Is Coming- S01E01 - YouTube
+Learn why APIs are important for digital business & where API developer fits in Digital Value Chain. Q & A - Please refer to https://community.apigee.com.
+www.youtube.com
+
+This is another mandatory Apigee training list highest in priority compared to the other two
+
+https://www.youtube.com/playlist?list=PLDgaYAoSDVg0hheloUWKQhXYfcFXEraPX
+
+
+Also adding Jenkins and open shift resources
+
+Apigee:
+https://www.youtube.com/playlist?list=PLDgaYAoSDVg0hheloUWKQhXYfcFXEraPX
+
+
+I recommend taking the whole Coursera course and parts of the 4MV4D Youtube play list, as needed.
+
+https://www.coursera.org/learn/api-design-apigee-gcp
+
+Optional : 4MV4D - https://www.youtube.com/watch?v=yq2_IiNkU3o&list=PLsWqc60hQz4e-dV4sXOmmqAdB_JIfpl2M
+
+
+Jenkinsfile explained - https://www.youtube.com/watch?v=7KCS70sCOKO
+
+
+Declarative pipeline with Jenkins - https://www.youtube.com/watch?v=79HfmjeOTET
+
+OpenShift: https://learn.openshift.com/
+
+Openshift
+
+
+https://learn.openshift.com/introduction/cluster-access/ https://learn.openshift.com/introduction/resource-objects/ https://learn.openshift.com/introduction/deploying-images/
+
+https://learn.openshift.com/middleware/courses/middleware-spring-boot/spring-rest-services https://learn.openshift.com/middleware/courses/middleware-spring-boot/microservices-1 https://learn.openshift.com/middleware/courses/middleware-spring-boot/microservices-2 https://learn.openshift.com/middleware/courses/middleware-spring-boot/microservices-3 https://learn.openshift.com/middleware/courses/middleware-spring-boot/monitoring
+
+Open ended exploration/learning : https://learn.openshift.com/playgrounds/openshift311/
+
+
+

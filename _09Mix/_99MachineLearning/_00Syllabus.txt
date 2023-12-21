@@ -1,0 +1,2 @@
+https://www.udemy.com/course/machinelearning/
+https://cloud.google.com/learn/certification/machine-learning-engineer

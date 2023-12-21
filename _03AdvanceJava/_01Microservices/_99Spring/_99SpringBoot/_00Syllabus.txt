@@ -1,6 +1,22 @@
-
-
-
+public class DemoBean implements InitializingBean, DisposableBean
+	{
+		//Other bean attributes and methods 
+		@Override
+		public void afterPropertiesSet() throws Exception
+		{
+			//Bean initialization code
+		}
+		@Override
+		public void destroy() throws Exception
+		{
+			//Bean destruction code
+		}
+	}
+Aware Interfaces to Add Specific Behavior
+	Spring offers a range of interfaces that allow the beans to indicate to the container that they require a particular infrastructure dependency.
+@PostConstruct and @PreDestroy Annotations
+	@PostConstruct annotated method will be invoked after the bean has been constructed using default constructor and just before it�s instance is returned to requesting object.
+	@PreDestroy annotated method is invoked just before the bean is about be destroyed inside bean container.
 
 https://stackoverflow.com/questions/6267138/spring-autowire-a-list
 https://www.baeldung.com/spring-injecting-collections
@@ -22,30 +38,10 @@ https://www.baeldung.com/spring-injecting-collections
 	Using @Bean decouples the instantiation of the bean from its class definition. 
 		This is why we can use it to make even third-party classes into Spring beans. 
 		It also means we can introduce logic to decide which of several possible instance options for a bean to use.
-@Component
-@Controller, @Service and @Repository
 
-DI
-	https://www.baeldung.com/spring-annotations-resource-inject-autowire
-		@Autowired
-			Field Injection & Setter Injection
-				Match by Type
-				Match by Qualifier
-				Match by Name
-		@Inject
-			Field Injection & Setter Injection
-				Match by Type
-				Match by Qualifier
-				Match by Name
-		@Resource
-			Field Injection	& Setter Injection
-				Match by Name
-				Match by Type
-				Match by Qualifier
-	https://www.baeldung.com/constructor-injection-in-spring	
 
-	@Qualifier
-	@Primary
+
+
 
 
 @Configuration

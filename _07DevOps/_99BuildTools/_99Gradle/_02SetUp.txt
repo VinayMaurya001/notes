@@ -1,0 +1,176 @@
+Install Gradle
+	https://gradle.org/install/
+	
+	sdk install gradle 7.2 (unix based)
+		unzip -d /opt/gradle gradle-7.2-bin.zip
+	brew install gradle		(macOS)
+		unzip -d /opt/gradle gradle-7.2-bin.zip
+	download zip file		(window)
+	
+	Set path environment variable till bin
+		export PATH=$PATH:/opt/gradle/gradle-8.3/bin
+		
+	gradlew
+		gradle wrapper
+	
+First Gradle Project
+	gradle init  //create a sample project
+		build.gradle
+		settings.gradle
+		gradlew  //gradle wrappers
+	gradle tasks  //list all tasks
+	gradle taskName  or gradle tN or gradlew tN //execute the task
+		task firstTask{
+			println "Gradle Welcome!"
+		}
+	gradle build
+	gradle  //execute the task with global gradle version
+	gradlew //gradle wrapper, downlaod & install the correct version of gradle for the project &  execute the task  
+			CICD tools like Jenkins will use this Gradle wrapper so we have consistent gradle version across environments
+			
+			
+Create a Java Project
+	gradle init
+	
+	gradle run   //run main class
+	gradle --rerun-tasks build  //rerun all task even code not changed
+
+build.gradle	
+	plugins {
+		//	gradle compileJava   // build/classes folder will be created
+		//	gradle clean  // delete the build folder
+		//	gradle test   //seee the reports on \firstProjectVinay\app\build\reports\tests\test
+		//	gradle jar   //create a jar for our application  insid\firstProjectVinay\app\build\libs
+    	id 'java'
+    	
+    	// Apply the application plugin to add support for building a CLI application in Java.
+    	//gradle run // run our application , use task application
+    	id 'application'
+	}
+
+	application {
+	    // Define the main class for the application.
+	    mainClass = 'com.vinay.gradle.App'
+	}			
+	
+	repositories {
+    	// Use Maven Central for resolving dependencies.
+    	//or jCenter()
+    	mavenCentral()
+	}
+
+	dependencies {
+    	// Use JUnit test framework.
+    	testImplementation 'junit:junit:4.13.2'
+
+    	// This dependency is used by the application.
+    	implementation 'com.google.guava:guava:30.1.1-jre'
+	}
+			
+			
+Repositories
+	repositories {
+    	// Use Maven Central for resolving dependencies.
+    	//We can declare any Maven/Ivy/file repository here
+		//Here order is important
+		mavenLocal()
+    	mavenCentral()
+		jcenter()
+    	mavenCentral{
+    		url: ""
+    	}
+	}
+
+	Gradle's all dependencies locally stored on C:\Users\java\.gradle\caches\modules-2\files-2.1\
+	
+	
+Configurations
+	Defines when the dependencies are available during build phases
+	Scopes of Maven are called Configurations in Gradle
+	
+	Scopes					Configurations
+	compile			implementation		api (previously compile)
+	provided		compileOnly			
+	runitme			runtimeOnly
+	test			testImplementation	testCompileOnly, testRuntimeOnly
+	
+	implementation vs api (previously compile)
+		api 'com.google.guava:guava:30.1.1-jre'
+		now if in some other project implementation "....:myJavaProject:..." is used, other project will not pull quaua depedency
+		
+	compileOnly
+		servlet- will be availbale inside tomcat server itself
+		Lombok
+		Dozer
+		JMapper
+	runtimeOnly
+		logging-api
+		logging-impl
+	testCompileOnly		
+		Junit
+		Mockito
+		Jasmine
+	runtimeCompileOnly
+		Jupiter
+		Jasmine Runtime
+		
+		
+Build Phases
+	1)Initialization
+		Project
+			Module1	Module2	Module3
+	2)Configuration
+		Create a DAG(Direct Acyclic Graph)
+			Task1->Task2->Task3->Task4
+	3)Execution
+		Compiled Tested Jar/War
+
+    println "Start for Configuration phase!"
+	task firstTask{
+		//For configuration phase
+		 println "Gradle Welcome!"
+		 doFirst(){
+		 	//For Execution phase
+			println "Gradle doFirst"
+		 }
+		 doLast(){
+		 	//For Execution phase
+			println "Gradle doLast"
+		 }
+	}
+	println "End for Configuration phase!"
+	
+	gradle build
+		> Configure project :app
+		Gradle Welcome!
+	gradle run
+		> Configure project :app
+		Gradle Welcome!
+		> Task :app:run
+		Hello World!
+	gradle firstTask
+		> Configure project :app
+		Gradle Welcome!
+		> Task :app:firstTask
+		Gradle doFirst
+		Gradle doLast
+		
+		
+		
+Gradle Daemon Process
+	gradle build --daemon
+	gradle build --no-daemon
+	
+
+build.gradle & pom.xml
+
+
+Q)Which of the following plugin gives tasks to run the java application
+A)application
+Q)The java compile task is added by which of the following plugin
+A)java
+Q)
+A)
+Q)
+A)
+	

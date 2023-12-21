@@ -1,0 +1,57 @@
+Why is Coupling Important?
+	Coupling: How much work is involved in changing something?
+		Coupling is important everywhere:
+			An engine is tightly coupled to a Car
+			A wheel is loosely coupled to a Car
+			You can take a laptop anywhere you go
+			A computer, on the other hand, is a little bit more difficult to move
+		Coupling is even more important in building great software
+			Only thing constant in technology is change
+				Business requirements change
+				Frameworks change
+				Code changes
+			We want Loose Coupling as much as possible
+			We want to make functional changes with as less code changes as possible
+	Let's explore how Java Interfaces and Spring Framework help with Loose Coupling!
+	
+	
+	
+Spring Container: 
+	Manages Spring beans & their lifecycle
+	1: Bean Factory: Basic Spring Container
+	2: Application Context: Advanced Spring Container with enterprise-specific features
+		Easy to use in web applications
+		Easy internationalization
+		Easy integration with Spring AOP
+	Which one to use?: 
+		Most enterprise applications use Application Context
+			Recommended for web applications, web services -REST API and microservices
+		The only use case I can think about for BeanFactory is some kind of an IoT application 
+			where you're severely constrained for memory.
+
+		//1: Launch a Spring Context
+		var context = new AnnotationConfigApplicationContext(HelloWorldConfiguration.class);
+		//It says, "Resource leak: 'context' is never closed."
+		//What I can do is 
+			//I can put a try-catch block and in finally I can close the context.
+			//I can use try with resourses also 
+		
+		//2: Configure the things that we want Spring to manage - 
+		//HelloWorldConfiguration - @Configuration
+		//name - @Bean
+		//3: Retrieving Beans managed by Spring
+		System.out.println(context.getBean("name"));
+		Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+	
+		
+					
+Exploring Java Bean vs POJO vs Spring Bean			
+	Java Bean: Classes adhering to 3 constraints:
+		1: Have public default (no argument) constructors
+		2: Allow access to their properties using getter and setter methods
+		3: Implement java.io.Serializable
+	POJO: Plain Old Java Object
+		No constraints
+		Any Java Object is a POJO!
+	Spring Bean: Any Java object that is managed by Spring
+		Spring uses IOC Container (Bean Factory or Application Context) to manage these objects

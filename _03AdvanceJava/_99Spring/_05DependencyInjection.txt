@@ -1,0 +1,163 @@
+Dependency Injection: 
+	Identify beans, their dependencies and wire them together (provides IOC - Inversion of Control)
+	Spring Beans: An object managed by Spring Framework
+	IoC container: Manages the lifecycle of beans and dependencies
+	Types: ApplicationContext (complex), BeanFactory (simpler features - rarely used)
+	Autowiring: Process of wiring in dependencies for a Spring Bean
+
+Dependency Injection Types
+	Constructor-based : Dependencies are set by creating the Bean using its Constructor
+	Setter-based : Dependencies are set by calling setter methods on your beans
+	Field: No setter or constructor. Dependency is injected using reflection.
+	Method Injection: Manual DI (it not happens using @Autowired)
+	Question: Which one should you use?	
+		Spring team recommends Constructor-based injection as dependencies are automatically set when an object is created!
+
+	@Autowired- for dependency injection 
+				on constructor (optional) 
+				on setters or 
+				on field (using reflection)
+				
+DI
+	https://www.baeldung.com/spring-annotations-resource-inject-autowire
+		@Autowired
+			Field Injection & Setter Injection
+				Match by Type
+				Match by Qualifier
+				Match by Name
+		@Inject
+			Field Injection & Setter Injection
+				Match by Type
+				Match by Qualifier
+				Match by Name
+		@Resource
+			Field Injection	& Setter Injection
+				Match by Name
+				Match by Type
+				Match by Qualifier
+	https://www.baeldung.com/constructor-injection-in-spring	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@SpringBootApplication
+	@SpringBootConfiguration
+	@EnableAutoConfiguration
+	@ComponentScan
+	@EnableWebMvc (optional)
+	
+
+@Component
+@Controller
+@Service
+@Repository
+
+@Scope("singleton")
+	Scope("prototype")
+	Scope("request")
+	Scope("session")
+	Scope("application")
+
+
+Depedency Injection
+	Constructor DI
+	Settor DI
+	Method DI
+
+@Autowired
+@Qualifier("specificRepository")
+@Primary
+@Value
+
+@Profile("dev")
+	spring.profiles.active=dev
+	java -jar your-application.jar -Dspring.profiles.active=dev
+
+@RestController
+	@Controller and @ResponseBody
+@RequestMapping
+	GetMapping, @PostMapping, @PutMapping, @DeleteMapping
+@PathVariable
+@RequestParam
+@RequestBody
+@ResponseBody
+
+
+@Value("${my.property}")
+	@ConfigurationProperties(prefix = "my")
+	@EnableConfigurationProperties:
+		Enable@ConfigurationProperties annotated classes
+
+	private final Environment environment;
+	public MyService(Environment environment) {
+        	his.environment = environment;
+    	}
+	public void someMethod() {
+        	tring myProperty = environment.getProperty("my.property");
+        }
+
+	Use @Value for simple cases with a small number of properties.
+	Use@ConfigurationProperties for structured, type-safe configuration in larger applications.
+	Use Evironment when fine-grained control over property retrieval is required or when dealing with dynamic or non-standard properties.
+
+@PropertySource:
+	Spcifies the properties file to be used for configuration
+
+
+
+@SpringBootTest
+	Used to create a Spring context for integration testing.
+	Load the entire application context
+@DataJpaTest, @WebMvcTest, @RestClientTest:
+	Slicetesting annotations for specific layers of the application
+@TestPropertySource
+Specifies additional property sources for testing.
+@TestConfiguration
+Used to define additional configuration classes for testing
+
+
+
+
+
+@ConditionalOnProperty(name = "custom.feature.enabled", havingValue = "true")
+@ConditionalOnClass(name = "org.springframework.web.servlet.DispatcherServlet")
+
+Spring Boot Externalized Configuration
+    Common Sources for Externalized Configuration:
+	Application Properties and YAML Files:
+		The primary source for configuration properties.
+	Profile-Specific Files
+		Allows customization based on different environments.
+	Command Line Arguments
+		Provide a quick way to override configuration.
+		java -jar myapp.jar --server.port=9090
+	Environment Variables
+		Useful in containerized or cloud environments
+		export CUSTOM_FEATURE_ENABLED=false
+
+
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+	spring.autoconfigure.exclude:=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+	
+

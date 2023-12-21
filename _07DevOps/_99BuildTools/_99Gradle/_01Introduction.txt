@@ -1,0 +1,69 @@
+Gradle
+Gradle is a build automation tool.
+
+Build a project means
+	Compiling a source code
+	Compiling & running a test (both unit & integration)
+	Packaging the compiled code into artifacts(jar/war/docker_image)
+	Deploy & run 
+	And several other task
+	
+	
+Build tools
+Ant 
+	build.xml
+		tasks
+	Adv-
+		Customize
+	Dis Adv-
+		It does not have inbuilt dependency management or library. So we have to use 3rd party tool like Ivy.
+	  	DIff folder structure of project- Steep learning curve for each new project
+	  	
+Maven	
+	Convention over configuration
+	In built dependency management
+		pom.xml
+	Dis advantage
+		difficult Customization
+		
+Gradle
+	Convention over configuration
+	In built dependency management
+	Easy customization using DSL(Groovy or Kotlin)
+		build.gradle- Groovy or Kotlin
+		
+		
+Why Gradle?
+    Gradle has become standard build management tool for Android.
+    Gradle also used by several open source projects like 
+    	Spring, 
+    	hibernate etc.
+	Gradle used for project of languages like- 
+		Java, 
+		C++, 
+		Kotlin, 
+		Groovy, 
+		Swift etc.
+	Gradle may use any repositories like
+		Maven Central
+		Maven Local
+		JCenter
+		File System
+	In gradle we may define custom rules based on which dependencies will be pulled. 
+		In maven we can customize only version of dependency.
+	Gradle defines custom scopes unlike maven which defines fixed scopes compile, provided etc.
+	Gradle is best in performance.
+		Incremental builds
+			It track records & if we change only 1 java file, then only 1 java file will be compiled.
+			And it will use output of other unchanged files from previous build.
+		Build Cache
+			It uses output of other gradle build, which use the same input
+		Support Daemon process
+			It keeps build information in-memory 
+			HOT deployment
+	Plugins
+	CLI
+	DSL-Domain specific language
+		build.gradle
+			groovy/kotlin
+			
