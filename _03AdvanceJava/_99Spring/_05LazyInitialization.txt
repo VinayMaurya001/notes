@@ -1,0 +1,66 @@
+Lazy and Eager Initialization of Spring Framework Beans
+		Default initialization for Spring Beans: Eager
+		Eager initialization is recommended:
+			Errors in the configuration are discovered immediately at application startup
+		However, you can configure beans to be lazily initialized using Lazy annotation:
+			NOT recommended (AND) Not frequently used
+		Lazy annotation:
+			Can be used almost everywhere @Component and @Bean are used
+			Lazy-resolution proxy will be injected instead of actual dependency
+			Can be used on Configuration (@Configuration) class:
+				All @Bean methods within the @Configuration will be lazily initialized
+
+
+			@Component
+			class ClassA {}
+			@Component
+			@Lazy
+			class ClassB { 	
+				private ClassA classA;
+				public ClassB(ClassA classA) {
+					//Logic
+					System.out.println("Some Initialization logic");
+					this.classA = classA;
+				}
+				public void doSomething() { 		System.out.println("Do Something");}
+			}
+			@Configuration
+			@ComponentScan
+			public class LazyInitializationLauncherApplication {	
+				public static void main(String[] args) {
+					try (var context = 
+							new AnnotationConfigApplicationContext
+								(LazyInitializationLauncherApplication.class)) {
+						System.out.println("Initialization of context is completed");
+						context.getBean(ClassB.class).doSomething();
+					}
+				}
+			}
+			
+			
+Comparing Lazy Initialization vs Eager Initialization
+		Heading 
+			Lazy Initialization 
+			Eager Initialization
+		Initialization time 
+			Bean initialized when it is first made use of in the application
+			Bean initialized at startup of the application
+		Default 
+			NOT Default 
+			Default
+		Code Snippet 
+			@Lazy OR @Lazy(value=true) 
+			@Lazy(value=false) OR (Absence of @Lazy)
+		What happens if there are errors in initializing?
+			Errors will result in runtime exceptions 
+			Errors will prevent application from starting up
+		Usage 
+			Rarely used 
+			Very frequently used
+		Memory Consumption 
+			Less (until bean is initialized) 
+			All beans are initialized at startup
+		Recommended Scenario 
+			Beans very rarely used in your app 
+			Most of your beans
+	

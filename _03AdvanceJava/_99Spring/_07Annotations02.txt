@@ -1,73 +1,98 @@
-@Configuration
-public class HelloWorldConfiguration {
+
+
+@SpringBootApplication
+	@SpringBootConfiguration
+	@EnableAutoConfiguration
+	@ComponentScan
+	@EnableWebMvc (optional)
 	
-	@Bean
-	public String name() {
-		return "Ranga";
-	}
+
+@Component
+@Controller
+@Service
+@Repository
+
+@Scope("singleton")
+	Scope("prototype")
+	Scope("request")
+	Scope("session")
+	Scope("application")
+
+
+
+@Autowired
+@Qualifier("specificRepository")
+@Primary
+@Value
+
+@Profile("dev")
+	spring.profiles.active=dev
+	java -jar your-application.jar -Dspring.profiles.active=dev
+
+@RestController
+	@Controller and @ResponseBody
+@RequestMapping
+	GetMapping, @PostMapping, @PutMapping, @DeleteMapping
+@PathVariable
+@RequestParam
+@RequestBody
+@ResponseBody
+
+
+@Value("${my.property}")
+	@ConfigurationProperties(prefix = "my")
+	@EnableConfigurationProperties:
+		Enable@ConfigurationProperties annotated classes
+
+	private final Environment environment;
+	public MyService(Environment environment) {
+        	his.environment = environment;
+    	}
+	public void someMethod() {
+        	tring myProperty = environment.getProperty("my.property");
+        }
+
+	Use @Value for simple cases with a small number of properties.
+	Use@ConfigurationProperties for structured, type-safe configuration in larger applications.
+	Use Evironment when fine-grained control over property retrieval is required or when dealing with dynamic or non-standard properties.
+
+@PropertySource:
+	Spcifies the properties file to be used for configuration
+
+
+
+@SpringBootTest
+	Used to create a Spring context for integration testing.
+	Load the entire application context
+@DataJpaTest, @WebMvcTest, @RestClientTest:
+	Slicetesting annotations for specific layers of the application
+@TestPropertySource
+Specifies additional property sources for testing.
+@TestConfiguration
+Used to define additional configuration classes for testing
+
+
+
+
+
+@ConditionalOnProperty(name = "custom.feature.enabled", havingValue = "true")
+@ConditionalOnClass(name = "org.springframework.web.servlet.DispatcherServlet")
+
+Spring Boot Externalized Configuration
+    Common Sources for Externalized Configuration:
+	Application Properties and YAML Files:
+		The primary source for configuration properties.
+	Profile-Specific Files
+		Allows customization based on different environments.
+	Command Line Arguments
+		Provide a quick way to override configuration.
+		java -jar myapp.jar --server.port=9090
+	Environment Variables
+		Useful in containerized or cloud environments
+		export CUSTOM_FEATURE_ENABLED=false
+
+
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+	spring.autoconfigure.exclude:=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 	
-	@Bean
-	public int age() {
-		return 15;
-	}
-	
-	@Bean
-	public Person person() {
-		return new Person("Ravi", 20, new Address("Main Street", "Utrecht"));		
-	}
 
-	@Bean
-	public Person person2MethodCall() {
-		return new Person(name(), age(), address()); //name, age		
-	}
-
-	@Bean
-	public Person person3Parameters(String name, int age, Address address3) {
-		//name,age,address2
-		return new Person(name, age, address3); //name, age		
-	}
-
-	@Bean
-	@Primary
-	//No qualifying bean of type 'com.in28minutes.learnspringframework.Address' 
-	//available: expected single matching bean but found 2: address2,address3
-	public Person person4Parameters(String name, int age, Address address) {
-		//name,age,address2
-		return new Person(name, age, address); //name, age		
-	}
-
-	@Bean
-	public Person person5Qualifier(String name, int age, @Qualifier("address3qualifier") Address address) {
-		//name,age,address2
-		return new Person(name, age, address); //name, age		
-	}
-
-	
-	@Bean(name = "address2")
-	@Primary
-	public Address address() {
-		return new Address("Baker Street", "London");		
-	}
-
-	@Bean(name = "address3")
-	@Qualifier("address3qualifier")
-	public Address address3() {
-		return new Address("Motinagar", "Hyderabad");		
-	}
-
-}
-
-
-		System.out.println(context.getBean("name"));
-		System.out.println(context.getBean("age"));
-		System.out.println(context.getBean("person"));
-		System.out.println(context.getBean("address2"));
-		
-		System.out.println(context.getBean("person2MethodCall"));
-		System.out.println(context.getBean("person3Parameters"));
-		
-		System.out.println(context.getBean(Person.class));
-		System.out.println(context.getBean(Address.class));
-		
-		System.out.println(context.getBean("person5Qualifier"));
-		

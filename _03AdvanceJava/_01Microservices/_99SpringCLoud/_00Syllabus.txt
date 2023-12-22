@@ -8,7 +8,11 @@
 
 
 
-
+Spring Cloud ALternatives
+	Netflix OSS
+		Eureka (service discovery), Hystrix (circuit breaker), Ribbon (client-side load balancer), and Zuul (edge service)
+	Consul
+	Kubernates
 
 
 

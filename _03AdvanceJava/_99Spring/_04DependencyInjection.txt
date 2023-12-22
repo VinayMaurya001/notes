@@ -1,0 +1,62 @@
+Dependency Injection: 
+	Identify beans, their dependencies and wire them together (provides IOC - Inversion of Control)
+	Spring Beans: An object managed by Spring Framework
+	IoC container: Manages the lifecycle of beans and dependencies
+	Types: ApplicationContext (complex), BeanFactory (simpler features - rarely used)
+	Autowiring: Process of wiring in dependencies for a Spring Bean
+
+Dependency Injection Types
+	Constructor-based : Dependencies are set by creating the Bean using its Constructor
+	Setter-based : Dependencies are set by calling setter methods on your beans
+	Field: No setter or constructor. Dependency is injected using reflection.
+	Method Injection: Manual DI (it not happens using @Autowired)
+	Question: Which one should you use?	
+		Spring team recommends Constructor-based injection as dependencies are automatically set when an object is created!
+
+	@Autowired- for dependency injection 
+				on constructor (optional) 
+				on setters or 
+				on field (using reflection)
+				
+				
+DI
+	https://www.baeldung.com/spring-annotations-resource-inject-autowire
+		@Autowired
+			Field Injection & Setter Injection
+				Match by Type
+				Match by Qualifier
+				Match by Name
+		@Inject
+			Field Injection & Setter Injection
+				Match by Type
+				Match by Qualifier
+				Match by Name
+		@Resource
+			Field Injection	& Setter Injection
+				Match by Name
+				Match by Type
+				Match by Qualifier
+	https://www.baeldung.com/constructor-injection-in-spring	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
