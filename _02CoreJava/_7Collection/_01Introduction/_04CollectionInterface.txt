@@ -52,6 +52,7 @@ Methods of Collection interface
 			Returns an array containing all of the elements in this collection; 
 				the runtime type of the returned array is that of the specified array.
 			Note that toArray(new Object[0]) is identical in function to toArray().
+			
 	Default Methods
 		default Stream<E>	stream()
 			Returns a sequential Stream with this collection as its source.
@@ -60,13 +61,11 @@ Methods of Collection interface
 		default boolean	removeIf(Predicate<? super E> filter)
 			Removes all of the elements of this collection that satisfy the given predicate.
 
-
 	Methods from Object class
 		boolean	equals(Object o)
 			Compares the specified object with this collection for equality.
 		int	hashCode()
 			Returns the hash code value for this collection.
-
 
 	Methods from Interface Iterable<T>:
 		Iterator<E>	iterator()

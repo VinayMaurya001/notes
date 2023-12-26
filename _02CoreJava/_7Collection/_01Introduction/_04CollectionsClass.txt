@@ -7,7 +7,9 @@ Short notes
 	
 Collections class
 	It defines several utility method for collection objects 
-		like sorting, searching,reversing, min,max, unmodifiableCollection,unmodifiableMap,synchronizedCollection,synchronizedMap etc.
+		like sorting, searching,reversing, min,max, 
+			unmodifiableCollection,unmodifiableMap,
+			synchronizedCollection,synchronizedMap etc.
 	
 Sorting Elements Of list in Collection Class
 	public static void sort( List l)
@@ -148,6 +150,7 @@ Method for reversing elements of list in Collections class
 		To get reverse comparator object
 			Comparator descendingComparator = Collections.reverseOrder(Comparator ascendingComparator)
 		
+	List<String> unmodifiableList = Collections.unmodifiableList(list);
 	List l=Collections.synchronizedList(al1);
 
 		

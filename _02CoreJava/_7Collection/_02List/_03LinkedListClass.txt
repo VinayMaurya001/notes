@@ -7,6 +7,7 @@ LinkedList
 
 	LinkedList implements Serializable & Cloneable interfaces but not RandomAccess interface.
 	LinkedList implements  Queue & Dequeue interfaces.
+	ArrayList implements Spliterator interface.
 	
 	For linked list capacity concept is not applicable.
 

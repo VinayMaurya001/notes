@@ -61,8 +61,8 @@ Sorted Collections:
 		As Comparator is Functional interface, we can replace its implementation with Lambda Expression 
 		Collections.sort(l,(I1,I2)->(I1<I2)?1:(I1>I2)?-1:0);  
 		Program to Sort elements of ArrayList according to Customized Sorting Order By using Lambda Expressions(Descending Order): 
-			Example: CollectionWithLembdaExpression.java
-
+			        Collections.sort(list, (a, b) -> b - a);
+			
 
 2. Sorted Set  
 	In the case of Set, if we want Sorting order then we should go for TreeSet 

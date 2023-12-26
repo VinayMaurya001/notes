@@ -62,7 +62,7 @@ Searching  Elements of array
 	public static int binarySearch(Object[] p, Object target)
 	public static int binarySearch(Object [] p, Object target, Comparator c)
 
-	All rules of Arrays class binarySearch() method is exactly same as Collections class’ binarySearch() methods.
+	All rules of Arrays class binarySearch() method is exactly same as Collections classï¿½ binarySearch() methods.
 	Example
 		
 			int[] a = { 10, 5, 20, 11, 6 };
@@ -93,7 +93,7 @@ Conversion of array as list
 	Object[] a = c.toArray();
 
 public static List asList(Object[] arr)
-	Strictly speaking this method won’t create the independent list object. 
+	Strictly speaking this method wont create the independent list object. 
 	For the existing array we are getting  List view.
 	
 	String[] s = {"A", "Z", "S"};
@@ -106,7 +106,7 @@ public static List asList(Object[] arr)
 	s[0] = "K";
 	Sopln(l);//[k, z, B]
 
-	By using list reference we cann’t perform any operation which change the size otherwise we will get RTE saying UnsupportedOperationException.
+	By using list reference we cann't perform any operation which change the size otherwise we will get RTE saying UnsupportedOperationException.
 	l.add("M");//RE: UnsupportedOperationException
 	l.remove(l);//RE: UnsupportedOperationException
 	l.set(1, "N");

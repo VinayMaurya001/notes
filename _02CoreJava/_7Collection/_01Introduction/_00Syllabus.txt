@@ -22,7 +22,6 @@ List
 	Vector
 		Stack
 		
-
 	Diff b/w ArrayList & LinkedList
 	Diff b/w ArrayList & Vector
 	

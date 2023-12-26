@@ -1,14 +1,16 @@
 Short notes
 Need of Collection
 	1)Individual variable approach(Not feasible approach for long list of elements for operations (like searching,sorting etc) , int x=10;int y=20;Readability problem)
-	2)Array approach(fixed in size,Heterogeneous not allowed, not underlying DS available)
-	
+	2)Array approach(fixed in size,Heterogeneous not allowed, not underlying DS available so no readymade method available)
 Solution: 3)Collection approach:Growable in nature,Heterogeneous allowed,Underlying DS available
 			
 List(I)
 	ArrayList:
 		Underlying DS(re-sizable array Or grow-able array),Duplicates & Insertion(null also) order is preserved.
-		Const.(3)->ArrayList al=new ArrayList()//new ArrayList(int initialCapacity)//new ArrayList(Collection c).
+		Constructors(3)->
+			ArrayList al=new ArrayList()
+			new ArrayList(int initialCapacity)
+			new ArrayList(Collection c).
 			//default initial capacity=10 	&	New capacity=(current capacity*3/2)+1=16
 		ArrayList & Vector implements RandomAccess(I).
 	LinkedList:
@@ -31,14 +33,12 @@ Need or purpose of a collection
 	Not feasible approach for long list of elements for operations (like searching,sorting etc)
 2)Array approach
 	Student[] st=new Student[1000];
-Advantage
-	Using single variable, we can represent multiple values
-	Readability improved
-
+	Advantage
+		Using single variable, we can represent multiple values
+		Readability improved
 
 Limitations of array:
-	1)Array are fixed in size. Once we created an array with some size 
-		there is no chance of increasing or decreasing the size based on requirement. 
+	1)Array are fixed in size. Once we created an array with some size  there is no chance of increasing or decreasing the size based on requirement. 
 		To use arrays compulsory we should know the size in advance, which may not possible always. 
 		Like for seminar we taken big hall but at runtime only 2 person came.
 	2)Homogeneous data element
@@ -73,15 +73,17 @@ Difference b/w array & collection
 	
 	It is highly recommended to use array not collection if initial sized is known in advance.
 	
-Array																	Collection
-1. Arrays are fixed in size.											1. Collections are grow-able in nature that is based on our requirement 
-																	  	   we can increase or decrease the size.
-2. With respect to memory arrays are not recommended to use.			2. With respect to memory collection are recommended to use. 
-3. With respect to performance arrays are recommended to use.			3. With respect to performance collection are not recommended to use.
-4. Array can hold homogeneous data-type elements.						4. Collection can hold both homogeneous and heterogeneous data-type elements.
-5. There is no underlying data structure for arrays and hence 			5. Every collections class is implemented based on some standard 
- ready-made method support is not available.							   data structure. Hence ready-made method support is available for every 
-																		   requirement.
+Array	vs		Collection
+1. Arrays are fixed in size.											
+1. Collections are grow-able in nature that is based on our requirement we can increase or decrease the size.
+2. Array can hold homogeneous data-type elements.						
+2. Collection can hold both homogeneous and heterogeneous data-type elements.
+3. There is no underlying data structure for arrays and hence 	 ready-made method support is not available.							   
+3. Every collections class is implemented based on some standard  data structure. Hence ready-made method support is available for almost every requirement.
+4. With respect to memory arrays are not recommended to use.			
+5. With respect to memory collection are recommended to use. 
+5. With respect to performance arrays are recommended to use.			
+6. With respect to performance collection are not recommended to use.
 
 
 
@@ -109,8 +111,14 @@ Collection				Container
 Collection Framework	STL( Standard Template Library) 
 
 
-Library
-A group of classes & interfaces.
+Library vs Framework
+A library is a collection of pre-written code, functions, or classes that developers can use to simplify tasks. 
+A framework is a structure that provides guidelines and enforces specific coding patterns. 
+Libraries are optional and can be used as needed, whereas frameworks dictate the overall structure of a project.
+One way to think about the difference is to use the analogy of “who calls whom”. 
+	When we call a method from a library, we are in control. 
+	But in a framework, the control is inverted i.e. the framework calls us. 
+	It defines a skeleton where the application defines its own features to fill out the skeleton.
 
 
 Overview Of Collection Framework

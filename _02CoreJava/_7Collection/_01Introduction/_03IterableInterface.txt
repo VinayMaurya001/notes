@@ -1,14 +1,33 @@
 
 public interface Iterable<T> {
+	 By implementing the Iterable interface, a class can be used in the enhanced for loop (for-each loop)
 
 	Iterator<T> iterator();
+	
+	// Creates a spliterator over the elements of the collection 
 	default Spliterator<T> spliterator() {
 	        return Spliterators.spliteratorUnknownSize(iterator(), 0);
 	    }
+	 
 	default void forEach(Consumer<? super T> action) {
 	        Objects.requireNonNull(action);
 	        for (T t : this) {
 	            action.accept(t);
 	        }
 	}
+	
+	
 }
+
+
+Iterable interface: 
+	The Iterable interface is used to represent a collection of objects that can be iterated over. 
+	It provides a method called iterator() that returns an Iterator object 12.
+Iterator interface: 
+	The Iterator interface is used to traverse a collection of objects one by one. 
+	It provides methods such as hasNext() and next() to iterate over the collection 12.
+
+	
+The Spliterator interface in Java is used to traverse the elements of a collection one by one. 
+	It is similar to the Iterator interface, but it is designed to support parallel processing of collections.
+	https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html

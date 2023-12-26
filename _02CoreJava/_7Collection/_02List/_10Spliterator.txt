@@ -1,0 +1,9 @@
+The Spliterator interface in Java is used to traverse the elements of a collection one by one. 
+	It is similar to the Iterator interface, but it is designed to support parallel processing of collections.
+	https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html
+	https://www.baeldung.com/java-spliterator
+	
+	The Spliterator interface is implemented by several classes in the Java Collections Framework, including ArrayList, HashSet, and TreeSet. 
+	By implementing the Spliterator interface, a class can be used in the parallel stream processing of collections.
+	
+	
