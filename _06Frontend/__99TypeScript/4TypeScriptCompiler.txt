@@ -1,0 +1,95 @@
+Watch Mode
+	tsc first.ts -w
+	tsc first.ts -watch	
+	Keep recompiling first.ts, whenever any change happens in first.ts
+	
+
+Compiling the entire project/Multiple files
+	tsc --init   //create tsconfig.json
+	tsc
+	tsc -watch
+	
+	https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+	https://www.typescriptlang.org/docs/handbook/compiler-options.html
+
+Including & Excluding files
+	In tsconfig.json
+		"exclude":["first.ts","second.ts"]
+		"exclude":["*.dev.ts"]
+		"exclude":["**/*.dev.ts"]
+		"exclude":["node_modules"]  //default
+		
+		"include":["first.ts","second.ts"]
+		"include":["*.dev.ts"]
+		"include":["**/*.dev.ts"]
+		"include":["node_modules"]
+		
+		"files":["first.ts", "second.ts"] //Here we cannot include path
+		
+Setting a compilation target
+	    /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
+	    "target": "es5",                          
+		
+		
+Understanding TypeScript Core Libs
+    "lib": ["dom","es6","com.iterable","scripthost"]                             /* Specify library files to be included in the compilation. */
+    
+More Configuration & Compilation Options
+	 // "allowJs": true,                       /* Allow javascript files to be compiled. */
+    // "checkJs": true,                       /* Report errors in .js files. */
+    Probably we may use allowJs & checkJs where we want to check Js syntax.
+    
+    // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+    
+Working with sourceMap
+ "sourceMap": true,                           /* Generates corresponding '.map' file. */
+  Now we can see .ts file in browser (f12->sources->file://)
+    
+    
+rootDir & outDir
+	  "outDir": "./dist",                              /* Redirect output structure to the directory. */
+     "rootDir": "./src",                             /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+     
+     // "removeComments": true,                      /* Do not emit comments to output. */
+    // "noEmit": true,                              /* Do not emit outputs. */
+    
+    
+Stop Emitting Files on Compilation Errors
+	"noEmitOnError":false  //will generate js even if compilation fails for ts file
+
+Strict Compilation
+	"strict": true,                                 /* Enable all strict type-checking options. */
+    // "noImplicitAny": true,                       /* Raise error on expressions and declarations with an implied 'any' type. */
+    // "strictNullChecks": true,                    /* Enable strict null checks. */
+    // "strictFunctionTypes": true,                 /* Enable strict checking of function types. */
+    // "strictBindCallApply": true,                 /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
+    // "strictPropertyInitialization": true,        /* Enable strict checking of property initialization in classes. */
+    // "noImplicitThis": true,                      /* Raise error on 'this' expressions with an implied 'any' type. */
+    // "alwaysStrict": true,                        /* Parse in strict mode and emit "use strict" for each source file. */
+	
+
+Code Quality Options
+	 /* Additional Checks */
+    // "noUnusedLocals": true,                      /* Report errors on unused locals. */
+    // "noUnusedParameters": true,                  /* Report errors on unused parameters. */
+    // "noImplicitReturns": true,                   /* Report error when not all code paths in function return a value. */
+    // "noFallthroughCasesInSwitch": true,          /* Report errors for fallthrough cases in switch statement. */
+    // "noUncheckedIndexedAccess": true,            /* Include 'undefined' in index signature results */
+    // "noImplicitOverride": true,                  /* Ensure overriding members in derived classes are marked with an 'override' modifier. */
+    // "noPropertyAccessFromIndexSignature": true,  /* Require undeclared properties from index signatures to use element accesses. */
+	
+Debugging with Visual Studio Code
+	Google Chrome extention
+	sourceMap: true in tsconfig.json
+	
+
+Useful plugin for VSCode
+	ESLint Plugin
+	Pretier Formatting
+
+Wrap Up
+
+Useful Resources & Links
+	tsconfig Docs: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+	Compiler Config Docs: https://www.typescriptlang.org/docs/handbook/compiler-options.html
+	VS Code TS Debugging: https://code.visualstudio.com/docs/typescript/typescript-debugging

@@ -3,12 +3,35 @@ Local Variable Type Inference
 	Introduced in Java 10
 	You can add final if you want
 	var can also be used in loops
-	Remember:
-		You cannot assign null
-		var is NOT a keyword
-		CANNOT be used for member variables, method parameters or return types
+	var is NOT a keyword(for backward compatibility, if var has been used as a identifier in previous code)
+	var restrictions:
+		You cannot assign null	
+			var x=null;//CTE
+		You cannot use to refer Lambda expression
+			Consumer<Integer> consumer = num -> System.out.println(num);//No CTE
+			var consumer = num -> System.out.println(num);//CTE
+		var CANNOT be used for member variables, method parameters or return types
 	Best Practices:
 		Good variable names
 		Minimize Scope
-		
-		
+		use for complex collection types
+	
+
+	var x="abc";
+		x=10;//CTE
+	Uses of var
+		var map = new HashMap<String, List<String>>();
+		for (var entry : map.entrySet()) {
+			System.out.println(entry.getValue());
+		}
+
+	var list= new ArrayList<>();//we can add any type to this list.
+	
+	
+	
+	
+	
+	
+	
+	
+	

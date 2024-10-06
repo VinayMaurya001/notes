@@ -1,0 +1,37 @@
+Notes
+	https://arkalim.notion.site/AWS-Developer-Associate-DVA-C02-aa44174fd7634a788368a85ec533e5fc
+	https://tahseer-notes.netlify.app/notes/aws%20solutions%20architect%20associate/aws%20solutions%20architect%20associate%20(saa-c02)/
+
+
+https://aws.amazon.com/certification/certified-cloud-practitioner/
+
+https://www.udemy.com/course/aws-certified-cloud-practitioner-new/
+https://www.udemy.com/course/aws-certified-cloud-practitioner-training-course/
+https://www.udemy.com/course/aws-certified-cloud-practitioner/
+https://www.udemy.com/course/practice-exams-aws-certified-cloud-practitioner/
+https://www.udemy.com/course/aws-certified-cloud-practitioner-practice-exams-c/
+https://www.udemy.com/course/aws-certified-cloud-practitioner-certification-training/
+https://www.udemy.com/course/aws-certified-cloud-practitioner-5-practice-tests/
+
+https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/
+https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/
+
+
+Lambda Server
+CICD
+
+
+AWS Services
+	Billing
+	IAM
+	EC2-Elastic Compute Cloud
+		EBS Volume- Elastic Block Store Volume
+    EC2 Image Builder
+
+
+
+
+https://aws.amazon.com/training/course-descriptions/
+https://aws.amazon.com/training/
+
+https://explore.skillbuilder.aws/learn/public/learning_plan/view/78/architect-learning-plan

@@ -59,7 +59,7 @@ Dockerfile
 docker build -t in28min/hello-world-rest-api:dockerfile1 .(dot)
 	-t for tag
 	. for current folder- build context
-docker run -p 8080:8080 in28min/hello-world-rest-api:dockerfile3
+docker run -p 8080:8080 -d in28min/hello-world-rest-api:dockerfile3
 	Here p for publish
 Docker layers are cached until any modification happens
 	docker build -t in28min/hello-world-rest-api:dockerfile2 .(dot)

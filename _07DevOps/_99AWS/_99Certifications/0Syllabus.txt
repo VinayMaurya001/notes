@@ -1,0 +1,21 @@
+https://www.udemy.com/course/aws-certified-cloud-practitioner-new/learn/lecture/20053442#overview
+
+https://www.shanebart.com/aws-cloud-practitioner/
+https://aws.amazon.com/certification/certification-prep/
+AWS course for Practitioner exam
+White Papers
+Pricing
+Sample MCQ
+Udemy test series
+
+I used the free online mind mapping tool Coggle to create a mind map for the exam. I would periodically study the mind map to refresh my memory of the topics covered in the exam. If there were any concepts that I couldn’t remember, I’d go back and study them again. You can find my mind map below.
+https://www.shanebart.com/coggle
+
+
+I have cleared my AWS solution architect associate and AWS sysops associate certifications.
+I enrolled for Udemy courses for the same from Stephan Marek, Acloudguru and practice tests from John Bonso.
+They also answer technical doubts and questions in the q&a section.
+Before giving the exams I diligently went through aws white papers.
+
+https://www.udemy.com/course/aws-cloud-practitioner-complete-aws-introduction/
+https://learn.acloud.guru/course/aws--certified-cloud-practitioner/overview

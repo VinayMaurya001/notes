@@ -1,0 +1,670 @@
+Routing: 
+	using this concept we can implement single page applications. 
+	According to this concept we need not send request to server at the time of redirect from one page to another page.
+
+Angular is providing @angular/router package to implement single page applications
+	RouterModule : 
+		we need to import this module from NgModule 
+		  forRoot() : using this function we can provide root router object of application
+		  forChild() : To provide child router object
+	Routes : 
+		using this class we can create router object.
+		We need to provide path to every component at the time of creating router object
+
+	routerLink
+		we can call the component path using routerLink property
+		<input type="button" value="More Info" [routerLink]="['productDetails', { proId: oneproduct.pid }]" />
+		    
+		<a routerLink="header">Header page</a>&nbsp;
+		<a routerLink="contactus">Contactus Page</a>&nbsp;
+		<a routerLink="contactus/email">Contactus Page & email page</a>&nbsp;
+		<a routerLink="footer">Footer Page</a>&nbsp;
+		<a routerLink="../footer">Footer Page</a>&nbsp;
+		<router-outlet></router-outlet>
+	
+	<router-outlet> 
+		using this directive we can display the content of router html template
+		<router-outlet></router-outlet>
+
+	src\app\app-routing.module.ts
+			import { RouterModule, Routes } from '@angular/router';
+			var routes:Routes=[
+			    { path: '', component: ContactusComponent },//default path
+ 				 { path: 'header', component: HeaderComponent },
+ 				 { path: 'footer', component: FooterComponent },
+ 				 { path: '**', component: ErrorComponent }, //wild card path
+ 				 {
+   							 path: 'contactus', component: ContactusComponent,
+   							 children: [{ path: 'email', component: EmailComponent }],  //		<router-outlet></router-outlet> in contactus-component.html page
+  					},
+  					 [{path:"c1/:sno/:uname",component:Comp1Component}],
+			]
+			@NgModule({
+			  imports: [RouterModule.forRoot(routes)],
+			  exports: [RouterModule]
+			})
+			export class AppRoutingModule { }
+	
+	src\app\app.module.ts
+				  imports: [
+				    BrowserModule,AppRoutingModule
+				  ],
+
+			
+			
+ActivatedRoute : 
+	using this class we can read the paramets of router object. 
+	It is providing params property we need to subscibe to read the parameters.
+	subscribe() : using this function we can subscribe the data of a service
+
+     { path: 'parameters', component: ParametersComponent },
+	src\app\app.component.html	
+		<a [routerLink]="['parameter',{sno:100,uname:'scott'}]">Parameters</a>////http://localhost:4200/parameter;sno=100;uname=scott
+		<router-outlet></router-outlet>
+	src\app\parameter\parameter.component.ts
+		  constructor(activatedRoute: ActivatedRoute) {
+			    activatedRoute.params.subscribe((parameters: any) => {
+			    	  console.log(parameters);
+			    	  alert(parameters.sno);
+			    	  alert(parameters.uname);
+			    });
+		  }
+
+
+
+export data from a ts file
+		src\app\products.ts
+			export default[
+			    {pid:1001,pname:"Samsumg",image:"img1.jpg", descp:"Dual can mobile with red color",  price:1000},
+			    {pid:1002,pname:"Nokia",image:"img2.jpg",   descp:"Dual can mobile with green color",price:1200},
+			    {pid:1003,pname:"Oppo",image:"img3.jpg",    descp:"Dual can mobile with blue color", price:900},
+			    {pid:1004,pname:"Redmi",image:"img4.jpg",   descp:"Dual can mobile with red color",  price:800},
+			]
+			export var obj1={		    uname:"scott",city:"chennai"}
+			export var obj2={		    lang:"Ang",scope:"good"}
+	
+		src\app\app.component.ts
+			  import productData from './product';
+			  export class AppComponent {
+				  allProducts:any;
+				  data:any;
+				  constructor(){
+				    this.allProducts=(productData)
+				    this.data=obj1;
+					 alert(this.data.uname);
+				    alert(obj2.lang);
+				  }
+			  }
+
+
+Example:
+	export class AppComponent {
+			  allProducts: any;
+			  data: any;
+			  constructor() {
+			    this.allProducts = productData;
+			  }
+		}
+	src\app\app.component.html
+		<div style="display: flex">
+		  <div *ngFor="let oneproduct of allProducts">
+		    <h2>{{ oneproduct.pname }}</h2>
+		    <img src="../assets/{{ oneproduct.image }}" width="100px" height="100px" />
+		    <br />
+		    <input
+		      type="button"
+		      value="More Info"
+		      [routerLink]="['productDetails', { proId: oneproduct.pid }]"
+		    />
+		  </div>
+		</div>
+		<router-outlet></router-outlet>
+	src\app\product-details\product-details.component.ts
+		  selectedProduct: any;
+		  constructor(private ar: ActivatedRoute) {
+		    this.ar.params.subscribe((dt: any) => {
+		      // alert(dt.proId)
+		      this.selectedProduct = productData.filter(
+		        (oneproduct) => oneproduct.pid == dt.proId
+		      );
+		    });
+		  }
+	src\app\product-details\product-details.component.html
+		<p>product-details works!</p>
+		<div>
+		    <h1>{{selectedProduct[0].pname}}</h1>
+		    <img src="../../assets/{{selectedProduct[0].image}}" />
+		    <div>{{selectedProduct[0].descp}}</div>
+		    <div>{{selectedProduct[0].price}}</div>
+		</div>
+
+
+Ex:
+	Path variable
+	src\app\app-routing.module.ts
+		const routes: Routes = [{path:"c1/:sno/:uname",component:Comp1Component}];
+	src\app\app.component.html
+		<a [routerLink]="['c1',123,'scott']">Open c1</a>
+		<router-outlet></router-outlet>
+	src\app\comp1\comp1.component.ts
+		import { Inject } from '@angular/core';
+		import { ActivatedRoute } from '@angular/router';
+		constructor(@Inject(ActivatedRoute) ar: ActivatedRoute) {
+		    ar.params.subscribe((dt: any) => {
+		      alert(dt.sno);
+		      alert(dt.uname);
+		    });
+		  }
+
+Router 
+	This package we can use to navigate from one component to another component dynamically based on some business logic.
+	It is providing navigate() and navigateByUrl() methods to navigate from one component to another component
+		router.navigate: To navigate with some parameters
+		router.navigateByUrl : To navigate without parameters
+
+	src\app\app-routing.module.ts
+		const routes: Routes = [
+		  {path:"c1Path",component:C1Component},
+		  {path:"c2Path",component:C2Component}
+		];
+	src\app\app.component.html
+		<input type="button" value="Click" (click)="fun1()" />
+		<router-outlet></router-outlet>
+	src\app\app.component.ts
+		import { Router } from '@angular/router';
+		constructor(private rt: Router) {}
+		fun1() {
+		    var userInt = prompt('Enter component name');
+		    if (userInt == 'c1') this.rt.navigateByUrl('c1Path'); //???
+		    else this.rt.navigate(['c2Path', { x: 100, y: 200 }]);
+		}
+	src\app\c2\c2.component.ts
+		constructor(ar:ActivatedRoute) { 
+   			 ar.params.subscribe((dt:any)=>alert(dt.x))
+  		}
+
+
+
+
+
+	
+	
+Router Guard : 
+	using this concept we can allow or restrict to access the components from users. 
+	If you want to provide access to only authenticated users we can use this concept.
+
+	Angular is providing CanActivate Interface available in @angular/router package to work with guard
+	we need to return a value from this if it is true it allows access of component otherwise it restricts access.
+	
+	CanActivate is providing canActivate abstract function from this function we need to return true/false
+	
+	ng g guard myauth
+	CanActivate 
+	CanActivateChild 
+	CanDeactivate - when from open component to  - confirm('want to leave page without saving form')
+	CanLoad
+	
+	const routes: Routes = [
+	  {path:"c1path",component:C1Component},
+	  {path:"c2path",component:C2Component,canActivate:[AuthGuard]}
+	];
+	ng generate guard auth
+		src\app\auth.guard.ts
+			@Injectable({
+			  providedIn: 'root'
+			})
+			export class AuthGuard implements CanActivate {
+			  canActivate(
+			    route: ActivatedRouteSnapshot,
+			    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+			    return false;
+			  }
+			}
+	
+	Class-based Route guards are deprecated in favor of functional guards. 
+	An injectable class can be used as a functional guard using the inject function: canActivate: [() => inject(myGuard).canActivate()].
+	@see — CanActivateFn
+
+
+
+
+  canDeactivate(component: AboutComponent) {
+    if (JSON.stringify(component.obj) != JSON.stringify(component.obj1)) {
+      var conf = confirm(
+        'You want to leave page with out saving modifications'
+      );
+      if (conf) return true;
+      else return false;
+    } else return true;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+Routing
+	<router-outlet></router-outlet>
+	 
+	const appRoutes: Routes = [
+  		{ path: '', component: HomeComponent },
+  		{ path: 'users', component: UsersComponent },
+  		{ path: 'servers', component: ServersComponent }
+      ];
+    @NgModule({
+  		imports: [
+    		.
+    		 RouterModule.forRoot(appRoutes)
+  		],
+	})
+	export class AppModule { }
+	 
+	 
+	 
+Navigating with Router Links
+
+	The following will reload the page and is not recommended to do in angular
+	<ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
+        <li role="presentation"><a href="/servers">Servers</a></li>
+        <li role="presentation"><a href="/users">Users</a></li>
+      </ul>
+      
+    Using routerLink:
+    It does not reload the page.
+    It does not restart the app & keep app state.
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a routerLink="/">Home</a></li>
+        <li role="presentation"><a routerLink="/servers">Servers</a></li>
+        <li role="presentation"><a [routerLink]="['/users']">Users</a></li>
+    </ul> 
+       
+      
+Understanding Navigation paths
+	We may give absolute and relative path both.
+	
+	
+	
+Styling Active Router Links
+	<ul class="nav nav-tabs">
+        <li role="presentation"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/">Home</a>
+        </li>
+        <li role="presentation"
+            routerLinkActive="active">
+          <a routerLink="servers">Servers</a>
+        </li>
+        <li role="presentation"
+            routerLinkActive="active">
+          <a [routerLink]="['users']">Users</a>
+        </li>
+      </ul>
+      
+      
+Navigating Programatically
+	button (click)="loadServerPage()">Load Server</button>
+	constructor(private router: Router) { }
+    loadServerPage() {
+  	  this.router.navigate(['/servers']);
+  	}
+
+Using Relative paths in Programmatic Navigation
+	 <button (click)="onReload()">Reload Servers</button>
+	 export class ServersComponent implements OnInit {
+	 	constructor(private router: Router,
+              private activatedRoute: ActivatedRoute) {
+  		}
+  		onReload() {
+    		// this.router.navigate(['servers'], {relativeTo: this.activatedRoute});
+  		}
+	}
+	
+	
+Passing Parameters to Routes
+	 { path: 'user/:id', component: UserComponent },
+	 
+	 
+Fetching Route Parameters 
+	{ path: 'user/:id/:name', component: UserComponent },
+	export class UserComponent implements OnInit {
+  		user: {id: number, name: string};
+  		constructor( private activatedRoute: ActivatedRoute) { }
+  		ngOnInit() {
+    		this.user = {
+      				id: this.activatedRoute.snapshot.params['id'],
+      				name: this.activatedRoute.snapshot.params['name']
+    				};
+  		}
+	}
+	<p>User with ID {{user.id}} loaded.</p>
+	<p>User name is  {{user.name}}</p>
+	
+
+Fetching Route Parameters Reactively
+	this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.user.id = params['id'];
+        this.user.name = params['name'];
+      }
+    );
+  
+    
+A note on Route Observable
+import {Subscription} from 'rxjs';
+export class UserComponent implements OnInit,OnDestroy {
+  user: {id: number, name: string};
+  paramSubscription:Subscription;
+  constructor( private activatedRoute: ActivatedRoute) { }
+  ngOnInit() {
+    this.user = {
+      id: this.activatedRoute.snapshot.params['id'],
+      name: this.activatedRoute.snapshot.params['name']
+    };
+    this.paramSubscription = this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.user.id = params['id'];
+        this.user.name = params['name'];
+      }
+    );
+  }
+  ngOnDestroy() {
+    this.paramSubscription.unsubscribe();
+  }
+}
+
+	 
+	 
+	 
+Passing Query Parameters and Fragments
+	{ path: 'servers/:id/edit', component: EditServerComponent }
+	<a
+        [routerLink]="['/servers',5,'edit']"
+        href=""
+        *ngFor="let server of servers">
+        {{ server.name }}
+      </a>
+      http://localhost:4200/servers/5/edit
+      
+      <a
+        [routerLink]="['/servers',5,'edit']"
+        [queryParams]="{allowEdit:1}"
+        href=""
+        *ngFor="let server of servers">
+        {{ server.name }}
+      </a>
+      http://localhost:4200/servers/5/edit?allowEdit=1
+      
+      <a
+        [routerLink]="['/servers',5,'edit']"
+        [queryParams]="{allowEdit:1}"
+        fragment="loading"
+        href=""
+        *ngFor="let server of servers">
+        {{ server.name }}
+      </a>
+      http://localhost:4200/servers/5/edit?allowEdit=1#loading
+      
+      
+      <button (click)="loadServerPage(1)">Load Server1</button>
+      loadServerPage(id: number) {
+   		 this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
+  	  }
+  	  http://localhost:4200/servers/1/edit?allowEdit=1#loading
+  	  
+  	  
+Retrieving Query Parameters and Fragments
+	console.log(this.activateRoute.snapshot.queryParams);
+    console.log(this.activateRoute.snapshot.fragment);
+    this.activateRoute.queryParams.subscribe();
+    this.activateRoute.fragment.subscribe();	  
+    
+    <a
+        [routerLink]="['/users',user.id,user.name]"
+        href="#"
+        class="list-group-item"
+        *ngFor="let user of users">
+        {{ user.name }}
+      </a>
+      
+      
+    <a
+        [routerLink]="['/servers',server.id]"
+        [queryParams]="{allowEdit:1}"
+        fragments="loading"
+        href=""
+        class="list-group-item"
+        *ngFor="let server of servers">
+        {{ server.name }}
+      </a>  
+    ngOnInit() {
+    const id = +this.activateRoute.snapshot.params['id'];
+    this.server = this.serversService.getServer(id);
+    this.activateRoute.params.subscribe((params: Params) => {
+      this.server = this.serversService.getServer(+params['id']);
+    });
+    
+    
+    
+    
+Setting up CHild(Nested) Routes
+	{ path: 'servers', component: ServersComponent , children : [
+      { path: ':id', component: ServerComponent },
+      { path: ':id/edit', component: EditServerComponent }
+    ]}
+    
+     <!-- 
+        <app-edit-server></app-edit-server>
+    	<app-server></app-server>
+      -->
+    <router-outlet></router-outlet>
+    
+    
+    
+Using Query Parameters-Practice
+	button class="btn btn-primary" (click)="editServer()">Edit Server</button>
+	editServer() {
+   		 //this.router.navigate(['/servers', this.server.id, 'edit']);
+    	this.router.navigate([ 'edit'],{relativeTo: this.activateRoute });
+  	}
+  	
+  	this.activateRoute.queryParams.subscribe((queryParams: Params) => {
+       this.allowEdit = queryParams['allowEdit'] === '1' ? true: false;
+     });
+    <h4 *ngIf="!allowEdit">You are not allowed to Edit</h4>
+    
+    
+Configuring the Handling of Query Parameters
+	    this.router.navigate([ 'edit'],{relativeTo: this.activateRoute , queryParamsHandling: 'preserve'});
+	
+	
+Redirecting & Wildcard routes
+	 path: 'not-found', component: PageNotFoundComponent },
+  { path: 'something', redirectTo: '/not-found' },
+  { path: '**', redirectTo: '/not-found' }
+  
+  
+Important: Redirection Path Matching
+	In our example, we didn't encounter any issues when we tried to redirect the user. But that's not always the case when adding redirections.
+	By default, Angular matches paths by prefix. That means, that the following route will match both /recipes  and just / 
+		{ path: '', redirectTo: '/somewhere-else' } 
+	Actually, Angular will give you an error here, because that's a common gotcha: This route will now ALWAYS redirect you! Why?
+	Since the default matching strategy is "prefix" , Angular checks if the path you entered in the URL does start with the path specified in the route. Of course every path starts with ''  (Important: That's no whitespace, it's simply "nothing").
+	To fix this behavior, you need to change the matching strategy to "full" :
+		{ path: '', redirectTo: '/somewhere-else', pathMatch: 'full' } 
+	Now, you only get redirected, if the full path is ''  (so only if you got NO other content in your path in this example).
+
+	
+Outsourcing the Route Configuration
+	app-routing.module.ts	
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'users', component: UsersComponent, children: [
+    { path: ':id/:name', component: UserComponent }
+  ] },
+];
+@NgModule({
+  imports: [
+    // RouterModule.forRoot(appRoutes, {useHash: true})
+    RouterModule.forRoot(appRoutes)
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}
+		
+		
+		
+An Introduction to Guards
+	{ path: 'servers', 
+			//canActivate: [AuthGuard]
+			canActivateChild: [AuthGuard]
+		, component: ServersComponent , children : [
+      { path: ':id', component: ServerComponent },
+      { path: ':id/edit', component: EditServerComponent }
+    ]},
+    providers: [ServersService, AuthService,AuthGuard],
+    
+    auth.service.ts
+    export class AuthService {
+  		loggedIn = false;
+		isAuthenticated() {
+    		const promise = new Promise(
+      			(resolve, reject) => {
+        			setTimeout(() => {
+          				resolve(this.loggedIn);
+        			}, 800);
+      			}
+    		);
+    	return promise;
+  		}
+		login() {
+    		this.loggedIn = true;
+  		}
+		logout() {
+    		this.loggedIn = false;
+  		}
+    }
+    
+    auth-guard.service.ts
+    @Injectable()
+	export class AuthGuard implements CanActivate, CanActivateChild {
+  		constructor(private authService: AuthService, private router: Router) {}
+
+  		canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    			return this.authService.isAuthenticated()
+      				.then(
+        				(authenticated: boolean) => {
+       					   if (authenticated) {
+        				    return true;
+        				   } else {
+        					    this.router.navigate(['/']);
+          					}
+        				}
+      				);
+  		}
+
+  		canActivateChild(route: ActivatedRouteSnapshot,
+                   state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    				return this.canActivate(route, state);
+  		}
+	}
+    
+    
+Controlling Navigation with canDeactivate
+  { path: 'servers', canActivateChild: [AuthGuard], component: ServersComponent , children : [
+      { path: ':id', component: ServerComponent },
+      { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard] }
+  ]},
+
+  can-deactivate-guard.service.ts
+  	export interface CanComponentDeactivate {
+  		canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+	}
+	export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+	  canDeactivate(component: CanComponentDeactivate,
+                currentRoute: ActivatedRouteSnapshot,
+                currentState: RouterStateSnapshot,
+                nextState?: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    		return component.canDeactivate();
+  		}
+	}
+
+	canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    	if (!this.allowEdit) {
+      		return true;
+    	}
+    	if ((this.serverName !== this.server.name || this.serverStatus !== this.server.status) && !this.changesSaved) {
+      		return confirm('Do you want to discard the changes?');
+    	} else {
+    	  return true;
+    	}
+  	}
+  	
+  	
+Passing static data to a Route
+	  { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page Not Found'} },
+	  export class ErrorPageComponent implements OnInit {
+  		errorMessage:string;
+  		constructor(private activateRoute:ActivatedRoute) { }
+
+		ngOnInit(): void {
+    		this.errorMessage= this.activateRoute.snapshot.data['message'];
+  		}
+	  }
+	  
+
+
+
+
+
+
+Resolving dynamic data with the Resolve guard
+	{ path: 'servers',  component: ServersComponent , children : [
+      { path: ':id', component: ServerComponent, resolve: {server0 : ServerResolver} },
+      { path: ':id/edit', component: EditServerComponent}
+    ]},
+	server-resolver.service.ts
+	interface Server {
+  		id: number;
+  		name: string;
+  		status: string;
+	}
+	@Injectable()
+	export class ServerResolver implements Resolve<Server> {
+	  constructor(private serversService: ServersService) {}
+	  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Server> | Promise<Server> | Server {
+	    return this.serversService.getServer(+route.params['id']);
+	  }
+	}
+	
+	
+	export class ServerComponent implements OnInit {
+  		server: {id: number, name: string, status: string};
+		constructor(private serversService: ServersService, private activateRoute: ActivatedRoute, private router: Router) { }
+  		ngOnInit() {
+    		this.activateRoute.data.subscribe((data: Data)=> { this.server = data['server0'];});
+		}
+	}
+
+
+
+
+
+
+Understanding Location Strategies
+    	 RouterModule.forRoot(appRoutes, {useHash: true})
+    	//RouterModule.forRoot(appRoutes)
+	
+	
+Introduction to Routing
+1)URL based routing
+2)Component based routing	
+    

@@ -1,0 +1,35 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Download Open JDK
+	https://jdk.java.net/21/
+
+https://docs.oracle.com/javase/8/docs/technotes/guides/collections/changes8.html
+
+
+
+
+
+Resources
+	https://www.java67.com/2018/02/10-books-java-developers-should-read-in.html
+	https://javarevisited.blogspot.com/2017/12/10-things-java-programmers-should-learn.html#axzz7SVpYcDpl
+	https://javarevisited.blogspot.com/2018/09/the-2018-devops-roadmap-your-guide-to-become-DevOps-Engineer.html#axzz7SVpYcDpl
+	https://javarevisited.blogspot.com/2018/04/top-5-spring-cloud-courses-for-java.html#axzz7SVpYcDpl
+	https://javarevisited.blogspot.com/2019/10/the-java-developer-roadmap.html#axzz7cex6gtRM
+	http://durgajobs.com/onlineexams/DisplayTopics.php?sub_id=1
+	
+	
+	
+	https://stackoverflow.com/questions/4732544/why-are-only-final-variables-accessible-in-anonymous-class
+		https://en.wikipedia.org/wiki/Closure_(computer_programming)

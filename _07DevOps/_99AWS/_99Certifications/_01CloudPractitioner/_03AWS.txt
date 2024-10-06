@@ -1,0 +1,130 @@
+AWS Cloud History
+	2002: Internally launched
+	2003: Amazon infrastructure is one of their core strength.
+			  Idea to market
+	2004:Launched publicly with SQS
+	2006:Re-launched publicly with SQS, S3 & EC2
+	2007:Launched in Europe
+	Dropbox, Netflix, Nasa, Airbnb, Macdonald, Activision, 21stCenturyFox
+	
+	AWS Cloud Number Facts 
+		In 2019, AWS had $35.02 billion in annual revenue
+			AWS accounts for 47% of the market in 2019 (Microsoft Azure is 2nd with 22%)
+		Pioneer and Leader of the AWS Cloud Market for the 9th consecutive year
+		Over 1,000,000 active users
+
+
+AWS Cloud Use Cases
+	AWS enables you to build sophisticated, scalable applications
+	Applicable to a diverse set of industries
+	Use cases include
+		Enterprise IT, Backup & Storage, Big Data analytics
+		Website hosting, Mobile & Social Apps
+		Gaming
+	
+	
+AWS Global Infrastructure 
+	AWS Regions 
+		AWS Availability Zones 
+			AWS Data Centers 
+	AWS Edge Locations /Points of Presence
+	https://infrastructure.aws/
+	
+	AWS Regions 
+		A region is a cluster of data centers 
+		AWS has Regions all around the world 
+		Names can be us-east-1, eu-west-3� 
+		Most AWS services are region-scoped
+			
+		How to choose an AWS Region?
+			1)Compliance with data governance and legal requirements
+				data never leaves a region without your explicit permission
+			2)Proximity to customers: 
+				reduced latency
+			3)Available services within a Region: 
+				new services and new features aren't available in every Region
+			4)Pricing: 
+				pricing varies region to region and is transparent in the service pricing page
+	
+	AWS Availability Zones
+		This Global Infrastructure identity is composed of one or more discrete data centers 
+			with redundant power, networking, and connectivity, and are used to deploy infrastructure.
+		Each region has many availability zones (usually 3, min is 3, max is 6). Example:
+			ap-southeast-2a
+			ap-southeast-2b
+			ap-southeast-2c
+		Each availability zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity
+		They are separate from each other, so that they are isolated from disasters
+		They are connected with high bandwidth, ultra-low latency networking
+		
+	
+	AWS Points of Presence (Edge Locations)
+		Amazon has 400+ Points of Presence (400+ Edge Locations & 10+ Regional Caches) in 90+ cities across 40+ countries.
+		Content is delivered to end users with lower latency
+
+     AWS in INDIA
+		Asia Pacific (Mumbai) Region, Availability Zones: 3, Launched 2016
+		AWS Asia Pacific (Hyderabad) Region, Availability Zones: 3, Launched 2022
+		Edge locations - Bangalore, India; 
+								  Chennai, India; 
+								  Hyderabad, India; 
+								  Kolkata, India; 
+								  Mumbai, India; 
+								  New Delhi, India; 
+								  Pune, India; 
+		Regional Edge Caches - Mumbai, India; 
+
+Tour of the AWS Console
+	AWS has Global Services:
+		Identity and Access Management (IAM)
+		Route 53 (DNS service)
+		CloudFront (Content Delivery Network)
+		WAF (Web Application Firewall)
+	Most AWS services are Region-scoped:
+		Amazon EC2 (Infrastructure as a Service)
+		Elastic Beanstalk (Platform as a Service)
+		Lambda (Function as a Service)
+		Rekognition (Software as a Service)
+		List of AWS Services Available by Region
+			https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services
+
+
+Shared Responsibility Model
+	CUSTOMER = RESPONSIBILITY FOR THE SECURITY IN THE CLOUD
+			Customer Data
+			Platform, Applications, IAM
+			OS,	Network & Firewall Configuration
+			Client-side data, Encryption & Data Integrity, Authentication
+				Service Side Encryption(File System and /or data)
+				Networking traffic protection(Encryption,Integrity, Identity)
+	AWS = RESPONSIBILITY FOR THE SECURITY OF THE CLOUD
+			Software
+			Compute			Storage	Database		Networking
+			Hardware/AWS global Infrastructure
+			Regions		AWS availability zones		Edge locations
+	https://aws.amazon.com/compliance/shared-responsibility-model/
+
+
+AWS Acceptable Use Policy 
+	https://aws.amazon.com/aup/ 
+	No Illegal, Harmful, or Offensive Use or Content 
+	No Security Violations 
+	No Network Abuse 
+	No E-Mail or Other Message Abuse
+
+
+Q)Which Global Infrastructure identity is composed of one or more discrete data centers with redundant power, networking, and connectivity, and are used to deploy infrastructure?
+A)Availability ZOnes
+
+
+
+AWS Budget
+	Root User>Account> IAM user and role access to Billing information> IAM user/role access to billing information
+	User with Administrative access
+		Top right corner > Billing & cost management>
+			Bills
+			Free-tier
+			Budget>Create Budget>
+
+
+

@@ -1,0 +1,137 @@
+Abstract Factory Pattern
+	Factory of factories
+
+Example
+public class AbstractFactoryDesinPattern {
+
+	public static void main(String[] args) {
+		X factory = AbstractFactory.getFactory("BANK");
+		System.out.println(factory);
+		Bank bank = factory.getBank("H");
+		System.out.println(bank);
+
+		X factory2 = AbstractFactory.getFactory("LOAN");
+		System.out.println(factory2);
+		Loan loan = factory2.getLoan("C");
+		System.out.println(loan);
+	}
+}
+
+class AbstractFactory {
+	public static X getFactory(String str) {
+		switch (str) {
+		case "BANK":
+			return new BankFactory();
+		case "LOAN":
+			return new LoanFactory();
+		}
+		return null;
+	}
+
+}
+
+interface X {
+	public Bank getBank(String bankName);
+
+	public Loan getLoan(String loanName);
+}
+
+class LoanFactory implements X {
+	public Loan getLoan(String loanName) {
+		switch (loanName) {
+		case "H":
+			return new HomeLoan();
+		case "C":
+			return new CarLoan();
+		}
+		return null;
+	}
+
+	@Override
+	public Bank getBank(String bankName) {
+		return null;
+	}
+}
+
+interface Loan {
+
+}
+
+class HomeLoan implements Loan {
+
+}
+
+class CarLoan implements Loan {
+
+}
+
+class BankFactory implements X {
+	public Bank getBank(String bankName) {
+		switch (bankName) {
+		case "H":
+			return new HDFC();
+		case "I":
+			return new ICICI();
+		}
+		return null;
+	}
+
+	@Override
+	public Loan getLoan(String loanName) {
+		return null;
+	}
+}
+
+interface Bank {
+
+}
+
+class HDFC implements Bank {
+
+}
+
+class ICICI implements Bank {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+Abstract Factory patterns work around a super-factory which creates other factories. 
+	This factory is also called as factory of factories. This type of design pattern comes under 	
+	creational pattern as this pattern provides one of the best ways to create an object.
+
+In Abstract Factory pattern an interface is responsible for creating a factory of related objects without explicitly specifying their classes. 
+	Each generated factory can give the objects as per the Factory pattern.
+
+Abstract Factory Pattern says that just define an interface or abstract class for creating families of related (or dependent) objects 
+	but without specifying their concrete sub-classes.That means Abstract Factory lets, a class returns a factory of classes. 
+	So, this is the reason that Abstract Factory Pattern is one level higher than the Factory Pattern.
+ 
+An "Abstract Factory Pattern" is also known as "Kit of Factory Method Pattern".
+
+Advantage of Abstract Factory Pattern
+Abstract Factory Pattern isolates the client code from concrete (implementation) classes.
+It eases the exchanging of object families.
+It promotes consistency among objects.
+
+Usage of Abstract Factory Pattern
+When the system needs to be independent of how its object are created, composed, and represented.
+When the family of related objects has to be used together, then this constraint needs to be enforced.
+When you want to provide a library of objects that does not show implementations and only reveals interfaces.
+When the system needs to be configured with one of a multiple family of objects.
+
+UML for Abstract Factory Pattern	
+	UML_AbstractFactory.JPG
+	
+A Real World Example of Abstract Factory Pattern
+Example: AbstractFactoryPatternDemo.java
+	
+	

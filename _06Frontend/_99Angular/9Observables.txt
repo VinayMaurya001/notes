@@ -1,0 +1,114 @@
+Observable
+	Various data sources
+	(User Input) Events, Http Requests,Triggered in code....
+	
+	Observable Pattern (To handle Asynchrnous task)
+		Observable
+		Observer
+			We write the code which gets executed!
+				Handle Data, Handle Error, Handle Completion
+				
+				
+Install RxJS
+	npm install --save rxjs@6
+	rxjs-compat package:
+		npm install --save rxjs-compat
+		
+Analyzing Angular Observable
+
+
+Getting closer to the core of Observable
+ ngOnInit() {
+     this.firstObsSubscription = interval(1000).subscribe(count => {
+       console.log(count);
+     });
+  }
+  
+  ngOnDestroy(): void {
+    this.firstObsSubscription.unsubscribe();
+  }
+  
+  
+Building a custom Observable
+	const customIntervalObservable = Observable.create(observer => {
+      let count = 0;
+      setInterval(() => {
+        observer.next(count);
+        if (count === 5) {
+          observer.complete();
+        } 
+        if (count > 3) {
+          observer.error(new Error('Count is greater 3!'));
+        }
+        count++;
+      }, 1000);
+    });
+    
+    this.firstObsSubscription=customIntervalObservable.subscribe(
+    	data => {console.log(data);},
+    	error=> {console.log(error); alert(error.message);}
+    	() => { console.log('Completed!');
+    }
+     });
+     
+     
+     
+Understanding Operators
+	this.firstObsSubscription = customIntervalObservable.pipe(
+        filter(data => {return data > 0;}),
+        map(     (data: number) => {   return 'Round: ' + (data + 1);} )
+    ).subscribe(
+       data => {console.log(data);}, 
+        error => {console.log(error);alert(error.message);}, 
+        () => {   console.log('Completed!');}
+    );
+    
+    
+    
+    
+Without Subjects
+	<button class="btn btn-primary" (click)="onActivate()">Activate</button>
+	onActivate() {
+    	this.userService.activatedEmitter.emit(true);
+  	}
+	@Injectable({providedIn: 'root'})
+	export class UserService {
+  		activatedEmitter = new EventEmitter<boolean>();
+	}
+
+	ngOnInit() {
+    	this.activatedSub = this.userService.activatedEmitter.subscribe(didActivate => {
+      		this.userActivated = didActivate;
+    	});
+  	}
+  	ngOnDestroy(): void {
+    	this.activatedSub.unsubscribe();
+    }
+  
+	<p *ngIf="userActivated">Activated!</p>
+	
+
+With Subjects	
+	<button class="btn btn-primary" (click)="onActivate()">Activate</button>
+	onActivate() {
+    	this.userService.activatedEmitter.next(true);
+  	}
+	@Injectable({providedIn: 'root'})
+	export class UserService {
+  		activatedEmitter = new Subject<boolean>();
+	}
+
+	
+	
+Observable vs Subject
+Observable is passive
+	Example wraps, callback,event....
+Subject is Active
+	Can be triggered from code
+
+     
+     
+Useful Resources & Links
+Official Docs: https://rxjs-dev.firebaseapp.com/
+RxJS Series: https://academind.com/learn/javascript/understanding-rxjs/
+Updating to RxJS 6: https://academind.com/learn/javascript/rxjs-6-what-changed/

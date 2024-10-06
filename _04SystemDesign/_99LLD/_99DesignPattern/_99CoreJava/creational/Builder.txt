@@ -1,0 +1,18 @@
+Create object step by step
+allows for the step-by-step creation of complex objects using the correct sequence of actions. The construction is controlled by a director object that only needs to know the type of object it is to create.
+
+Builder
+Director
+
+Advantages
+Undoubtedly, the number of lines of code increases at least to double in the builder pattern, but the effort pays off in terms of design flexibility and much more readable code.
+
+The parameters to the constructor are reduced and are provided in highly readable chained method calls. This way there is no need to pass in null for optional parameters to the constructor while creating the instance of a class.
+
+Another advantage is that an instance is always instantiated in a complete state rather than sitting in an incomplete state until the developer calls (if ever calls) the appropriate “setter” method to set additional fields.
+
+And finally, we can build immutable objects without much complex logic in the object building process.
+
+
+https://www.journaldev.com/1425/builder-design-pattern-in-java
+https://www.journaldev.com/1432/java-immutable-class-builder

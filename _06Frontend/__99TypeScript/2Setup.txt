@@ -1,0 +1,128 @@
+Setting up TypeScript
+1)Installing NodeJS with NPM
+	Nodejs is server side script. 	
+		https://nodejs.org/en/
+		After installation of nodejs we can get node server and npm program
+			node server :  To run nodejs script
+					node -v
+					node --version
+			npm program : It stands for Node package manager. It is a program to download the required packages from node repository.
+						  After installation of nodejs we can get npm program.
+						  C:\Users\java\AppData\Roaming\npm\tsc
+					npm -v
+					npm -version
+					npm --version
+					
+					npm i npm to update
+					npm install latest-version
+					
+					
+					C:\Users\java\AppData\Roaming\npm
+2)Installing the TypeScript compiler
+	We can download typescript from external repositories (node repo, yarn repo,....)
+		Repository : It is a location providing collection of packages of different technologies. (Angular, Typescript,React,...)
+		Node repository is a location to download the packages of Angular,typescript etc.
+	
+	https://www.npmjs.com/package/typescript
+	https://www.npmjs.com/products
+	https://www.typescriptlang.org/
+	npm install typescript -G //install globally
+		npm install typescript -g  //for global location
+		npm install typescript --location=global  //for global location  
+ 		%appdata/%  C:\Users\java\AppData\Roaming
+ 
+	npm install -g typescript   | sudo npm install -g typescript
+		tsc -v
+		tsc -version
+		tsc --version
+		tsc <fileName>
+		npm view typescript version  // prints the latest available version in the npm registry
+		
+	tsc -v
+		tsc : File D:\tools\node-v14.17.3-win-x64\tsc.ps1 cannot be loaded because running scripts is    
+		disabled on this system. For more information, see about_Execution_Policies at 
+		https:/go.microsoft.com/fwlink/?LinkID=135170.
+	    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+	    + FullyQualifiedErrorId : UnauthorizedAccess
+	https:/go.microsoft.com/fwlink/?LinkID=135170
+	
+
+	The execution policy isn't a security system that restricts user actions. 
+	For example, users can easily bypass a policy by typing the script contents at the command line when they cannot run a script. 
+	Instead, the execution policy helps users to set basic rules and prevents them from violating them unintentionally.
+
+	Power shell- run as administrator
+	   Get-ExecutionPolicy -List
+ 	   Set-ExecutionPolicy -ExecutionPolicy Restricted -Scope LocalMachine*
+ 	   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+	tsc-v
+
+3)npm init
+    Create package.json with default configuration
+  
+4)For running in lite-server
+  Inside package.json
+  	  "scripts": {    "start": "lite-server"},
+	  "devDependencies": {	"lite-server": "^2.6.1" }
+  npm install --save-dev lite-server	
+  	--save-dev marked it is development only dependency 
+  npm install
+  npm run
+  npm start
+  	short form for npm run start
+  
+  http://localhost:3000/
+  
+  
+  What is package lock json and package json?
+		package-lock. json is automatically generated for any operations where npm modifies either the node_modules tree, or package. json . 
+		It describes the exact tree that was generated, such that subsequent installs are able to generate identical trees, 
+			regardless of intermediate dependency updates.
+			
+5) 
+  bs-config.json
+  	{
+    	 "port": 3000,
+    	 "server": {
+    	   	 "baseDir": "./  
+    	   //"baseDir": "C:/Users/java/Downloads/first-project/"
+	      }
+     } 		
+		
+6)IDE: Visual Studio Code
+	Extensions:
+		Path Intellisense-autocompletes filenames (like when use import)
+		ESLint-Code Quality Check Support	
+			npm install -g eslint 	
+		Prettier:Code Formatter
+		Color Theme-
+		Material Icon Theme
+
+	Setting
+		color theme- preinstalled themes
+		file icon theme-Seti
+		setting
+			default formatter
+			format on save
+			auto save
+			tab size -2
+			
+
+	Microsoft Visual Studio Code : It is an open source IDE to work with Angular,react,node ,....
+			For CodeFormat
+					ctrl+K+F
+
+			Add extention 
+				Angular Snippets (Version 13)
+7)
+<script src="js-only.js" defer></script>
+  The defer attribute is a boolean attribute. 
+  	If the defer attribute is set, it specifies that the script is downloaded in parallel to parsing the page, 
+  	and executed after the page has finished parsing. 
+  	Note: The defer attribute is only for external scripts (should only be used if the src attribute is present).
+
+
+8)
+Babel JavaScript compiler
+
+//   "start": "ng serve --proxy-config proxy.conf.json",

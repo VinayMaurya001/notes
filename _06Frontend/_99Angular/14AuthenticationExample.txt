@@ -1,0 +1,68 @@
+
+
+ {path:"home",component:HomeComponent},
+  {path:"login/:path",component:LoginComponent},
+  {path:"logout",component:LogoutComponent},
+  {path:"inbox",component:InboxComponent,canActivate:[AuthGuard]},
+  
+  
+export class LoggedinService {
+  loggedInUser: boolean = false;
+  constructor() {
+    if (localStorage.getItem('auth')) {
+      this.loggedInUser = true;
+    }
+  }
+}
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
+    var urlPath = route.routeConfig?.path;
+    if (this.loggedinService.loggedInUser) {
+      return true;
+    }else {
+      this.router.navigate(['./login', urlPath]);
+      return false;
+    }
+  }
+}
+
+export class LoginComponent implements OnInit {
+  txtUname: string = '';
+  txtPwd: string = '';
+  currentpath: any;
+  constructor(
+    private ar: ActivatedRoute,
+    private rt: Router,
+    private ser: LoggedinService
+  ) {
+    ar.params.subscribe((dt: any) => {
+      this.currentpath = dt.path;
+    });
+  }
+  funLogin() {
+    if (this.txtUname == 'scott' && this.txtPwd == 'scott123') {
+      localStorage.setItem('auth', '1');
+      this.ser.loggedInUser = true;
+      this.rt.navigateByUrl(this.currentpath);
+    } else {
+      alert('Invalid user');
+    }
+  }
+  ngOnInit(): void {}
+}
+
+
+export class LogoutComponent implements OnInit {
+  constructor(private ser: LoggedinService, private rt: Router) {
+    localStorage.clear();
+    this.ser.loggedInUser = false;
+    this.rt.navigate(['login', 'home']);
+  }
+  ngOnInit(): void {
+   
+  }
+}
+ 
+
+  

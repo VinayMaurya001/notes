@@ -1,0 +1,61 @@
+ng g module : using this command we can create new modules in angular project.
+					@NgModule({
+				  declarations: [],
+				  imports: [
+				    AdminRoutingModule //Manually we need to create
+				  ]
+				})
+				export class AdminModule { }
+
+
+loadChildren() : To provide routing path to module
+			app works
+					<a routerLink="admin">OpenAdmin</a>
+					<a routerLink="user">Open user</a>
+					<router-outlet></router-outlet>
+					
+			<p>adminhomepage works!</p>
+					<a routerLink="a1path">A1 component</a>
+					<a routerLink="a2path">A2 component</a>
+					<a routerLink="u1">U1 component</a>
+					<router-outlet></router-outlet>
+					
+			 { path: 'admin', loadChildren: () => AdminModule },
+			  {
+			    path: 'user',
+			    loadChildren: () =>    import('./user/user.module').then((us) => us.UserModule),
+			  },
+			  export class AppRoutingModule {}
+			  
+RouterModule.forChild() : To load a module as child module of root module
+			const routes: Routes = [
+					  {
+					    path: '', component: AdminhomepageComponent,
+					    children: [
+					      { path: '', component: A1Component },
+					      { path: 'a2path', component: A2Component },
+					      { path: 'u1', component: U1Component },
+					    ],
+					  },
+					];
+			@NgModule({
+			 	 imports: [RouterModule.forChild(routes)],
+			  	exports: [RouterModule],
+			})
+			export class AdminRoutingModule {}
+
+			@NgModule({
+  					imports: [ AdminRoutingModule],
+			})
+			export class AdminModule {}
+
+
+
+
+
+lazy loading : It is a concept of loading the module based on the demand of user. if the module 
+contains more components with huge code we dont load that module at the time of application loading, we
+can load it on demand of user. In this case we can use this concept.
+
+canLoad is an interface we can use to load/stop loading the module. This interface provides canLoad abstract
+function from this function we can return true/false.

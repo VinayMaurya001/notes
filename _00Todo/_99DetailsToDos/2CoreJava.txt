@@ -1,0 +1,57 @@
+Core Java
+	Regular Expressions, concurrency, Lambdas, Reactive, Exception handling
+	
+	Multi-threading	
+	Collections including Concurrent
+		Hashmap_ConcurrentHashMap_HashTable_SetInternalWorking
+		for-eachmethod
+		HashMap-Internal Working
+			get working
+			put working
+			8, 9 changes
+			
+	Java9_Java10_Java11_Java12
+	JVM internal
+	GC
+	Generice_enum wxample in projects
+	Multithreading
+	Books
+	Java profiling and Tuning (Class Lloading, Memory Management and Garbage Collection)
+	Important classes
+		System
+		Math
+		Runtime
+		SecurityManager
+		StringUtils.isEmpty
+	https://javahungry.blogspot.com
+		JVM internal 
+		Class loaders
+			Delegation model
+	Security Manager
+	Wrapper Classe: BigInteger, BigDecimal
+	Design pattern
+
+
+https://stackoverflow.com/questions/20491879/role-of-multithreading-in-web-application
+
+
+https://stackify.com/best-practices-exceptions-java/
+https://howtodoinjava.com/java/io/how-to-create-password-protected-zip-files-in-java/
+Core Java_Java8_Java9_Java10_Java11_Java12
+https://www.webucator.com/how-to/how-create-jar-file-java.cfm
+https://www.youtube.com/watch?v=hTJ3xNZwieM
+
+maa:
+	https://base64.guru/converter/decode/pdf
+	https://base64.guru/converter/decode/pdf
+	https://dzone.com/articles/create-your-own-constraint-with-bean-validation-20
+	jar that can be deployed independentaly
+PowerMock internal working
+
+
+Understanding of Java internals:
+	Target collaborator description:
+* Java internals and JVM internals
+* Java Instrumentation or other instrumentation
+* native software engineering or java software engineering
+* program analysis techniques like taint checking

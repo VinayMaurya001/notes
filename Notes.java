@@ -7,16 +7,17 @@ import java.util.stream.IntStream;
 
 public class Notes {
 
-	private static final String BASE_PATH = "C:\\workspace\\github\\";
+	private static final String BASE_PATH = "D:\\workspace\\github\\";
 
-	private static final String REPO_NAME = "notes";
+	private static final String REPO_NAME = "notes2";
 
 	private static final String PREFIX = "<a target='_blank' href=\"https://raw.githubusercontent.com/VinayMaurya001/"
 			+ REPO_NAME + "/master/";
 	private static final String SUFFIX = "</a>";
 	private static final String SPACES = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 
-	private static final String FILENAME = REPO_NAME + ".html";
+	private static final String PATH = "D:\\workspace\\github\\notes2\\_09Projects\\_99Notes\\";
+	private static final String FILENAME = PATH + REPO_NAME + ".html";
 
 	static String path = "";
 

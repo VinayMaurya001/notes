@@ -1,0 +1,96 @@
+Revision
+
+di in angular
+why nginit if we have construcotr
+other webhooks
+
+ways to pass data b/w components
+intercepters
+reactive forms
+authorizationroute
+
+
+
+Getting Started
+The Basics
+Component & Databinding
+Directives
+Service & dependency injection
+Routing
+Observables
+Forms
+Pipes
+Http
+Authentication
+Optimizations & ngModules
+Deployment
+Animation & Testing
+
+
+
+
+
+
+
+
+
+Next Step
+	Testing in Angular
+		Jasmine for Unit testing
+		End to End testing unsing Protractor
+	RxJS
+	State Management
+		NgRx
+
+
+Resources
+	https://angular.io/start
+	Udemy
+		https://www.udemy.com/course/the-complete-guide-to-angular-2/
+	Online Learning Community
+		https://academind.com/community
+	Certification
+		https://angulartraining.teachable.com/courses
+		https://www.angulartraining.com/angular-certification.html
+		
+	
+Angular Offical Resources
+	Explore the docs
+		https://angular.dev/
+	Learn with tutorials
+		https://angular.dev/tutorials
+	CLI docs
+		https://angular.dev/tools/cli
+	Angular Language Service
+		https://angular.dev/tools/language-service
+	Angular dev tools
+		https://angular.dev/tools/devtools
+	Youtube:Angular
+		https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw
+	Githib
+		https://github.com/angular/angular
+		
+Angular CLI
+	documentation: https://github.com/angular/angular-cli/wiki
+
+Deploy angular app on AWS
+	https://www.vananhnguyen.net/read?postId=107
+JavaBrains
+	https://github.com/in28minutes/full-stack-with-angular-and-spring-boot
+WHy full Stack Application?
+	To create flexible Architecture to meet future requirement
+
+Security
+	https://academind.com/tutorials/hide-javascript-code
+
+https://academind.com/tutorials/building-a-restful-api-with-nodejs
+	
+Angular Certification
+	https://www.angularacademy.ca/angular-certification
+	
+Courses
+	https://coursera.org/projects/build-atm-user-interface-routing-angular?action=enroll
+	https://www.coursera.org/projects/routing-and-navigation-concepts-in-angular
+	https://www.udemy.com/course/the-complete-angular-master-class/
+	https://www.udemy.com/course/the-complete-guide-to-angular-2/
+	https://www.udemy.com/course/angular-2-and-nodejs-the-practical-guide/

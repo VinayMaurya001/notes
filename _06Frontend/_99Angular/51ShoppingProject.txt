@@ -1,0 +1,23 @@
+Planning the app
+
+Setting up the aplication
+	ng new tomato
+	
+	npm install --save bootstrap@3  //install locally in project
+	npm install --save bootstrap
+	angular.json file
+	"styles":{
+		"node_modules/bootstrap/dist/css/bootstrap.min.css",
+		"src/style.css"
+	}
+	
+	
+	ng g c header
+	ng g c recipes
+	ng g c recipes/recipe-list --skipTests true
+	ng g c recipes/recipe-list/recipe-item 
+	ng g c recipes/recipe-detail 
+	ng g c shopping-list
+	ng g c shopping-list/shopping-edit
+	
+	

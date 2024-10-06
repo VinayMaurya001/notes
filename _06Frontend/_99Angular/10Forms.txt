@@ -1,0 +1,251 @@
+
+Introduction
+Angular & Forms
+	{
+		value:{
+			name:'Max',
+			email:'test@test.com'
+		}
+		valid:true
+	}
+	
+	
+Approach to handling forms
+	1)Template-driven(TD) 
+		Angular infers the Form Object from the DOM
+		import { FormsModule } from '@angular/forms';
+		
+	2)Reactive
+		Form is created programmatically and synchronized with the DOM
+		Complex
+		More control on form
+		import { ReactiveFormsModule} from '@angular/forms';
+		
+		
+TD:Creating the forms & Registering the controls
+	import { FormsModule } from '@angular/forms';
+	imports: [
+    	.
+    	FormsModule,
+  	]
+  	<input type="text" id="username" class="form-control" ngModel name="username">
+  	<select id="secret" class="form-control" ngModel name="secret">
+  	
+  	
+TD: Submitting & Using the forms
+	<form (ngSubmit)="onSubmit()">
+	onSubmit(){
+    	console.log('On Submit');
+  	}
+  	
+  	<form (ngSubmit)="onSubmit(f)" #f>
+  	onSubmit(form: HTMLFormElement){
+	    console.log(form);
+  	}
+  	
+  	<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  	onSubmit(form: NgForm){
+    	console.log(form);
+  	}
+  	
+  	
+TD: Form State
+
+
+
+TD:Accessing the form with @ViewChild
+	<form (ngSubmit)="onSubmit()" #f="ngForm">
+	@ViewChild('f') signupFrom:NgForm;
+	onSubmit(){
+    	console.log(this.signupFrom);
+  	}
+  	
+  	
+TD:Adding validation to check User Input
+	<input type="text" id="username" class="form-control" ngModel name="username" required>	
+	<input type="email" id="email" class="form-control" ngModel name="email" email>
+	Angular add css classes to these input elements.
+	
+	
+Built-in Validators & Using HTML5 Validation
+	Which Validators do ship with Angular? 
+		Check out the Validators class: https://angular.io/api/forms/Validators - these are all built-in validators, 
+			though that are the methods which actually get executed (and which you later can add when using the reactive approach).
+	For the template-driven approach, you need the directives. 
+		You can find out their names, by searching for "validator" in the official docs: https://angular.io/api?type=directive - 
+			everything marked with "D" is a directive and can be added to your template.
+	Additionally, you might also want to enable HTML5 validation (by default, Angular disables it). 
+		You can do so by adding the ngNativeValidate  to a control in your template.
+  	
+  	
+TD: Using the form state
+	<button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+	
+	.ng-invalid{
+  		border: 1px solid red;
+	}
+	input.ng-invalid{
+  		border: 1px solid red;
+	}
+	input.ng-invalid.ng-touched{
+  		border: 1px solid red;
+	}
+	
+	
+TD: Outputing Validation Error Messages
+	<input type="email" id="email" class="form-control" ngModel name="email" email #e="ngModel">
+    <span class="help-block" *ngIf="!e.valid">Please enter a valid Email</span>
+		<span class="help-block" *ngIf="!e.valid && e.touched">Please enter a valid Email</span>
+		
+TD: Set default values with ngModel Property Binding
+	<select id="secret" class="form-control" [ngModel]="'pet'" name="secret">
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+     </select>
+     
+     defaultQuestion = 'pet';
+     <select id="secret" class="form-control" [ngModel]="defaultQuestion" name="secret">
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+     </select>
+
+     
+TD: Using ngModel with two-way-binding
+	answer = '';
+	<div class="form-group">
+          <textarea
+            name="questionAnswer"
+            rows="3"
+            class="form-control"
+            [(ngModel)]="answer"></textarea>
+    </div>
+    <p>Your reply: {{ answer }}</p>
+    
+    
+TD: Grouping Form Controls
+	<div id="user-data"  ngModelGroup="userData">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" ngModel name="username" required>
+          </div>
+          <button class="btn btn-default" type="button">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input type="email" id="email" class="form-control" ngModel name="email" email #e="ngModel">
+            <span class="help-block" *ngIf="!e.valid && e.touched">Please enter a valid Email</span>
+          </div>
+     </div> 
+    
+    
+    <div id="user-data"  ngModelGroup="userData" #ud="ngModelGroup">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" ngModel name="username" required>
+          </div>
+          <button class="btn btn-default" type="button">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input type="email" id="email" class="form-control" ngModel name="email" email #e="ngModel">
+            <span class="help-block" *ngIf="!e.valid && e.touched">Please enter a valid Email</span>
+          </div>
+     </div>
+     <div *ngIf="!ud.valid && ud.touched">User Data is Invalid!</div>
+    
+    
+TD: Handling Radio Buttons
+	genders = ['male', 'female'];
+	<div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              ngModel
+              [value]="gender"
+              required>
+            {{ gender }}
+          </label>
+      </div>
+        
+TD: Setting & Patching form values
+	<button class="btn btn-default" type="button" (click)="suggestUserName()">Suggest an Username</button>
+	suggestUserName() {
+    	const suggestedName = 'Superuser';
+    	 this.signupForm.setValue({
+    	   userData: {
+    	     username: suggestedName,
+    	     email: ''
+    	   },
+    	   secret: 'pet',
+    	   questionAnswer: '',
+    	   gender: 'male'
+    	 });
+  	}
+  	suggestUserName() {
+    	const suggestedName = 'Superuser';
+    	this.signupForm.form.patchValue({
+      		userData: {
+        		username: suggestedName
+      		}
+    	});
+  	}
+
+TD: Using Form Data
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: ''
+  };
+  submitted = false;
+  onSubmit() {
+    this.submitted = true;
+    this.user.username = this.signupForm.value.userData.username;
+    this.user.email = this.signupForm.value.userData.email;
+    this.user.secretQuestion = this.signupForm.value.secret;
+    this.user.answer = this.signupForm.value.questionAnswer;
+    this.user.gender = this.signupForm.value.gender;
+    this.signupForm.reset();
+  }
+  <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+      <h3>Your Data</h3>
+      <p>Username: {{ user.username }}</p>
+      <p>Mail: {{ user.email }}</p>
+      <p>Secret Question: Your first {{ user.secretQuestion }}</p>
+      <p>Answer: {{ user.answer }}</p>
+      <p>Gender: {{ user.gender }}</p>
+    </div>
+  </div>
+
+
+
+TD:Resetting Forms
+	this.signupForm.reset();	
+	
+	
+Assignment
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

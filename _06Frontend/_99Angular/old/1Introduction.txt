@@ -1,0 +1,144 @@
+
+8)
+Binding data from component class
+	 dateMessage:string=new Date().toDateString();
+	 <h1>{{dateMessage}}</h1>
+	 Hare one way data binding from TypeScript file to Markup html file.
+
+9)
+Data binding and async
+setInterval(()=>{
+    let currentDate=new Date();
+    this.dateMessage=currentDate.toDateString()+' '+currentDate.toLocaleTimeString();
+
+  },1000); 
+setInterval is a JavaScript API that lets you run a function at regular time intervals.
+
+
+
+
+13)
+Passing inputs to components
+<app-address-card name="Vinay Maurya"></app-address-card>
+
+@Input('name') userName:string;
+  constructor() {
+    
+   }
+
+  ngOnInit() {
+    this.user={
+      name:this.userName,
+      title:"Software Developer",
+      address:"Ambience Mall",
+      phoneList:[
+        '9423564752',
+        '9435124356'
+      ],
+      company:"Cointribe"
+    };
+  }
+
+
+
+14)
+Using ngOnInit Lifecycle hook
+
+<app-address-card name="Vinay Maurya"></app-address-card>
+	Create object AddressCardComponent
+	Call constructor()
+	bind name="Vinay Maurya" to component
+	call ngOnChanges()
+	call ngOnInit() from OnInIt interface or without it also
+
+	https://angular.io/guide/lifecycle-hooks
+
+15)
+Passing member variables to components
+	user!:User;
+  constructor(){
+    this.user=new User();
+    this.user.name="Foo Bar";
+    this.user.designation="Software Engineer";
+    this.user.address="1000 City Ambience mall";
+    this.user.phone=[
+      '123456789',
+      '987654321'
+    ];
+  }
+
+  <app-app-address-card2 [user]="user"></app-app-address-card2>
+
+  user:any;
+  @Input('user') userObj:User;
+  constructor() { }
+
+  ngOnInit() {
+    this.user={
+      name:this.userObj.name,
+      title:this.userObj.designation,
+      address:this.userObj.address,
+      phoneList:this.userObj.phone,
+    };
+  }
+
+
+16)
+Styling Angular components
+<h1 class="name">{{user.name}}</h1>
+<h1 _ngcontent-lbd-c1="" class="name">Foo Bar</h1>
+
+.address{
+    font-size: 15px;
+    color: green;
+}
+.address[_ngcontent-rbi-c1] {
+    font-size: 15px;
+    color: green;
+}
+
+for global style-style.css
+
+
+17)
+Handling click events
+
+ isCollapsed:boolean=true;
+ toggleCollapsed(){
+    this.isCollapsed=!this.isCollapsed;
+  }
+
+ <button (click)='toggleCollapsed()'>Expand/Collapse</button>
+            <div *ngIf="!isCollapsed">
+                <div *ngIf="user.phone.length" class="phone1">
+                    <p>Phone:</p>
+                    <p>{{user.phone[0]}}</p>
+                    <p>{{user.phone[1]}}</p>
+                </div>
+ </div>
+
+
+ <button *ngIf="isCollapsed" (click)='toggleCollapsed()'>Expand</button>
+ <button *ngIf="!isCollapsed" (click)='toggleCollapsed()'>Collapse</button>
+
+
+18)
+Two way data binding with ngModel
+
+In Angualr 1, Two way data binding was key feature but since Angular2+ it is not commonly used.
+
+ngModel directive
+
+<input type="text" [(ngModel)]="inputText"/>{{inputText}}
+ inputText:string='Initial Value';
+FormsModule
+
+The [()] syntax is referred to as banana-in-a-box.
+
+25)
+Building an Angular project
+	ng build
+	ng build --prod
+
+npm install http-server -g
+http-server dist/build-proj

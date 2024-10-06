@@ -1,0 +1,275 @@
+
+Singleton Pattern is one of the Gangs of Four Design patterns and comes in the Creational Design Pattern category.
+Singleton Pattern says that just"define a class that has only one instance and provides a global point of access to it".
+
+In other words, a class must ensure that only single instance should be created and single object can be used by all other classes.
+Singleton pattern restricts the instantiation of a class and ensures that only one instance of the class exists in the java virtual machine.
+
+The singleton class must provide a global access point to get the instance of the class.
+
+Key Term
+	only single instance/ JVM
+	Single object per jvm per container
+	global access point
+
+Uses of Singleton design pattern
+	Singleton pattern is mostly used in multi-threaded and database applications. 
+	It is used in logging, caching, thread pools, configuration settings etc.
+	Singleton pattern is used for logging, drivers objects, caching and thread pool.
+	Singleton design pattern is also used in other design patterns like Abstract Factory, Builder, Prototype, Facade etc.
+	Singleton design pattern is used in core java classes also, for example java.lang.Runtime, java.awt.Desktop.
+
+
+Example: 
+Runtime, BusinessDelegate, ServiceLocator etc.
+
+	
+Advantage of Singleton design pattern
+Saves memory because object is not created at each request. Only single instance is reused again and again.
+
+Uml of Singleton design pattern
+	UML_Singleton.JPG
+	Singleton.png
+
+
+There are two forms of singleton design pattern
+Early Instantiation: creation of instance at load time.
+Lazy Instantiation: creation of instance when required first time.
+
+
+How to create Singleton design pattern?
+To implement a Singleton pattern, we have different approaches but all of them have the following common concepts.
+	1)Private constructor to restrict instantiation of the class from other classes.
+		By declaring every constructor as private, we can restrict child class creation something like final class.
+	2)private static variable of the same class that is the only instance of the class.
+	3)public static method that returns the instance of the class, this is the global access point for outer world to get the instance of the singleton class.
+		Runtime class is internally implemented by using this approach.
+	
+	
+	
+	
+In further sections, we will learn different approaches of Singleton pattern implementation and design concerns with the implementation.
+Ways of Eager initialization
+	1)Enum
+		eager initialization
+		thread safe
+		no options for exception handling
+	2)static variable
+		eager initialization
+		thread safe
+		no options for exception handling
+	3)Static block initialization
+		eager initialization
+		thread safe
+		options for exception handling
+	
+Lazy Initialization
+	1)static method
+		lazy Initialization
+		Not thread safe
+		Reflection can destroy
+		Not Serialization proof
+	2)static synchronized method
+		lazy Initialization
+		thread Safe 
+		Low performance
+		Reflection can destroy
+		Not Serialization proof
+	3)synchronized block inside static method 
+		lazy Initialization
+		thread Safe 
+		Low performance
+		Reflection can destroy
+		Not Serialization proof
+	4)	synchronized block with double checked locking
+		lazy Initialization
+		thread Safe 
+		Good performance
+		Reflection can destroy
+		Not Serialization proof
+	5) Bill Pugh Singleton Implementation(using inner static class)
+		lazy Initialization
+		thread Safe 
+		Good performance
+		Reflection can destroy
+		Easy & Widely used
+		Not Serialization proof
+	7)	Using readResolve()
+			Serialization proof
+	8) Cloning
+	9) java.util.concurrent package to create a thread-safe singleton
+
+Understanding early Instantiation of Singleton Pattern
+
+static varibale
+	In such case, we create the instance of the class at the time of declaring the static data member, 
+		so instance of the class is created at the time of classloading.
+	If your singleton class is not using a lot of resources, this is the approach to use. 
+		But in most of the scenarios, Singleton classes are created for resources such as File System, Database connections etc. 
+		We should avoid the instantiation until unless client calls the getInstance method. 
+		Also, this method doesn’t provide any options for exception handling.
+	Example: SingletonDP1.java( thread safe singleton class)
+
+
+Static block initialization
+	Static block initialization implementation is also a eager initialization  like with static variable, 
+		except that instance of class is created in the static block that provides option for exception handling.
+	Both eager static variable initialization and static block initialization creates the instance 
+		even before it’s being used and that is not the best practice to use.
+	Example: SingletonDP2.java( thread safe singleton class)
+
+Understanding lazy Instantiation of Singleton Pattern
+	Example: SingletonDP3.java (Not thread safe singleton class)
+	The above implementation works fine in case of the single-threaded environment 
+		but when it comes to multithreaded systems, it can cause issues if multiple threads are inside the if condition at the same time. 
+		It will destroy the singleton pattern and both threads will get the different instances of the singleton class. 
+	
+	Example: SingletonDP4.java ( thread safe singleton class)
+	Example: SingletonDP5.java ( thread safe singleton class)
+	Above two implementation works fine and provides thread-safety but it reduces the performance 
+		because of the cost associated with the synchronized method, 
+		although we need it only for the first few threads who might create the separate instances
+	
+	To avoid this extra overhead every time, double checked locking principle is used. 
+		In this approach, the synchronized block is used inside the if condition with an additional check 
+		to ensure that only one instance of a singleton class is created.
+	Example: SingletonDP6.java (Not thread safe singleton class)
+	Example: SingletonDP7.java (thread safe singleton class)
+
+
+Bill Pugh Singleton Implementation
+	Example: SingletonDP8.java (Not thread safe singleton class & lazy instationation also)
+	Prior to Java 5, java memory model had a lot of issues and the above approaches used to fail in certain scenarios 
+		where too many threads try to get the instance of the Singleton class simultaneously.
+	Notice the private inner static class that contains the instance of the singleton class. 
+		When the singleton class is loaded, SingletonHelper class is not loaded into memory and 
+		only when someone calls the getInstance method, this class gets loaded and creates the Singleton class instance.
+	This is the most widely used approach for Singleton class as it doesn’t require synchronization. 
+		I am using this approach in many of my projects and it’s easy to understand and implement also.
+
+
+Using Reflection to destroy Singleton Pattern
+Example: m9()
+Reflection can be used to destroy (like using constructor.setAccessible(true)) all the above singleton implementation approaches 
+Reflection is very powerful and used in a lot of frameworks like Spring and Hibernate.
+
+Enum Singleton
+Example: SingletonDP10.java 
+To overcome this situation with Reflection, Joshua Bloch suggests the use of Enum to implement Singleton design pattern 
+	as Java ensures that any enum value is instantiated only once in a Java program. 
+	Since Java Enum values are globally accessible, so is the singleton. 
+	The drawback is that the enum type is somewhat inflexible; 
+	for example, it does not allow lazy initialization.
+
+
+
+Significance of Serialization in Singleton Pattern
+Serialization allows storing the object in some data store and re create it later on. 
+	However when we serialize a singleton class and invoke deserialization multiple times, 
+	we can end up with multiple objects of the singleton class.
+In order to make serialization and singleton work properly,we have to introduce readResolve() method in the singleton class. 
+	readResolve() method lets developer control what object should be returned  on deserialization.
+Sometimes in distributed systems, we need to implement Serializable interface in Singleton class 
+	so that we can store its state in the file system and retrieve it at a later point of time. 
+	If singleton class is Serializable, you can serialize the singleton instance. 
+	Example: SingletonDP11.java 
+The problem with serialized singleton class is that whenever we deserialize it, 
+	it will create a new instance of the class.
+To resolve this issue, you need to override the readResolve() method that enforces the singleton. 
+	It is called just after the object is deserialized. 
+	It returns the singleton object.
+public class A implements Serializable {  
+        //your code of singleton  
+        protected Object readResolve() {  
+            return getA();  
+        }  
+}
+Example: SingletonDP11.java
+
+
+Cloning can spoil the game
+Although we have taken enough precaution to make the Singleton object work as singleton, 
+	Cloning the object can still copy it and result into duplicate object. 
+	The clone of the singleton object can be constructed using clone() method of the object. 
+	Hence it is advisable to overload clone() method of Object class and throw CloneNotSupportedException exception.
+public Object clone() throws CloneNotSupportedException {
+   //return super.clone();
+   //return this;
+   throw new CloneNotSupportedException();
+}
+Example: SingletonDP12.java 
+
+   
+  
+Significance of Classloader in Singleton Pattern
+If singleton class is loaded by two classloaders, 
+	two instance of singleton class will be created, one for each classloader.
+
+Static Class vs Singleton Class
+	When to use Static Class in place of Singleton in Java
+	Advantage of Singleton Pattern over Static Class in Java	
+When to use Static Class in place of Singleton in Java
+The Singleton pattern has several advantages over static classes. 
+	First, a singleton can extend classes and implement interfaces, 
+	while a static class cannot (it can extend classes, but it does not inherit their instance members??????). 
+	A singleton can be initialized lazily or asynchronously while a static class is generally initialized when it is first loaded, 
+	leading to potential class loader issues. 
+	However the most important advantage, though, is that singletons can be handled polymorphically without forcing their users to assume that 
+	there is only one instance.
+But there are some situations, where static classes makes sense than Singleton. 
+	Prime example of this is java.lang.Math which is not Singleton, instead a class with all static methods. 
+	Here are few situation where I think using static class over Singleton pattern make sense:
+		If your Singleton is not maintaining any state, and just providing global access to methods, than consider using static class, 
+			as static methods are much faster than Singleton, because of static binding during compile time. 
+			But remember its not advised to maintain state inside static class, especially in concurrent environment, 
+			where it could lead subtle race conditions when modified parallel by multiple threads without adequate synchronization.
+		You can also choose to use static method, if you need to combine bunch of utility method together. 
+	Anything else, which requires singles access to some resource, should use Singleton design pattern.
+
+Advantage of Singleton Pattern over Static Class in Java
+Main advantage of Singleton over static is that former is more object oriented than later. 
+	With Singleton, you can use Inheritance and Polymorphism to extend a base class, implement an interface 
+		and capable of providing different implementations. 
+		If we talk about java.lang.Runtime, which is a Singleton in Java, call to getRuntime() method return different implementations 
+			based on different JVM, but guarantees only one instance per JVM, had java.lang.Runtime 
+		An static class, it’s not possible to return different implementation for different JVM.??????
+ 
+
+
+
+Understanding Real Example of Singleton Pattern
+ 	JDBCSingletonDemo.java
+ 	Data source
+ 	Property file reader
+ 	Logger
+ 		error
+ 		debug
+ 		info
+ 	
+Steps
+	static member
+	Private Constructor
+	static factory method
+	
+	
+1)
+	static member
+	Private Constructor
+	static factory method
+2)Eager initialization , thread safe also
+	a) instance=new DeatUti();
+	b)static{	instance=new DeatUti()}
+3)Thread safe
+	a)synchronized method
+	b)synchronized block
+	c)double null check to reduce overhead each time
+	d)volatile//??????
+4)Seralization
+		serialVersionId???????
+5)Override clone() method
+
+
+Q)The process of creating the singleton instance only when it is first used is called(Lazy Initialization)
+Q)Which of the following exception is thrown to prevent singleton cloning (CloneNotSupportedException)
+
+logger

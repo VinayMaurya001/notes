@@ -3,7 +3,7 @@ Iterable
 	Collection
 		List
 		Set
-			Sorted Set
+			SortedSet
 				NavigableSet
 		Queue
 	Map

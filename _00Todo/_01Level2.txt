@@ -1,0 +1,33 @@
+
+
+Baby
+	Health
+	Laugh
+	Fun activities
+Health
+	Exercise
+	Laugh
+	HealthCheckup
+	Finance
+	Relationship
+English
+Study with Revision
+	DSA
+	CoreJava
+		Java 11
+		Performance & Memory Management
+		Assertions
+		ClassLoaders 
+	Advance Java
+	SystemDesign
+		LLD
+		HLD
+	Testing
+	Frontend
+		ReactJS
+	Devops
+	Database
+	Projects
+	Mix
+
+https://www.geopits.com/blog/triggers-in-dbms.html#:~:text=3%20TYPES%20OF%20TRIGGERS,a%20user%20session%20is%20established.

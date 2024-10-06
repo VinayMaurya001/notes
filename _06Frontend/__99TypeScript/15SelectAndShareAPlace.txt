@@ -1,0 +1,117 @@
+
+
+Setting up a Google API key
+
+
+Using Axios to fetch Coordinates for an Entered Address
+Javascript has fetch() to call http request
+npm install --save axios
+
+import axios from "axios";
+
+const form = document.querySelector("form")!;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
+
+const GOOGLE_API_KEY = "AIzaSyCIaAc2c5M3VpbCH6PPq_guwy9lHuowXOs";
+
+type GoogleGeocodingResponse = {
+  results: { geometry: { location: { lat: number; lng: number } } }[];
+  status: "OK" | "ZERO_RESULTS";
+};
+
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
+
+  axios
+    .get<GoogleGeocodingResponse>(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
+        enteredAddress
+      )}&key=${GOOGLE_API_KEY}`
+    )
+    .then(response => {
+      if (response.data.status !== "OK") {
+        throw new Error("Could not fetch location!");
+      }
+      const coordinates = response.data.results[0].geometry.location;
+    })
+    .catch(err => {
+      alert(err.message);
+      console.log(err);
+    });
+}
+form.addEventListener("submit", searchAddressHandler);
+
+
+
+
+Rendering the map with Google Maps (Inclusive Types!)	
+npm install --save @Types/googlemaps
+
+  axios
+    .get<GoogleGeocodingResponse>(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
+        enteredAddress
+      )}&key=${GOOGLE_API_KEY}`
+    )
+    .then(response => {
+      if (response.data.status !== "OK") {
+        throw new Error("Could not fetch location!");
+      }
+      const coordinates = response.data.results[0].geometry.location;
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: coordinates,
+        zoom: 16
+      }); 
+
+      new google.maps.Marker({ position: coordinates, map: map });
+    })
+    .catch(err => {
+      alert(err.message);
+      console.log(err);
+    });
+}
+
+Working with Maps without a Credit Card
+Using Google Maps unfortunately requires a credit card, even though you got a generous free tier which you very likely wouldn't exceed.
+
+If you got no credit card, you can look into OpenLayers as an alternative (here's how to render a map with it: https://openlayers.org/en/latest/doc/quickstart.html).
+
+In our concrete example, this would render a map:
+
+Include this in your HTML file:
+
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
+In app.ts, use this code:
+
+declare var ol: any;
+ 
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+ 
+  const coordinates = {lat: 40.41, lng: -73.99}; // Can't fetch coordinates from Google API, use dummy ones
+ 
+  document.getElementById('map')!.innerHTML = ''; // clear <p> from <div id="map">
+  new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([coordinates.lng, coordinates.lat]),
+      zoom: 16
+    })
+  });
+}
+You can explore the OpenLayers docs to learn how to render a broad variety of different things.
+
+
+
+Google Maps Pricing: https://cloud.google.com/maps-platform/pricing/sheet/
+
+Google Geocoding API: https://developers.google.com/maps/documentation/geocoding/start
+
+Google Maps JS SDK: https://developers.google.com/maps/documentation/javascript/tutorial

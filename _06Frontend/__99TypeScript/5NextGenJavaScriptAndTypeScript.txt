@@ -1,0 +1,82 @@
+Next-generation JavaScript & TypeScript
+	https://kangax.github.io/compat-table/es6/
+	"let" and "const"
+	Arrow Functions
+	Default Function Parameters
+	The Spread Operator (...)
+		https://academind.com/tutorials/reference-vs-primitive-values/
+	Rest Parameters
+	Array & Object Destructuring
+	How code Gets Compiled & Wrap Up
+	Useful Resources & Linkes
+
+	
+"let" and "const"
+	const - for constant
+	let-for variable
+		 has funtion & global scope and also has block scope (if block, for loop block)
+	var- for variable (deprecated)
+		 var has funtion & global scope
+	
+Arrow Functions	
+	const add =(a:number,b:number)=>{
+				return a+b;
+				};
+	const add =(a:number,b:number)=>a+b;
+	console.log(add(2,3));
+	
+	const printout=(output:number | string)=>console.log(output);
+	const printout:(a:number | string)=>void = output=>console.log(output);
+	
+Default Function Parameters
+	We can give default value to parameters from right hand side.
+	const add =(a:number,b:number=1)=>a+b;
+	console.log(add(2,3));
+	console.log(add(2));
+
+
+The Spread Operator (...)
+		https://academind.com/tutorials/reference-vs-primitive-values/
+	const hobbies = ['Sports', 'Cooking'];
+	const activeHobbies = ['Hiking'];
+	activeHobbies.push(...hobbies);
+
+	const person = {
+  		name: 'Max',
+  		age: 30
+	};
+	const referencePerson =person;
+	const copiedPerson = { ...person };
+
+
+
+Rest Parameters
+	const add = (...numbers: number[]) => {
+	  return numbers.reduce((curResult, curValue) => {
+	    return curResult + curValue;
+	  }, 0);
+	};
+	const addedNumbers = add(5, 10);
+	const addedNumbers = add(5, 10, 2);
+	const addedNumbers = add(5, 10, 2, 3.7);
+
+	console.log(addedNumbers);
+
+
+Array & Object Destructuring
+
+	const hobbies = ['Sports', 'Cooking'];
+	const [hobby1, hobby2, ...remainingHobbies] = hobbies;
+	console.log(hobbies, hobby1, hobby2);// Original hobbies array will not change 
+	
+	const person = {
+  		firstName: 'Max',
+  		age: 30
+	};
+	const { firstName: userName, age } = person;
+	console.log(userName, age, person);
+
+How code Gets Compiled & Wrap Up
+
+
+Useful Resources & Linkes

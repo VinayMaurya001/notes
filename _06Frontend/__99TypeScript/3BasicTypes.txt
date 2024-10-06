@@ -1,0 +1,399 @@
+Core Types
+	number
+	string
+	boolean - 
+	object
+		particular object types
+	array
+		tuple
+	enum
+	any
+	union
+	literals types
+	Type Aliases/Custom Types
+	Type Aliases & Object Types
+	
+	Function Return Types & "void" type:
+	undefined type
+	Function type
+	Function as Type
+	Function Types & Callbacks function & anonymous function
+	
+	The "unknown" Type
+	The "never" Type
+	
+	
+Basic Types
+JavaScript is dynamically typed
+	Types may change during run-time
+TypeScript is statically typed
+	Types we defines during development time
+	
+	
+Type Casing:
+In TypeScript, you work with types like string or number all the times.
+The core primitive types in TypeScript are all lowercase!
+
+number: no difference between integer & float
+	1
+	1.5
+string	
+	""
+	''
+	``   //The last notation with back takes is a special syntax provided in modern JavaScript and also in TypeScript,
+		 //  	which allows us to write so-called "template literals" that are normal strings 
+		 //  		where you can dynamically inject some data into them.
+boolean
+	true
+	false
+	just 2 true and false (In javascript, number 0 is a false when it is inside if() condition)
+
+const number1=10;
+console.log(typeof number1)
+if(typeof number1 !=='number'){
+	throw new Error("Incorrect input");
+}
+
+
+
+Type Assignment & Type Inference
+	let number1;
+	let number2:number;
+
+	let number3=5;  // type inference
+	let number4:number=5;
+		number4='Sachin';//CTE
+		
+	const num=5; // type of num is 5
+Types allow us to detect error early & avoid some runtime errors.
+Types allow you to detect if data of a wrong type is used or pass around, hence you can avoid unexpected runtime errors.
+
+Question:
+	Does this code rely on type inference?
+		const age: number = 29;
+Ans:TypeScript would be able to infer the type (and hence you should omit ":number") but here, we actually also have an explicit type assignment.
+
+Question:
+	What's the difference between JavaScript types (e.g. typeof 'Max' => 'string') 
+		and TypeScript types (e.g. const name: string = '...')?
+Answer:JS has no compilation step but at runtime, you can check for certain types (e.g. in if conditions). 
+	TS on the other hand allows you to catch certain errors during development since it checks types during compilation as well.
+
+
+
+
+
+
+
+
+
+
+
+let vs var vs const??????????
+
+
+
+
+
+
+
+Object Types
+
+const person={
+		name:"Shalu",
+		age:30
+	}
+
+const person: object={ name:"Shalu",age:30	}   or  const person: {}={name:"Shalu",age:30}  //CTE
+
+
+const person:{
+		name:string;
+		age:number;
+	}={
+		name:"Shalu",
+		age:30;
+	}
+
+Nested Objects & Types
+	const product = {
+  			id: 'abc1',
+  			price: 12.99,
+  		    tags: ['great-offer', 'hot-and-new'],
+		    details: {
+		    	title: 'Red Carpet',
+    			description: 'A great carpet - almost brand-new!'
+  			}
+	}
+	This would be the type of such an object:
+	{
+  		id: string;
+  		price: number;
+  		tags: string[];
+  		details: {
+    		title: string;
+    		description: string;
+  		}
+	}
+	console.log(product.details);
+		//{title: "Red Carpet", description: "A great carpet - almost brand-new!"}  "_proto_":{.....}
+
+
+
+
+Arrays Types
+	Array is collection of elements. We can store any type of values in array. 
+	Any JavaScript array.
+	Type can be flexible or strict (regarding the element types)
+	
+	const person = {
+        name: 'Maximilian',
+        age: 30,
+        hobbies: ['Sports', 'Cooking']
+      };
+      
+	 let favoriteActivities: string[];
+     favoriteActivities = ['Sports'];
+
+	 let favoriteActivities: any[];
+      favoriteActivities = ['Sports',1];
+      
+     for (const hobby of person.hobbies) {
+        console.log(hobby.toUpperCase());
+        // console.log(hobby.map()); // !!! ERROR !!!
+      }
+   
+     for (const hobby in person.hobbies) {
+  		console.log("hi " + hobby);
+	 }
+
+
+	Working with Tuples
+		Fixed length array & fixed type. This is to say; you'd use a tuple for a static, well-defined array.
+		Added by typescript but not in Vanilla JavaScript.
+
+	 const person = {
+        name: 'Maximilian',
+        age: 30,
+        hobbies: ['Sports', 'Cooking'],
+        role: [2, 'author']   //role:(string|number)[]
+      };
+      
+      const person: {
+        name: string;
+        age: number;
+        hobbies: string[];
+        role: [number, string]; //tuple type
+      } = {
+        name: 'Maximilian',
+        age: 30,
+        hobbies: ['Sports', 'Cooking'],
+        role: [2, 'author']   //role:(string|number)[]
+      };
+      
+       person.role = [0, 'admin', 'user'];//CTE
+      person.role.push('admin'); //NO CTE
+      console.log(person.role);//[2, "author", "admin"]
+      person.role[0] = 10;
+    //  person.role[1] = 10;//CTE
+      
+
+
+
+
+Working with Enums
+ 	Human readable named constant
+ 	enum {NEW,OLD}
+ 	
+ 	Added by typeScript
+ 	Automatically enumerated global constant identifiers
+
+	// const ADMIN = 0;
+	// const READ_ONLY = 1;
+	// const AUTHOR = 2;
+	//const person = {
+	//  name: 'Maximilian',
+	//  role: ADMIN
+	//};
+	
+	
+	enum Role { ADMIN = 'ADMIN', READ_ONLY = 100, AUTHOR = 'AUTHOR' };
+
+	const person = {
+	  name: 'Maximilian',
+	  age: 30,
+	  hobbies: ['Sports', 'Cooking'],
+	  role: Role.ADMIN
+	};
+
+	if (person.role === Role.AUTHOR) {
+	  console.log('is author');
+	}
+
+
+	enum Role { ADMIN = 6, READ_ONLY = 100, AUTHOR = 'AUTHOR' };
+	
+	
+ 
+The "any" Type
+	*
+	Any kind of value, no specific type assignment
+	
+	let favoriteActivities: any[];
+	favoriteActivities = ['Sports'];
+
+
+
+Union Types
+	input1: number | string | boolean
+	
+function combine(input1: number | string, input2: number | string) {
+  let result;
+  if (typeof input1 === 'number' && typeof input2 === 'number') {
+    result = input1 + input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
+}
+const combinedAges = combine(30, 26);
+console.log(combinedAges);
+const combinedNames = combine('Max', 'Anna');
+console.log(combinedNames);
+	
+
+Literal Types
+	 resultConversion: 'as-number' | 'as-text'
+	
+	
+	
+Type Aliases / Custom Types
+	type ConversionDescriptor = 'as-number' | 'as-text';
+	resultConversion: ConversionDescriptor
+
+
+
+Type Aliases & Object Types
+	Type aliases can be used to "create" your own types. 
+	You're not limited to storing union types though - you can also provide an alias to a (possibly complex) object type.
+	For example:
+		type User = { name: string; age: number };
+		const u1: User = { name: 'Max', age: 30 }; // this works!
+		This allows you to avoid unnecessary repetition and manage types centrally.
+
+Quiz 2: Core Types & Concepts
+
+
+
+	
+
+
+
+
+
+
+
+
+
+Function Return Types & "void" type:
+
+	function add(n1: number, n2: number):number {
+  return n1 + n2;
+}
+function printResult(num: number): void {
+  console.log('Result: ' + num);
+  return ;
+}
+function printResult2(num: number): void {
+  console.log('Result: ' + num);
+}
+function printResult3(num: number): undefined {
+  console.log('Result: ' + num);
+  return ;
+}
+console.log(printResult3(2));//undefined
+
+
+undefined type
+	It is also a type in typescript
+	it can be defind as a function return type also
+	
+	
+
+Functions as Types or funtion type
+let combineValues:any;
+combineValues = add;
+ combineValues = 5;
+//console.log(combineValues(8, 8));//RTE
+
+let combineValues2:Function;
+combineValues2 = add;
+//combineValues2= 5;//CTE
+//console.log(combineValues2(8, 8));
+
+let combineValues3:Function;
+combineValues3 = add;
+//combineValues3= 5;//CTE
+combineValues3 = printResult;
+//console.log(combineValues3(8, 8));// At Runtime, 8, undeifned
+
+let combineValues4:(a: number, b: number) => number;   //Function as Type
+combineValues4 = add;
+//combineValues3= 5;//CTE
+//combineValues4 = printResult;//CTE
+console.log(combineValues4(8, 8));//16
+
+
+
+Function Types & Callbacks function & anonymous function
+	function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
+  		const result = n1 + n2;
+  		cb(result);
+	}
+	addAndHandle(10, 20, (result) => {});
+	addAndHandle(10, 20, (result) => {
+	  console.log(result);
+	});
+ 	addAndHandle(10, 20, (result) => {
+	  console.log(result);
+	  return 11;//no error
+	});
+	Callback functions can return something, even if the argument on which they're passed does NOT expect a returned value.
+ 
+ 
+
+
+
+
+ 
+The "unknown" Type
+	"unknown" Type is more restrictive than "any" type
+	let userName:string;
+	let userInput:unknown;
+  	userInput=5;
+  	userInput="Sachin";
+  	userInput=userName;
+  	//userName=userInput;//CTE
+	if(typeof userInput === 'string'){
+	  userName=userInput;//No CTE
+	}
+
+
+The "never" Type
+	function generateError(message: string, code: number): never {
+  		throw { message: message, errorCode: code };
+  		//while(true){}
+	}
+	generateError('An error occurred!', 500);
+ 
+  
+Wrap Up
+	
+Useful Resources & Links
+	https://www.typescriptlang.org/docs/handbook/basic-types.html
+	
+	
+	
+	
+	
+	

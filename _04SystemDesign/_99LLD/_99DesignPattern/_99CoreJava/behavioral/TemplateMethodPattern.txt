@@ -1,0 +1,11 @@
+Template Method Pattern
+It is a behavioral pattern.
+It provide base/template method for child classes.
+A template method provides a standard base class method.
+
+Example:
+	DataRederer(render(){},readData(),processData())
+		XMLDataRederer
+		CSVDataRederer
+		
+		

@@ -1,0 +1,13 @@
+String Api updates
+	indent()
+	trnasform()
+Number Format
+	NumberFormat numberFormat = NumberFormat.getCompactNumberInstance();
+Unicode 11
+Collectors
+	teeing
+Switch Expressions(preview)
+Non developer featire
+	GC
+	Performance benchmarking
+	Processor ports

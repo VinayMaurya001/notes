@@ -30,7 +30,7 @@ Constructors
 			ArrayList l=new ArrayList();
 			l.add("A");
 			l.add(10);
-			l.add("A");
+			l.add("A");// by default add method insert atend just after last filled element
 			l.add(null);
 			System.out.println(l);
 			l.remove(2);

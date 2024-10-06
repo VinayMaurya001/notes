@@ -1,0 +1,116 @@
+String API Updates
+File API Updates
+isEmpty() on Optional
+HttpClient API
+Deprecations & removals
+
+
+
+String API Updates
+	isBlank()
+		System.out.println(" ".isBlank());//true
+		System.out.println(" ".isEmpty());//false
+		System.out.println("".isBlank());//true
+		System.out.println("".isEmpty());//true
+		System.out.println(" a".isBlank());//false
+		System.out.println(" a".isEmpty());//false
+	lines()
+		String str = "I\nam\nthe\ncreator\nof\nmy\ndestiny.";
+		System.out.println(str);
+		System.out.println(str.lines().collect(Collectors.toList()));
+	strip()
+		String str = "I\nam\nthe creator of my destiny.";
+		System.out.println(str);
+		char c='\u2000';
+		str=c+str;
+		System.out.println(str);
+		System.out.println(str.trim());
+		System.out.println(str.strip());
+		System.out.println(str.stripLeading());
+		System.out.println(str.stripTrailing());
+		System.out.println(str.stripIndent());//SInce Java 15
+	repeat()
+		System.out.println("-".repeat(10));//----------
+
+
+
+File API Updates
+			try {
+				Path path = Files.writeString(Files.createTempFile("test", ".txt"), "Java is cool");
+				System.out.println(path);//C:\Users\java\AppData\Local\Temp\test16671983728794224527.txt
+				String content=Files.readString(path);
+				System.out.println(content);//Java is cool
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+isEmpty() on Optional class
+		Optional<String> optionalString = Optional.empty();
+		System.out.println(optionalString.isEmpty());//true
+		System.out.println(!optionalString.isPresent());//true
+
+
+
+Deprecations & removals
+	java.xml.ws
+	java.xml.bind
+	java.xml.activation
+	java.xml.corba
+	java.se.ee
+	java.transaction
+	
+	
+HttpClient API
+
+	HttpUrlConnection
+		Lot of code
+		Http1 not Http2
+		Only one call at a time
+		SLow
+		Text Only
+			It didn't support binary streaming 
+		We could not make Ajax calls.
+		it was synchronous.
+			We could make a call, then do some other work instead of waiting.
+			So it was blocking.
+			
+	That is the reason we are developers for a long time. In Java1 all the way to Java 9, 
+		we were using open source libraries like Apache HTTP client
+		If you had to make HTTP calls from your Java application thanks to HTTP client in Java 9,
+		it was introduced as a preview feature.
+		And in Java 11, it became permanent.
+		
+	module myhttpclientdemo{
+		requires java.net.http
+	}
+	
+	https://fakerestapi.azurewebsites.net/index.html
+	
+	Create HttpClient Object
+	Create HttpRequest Object
+	Send the request
+	Process the response	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		

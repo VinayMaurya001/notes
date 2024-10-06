@@ -1,0 +1,447 @@
+Backend(firebase) setup
+	https://firebase.google.com/
+	https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/
+	
+
+Angular Module for Http Requests
+	import { HttpClientModule } from '@angular/common/http';
+	imports: [BrowserModule, FormsModule, HttpClientModule],
+ 
+	constructor(private http: HttpClient) {}
+	import { HttpClient } from '@angular/common/http';
+ 
+ 
+ 
+Sending a POST request
+	this
+		.httpClient
+			.post('https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/posts.json',postData)
+				.subscribe( response=>{
+      				console.log('Response: '+response);
+    			});
+  
+  
+Getting Data
+	 this.httpClient.get('https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/posts.json').subscribe( response=>{
+      console.log('Response: '+response);
+      console.log(response);
+    });
+    
+    
+Using RsJS operator to transform response data
+    import { map } from 'rxjs/operators';
+    private fetchPosts() {
+    this.httpClient.get('https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/posts.json')
+    .pipe(map(response=>{
+      const postsArray=[];
+      for(const key in response){
+        postsArray.push({...response[key],id:key});
+      }
+      return postsArray;
+    }))
+    .subscribe( response=>{
+      console.log('Response: '+response);
+      console.log(response);
+    });
+  }
+  
+  
+  
+Using Types with the HttpClient
+	export interface Post {
+    	title: string;
+    	content: string;
+    	id?: string;
+  	}
+  	private fetchPosts() {
+    this.httpClient.get<{[key:string]:Post}>('https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/posts.json')
+    .pipe(map((response)=>{
+      const postsArray:Post[]=[];
+      for(const key in response){
+        postsArray.push({...response[key],id:key});
+      }
+      return postsArray;
+    }))
+    .subscribe( response=>{
+      console.log('Response: '+response);
+      console.log(response[0].content);
+    });
+  }
+  
+  private fetchPosts() {
+    this.httpClient.get<{[key:string]:Post}>('https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/posts.json')
+    .pipe(map((response)=>{
+      const postsArray:Post[]=[];
+      for(const key in response){
+        postsArray.push({...response[key],id:key});
+      }
+      return postsArray;
+    }))
+    .subscribe( response=>{
+      console.log('Response2: '+response);
+      console.log(response[1].content);
+       this.loadedPosts=response;
+    });
+  }
+  
+  this.httpClient.post<{name:string}>('https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/posts.json',postData).subscribe( response=>{
+      console.log('Response: '+response);
+    });
+    
+    
+    
+    
+Showing a Loading Indicator
+	isFetching=false;
+	private fetchPosts() {
+    this.isFetching=true;
+    this.httpClient.get<{[key:string]:Post}>('https://ng-complete-guide-vinay-default-rtdb.firebaseio.com/posts.json')
+    ....
+    .)
+    .subscribe( response=>{
+      this.loadedPosts=response;
+      this.isFetching=false;
+    });
+    }
+    <p *ngIf="isFetching">Loading...</p>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+Using a Service for Http Requests
+
+@Injectable({ providedIn: 'root' })
+export class PostsService {
+  error = new Subject<string>();
+  constructor(private http: HttpClient) {}
+  createAndStorePost(title: string, content: string) {
+    const postData: Post = { title: title, content: content };
+    this.http
+      .post<{ name: string }>(
+        'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
+        postData
+      )
+      .subscribe(
+        responseData => {
+          console.log(responseData);
+        }
+       );
+  }
+  fetchPosts() {
+    return this.http
+      .get<{ [key: string]: Post }>(
+        'https://ng-complete-guide-c56d3.firebaseio.com/posts.json'
+      )
+      .pipe(
+        map(responseData => {
+          const postsArray: Post[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postsArray.push({ ...responseData[key], id: key });
+            }
+          }
+          return postsArray;
+        })
+      );
+  }
+  deletePosts() {
+    return this.http.delete(
+      'https://ng-complete-guide-c56d3.firebaseio.com/posts.json'
+    );
+  }
+}
+
+export class AppComponent implements OnInit, OnDestroy {
+  loadedPosts: Post[] = [];
+  isFetching = false;
+  error = null;
+  private errorSub: Subscription;
+
+  constructor(private http: HttpClient, private postsService: PostsService) {}
+
+  ngOnInit() {
+    this.isFetching = true;
+    this.postsService.fetchPosts().subscribe(
+      posts => {
+        this.isFetching = false;
+        this.loadedPosts = posts;
+      }
+    );
+  }
+  onCreatePost(postData: Post) {
+    this.postsService.createAndStorePost(postData.title, postData.content);
+  }
+
+  onFetchPosts() {
+    this.isFetching = true;
+    this.postsService.fetchPosts().subscribe(
+      posts => {
+        this.isFetching = false;
+        this.loadedPosts = posts;
+      }
+    );
+  }
+}
+
+
+
+
+
+Sending a Delete Request
+
+deletePosts() {
+    return this.http.delete(
+      'https://ng-complete-guide-c56d3.firebaseio.com/posts.json'
+    );
+  }
+  
+ onClearPosts() {
+    this.postsService.deletePosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
+  }
+  
+  
+  
+  
+Handling Errors
+	this.postsService.fetchPosts().subscribe(
+      posts => {
+        this.isFetching = false;
+        this.loadedPosts = posts;
+      },
+      error => {
+        this.error = error.message;
+        console.log(error);
+      }
+      
+      
+Using Subjects for Error handling
+export class PostsService {
+  error = new Subject<string>();
+  constructor(private http: HttpClient) {}
+  createAndStorePost(title: string, content: string) {
+    const postData: Post = { title: title, content: content };
+    this.http
+      .post<{ name: string }>(
+        'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
+        postData
+      )
+      .subscribe(
+        responseData => {
+          console.log(responseData);
+        },
+        error => {
+          this.error.next(error.message);
+        }
+      );
+  }
+  export class AppComponent implements OnInit, OnDestroy {
+   private errorSub: Subscription;
+   ngOnInit() {
+    this.errorSub = this.postsService.errorSubject.subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
+   ngOnDestroy() {
+    this.errorSub.unsubscribe();
+  }}
+  
+  
+  
+  
+  
+  
+Using the catchError operator
+ fetchPosts() {
+    return this.http
+      .get<{ [key: string]: Post }>(
+        'https://ng-complete-guide-c56d3.firebaseio.com/posts.json'
+      )
+      .pipe(
+        map(responseData => {
+          const postsArray: Post[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postsArray.push({ ...responseData[key], id: key });
+            }
+          }
+          return postsArray;
+        }),
+        catchError(errorRes => {
+          // Send to analytics server
+          return throwError(errorRes);
+        })
+      );
+  }
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+Setting Headers
+	{   headers: new HttpHeaders({ 'Custom-Header': 'Hello' })   }
+	
+	
+Adding Query Params
+	this.http.get<{ [key: string]: Post }>('https://ng-complete-guide-c56d3.firebaseio.com/posts.json?name=vinay&age=30)
+      
+	{   
+		headers: new HttpHeaders({ 'Custom-Header': 'Hello' })   
+		params:  new HttpParams().set('name','vinay')
+	}
+  
+  	let searchParams = new HttpParams();
+    searchParams = searchParams.append('print', 'pretty');
+    searchParams = searchParams.append('custom', 'key');
+  	{
+          headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+          params: searchParams
+    }
+    
+    
+Observing different types of responses
+	{
+          headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+          observe: 'response'
+    }
+	{
+          headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+          observe: 'body'
+    }
+	{
+          headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+          observe: 'events'
+    }
+	deletePosts() {
+    	return this.http
+      		.delete('https://ng-complete-guide-c56d3.firebaseio.com/posts.json', 
+      		{
+        		observe: 'events'
+      		})
+      		.pipe(
+        		tap(event => {   //tap will not affect subscribe functionality
+          			console.log(event);
+          			if (event.type === HttpEventType.Sent) {
+            			// ...
+          			}
+         			if (event.type === HttpEventType.Response) {
+            			console.log(event.body);
+          			}
+        		})
+      		);
+  	}
+
+  	
+Changing the Response Body type
+	{
+        		observe: 'events',
+        		responseType: 'text'  //defualt is json
+     }
+
+     
+Introducing Interceptors
+   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+   ],
+   auth-interceptor.service.ts
+	import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
+	export class AuthInterceptorService implements HttpInterceptor {
+  		intercept(req: HttpRequest<any>, next: HttpHandler) {
+    		console.log('Request is on its way');//runs before your request leaves your app
+    		return next.handle(req);
+  		}
+	}
+	
+	Interceptor runs code before your request leaves your app & right before the response is forwarded to the subscribe.
+	
+	
+Manipulating Request Objects
+	Request Object is Immutable
+	export class AuthInterceptorService implements HttpInterceptor {
+  		intercept(req: HttpRequest<any>, next: HttpHandler) {
+    		const modifiedReq=req.clone({headers: req.headers.append('name','vinay')});
+    		console.log('Request is on its way');
+    		return next.handle(modifiedReq);
+  		}
+	}
+	
+	
+	
+Response Interceptors
+	return next.handle(modifiedReq).pipe(tap(event=>{
+      console.log(event);
+      if(event.type == HttpEventType.Response){
+        console.log('Response Arrived:');
+        console.log(event.body);
+      }
+    }));
+    
+    
+Multiple Interceptors
+	logging-interceptor.service.ts
+		export class LoggingInterceptorService implements HttpInterceptor {
+  			intercept(req: HttpRequest<any>, next: HttpHandler) {
+    			console.log('Outgoing request');
+    			console.log(req.url);
+    			console.log(req.headers);
+    			return next.handle(req).pipe(
+    			  tap(event => {
+        				if (event.type === HttpEventType.Response) {
+        					  console.log('Incoming response');
+        					  console.log(event.body);
+        				}
+      				})
+    			);
+  			}
+		}
+		
+		providers: [
+    	{
+    	  provide: HTTP_INTERCEPTORS,
+    	  useClass: LoggingInterceptorService,
+    	  multi: true
+    	},
+    	{
+    	  provide: HTTP_INTERCEPTORS,
+    	  useClass: AuthInterceptorService,
+    	  multi: true
+    	}
+  		],
+  		
+  		
+  		
+Useful Resources:
+	Official Docs: https://angular.io/guide/http

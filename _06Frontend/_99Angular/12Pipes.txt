@@ -1,0 +1,96 @@
+Introduction
+ To Transform Output
+ {{name | uppercase}}
+ 
+ 
+Using pipes
+ 	{{ server.name }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date}}
+ 
+Parametrizing Pipes
+ 	{{ server.started | date:'fullDate'}}
+ 	
+Where to learn more about pipes?
+	https://angular.io/api?query=pipe
+	
+	
+	
+Chaining Multiple pipes
+	{{ server.started | date:'fullDate' | uppercase}}
+	{{ server.started | uppercase | date:'fullDate' }} // Error!
+	
+	
+Creating a custom pipe
+	ng generate pipe shorten
+	{{ server.name | shorten}}
+	@Pipe({
+  		name: 'shorten'
+	})
+	export class ShortenPipe implements PipeTransform {
+  		transform(value: any) {
+    		if (value.length > 10) {
+      			return value.substr(0, 10) + ' ...';
+    		}
+    		return value;
+  		}
+	}
+	
+Parametrizing a custom pipe
+	{{ server.name | shorten:10}}
+	@Pipe({
+  		name: 'shorten'
+	})
+	export class ShortenPipe implements PipeTransform {
+  		transform(value: any, limit: number) {
+    		if (value.length > limit) {
+      			return value.substr(0, limit) + ' ...';
+    		}
+    		return value;
+  		}
+	}
+	
+	
+	
+Creating a filter pipe
+	 <input type="text" [(ngModel)]="filteredStatus">
+	 <li class="list-group-item" *ngFor="let server of servers | filter:filteredStatus:'status'">
+          <span class="badge"> {{ server.status }}</span>
+          <strong>{{ server.name | shorten:15 }}</strong>
+     </li>
+	  filteredStatus = '';
+@Pipe({
+  name: 'filter'
+})
+export class FilterPipe implements PipeTransform {
+  transform(value: any, filterString: string, propName: string): any {
+    if (value.length === 0 || filterString === '') {
+      return value;
+    }
+    const resultArray = [];
+    for (const item of value) {
+      if (item[propName] === filterString) {
+        resultArray.push(item);
+      }
+    }
+    return resultArray;
+  }
+}
+	  
+	  
+Pure & Impure Pipes(or How to fix the filter pipe)
+	@Pipe({
+  		name: 'filter',
+  		pure: false
+	})
+
+
+
+Understanding the Async pipe
+	appStatus = new Promise((resolve, reject) => {
+    	setTimeout(() => {
+    	  resolve('stable');
+    	}, 2000);
+  	});
+  	{{ appStatus | async}}
+  	
+  	
+  	

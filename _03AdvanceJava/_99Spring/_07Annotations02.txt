@@ -96,3 +96,7 @@ Spring Boot Externalized Configuration
 	spring.autoconfigure.exclude:=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 	
 
+
+@ComponentScan
+@EntityScan
+@EnableJpaRepositories

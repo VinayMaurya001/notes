@@ -41,16 +41,17 @@ Lambda Expression
 			Reside in permanent memory of JVM (Method Area)
 			
 	Common ways to use the expression
-		Assignment to a functional Interface —> Predicate<String> stringPredicate = s -> s.isEmpty();
-		Casting it to a functional type —> (Predicate<String>) s -> s.isEmpty()
-		Can be passed as a parameter that has a functional type —> stream.filter(s -> s.isEmpty())
-		Returning it from a function —> return s -> s.isEmpty()
+		Assignment to a functional Interface ï¿½> Predicate<String> stringPredicate = s -> s.isEmpty();
+		Casting it to a functional type ï¿½> (Predicate<String>) s -> s.isEmpty()
+		Can be passed as a parameter that has a functional type ï¿½> stream.filter(s -> s.isEmpty())
+		Returning it from a function ï¿½> return s -> s.isEmpty()
 
 Functional Interface And Lambda Expression
 	To invoke Lambda expressions's functionality, Functional Interface is required.
 	We can use Functional Interface reference to refer Lambda Expression.
 	Where ever Functional Interface concept is applicable there we can use Lambda Expressions.
-
+	Lambda expression is basically express instance of functional interface.
+	
 	Example:
 	interface MyAddInterface {
 		int sumMethod(int a,int b);
@@ -188,7 +189,7 @@ How to write Lambda expression
 			}
 		}
 		
-		According to the “effectively final” concept, a compiler treats every variable as final, as long as it is assigned only once.
+		According to the ï¿½effectively finalï¿½ concept, a compiler treats every variable as final, as long as it is assigned only once.
 	    It is safe to use such variables inside lambdas because the compiler will control their state and 
 		    trigger a compile-time error immediately after any attempt to change them.
 	For example, the following code will not compile:
@@ -202,15 +203,15 @@ How to write Lambda expression
 			Variable 'localVariable' is already defined in the scope.
 	This approach should simplify the process of making lambda execution thread-safe.
  b)Protect Object Variables from Mutation
-	One of the main purposes of lambdas is use in parallel computing – 
+	One of the main purposes of lambdas is use in parallel computing ï¿½ 
 		which means that they're really helpful when it comes to thread-safety.
-	The “effectively final” paradigm helps a lot here, but not in every case. 
+	The ï¿½effectively finalï¿½ paradigm helps a lot here, but not in every case. 
 	Lambdas can't change a value of an object from enclosing scope. 
 	But in the case of mutable object variables, a state could be changed inside lambda expressions.
 		int[] total = new int[1];
 		Runnable r = () -> total[0]++;
 		r.run();
-		This code is legal, as total variable remains “effectively final”. 
+		This code is legal, as total variable remains ï¿½effectively finalï¿½. 
 		But will the object it references to have the same state after execution of the lambda? No!
 	Keep this example as a reminder to avoid code that can cause unexpected mutations.
 		
@@ -383,9 +384,9 @@ e)Use Method References
 		String::toLowerCase;
 		This is not always shorter, but it makes the code more readable.
 	MethodReference is simplified version of Lambda.????????
-2)Use “Effectively Final” Variables
+2)Use ï¿½Effectively Finalï¿½ Variables
 	Accessing a non-final variable inside lambda expressions will cause the compile-time error. 
-		But it doesn’t mean that you should mark every target variable as final.
+		But it doesnï¿½t mean that you should mark every target variable as final.
 	This approach should simplify the process of making lambda execution thread-safe.
 3)Lambda with Existing Libraries
 	The lambda expression approach can be used for any suitable interface from old libraries. 

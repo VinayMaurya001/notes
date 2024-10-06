@@ -1,4 +1,4 @@
-
+https://www.indmoney.com/stocks/category/nifty-50-stocks
 
 For image to text
 	https://www.ocr2edit.com/convert-to-txt
@@ -35,4 +35,16 @@ For emoji picker
 	
 Grammerly extension for English grammer check 
 	https://chromewebstore.google.com/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen
+	
+UML diagram tooll online free
+	https://online.visual-paradigm.com/drive/#diagramlist:proj=0&dashboard
+	
+	
+Free rest APIs
+		https://fakerestapi.azurewebsites.net/index.html
+		country
+		
+		
+Temp EMail
+	https://www.mailinator.com/
 	

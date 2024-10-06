@@ -7,3 +7,7 @@ The Spliterator interface in Java is used to traverse the elements of a collecti
 	By implementing the Spliterator interface, a class can be used in the parallel stream processing of collections.
 	
 	
+Difference between Iterator and Spliterator
+Iterator was introduced in jdk 1.2 while Spliterator is introduced in jdk 1.8
+Iterator is used for Collection API while Spliterator is used for Stream API
+Iterator can be used for iterating the elements in Collection in sequential order while Spliterator can be used for iterating the Stream elements in parallel or sequential order.

@@ -1,0 +1,901 @@
+	
+To declare variables in typescript we can use var/let/const keywords
+
+
+Diff null vs undefined
+var x: any;
+var y = null;
+alert(typeof x); //undefined
+alert(typeof y); //object
+
+
+
+Arrays methods:
+	length : return no of elements
+		var arr:any=[10,20,30,40,"scott"]
+		alert(arr.length) //5
+
+	push() & unshift()
+		push() : add an element at the end of array and returns total number of elements.
+			var arr:any=[10,20,30,40,50]
+			var val:number=arr.push(60)
+			alert(val)//6
+			alert(arr)//10,20,30,40,50,60
+
+		unshift() : adds an element at the begining of array and returns total number of elements.
+			var arr:any=[10,20,30,40,50]
+			var val:number=arr.unshift(2)
+			alert(val);//6
+			alert(arr);//2,10,20,30,40,50
+
+	pop() & shift()
+		pop() : removes the last element and returns value of that element
+			var arr:any=[10,20,30,40,50]
+			var val:number=arr.pop()
+			alert(val);//50
+			alert(arr);//10,20,30,40
+	
+		shift() : removes the first element of array and returns value of that element
+			var arr:any=[10,20,30,40,50]
+			var val:number=arr.shift()
+			alert(val);//10
+			alert(arr);//20,30,40,50
+
+	splice() : To add/remove elements based on specific position.
+		var arr2: any = [10, 20, 30, 40, 50];
+		var element2: number = arr2.splice(2, 2);
+		//alert(element2); //30,40
+		//alert(arr2); //10,20,50
+
+		var arr: any = [10, 20, 30, 40, 50];
+		var element: number = arr.splice(2, 2, 111, 222, 333);
+		//alert(element); //30,40
+		//alert(arr); //10,20,111,222,333,50
+
+		var arr3: any = [10, 20, 30, 40, 50];
+		var element3: number = arr3.splice(2, 0, 111, 222);
+		alert(element3); //empty
+		alert(arr3); //10,20,111,222,30,40,50
+
+	slice(): using this function we can get some part of array
+		var arr:any=[10,20,30,40,50]
+		var val:number=arr.slice(2,4)
+		alert(val); //30,40 ((+ve started from start))
+		alert(arr); //10, 20, 30, 40, 50
+		alert(arr.slice(0, -1)); //10, 20, 30, 40 (-ve started from end)
+
+	for..of : 
+		same as for..in but holds values of elements.
+		var arr: any = [10, 20, 30, 40, 50];
+		for (var value of arr) {
+			alert(value); //10, 20, 30, 40, 50
+		}
+
+	for..in : 
+		Runs a loop througn elements of array and holds the index of elements from 0 to n-1
+		var arr: any = [10, 20, 30, 40, 50];
+		for (var index in arr) {
+		  alert(index); //0,1,2,3,4
+		}
+
+	forEach() : 
+		Runs a loop through the elements of array and executes a function for every element.
+		var arr: any = [10, 20, 30, 40, 50];
+		arr.forEach(function (x, y) {
+  			console.log(x + " ", y);
+		});
+		10  0 
+		20  1
+		30  2
+		40  3
+		50  4
+
+	map() : 
+		This function runs a loop through the elements of array and returns set values in the form of array.
+		Return values are equal to total number of elements.
+		var arr:any=[10,20,30,40,50]
+		var rv = arr.map(function (x, y) {
+  			console.log(x + " ", y);
+  			return x + y;
+		});
+		console.log(rv); //[10, 21, 32, 43, 54]
+
+		var arr: any = [10, 20, 30, 40, 50];
+		var rv = arr.map(function (x, y) {
+	  		console.log(x + " ", y);
+  			return x > 30;
+		});
+		console.log(rv); //[false, false, false, true, true]
+
+	filter() : 
+		Runs a loop through the elements of array are returns truth values
+		var arr: any = [10, 20, 30, 40, 50];
+		var rv = arr.filter(function (x, y) {
+		  console.log(x + " ", y);
+		  return x > 30;
+		});
+		console.log(rv); //[40,50]
+		
+
+	reduce() : 
+		returns a values based on given logic
+		var arr: any = [10, 20, 30, 40, 50];
+		var rv = arr.reduce(function (x, y) {
+		  console.log("loop: " + x + " ", y);
+		  // return x + y;
+		});
+		console.log(rv); 
+		loop: 10  20
+		loop: undefined  30
+		loop: undefined  40
+		loop: undefined  50
+		undefined
+
+		var arr: any = [10, 20, 30, 40, 50];
+		var rv = arr.reduce(function (x, y) {
+		  console.log("loop: " + x + " ", y);
+		  return x + y;
+		});
+		console.log(rv);
+		loop: 10  20
+		loop: 30  30
+		loop: 60  40
+		loop: 100  50
+		150
+		
+		var arr: any = [10, 20, 30, 40, 50];
+		var rv = arr.reduce(function (x, y) {
+		  console.log("loop: " + x + " ", y);
+		  return "hi";
+		});
+		console.log(rv);
+		loop: 10  20
+		loop: hi  30
+		loop: hi  40
+		loop: hi  50
+		hi
+
+
+		join() : 
+			To join the elements of array as string
+			var arr:any=[10,20,30,40,50]
+			var str=arr.join("/")
+			alert(str);//10/20/30/40/50
+
+
+String methods
+		split() : 
+			To split a string as array eleemnts based on input delimiter.
+			var str: string = "welcometoall";
+			var arr: any = str.split("o");
+			console.log(arr); //['welc', 'met', 'all']
+			
+			
+			
+Object
+object creation : 
+We can create objects in different ways:
+1)using object literals : 
+2)using Object.create() function
+3)using class
+
+1)using object literals : 
+		var obj: any = {
+		  uname: "scott",
+		  city: "hyd",
+		  fun1: function () {
+		    alert("Exec...");
+		  },
+		};
+		alert(obj); //[object Object]
+		console.log(obj); //{uname: 'scott', city: 'hyd', fun1: �}
+		obj.fun1(); //Exec...
+
+
+2)Object.create() function
+		var obj: any = Object.create({
+		  uname: "scott",
+		  city: "hyd",
+		});
+		console.log(obj); //{}[[Prototype]]: Objectcity: "hyd"uname: "scott"[[Prototype]]: Object
+
+
+3)we can also create object using class.
+	new : 
+		new keyword allocates memory to class object.
+		class cls1 {
+		  sno: number = 100;
+		  fun1() {
+		    alert("Func exec...");
+		  }
+		}
+		var obj: cls1 = new cls1();
+		alert(obj.sno); //100
+		obj.fun1(); //Func exec...
+
+
+Example:
+		var obj: any = [
+		  {
+		    uname: "scott",
+		    wife: "sw",
+		  },
+		  { uname: "amith", wife: "aw" },
+		];
+		console.log(obj);
+		alert(obj[0].uname);
+	
+		var obj: any = {
+		  uname: "amith",
+		  wife: "aw",
+		  child: [{ name: "as1" }, { name: "as2" }],
+		};
+		alert(obj.child[0].name); //as1
+		
+		var obj: any = {
+		  uname: "amith",
+		  wives: [
+		    {
+		      name: "sw1",
+		      child: { sons: ["sw1s1", "sw1s2"], dau: ["sw1d1", "sw1d2"] },
+		    },
+		    {
+		      name: "sw2",
+		      child: { sons: ["sw2s1", "sw2s2"], dau: ["sw2d1", "sw2d2"] },
+		    },
+		  ],
+		};
+		alert(obj.wives[1].child.dau[1]);//sw2d2
+		
+		var obj: any = {
+		  cmp: {
+		    hyd: { prog: ["hp1", "hp2"], admin: ["ha1", "ha2"] },
+		    chennai: { prog: ["cp1", "cp2"], admin: ["ca1", "ca2"] },
+		  },
+		};
+		alert(obj.cmp.chennai.admin[0]); //ca1
+
+
+
+
+for..in : 
+		using this function we can run a loop throught object properties
+		var obj: any = {
+		  uname: "scott",
+		  city: "chennai",
+		};
+		for (var key in obj) {
+		  console.log(key); //uname,city
+		}
+		for (var x in obj) {
+		  console.log(obj[x]); //scott, chennai
+		}
+Object.keys() : 
+		This function returns all the keys of object
+		alert(allKeys);//uname,city
+		var allKeys:any=Object.keys(obj)
+Object.values() : 
+		Returns all the values of object
+		var allValues:any=Object.values(obj)
+		alert(allValues);//scott, chennai
+Object.entries() : 
+		This function returns all properties of object as array elements. Each property is an array.
+		var allEntries: any = Object.entries(obj);
+		console.log(allEntries); //[["uname", "scott"], ["city", "chennai"]];
+hasOwnProperty() : 
+	using this function we can cheak the input property is own property or not in specified object
+	alert(obj.hasOwnProperty("uname"));//true
+
+
+
+constructor : 
+	It is a type of function use to create class object. 
+	Every class contains pre-defined constructor.
+	We can also create user defined constructor to execute some statements at the time object  creation.
+	"__constructor" is a keyword to create constructors.
+	Multiple constructor implementations are not allowed.
+	
+	We use constructor for:
+		initialize the object property at the time of object creation
+		inject the object
+	
+		class cls1 {
+		  constructor(x: number) {
+		    alert("Cons exec...");
+		  }
+		
+		  fun1() {
+		    alert("Fun1 exec");
+		  }
+		}
+		
+		var obj: cls1 = new cls1(10);
+		obj.fun1();
+
+		class cls1 {
+		  constructor(private x: number) {
+		    alert(this.x);
+		  }
+		  fun1() {
+		    alert(this.x);
+		  }
+		}
+		var obj: cls1 = new cls1(10);
+		obj.fun1();
+
+		
+this : 	
+	using this keyword we can access the members of class from the methods of same class.
+		class cls1 {
+		  sno: number = 100;
+		  fun1() {
+		    var sno: number = 333;
+		    alert(sno); //333
+		    alert(this.sno); //100
+		  }
+		}
+		var obj: cls1 = new cls1();
+		obj.fun1();
+
+
+
+
+
+Inheritance : 
+	It is a concept of sharing the members of a class to another class. 
+	Using extends keyword we can inherit the members of class.
+Types of Inheritances 
+Single Inheritance : 
+	In this concept we have only 2 classes one is parent class another one is derived class.
+
+		class cls1 {
+		  fun1() {
+		    alert("fun1");
+		  }
+		}
+		class cls2 {
+		  fun2() {
+		    alert("fun2");
+		  }
+		}
+		var obj: cls1 = new cls2(); //CTE,Property 'fun1' is missing in type 'cls2' but required in type 'cls1'.
+
+		class cls1 {
+		  fun1() {
+		    alert("fun1");
+		  }
+		}
+		class cls2 {
+		  fun2() {
+		    alert("fun2");
+		  }
+		  fun1() {
+		    alert("fun2");
+		  }
+		}
+		var obj: cls1 = new cls2(); //No CTE
+Multiple Inheritance : 
+		A child class can have many parent classes.
+		It is not supported in TypeScript
+Multi level Inheritance : 
+		In this concept a class can behave as both parent and child class.
+		It is supported in TypeScript.
+		class cls1{
+		}
+		class cls2 extends cls1{
+		}
+		class cls3 extends cls2{}
+
+Hierarchical Inheritance : 
+		In this concept a class can have multiple derived classes.
+		class cls1{
+		}
+		class cls2 extends cls1{
+		}
+		class cls3 extends cls1{}
+Hybrid Inheritance : 
+		It is collection of single, multiple, multi-level and hierarchical inheritances.
+		Typescript not supports this concept.
+
+
+super : 
+	using super keyword we can access parent class members from derived/child class.
+		class cls1 {
+		  fun1() {
+		    alert("Fun1 from cls1");
+		  }
+		}
+		class cls2 extends cls1 {
+		  fun1() {
+		    alert("fun1 From class2");
+		  }
+		  fun2() {
+		    alert("Fun2");
+		    this.fun1(); //fun1 From class2
+		    super.fun1(); //Fun1 from cls1
+		  }
+		}
+		var obj: cls1 = new cls1();
+		//obj.fun1(); //Fun1 from cls1
+		var obj2: cls2 = new cls2();
+		//obj2.fun1(); //fun1 From class2
+		obj2.fun2();
+
+
+Access Modifiers for class members: 
+	using this concept we can specify the scope of accerssibility to class contents.
+	We can access class members from base class, derived class and from out side the class. 
+	Using access modifiers we can restrict the access of members.
+
+	private : These members we can access from base class only not from derived class and outside the class
+	protected : These members we can access from base class and derived class only but not from outside these two class
+	pubic : we can access from any location.
+	default is public
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+var/let : 	
+	using these keywords we can declare variables. 
+	var is function scope and let is block scope.
+	
+		function fun1() {
+		  {
+		    var x: number = 10;
+		    let y: number = 20;
+		  }
+		  alert(x);
+		  alert(y); // error(block scope)
+		}
+		fun1();
+		
+		{
+		  var a: number = 333;
+		}
+		alert(a); //333
+		{
+		  let a2: number = 444;
+		}
+		alert(a2); //444
+		
+		for (var i: number = 1; i <= 3; i++) {
+		  alert(i);
+		}
+		alert(i); // Error
+		for (let i2: number = 1; i <= 3; i++) {
+		  alert(i2);
+		}
+		alert(i2); // Error
+
+
+
+
+function : 
+	function is set of executable statements to perform a task.
+
+		function fun1(){
+		  alert("From fun1")
+		}
+		fun1()
+		
+		We can pass arguments into functions.
+		
+		function fun1(x:number,y:number){
+		  alert(x+y)
+		}
+		fun1(10,20)
+		
+		Every function can return a value using return keyword
+		function fun1(): number {
+		  alert("Function exec..");
+		  return 100;
+		}
+		fun1();//Function exec..
+		var rv: any = fun1(); //Function exec..
+		alert(rv); //100
+		alert(fun1()); //Function exec.., 100
+		
+		
+Types of functions : 
+We can create functions in different ways
+1) Anonymous Function : 
+	It is a concept of function declaration with out any name
+		var x = function () {
+		  alert("From anonymous fun");
+		};
+		console.log(x); //� () {  alert("From anonymous fun");}
+		x(); //From anonymous fun
+2)Callback function : 
+	A callback function is a function which is scheduled to be called after some asynchronous processing is completed. 
+		function fun1(fun: any) {
+		  alert("From fun1");
+		  fun();
+		}
+		function fun2() {
+		  alert("From fun2");
+		}
+		function fun3() {
+		  alert("From fun3");
+		}
+		fun1(fun2); //From fun1 From fun2
+		fun1(fun3); //From fun1 From fun3
+3)Nested function : 
+	It is the concept of declaraion of function inside another function.
+		function fun1() {
+		  alert("From fun1");
+		  function fun2() {
+		    alert("From fun2");
+		  }
+		  fun2();
+		}
+		fun1();
+
+
+		var count = 0;
+		function fun1() {
+		  count++;
+		  console.log(count);
+		}
+		function fun2() {
+		  count = 222;
+		  console.log(count);
+		}
+		fun1(); //1
+		fun1(); //2
+		fun1(); //3
+		fun2(); //222
+		fun1(); //223
+		fun1(); //224
+		<input type="button" onclick="fun1()" value="111111" />
+    	<input type="button" onclick="fun2()" value="222222222" />
+
+		IIFE : 
+			Stands for immediate Invoking function Expression.	 
+			IIFE executes itself when the application executions starts.
+			IIFE excutes only 1 time when application loaded.
+	
+			(function () {
+			  alert("Exec...");
+			})();
+			var rv: any = (function () {
+			  return "Exec...";
+			})();
+
+			var count = 0;
+			var fun1: any = (function () {
+			  var count = 0;
+			  return function () {
+			    count++;
+			    alert(count);
+			  };
+			})();
+			function fun2() {
+			  count = 222;
+			  alert(count); //222
+			}
+			alert(fun1);
+			fun1(); //1
+			fun1(); //2
+			fun1(); //3
+			fun2(); //222
+			fun1(); //4
+			fun1(); //5
+
+4)Arrow Function/Lambda Function : 
+Using this concept we can create nested functions in class.
+We can also use arrow functions to define function in short way.
+
+		() => {};
+		
+		let fun1 = () => {
+		  alert("Arrow function");
+		};
+		fun1();
+		
+		var arr: any = [10, 20, 30, 40, 50];
+		var rv: any = arr.map((x, y) => x * 111);
+		alert(rv);
+		
+		class cls1 {
+		  sno: number = 100;
+		  fun1() {
+		    alert(this.sno);
+		    let fun2 = () => {
+		      alert(this.sno);
+		    };
+		    fun2();
+		  }
+		}
+		
+		var obj: cls1 = new cls1();
+		obj.fun1();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export : using this we can export the members of current file to outside
+import : To import the members of other file into current file
+		pro.ts
+		import {cls2} from "./pro1";
+		class cls1 extends cls2{}
+		
+		pro1.ts
+		export class cls2{
+		  fun2(){
+			alert("Exec...")
+		  }
+		}
+
+		
+		
+namespace : 
+	It is collection of classes. 
+	If you want to hold multiple classes as a group we can use namespaces. 
+	Using namespace keyword we can create namespaces.
+	Using export keyword we can export the classes of namespaces.
+
+		namespace ns1{
+		   export class cls1{}
+		   export class cls2{}
+		}
+		
+		var obj:ns1.cls1=new ns1.cls1()
+
+
+Abstract class : 
+	We can not create object for abstract classes.
+	Abstract classes are special type of classes contains abstract methods and non-abstract methods.
+	Abstract method contains only declarations not implementation. 
+	Abstract methods we can implement in derived classes according to our requirements.
+
+		abstract class ClsAbs {
+		  fun1() {
+		    alert("From fun1");
+		  }
+		  abstract fun2();
+		  abstract fun3();
+		}
+		abstract class cls2 {}
+		class cls1 extends ClsAbs {
+		  fun2() {
+		    console.log("Implementation From abstract method");
+		  }
+		  fun3() {}
+		}
+
+
+
+Interface : 
+	It is same as abstract class but we can not maintain non-abstract functions. 
+	Interfaces allows public access modifier only.
+	Using interface keyword we can create interfaces.	
+ 	Multiple inheritance is not possible with abstract classes but using interfaces we can do it
+
+	Abstract class can maintain both abstract and non-abstract methods. 
+	Interface can maintain only abstract methods.
+
+	Using extends keyword we can access abstract classes from derived class.
+	Using implements keyword we can access interfaces from derived classes.
+
+	Abstract class comes under partial abstraction.
+	Interface comes under fully abstraction.
+
+	In abstract class we can use any access modifiers.
+	Interfaces allows public access modifier only.
+
+
+		interface iface1 {
+		  fun1();
+		}
+		interface iface2 {
+		  fun2();
+		}
+		class cls1 implements iface1, iface2 {
+		  fun1() {
+		    alert("Implementation from derived class");
+		  }
+		  fun2() {}
+		}
+
+		interface iface1 {
+		  sno: number;
+		  uname: string;
+		}
+		class cls1 {
+		  fun1(): iface1 {
+		    return { uname: "scott", sno: 123 };
+		  }
+		  fun2(): iface1[] {
+		    return [{ uname: "scott", sno: 123 }];
+		  }
+		}
+
+		interface iface1 {
+		  fun1();
+		}
+		class cls1 {
+		  fun1() {
+		    console.log("Fun1 exec...");
+		  }
+		  fun2() {
+		    console.log("Fun2 exec...");
+		  }
+		}
+		var obj: iface1 = new cls1();
+		obj.fun1();//without crating any link using implements keyword
+		obj.fun2();//CTE
+
+
+Microsoft Visual Studio Code : It is an open source IDE to work with Angular,react,node ,....
+	For CodeFormat
+		ctrl+K+F
+		
+	Add extention 
+		Angular Snippets (Version 13)
+		
+		
+string : 
+	string is collection of characters. 
+	many functions are available to work with string
+
+	length : 
+		var str:string="welcome";
+		alert(str.length);//7
+	toUpperCase() : 
+	toLowerCase() : 
+	charAt() : To get the character of specified index.
+		var str:string="welcome";
+		alert(str.charAt(1));//e
+	indexOf() : 
+		we can get index value of input character from string.
+		var str: string = "welcome";
+		alert(str.indexOf("w")); //0
+		alert(str.indexOf("e", 1)); //1
+		alert(str.indexOf("e", 4)); //6
+		alert(str.indexOf("e", 7)); //-1
+		
+		var str: string = "welcome dhdhdhe ";
+		for (var i: number = 0; i < str.length; i++) {
+		  alert("hi");
+		  var ind: number = str.indexOf("e", i);
+		  if (ind == -1) break;
+		  console.log(ind);
+		  i = ind;
+		}
+	charCodeAt(): 
+		To get the ASCII number of a character based on its position from string.
+		var str: string = "Awelcome";
+		alert(str.charCodeAt(0));//65
+		a- 97
+		b-98
+		z-122
+		
+		A-65
+		B-66
+		Z-90
+		
+		space - 32
+		enter -13
+		bkspace - 8
+		tab - 9
+	String.fromCharCode() : 
+		using this function we can get the Character  of input ASCII.
+		alert(String.fromCharCode(49));//1
+	replace() : 
+		using this function we can replace a string with new string
+		var str: string = "welcome scott";
+		alert(str.replace("scott", "amith"));//welcome amith
+		var str: string = "welcome SCOTT hello scott";
+		alert(str.replace(/scott/, "amith")); //welcome SCOTT hello amith
+		var str2: string = "welcome SCOTT hello scott";
+		alert(str2.replace(/scott/i, "amith")); //welcome amith hello scott
+		var str3: string = "welcome SCOTT hello scott";
+		alert(str3.replace(/scott/gi, "amith")); //welcome amith hello amith
+	substr(): 
+		using this function we can get substring of input string
+		var str: string = "welcome";
+		alert(str.substr(2, 3)); //lco
+	substring(): 
+		almost similar as substr 
+		var str2: string = "welcome";
+		alert(str2.substring(2, 5)); //lco
+
+
+Events : 
+	Events we can use to execute a function when we perform an action on control.
+	Different types of events are available onclick,onmouseover,....
+		pro.ts
+		function fun1(){
+		    alert("Button clicked")
+		}
+		function fun2(){
+		    alert("Mouse over")
+		}
+		function fun3(){
+		    alert("Mouse out")
+		}
+		
+		index.html
+		
+		<script src="pro.js"></script>
+		<body>
+		    <input type="button" value="Click" onclick="fun1()"/>
+		    <br />
+		    <img src="apple.jpg" width="100px" onmouseover="fun2()" onmouseout="fun3()"/>
+		</body>
+
+
+
+
+
+Ajax: 
+	Ajax stand for Asynchronous Javascript and Xml
+	It is a web technology to send a request to server without submiting web page.
+	We can access api services using ajax	
+	Asynchronous : 
+		It is a process of sending a request to server with irrespective of previous response
+	Javascript : 
+		using javascript we can create ajax object and send it to server
+	Xml : 
+		data between browser and server transfers in the form of XML
+
+	fetch() : 
+		using fetch we can send a request to server without submit web page.
+	then() : 
+		It is a callback executes when fetch execution completed.
+
+			function getData() {
+			  fetch("https://restcountries.com/v3.1/all")
+			    .then((dt) => {
+			      return dt.json();
+			    })
+			    .then((dtt) => {
+			      dtt.map((conInfo) => {
+			        console.log(conInfo);
+			        console.log(conInfo.name.common + "-" + conInfo.population);
+			        console.log("hiii");
+			      });
+			    });
+			}
+			getData();
+
+
+
+
+

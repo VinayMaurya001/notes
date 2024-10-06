@@ -1,7 +1,6 @@
 https://www.udemy.com/course/docker-mastery/
 Docker Certified Associate.
 
-
 Revision
 	https://www.udemy.com/course/learn-docker/
 Next to read
@@ -47,3 +46,5 @@ https://github.com/in28minutes/docker-crash-course
 https://www.udemy.com/course/docker-course-with-java-and-spring-boot-for-beginners/
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
 https://www.udemy.com/course/learn-docker/
+Labs
+	https://beta.kodekloud.com/courses

@@ -1,0 +1,126 @@
+Introduction
+	What are design patterns?
+	Why we need design patterns?
+	How Are they identified?
+	Type of design pattern
+		GOF or Core design pattern
+		JEE design pattern
+		
+Design Pattern
+A design patterns are well-proved solution for solving the specific problem/task.
+A Design Pattern helps us identify Common Recurring Problems & provide ready to use & well-proved solution to solve that problems.
+Example:
+	Singleton Design Pattern (when we need to restrict to single object creation of a class), 
+	MVC Design Pattern (when we need to separate out the concerns)
+
+Best Practices
+Common Recurring Problems
+Proven Solutions
+Context/Environment
+
+Problem Given:
+Suppose you want to create a class for which only a single instance (or object) should be created and 
+	that single object can be used by all other classes.
+Solution:
+	Singleton design pattern is the best solution of above specific problem. 
+	So, every design pattern has some specification or set of rules for solving the problems. 
+
+But remember one-thing, design patterns are programming language independent strategies for solving the common object-oriented design problems. 
+	That means, a design pattern represents an idea, not a particular implementation.
+By using the design patterns you can make your code more flexible, reusable and maintainable. 
+	It is the most important part because java internally follows design patterns.
+To become a professional software developer, you must know at least some popular solutions (i.e. design patterns) to the coding problems.
+
+History of Design Pattern
+Idea of Design Pattern started in Civil Engineering space, 
+	where they have documented various patterns or problems they face in construction fields & the solutions for them, 
+	which can be reused across construction project.
+	Software field adopted this idea.
+	Gang Of Four(Eric Gamma, Richard Helm, Ralph Johnson, John Vlissides) popularized this idea in Software fields 
+		with thier book(Design Patterns: Elements of Reusabale Object Oriented Software).
+		
+		 
+Why Design Pattern?
+	Capture design Experience
+	Promote Reuse without having to reinvent the wheel
+	Define the System structure Better
+	Provide a common design language for developers
+	
+Advantage of design pattern:
+	They are reusable in multiple projects.
+	They provide the solutions that help to define the system architecture.
+	They capture the software engineering experiences.
+	They provide transparency to the design of an application.
+	They are well-proved and testified solutions since they have been built upon the knowledge and experience of expert software developers.
+
+By using the design patterns you can make your code more flexible, reusable and maintainable. 
+
+Design patterns don't guarantee an absolute solution to a problem. 
+They provide clarity to the system architecture and the possibility of building a better system.
+
+
+When should we use the design patterns?
+We must use the design patterns during the analysis and requirement phase of SDLC(Software Development Life Cycle).
+Design patterns ease the analysis and requirement phase of SDLC by providing information based on prior hands-on experiences.
+
+
+
+
+
+
+
+
+
+Categorization of design patterns of Java:
+	Core Java (or JSE) Design Patterns.
+	JEE Design Patterns.
+
+How Design Pattern are identified & formed?
+When we find a problem, we search Pattern Catlog for same problem & their solution.
+If we find problem in Pattern Catlog  we use that patern & solution.
+If we not found problem in Patter Catlog then we document the Problem & Solution with Pattern template. 
+	This will become a candidate pattern. 
+	If in future this problem repeats across multiple applications/ projects and we can solve the using same solution.
+	Then this Candidate Pattern will become a Design Pattern.And we can add to a pattern catalog as a Design Pattern.
+	
+Pattern Catlog in Java World
+	GOF/core pattern catlog
+		Creational
+		Structural
+		Behavioral
+	JEE pattern catlog
+	 
+	 
+Creational Design Pattern
+	It provide a guideline to instantiate a single or group of objects.
+	
+Structural Design Pattern
+	It provide a manner to define relationship b/w classes.
+	WHen one parts change, entire structure does not chnages
+Behavioral
+	It define how the communication should happens among classes & objects.
+	
+
+Java EE Pattern Catlog
+Presentation Layer & Integration Layer(Integrating/COmmunication with Other application)
+Business/Service Layer
+Data Access Layer
+
+Presentation Layer Desing Patterns
+	Intercepting Filter
+	Font Controller
+	MVC
+	Context Object
+	
+Business/Service Layer Desing Patterns
+	Business Delegate
+	Transfer Object
+	Session Facade
+
+Data Access Layer Desing Patterns
+	Data Access Object
+
+Integration Layer Desing Patterns
+	Service Activator
+	Web Service Broker
+	

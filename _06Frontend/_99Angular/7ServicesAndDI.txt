@@ -1,0 +1,120 @@
+Services
+
+Services : 
+	Service is single-ton object. 
+	If we want to share a signleton class through many component we can use services. 
+	Service is creating only one object at the time of injecting into component that can be sharable with multiple components.
+
+	@Injectable() is a decorator to create service classes 
+				Alternatively older ways , we can use providers in NgModule for simple class (ng g class myCommonClass)
+				@NgModule({
+					  providers: [MyCommonClass],
+				}
+	@Inject()  is a decorator to inject service class into component. 
+			constructor(@Inject(Common) public commonObject:Common) { }
+			Alternatively newer way, we should use   constructor(public common: MyCommonClass) {}
+	These decorators are available in core package of @angular.
+	
+	ng g class myCommonClass
+	
+	ng g service myService
+			@Injectable({
+  					providedIn: 'root'
+			})
+			export class MyServiceService {}
+			And inject in any class  using -
+					constructor(public common: MyCommonClass) {}
+	
+	
+	
+First Service
+logging.service.ts
+export class LoggingService {
+  logStatusChange(status: string) {
+    console.log('A server status changed, new status: ' + status);
+  }
+}
+const logService=new LoggingService();//Not recommended way 
+logService.logStatusChange('Active');
+
+
+Injecting Service into Component
+@Component({
+ ....,
+  providers: [LoggingService]
+})
+constructor(private logService:LoggingService){}
+this.logService.logStatusChange('Active');
+
+
+Hierarchical Injector
+AppModule  
+	Same Instance of Service is Available Application-wide
+AppComponent 
+	Same Instance of Service is Available for all Components (but not for other services)
+Any Other Component
+	Same Instance of Service is Available for the Component & all its child components
+
+
+
+Injecting Services into Services
+@Injectable()
+export class AccountsService {
+	constructor(private loggingService: LoggingService) {}
+  	addAccount(name: string, status: string) {
+    		this.loggingService.logStatusChange(status);
+  	}
+}
+@Injectable()
+export class LoggingService {
+  logStatusChange(status: string) {
+    console.log('A server status changed, new status: ' + status);
+  }
+}
+
+Using Services for Cross-Component Commnunication
+@Injectable()
+export class AccountsService {
+  statusUpdated = new EventEmitter<string>();
+}
+export class AccountComponent {
+  constructor(private accountsService: AccountsService) {}
+  onSetTo(status: string) {
+    this.accountsService.statusUpdated.emit(status);
+  }
+}
+export class NewAccountComponent {
+  constructor(private accountsService: AccountsService) {
+    this.accountsService.statusUpdated.subscribe(
+      (status: string) => alert('New Status: ' + status)
+    );
+  }
+}
+
+
+
+
+A Different Way Of Injecting Services
+	If you're using Angular 6+ (check your package.json  to find out), you can provide application-wide services in a different way.
+	Instead of adding a service class to the providers[]  array in AppModule , you can set the following config in @Injectable() :
+
+		@Injectable({providedIn: 'root'})
+		export class MyService { ... }
+		This is exactly the same as:
+			export class MyService { ... }
+			and
+			import { MyService } from './path/to/my.service';
+			@NgModule({
+    			...
+    			providers: [MyService]
+			})
+			export class AppModule { ... }
+	Using this syntax is completely optional, the traditional syntax (using providers[] ) will also work.
+	The "new syntax" does offer one advantage though: 
+		Services can be loaded lazily by Angular (behind the scenes) and redundant code can be removed automatically. 
+		This can lead to a better performance and loading speed - though this really only kicks in for bigger services and apps in general.
+
+		
+		
+		
+		

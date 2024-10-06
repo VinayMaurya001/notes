@@ -1,0 +1,258 @@
+What are Classes?
+	Blueprints for Objects
+	Classes make creation of multiple, similar objects much easier.
+		Class-based creation is an alternative to using object literals.
+		
+Creating a First Class
+  
+class Department {
+    name1: string;
+  
+    constructor(n: string) {
+      this.name1 = n;
+    }
+  
+    describe() {
+     //   console.log('Department: ' + name1);//CTE
+        console.log('Department: ' + this.name1);
+    }
+
+    describe2(this:Department) {
+        //   console.log('Department: ' + name1);//CTE
+           console.log('Department: ' + this.name1);
+    }
+  }
+  
+
+ Compiling class to JavaScript
+ 
+ 
+ Constructor Functions & The "this" Keyword
+ 
+  const accounting = new Department('Accounting');
+  //console.log(accounting);
+  //console.log(accounting.name1);
+
+
+  //accounting.describe();//Accounting
+  //accounting.describe2();//Accounting
+  
+  const accountingCopy = {  describe: accounting.describe };
+  accountingCopy.describe();//undefined
+  //accountingCopy.describe2();//CTE
+
+  
+  const accountingCopy2 = { name1: 'DUMMY2', describe: accounting.describe };
+  accountingCopy2.describe();//DUMMY2
+  //accountingCopy2.describe2();//CTE
+
+  const accountingCopy3 = { name1: 'DUMMY3', describe2: accounting.describe2 };
+  //accountingCopy3.describe();//CTE
+  accountingCopy3.describe2();//CTE,   beacuse this!=Department
+
+  const accountingCopy4 = { name1: 'DUMMY4',describe: accounting.describe , describe2: accounting.describe2 };
+  accountingCopy4.describe();//DUMMY4
+  accountingCopy4.describe2();//DUMMY4 , (NO CTE,  beacuse this!=Department)
+  
+
+"private" and "public" Access Modifiers
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields
+	Default is public
+	We may define field as private
+	
+	class Department {
+   // name1: string;
+    addresses: string[]=[];
+
+
+    addAddress(address:string){
+        this.addresses.push(address);
+    }
+    printAddresses(){
+        console.log(this.addresses.length);
+        console.log(this.addresses);
+    }
+  }
+  
+  const accounting = new Department();
+  console.log(accounting);//Department�{addresses: Array(0)}
+  accounting.addAddress("Atraulia");
+  accounting.addAddress("Azamgarh");
+  accounting.printAddresses();//(2)�["Atraulia", "Azamgarh"]
+  
+  
+Shorthand Initialization
+	class Department {
+    //private id:string;
+    //public name1: string;
+    addresses: string[]=[];
+    constructor(
+    	private id:string, 
+    	public name1:string)
+    {
+       // this.id=id;
+       // this.name1=name1;
+        console.log(this.id);//ID1
+    }
+
+    addAddress(address:string){
+        this.addresses.push(address);
+    }
+    printAddresses(){
+        console.log(this.addresses.length);
+        console.log(this.addresses);
+        console.log(`Department Details: (${this.id}) & ${this.name1}`);//Department Details: (ID1) & Vinay
+    }
+  }
+  
+  //const accounting = new Department();//CTE
+  const accounting = new Department('ID1',"Vinay");
+  console.log(accounting);//Department�{addresses: Array(0), id: "ID1", name1: "Vinay"}
+  accounting.addAddress("Atraulia");
+  accounting.addAddress("Azamgarh");
+  accounting.printAddresses();//(2)�["Atraulia", "Azamgarh"]
+  
+  
+
+"readonly" Properties
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+	private, public & readonly introduced in TypeScript. It was not present in JavaScript.
+	private readonly firstName=10;
+
+
+
+
+
+
+
+
+
+
+Inheritance
+Child class, Inherit all fields and methods, including constructor.
+
+class Department {
+    private id: string;
+    name: string;
+    private employees: string[] = [];
+  
+    constructor(  id: string,  name: string) {
+       this.id = id;
+       this.name = name;
+    }
+    describe(this: Department) {
+      console.log(`Department (${this.id}): ${this.name}`+this.employees);
+    }
+  }
+  
+  class ITDepartment extends Department {
+    admins: string[];
+    constructor(id: string, admins: string[]) {
+      super(id, 'IT');
+      this.admins = admins;
+    }
+  }
+  class AccountingDepartment extends Department {
+    constructor(id: string, private reports: string[]) {
+      super(id, 'Accounting');
+    }
+    addReport(text: string) {
+      this.reports.push(text);
+    }
+    printReports() {
+      console.log(this.reports);
+    }
+  }
+  
+  const it = new ITDepartment('d1', ['Max']);
+  it.describe();
+  it.name = 'NEW NAME';  
+  console.log(it);
+  
+  const accounting = new AccountingDepartment('d2', []);
+  accounting.addReport('Something went wrong...');
+  accounting.printReports();
+  
+  
+  
+  
+Overriding Properties & The "protected" Modifier
+	protected properties are inherited by child class & accessed via 'this' keyword
+	private properties are not accessed in child class 
+	We can override method in child class.
+	
+	
+Getters & Setters
+
+  class Department {
+    private lastReport: string;
+  
+    constructor(lastReport:string){
+        this.lastReport=lastReport;
+    }
+    get mostRecentReport() {
+      if (this.lastReport) {
+        return this.lastReport;
+      }
+      throw new Error('No report found.');
+    }
+    set mostRecentReport(value: string) {
+      if (!value) {
+        throw new Error('Please pass in a valid value!');
+      }
+      this.lastReport=value;
+    }
+  }
+  
+  const accounting = new Department('d2');
+  accounting.mostRecentReport = 'Year End Report';//call setter
+  console.log(accounting.mostRecentReport);//call getter
+  
+ 
+ 
+Static Methods & Properties
+	static member can not be accessed from non-static environments using this keyword.
+	We have to use ClassName.propertyName from non-static environments or from outside the class.
+	
+	Math.PI
+	Math.pow()
+	
+	
+Abstract Classes
+	Abstract class enforces that all classes that are based on abstract class, must provide implementation.
+	Abstract class cannot be instantiated.
+	abstract class Department{
+		abstract describe(this:Department): void;
+	} 
+	
+Singletons & Private Constructors
+	Singleton Design Pattern- Only one object can be created for a Singleton class.
+	A singleton class is configured such that you don't create it with "new" 
+		but by calling a method which then ensures that only one instance of the class exists at any given time.
+class Department  {
+    private static instance: Department;
+    private constructor(private name:string) { 
+        console.log(this.name);     
+    }
+    static getInstance() {
+      if (!Department.instance) {
+          console.log("Vinay");
+          this.instance = new Department("Shalu");
+      }
+      console.log("Vinay2");
+      return this.instance;
+    }
+  }
+  const accounting = Department.getInstance();
+  const accounting2 = Department.getInstance();
+  const accounting3 = Department.getInstance();
+  const accounting4 = Department.getInstance();
+  console.log(accounting, accounting2,accounting3);
+  console.log(accounting4);
+  
+Useful Resources & Links	
+	More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+	
+	
+	
+JSON.stringfy(obj1) ==JSON.stringfy(obj2)

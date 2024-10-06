@@ -195,8 +195,8 @@ sop(dt1);
 Ex:             
 LocalDateTime dt1=LocalDateTime.of(1995,04,28,12,45);             
 Sop(dt1);             
-Sop(“After six months:”+dt.plusMonths(6));             
-Sop(“Before six months:”+dt.minusMonths(6)); 
+Sop(ï¿½After six months:ï¿½+dt.plusMonths(6));             
+Sop(ï¿½Before six months:ï¿½+dt.minusMonths(6)); 
 
 
 
@@ -237,3 +237,9 @@ import Java.time.*;
 8)               System.out.printf("%d is not Leap year",n);   
 9) }   
 
+Differences between Javaâ€™s OLD Date API and Java 8â€™s Date and Time API
+Earlier Date API was not thread safe while Java 8's Date and Time API is thread safe.
+
+Earlier Date API was mutable while Java 8's Date and Time API is Immutable.
+
+Earlier Date API defines months from 0 to 11 while Java 8's Date and Time API defines months from 1 to 12.

@@ -1,0 +1,85 @@
+Getting Started
+	  <template id="project-input"> - Not loaded immediately in browser , we have to render it using JavaScript/TypeScript
+	  
+DOM Element Selection & OOP Rendering
+Interacting with DOM Elements
+Creating & Using an "Autobind" Decorator
+Fetching User Input
+Creating a Re-Usable Validation Functionality
+Rendering Project Lists
+Managing Application State with Singletons
+More Classes & Custom Types
+Filtering Projects with Enums
+Adding Inheritance & Generics
+Rendering Project Items with a Class
+Using a Getter
+Utilizing Interfaces to Implement Drag & Drop
+Drag Events & Reflecting the Current State in the UI
+Adding a Droppable Area
+Finishing Drag & Drop
+Useful Resources & Links
+
+DOM Element Selection & OOP Rendering	
+	class ProjectInput {
+    templateElement: HTMLTemplateElement;
+    hostElement: HTMLDivElement;
+    formElement: HTMLFormElement;
+  
+    constructor() {
+      this.templateElement = document.getElementById(
+        'project-input'
+      )! as HTMLTemplateElement;
+      this.hostElement = document.getElementById('app')! as HTMLDivElement;
+  
+      const importedNode = document.importNode(
+        this.templateElement.content,
+        true
+      );
+      this.formElement = importedNode.firstElementChild as HTMLFormElement;
+      
+       this.formElement.id='user-input';
+      this.attach();
+    }
+  
+    private attach() {
+      this.hostElement.insertAdjacentElement('afterbegin', this.formElement);
+    }
+	}  
+	const prjInput = new ProjectInput();
+  
+		
+Interacting with DOM Elements
+	this.titleInputElement = this.formElement.querySelector('#title') as HTMLInputElement;
+      this.descriptionInputElement = this.formElement.querySelector('#description') as HTMLInputElement;
+      this.peopleInputElement = this.formElement.querySelector('#people') as HTMLInputElement;
+      
+	private submitHandler(event: Event) {
+        event.preventDefault(); 
+        console.log(this.titleInputElement.value);
+        console.log(this.descriptionInputElement.value);
+        console.log(this.peopleInputElement.value);
+    }
+    private configure() {
+        this.formElement.addEventListener('submit', this.submitHandler.bind(this));
+    }
+
+
+
+
+Interacting with DOM Elements
+Creating & Using an "Autobind" Decorator
+Fetching User Input
+Creating a Re-Usable Validation Functionality
+Rendering Project Lists
+Managing Application State with Singletons
+More Classes & Custom Types
+Filtering Projects with Enums
+Adding Inheritance & Generics
+Rendering Project Items with a Class
+Using a Getter
+Utilizing Interfaces to Implement Drag & Drop
+Drag Events & Reflecting the Current State in the UI
+Adding a Droppable Area
+Finishing Drag & Drop
+Useful Resources & Links
+	More on Drag & Drop: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API

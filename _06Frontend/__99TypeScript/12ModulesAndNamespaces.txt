@@ -1,0 +1,86 @@
+Splitting Code Into Multiple Files Options
+Working with Namespaces
+Organizing files and folders
+A Problem with Namespace imports
+Using ES Modules
+Understanding various import & export syntaxes
+How Does code in modules Executes?
+
+
+Splitting Code Into Multiple Files Options
+1)
+Multiple ts file compiles to multiple js file
+js file imported in html file
+Have to manage all import manually
+2)
+Namespaces & File Bundling
+Use namespace code syntax to group code
+Per-file or buldled compilation is possible(less import to manage)
+3)
+ES6 Modules or Imports/Exports
+Use ES6 import/export syntax
+Per-file compilation but single <script import>
+May Need Bundling via third-party tools(ex-webpack) is possible
+
+
+
+Working with Namespaces
+namespace export reference  
+In tscoonfig: "outfile":".dist/bundle.js"  "module":"amd"
+
+namespace DDInterfaces{
+//export classes
+//export interfaces
+//functions
+//variables
+//etc
+}
+
+
+/// <reference path="file1.ts"/>
+namespace DDInterfaces{
+//export classes
+//export interfaces
+//functions
+//export variables
+//etc
+}
+
+https://medium.com/computed-comparisons/commonjs-vs-amd-vs-requirejs-vs-es6-modules-2e814b114a0b
+
+
+
+Organizing files and folders
+
+A Problem with Namespace imports
+
+
+Using ES Modules
+export
+import {DraggableProject, NotDraggableProject, stateVariable} from '../models/Project.js'  not .ts
+"module":"es2015"
+"target":"es6" or later version
+//"outfile":".dist/bundle.js"
+<script type="module" src="dist/app.js"/>
+
+
+
+
+Understanding various import & export syntaxes
+import autobind as Autobind from '../models/Project.js'  not .ts
+
+import * as Draggable from '../models/Project.js'  not .ts
+Draggable.DraggableProject  in ts code
+
+export default class Project
+import p from '../models/Project.js'
+
+
+How Does code in modules Executes?
+ES modules works only in modern browsers
+
+More resources
+JavaScript Modules (Overview): https://medium.com/computed-comparisons/commonjs-vs-amd-vs-requirejs-vs-es6-modules-2e814b114a0b
+More on ES Modules: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+
+

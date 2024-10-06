@@ -1,0 +1,38 @@
+
+
+
+
+DTO design pattern
+Pros:
+	Efficient remote call
+	Loose coupling b/w layers/tiers
+	Hide database entity structure
+Cons:
+	Increase complexity
+
+https://stackoverflow.com/questions/1612334/difference-between-dto-vo-pojo-javabeans
+
+DTO vs VO
+DTO - 
+	Data transfer objects are just data containers which are used to transport data between layers and tiers.
+	It mainly contains attributes. You can even use public attributes without getters and setters.
+	Data transfer objects do not contain any business logic.
+	DTO was mainly used to get data transported across the network efficiently, it may be even from JVM to another JVM.
+	DTOs are often java.io.Serializable - in order to transfer data across JVM.
+VO
+A Value Object represents itself a fixed set of data and is similar to a Java enum. 
+A Value Object's identity is based on their state rather than on their object identity and is immutable. 
+A real world example would be Integer, Color.RED, Color.BLUE, SEX.FEMALE etc.
+
+POJO vs JavaBeans
+The Java-Beanness of a POJO is that its private attributes are all accessed via public getters and setters that conform to the JavaBeans conventions. e.g.
+JavaBeans must implement Serializable and have a no-argument constructor. 
+whereas in POJO does not have these restrictions.
+
+
+
+Basically,
+DTO: "Data transfer objects " can travel between seperate layers in software architecture.
+VO: "Value objects " hold a object such as Integer,Money etc.
+POJO: Plain Old Java Object which is not a special object.
+Java Beans: requires a Java Class to be serializable, have a no-arg constructor and a getter and setter for each field

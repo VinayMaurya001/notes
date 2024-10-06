@@ -1,0 +1,61 @@
+What is UML? 
+	It is the general-purpose modeling language used to visualize the system. 
+	It is a graphical language that is standard to the software industry 	
+		for specifying, visualizing, constructing, and documenting the artifacts of 
+		the software systems, as well as for business modeling.
+		
+		
+Benefits of UML: 
+	Simplifies complex software design, can also implement OOPs like a concept that is widely used.
+	It reduces thousands of words of explanation in a few graphical diagrams that may reduce time consumption to understand.
+	It makes communication more clear and more real.
+	It helps to acquire the entire system in a view.
+	It becomes very much easy for the software programmer to implement the actual demand once they have a clear picture of the problem.
+	
+	
+Types of UML
+	Structural UML diagrams 
+		Class diagram
+		Package diagram
+		Object diagram
+		Component diagram
+		Composite structure diagram
+		Deployment diagram
+	Behavioral UML diagrams 
+		Activity diagram
+		Sequence diagram
+		Use case diagram
+		State diagram
+		Communication diagram
+		Interaction overview diagram
+		Timing diagram
+	
+UML class diagrams: 
+	Class diagrams are the main building blocks of every object-oriented method. 
+	The class diagram can be used to show the classes, relationships, interface, association, and collaboration. 
+	UML is standardized in class diagrams. 
+	Since classes are the building block of an application that is based on OOPs, 
+		so as the class diagram has an appropriate structure to represent the classes, inheritance, relationships, and everything that OOPs have in their context. 
+		It describes various kinds of objects and the static relationship between them. 
+	Class diagrams are one of the most widely used diagrams in the fields of software engineering as well as business modeling.
+
+	The main purpose to use class diagrams are: 
+		This is the only UML that can appropriately depict various aspects of the OOPs concept.
+		Proper design and analysis of applications can be faster and efficient.
+		It is the base for deployment and component diagram.
+	
+	There are several software available that can be used online and offline to draw these diagrams Like Edraw max, lucid chart, etc.
+	
+	
+	In class diagram, each class is represented by a rectangle having a subdivision of three compartments name, attributes, and operation.
+	There are three types of modifiers that are used to decide the visibility of attributes and operations. 
+		+ is used for public visibility(for everyone)
+		# is used for protected visibility (for friend and derived)
+		– is used for private visibility (for only me)
+
+	Class diagrams are used for:
+		Describing the static view of the system.
+		Showing the collaboration among the elements of the static view.
+		Describing the functionalities performed by the system.
+		Construction of software applications using object-oriented languages.
+			

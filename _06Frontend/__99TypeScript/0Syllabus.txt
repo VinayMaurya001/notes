@@ -1,0 +1,27 @@
+Introduction
+Setup
+Basics
+Compiler & Configuration Deep Dive
+Working with Next-gen JS Code
+Classes & Interfaces
+Advanced Types & TypeScript features
+Generics
+Decorators
+Time to Practice - Full Project
+Working with Namespaces & Modules
+Webpack & TypeScript
+Third-party Libraries & TypeScript
+
+React+TypeScript
+NodeJS+ExpressJS+TypeScript
+
+Community
+	https://academind.com/community/
+	
+
+	
+WebAssembly
+Progressive App
+Micro UI/Fronend
+
+

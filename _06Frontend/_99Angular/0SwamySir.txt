@@ -1,0 +1,201 @@
+Angular packages
+	Angular functionalities are available in the form of packages. 
+	Available packages are core, common,compiler,platform-browser....
+	core : 
+		This package contains all core functionalities. 
+		It is providing many 
+			classes like Component,NgModule,Injactable,...
+			and interfaces OnInit,OnDestroy,...
+	common : 
+		This package provides common directives and pipes(filters).
+    		*ngIf,*ngFor...(directives we can use in html tag)
+	compiler : 
+		This package loads html templates in to javascrpt functions.
+	platform-browser: 
+		This package provides BrowserModule class to load common and compiler.
+	platform-browser-dynamic : 
+		This package is providing platformBrowserDynamic().bootstrapModule() function to load ng-module
+
+Angular/React is component progamming.
+	Component is collection of logics and design script.
+	Module : It is collection of component,services,pipes,....
+
+
+
+Angular is providing decorators to decorate classes,functions,properties with some additional features. 
+	Decorators starts with @. 
+	decorator is a type of function.
+	@Component,@ngModule,@Inject,@Injectable,....
+
+How to create component?
+	Components we can create using @Component() decorator or using cli . 
+	This decorator is available in Component class of @angular/core package.
+
+		import {Component} from "@angular/core"		
+		@Component({
+		template:"<p>Welcome</p>",
+		templateUrl:"login.html",
+		selector: LoginPage,
+		styleUrls: ["login.css",..]
+		})
+		class clsLogin{
+		//Logics
+		}
+
+		We need to provide metadata information to create components those are some properties
+		template : using this property we can place html script to bind with component.
+		templateUrl : To bind a html file with component
+		selector : using this property we can provide custom tag to component. 
+				Using this tag we can call the component from html files.
+				<loginPage />
+
+How to create Module?
+	using @NgModule() directive we can create a module. 
+	It is available in NgModule class of @angular/core package.
+
+	Module : It is collection of component,services,pipes,....
+	
+		import {NgModule} from "@angular/core"
+		@NgModule({
+			declarations:[<To declare all components,services,custompipes,...>],
+			imports:[<To specify list of pre-defined angular classes>],
+			bootstrap:[<To specify list of components to display in front page of application>]
+		})
+		class AdminModule(){}
+
+
+
+
+
+
+CLI : 
+	stands for command line interface. Using CLI we can create angular projects,comonents,services,...
+	we can install cli using npm install @angular/cli -g
+
+	After installation of cli, ng program is available, using this program we can use command like
+	ng new - To create new project
+	ng generate - To generate component,service,....
+		ng g c componentName
+			generate 4 files & update app.mudule.ts (componentName in declarations of @NgModule)
+			if we want to add on index.html then we have to add componentName in bootstrap of @NgModule
+	ng serve/s - To build the project
+		This command checks the component for errors and starts server in port number 4200
+	ng build - To build the project
+		Both ng build and ng serve clear the output folder before they build the project, 
+		but only the ng build command writes the generated build artifacts to the output folder. 
+		The output folder is dist/project-name/ by default. 
+		To output to a different folder, change the outputPath in angular.json 
+	ng test - To test ang project
+
+
+
+package.json 
+	this file will be useful when we want execute project(without node_modules) in another system
+	npm i
+	This file can also maintain the list of installed node packages.
+	Also metadata about project like name ,version etc, of the project.
+	npm start call command specified in start scripts of package.json
+		start value defined in package.json like ng serve
+	npm i mongojs - install dependencies
+
+node_modules : 
+	Maintains all the packages of angular which are installed
+	npm install needed with package.json
+package-lock.json : 
+	It is similar as package.json. 
+	This file can also maintain the repository info from where these packages are downloaded.
+tsfonfig.json : 
+	This file contains configuration settings of typescript.
+	outputDir
+	strict:true
+	target:ES2022
+angular.json : 
+	This file contains angular conf settings(start up html filename, start up typescript file,....)
+	      "sourceRoot": "src",
+	      "prefix": "app",
+			
+		  "options": {
+            "outputPath": "dist/secondproj",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          },
+src : 
+	This folder contains index.html,main.ts,styles.css,assets folder, app folder,...
+	This folder we can use to maintain components,modules, services, pipes,... of project
+	Every new project provides a component and module with name app.
+src/assets : 
+	To main the images related to project
+index.html : 
+	This file contains landing page html script. 
+	It calls a component which contains name <app-root></app-root>
+	
+main.ts : 
+	This file loads module in angular application. 
+	Using platformBrowserDynamic().bootstrapModule(AppModule) it load AppModule 
+		& AppModule, uses   bootstrap: [AppComponent] provide AppComponent for index.html at bootstrap time
+	Since Angular 17, bootstrapApplication(AppComponent, appConfig) .catch((err) => console.error(err));
+How an Angular app gets loaded & started?
+	After ng serve, cli added the following code in index.html & with that angular app keep updated itself when we change in file
+		<body>
+		  <app-root></app-root>
+			<script src="runtime.js" type="module"></script>
+			<script src="polyfills.js" type="module"></script>
+			<script src="styles.js" defer></script>
+			<script src="vendor.js" type="module"></script>
+			<script src="main.js" type="module"></script>
+		</body>
+		</html>
+	angular.json -> main.ts -> loads components
+	http://localhost:4200 -> loads index.html and displays component's selector which we specified.
+	   Auto reload work for any change in component
+	   but it will not work for any change in index.html
+   
+After ng serve, By default node_modules folder will be searches in current project folder & then parent folder onwards
+  
+
+app : This folder can maintain the components,services,modules,....
+
+By default every new project provides a component and module with name app
+	Every component contains 4 files every file name is same as component name with different extensions
+	.ts : This file contains typescript of component
+	.html : This file contains html script of component
+	.css : This file contains styles of component
+	.spec.ts : This file we can use to write the test cases of component
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

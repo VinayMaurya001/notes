@@ -1,0 +1,244 @@
+IAM 
+	 Identity and Access Management, Global service
+
+IAM
+	Users & Groups
+		Root account created by default, shouldn't be used or shared
+		Users are people within your organization, and can be grouped
+		Groups only contain users, not other groups
+		Users don't have to belong to a group(bad practice), and user can belong to multiple groups
+		IAM Identity Center
+		
+IAM: Permissions
+	Users or Groups can be assigned JSON documents called policies
+	These policies define the permissions of the users
+	In AWS you apply the least privilege principle: don't give more permissions than a user needs 
+	{
+		"Version": "2012-10-17",
+		"Statement": [
+			{
+				"Effect": "Allow",
+				"Action": "ec2:Describe*",
+				"Resource": "*"
+			},
+			{
+				"Effect": "Allow",
+				"Action": "elasticloadbalancing:Describe*",
+				"Resource": "*"
+			},
+			{
+				"Effect": "Allow",
+				"Action": [
+					"cloudwatch:ListMetrics",
+					"cloudwatch:GetMetricStatistics",
+					"cloudwatch:Describe*"
+				],
+				"Resource": "*"
+			}
+		]
+	}
+
+	IAM policy
+		An IAM policy is an entity that, when attached to an identity or resource, defines their permissions.
+		JSON documents to define Users, Groups or Roles' permissions.
+		
+	IAM Policies inheritance
+		Policies inherited from group
+		Inline policies
+	
+	IAM Policies Structure
+		Consists of 
+			• Version: policy language version, always include “2012-10-17”
+			• Id: an identifier for the policy (optional) 
+			• Statement: one or more individual statements (required)
+				Statements consists of 
+					• Sid: an identifier for the statement (optional) 
+					• Effect: whether the statement allows or denies access(Allow, Deny)
+					• Principal: account/user/role to which this policy applied to 
+					• Action: list of actions this policy allows or denies 
+					• Resource: list of resources to which the actions applied to 
+					• Condition: conditions for when this policy is in effect(optional)
+
+
+	To prevent brute force attack there is 2 mechanism:
+	1)IAM Password Policy
+	2)Multi Factor Authentication - MFA
+	
+		IAM Password Policy 
+			Strong passwords = higher security for your account
+			In AWS, you can setup a password policy:
+				Account Settings>>Password Policy
+				Set a minimum password length
+				Require specific character types:
+					including uppercase letters
+					lowercase letters
+					numbers
+					non-alphanumeric characters
+				Allow all IAM users to change their own passwords
+				Require users to change their password after some time (password expiration)
+				Prevent password re-use
+		
+		Multi Factor Authentication - MFA
+				Account Name>>security_credentials
+			Users have access to your account and can possibly change
+			configurations or delete resources in your AWS account
+			You want to protect your Root Accounts and IAM users
+			MFA = password you know + security device you own
+			Main benefit of MFA:
+				if a password is stolen or hacked, the account is not compromised
+			
+		MFA devices options in AWS
+			1)Virtual MFA device
+				Authy (Multi -device)
+					Supports multiple tokens on a single device
+				Google Authenticator(phone only)
+			2)Universal 2nd Factor (U2F) Security Key
+				YubiKey by Yubico (3rd party)
+				Support for multiple root and IAM users using a single security key
+			3) Hardware Key Fob MFA Device
+					Provided by Gemalto (3rd party)
+				Hardware Key Fob MFA Device for AWS GovCloud (US)
+					Provided by SurePassID (3rd party)
+	IAM Roles for AWS Services & for others
+		An IAM entity that defines a set of permissions for making AWS service requests, 
+			that will be used by AWS services.
+		Some AWS service will need to perform actions on your behalf, to do so, 
+			we will assign permissions to AWS services with IAM Roles
+		Common roles: 
+			EC2 Instance Roles 
+			Lambda Function Roles 
+			Roles for CloudFormation 
+
+
+How can users access AWS ?
+		To access AWS, you have three options:
+			1)AWS Management Console (protected by password + MFA(optional))
+			2)AWS Command Line Interface (CLI): protected by access keys
+				AWS CloudShell service in specific regions only
+			3)AWS Software Developer Kit (SDK) - for code: protected by same access keys
+			
+			Access Keys 
+				Account Name>>security_credentials
+					Access Keys are generated through the AWS Console
+				Users manage their own access keys
+				Access Keys are secret, just like a password. Don't share them
+				Access Key ID ~= username
+				Secret Access Key ~= password
+		
+		
+		Whats the AWS CLI?
+			A tool that enables you to interact with AWS services using commands in your command-line shell.
+			Direct access to the public APIs of AWS services
+			You can develop scripts to manage your resources
+			Its open-source https://github.com/aws/aws-cli
+			Alternative to using AWS Management Console
+		
+		
+		Whats the AWS SDK?
+			AWS Software Development Kit (AWS SDK)
+			Language-specific APIs (set of libraries)
+			Enables you to access and manage AWS services programmatically
+			Embedded within your application
+			Supports
+				SDKs (JavaScript, Python, PHP, .NET, Ruby, Java, Go, Node.js,C++)
+				Mobile SDKs (Android, iOS, )
+				IoT Device SDKs (Embedded C, Arduino, )
+			Example: AWS CLI is built on AWS SDK for Python named Boto
+		
+		
+		
+		AWS CLI Setup
+			Windows
+				https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-windows.html
+				msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi
+				aws --version
+
+				Create access key
+					IAM>Users>UserName> Security Credentials > Create Access key
+					top right corner > Security Credentials > Create Access key
+
+				aws configure
+					enter access key & secret
+				aws configure list
+				aws configure list-profiles
+				
+				aws iam list-users
+				aws iam list-users --region ap-south-1
+				
+			Mac
+			Linux
+			
+		
+		AWS CloudShell
+			https://docs.aws.amazon.com/cloudshell/latest/userguide/faq-list.html#regions-available
+			CLI in aws browser
+			It has upload/download feature
+			AWS CloudShell is a browser-based shell that gives you command-line access to your AWS resources in the selected AWS region. 
+			AWS CloudShell comes pre-installed with popular tools for resource management and creation.
+			You have the same credentials as you used to log in to the console..
+			Pre-installed tools
+				AWS CLI, Python, Node.js and more
+				Storage included
+					1 GB of storage free per AWS region
+				Saved files and settings
+					Upload & download file option
+					Files saved in your home directory are available in future sessions for the same AWS region
+					echo "Hellp World!" > demo.txt
+					cat demo.txt
+					
+				
+
+	
+IAM Security Tools
+	IAM Credentials Report (account-level)
+		A report that lists all your account's users and the status of their various credentials
+		IAM>>Credential report
+	IAM Access Advisor (user-level)
+		Access advisor shows the service permissions granted to a user and when those services were last accessed.
+		You can use this information to revise your policies.
+		IAM>Users>>Username>>Access Advisor
+		
+
+IAM Guidelines & Best Practices
+	Dont use the root account except for AWS account setup
+		You only want to use the root account to create your first IAM user, 
+			and for a few account and service management tasks. 
+			For every day and administration tasks, use an IAM user with permissions.
+	One physical user = One AWS user
+	Assign users to groups and assign permissions to groups
+	Create a strong password policy
+	Use and enforce the use of Multi Factor Authentication (MFA)
+	Create and use Roles for giving permissions to AWS services
+	Use Access Keys for Programmatic Access (CLI / SDK)
+	Audit permissions of your account with the IAM Credentials Report & IAM Access Advisor 
+	Never share IAM users & Access Keys
+	Q)Which principle should you apply regarding IAM Permissions?
+	A)Grant Least Privilege
+		Don't give more permissions than the user needs.
+	
+
+
+
+Shared Responsibility Model for IAM
+	AWS
+		Infrastructure (global network security)
+		Configuration and vulnerability analysis
+		Compliance validation
+	You
+		Users, Groups, Roles, Policies management and monitoring
+		Enable MFA on all accounts
+		Rotate all your keys often
+		Use IAM tools to apply appropriate permissions
+		Analyze access patterns & review permissions 
+
+
+IAM Section Summary
+	Users: mapped to a physical user, has a password for AWS Console
+	Groups: contains users only
+	Policies: JSON document that outlines permissions for users or groups
+	Roles: for EC2 instances or AWS services
+	Security: MFA + Password Policy
+	AWS CLI: manage your AWS services using the command-line
+	AWS SDK: manage your AWS services using a programming language
+	Access Keys: access AWS using the CLI or SDK
+	Audit: IAM Credential Reports & IAM Access Advisor

@@ -1,0 +1,64 @@
+
+Using Javascript(!) library with Typescript
+	jQuery
+	lodash utility libraray
+		npm i --save lodash
+		<script scr=lodash.js/>
+		import _ from 'lodash.js';
+
+
+	tsconfig.ts
+		"noCommitOnError":false
+
+
+	npm install --save-dev @types/lodash  //for .dts files
+	
+	
+	
+	
+	
+Using "declare" as a "Last resort"
+In html body
+	<script> var GLOBAL="This is Set"; </script>
+In ts file
+	declare var GLOBAL:any;
+
+
+
+
+No Types needed: class transformer
+npm install class-transformer --save
+npm install reflect-metadata --save
+app.ts
+	import "reflect-metadata";
+	import {plainToClass} from "class-transformer"
+	const loadedProducts=plainToClass(Product,products)
+npm install es6-shim --save
+	import "es6-shim"
+	
+	
+
+	
+TypesSript-embracing: class-validator
+	import { plainToClass } from 'class-transformer';
+	import { validate } from 'class-validator';
+	
+	"experimentalDecorators": true
+
+import { IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+export class Product {
+  @IsNotEmpty()
+  title: string;
+  @IsNumber()
+  @IsPositive()
+  price: number;
+  constructor(t: string, p: number) {
+    this.title = t;
+    this.price = p;
+  }
+  getInformation() {
+    return [this.title, `$${this.price}`];
+  }
+}
+
+

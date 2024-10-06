@@ -1,0 +1,103 @@
+Core design principles
+	Core design principles guide the creation of effective and maintainable software solutions. 
+	These principles help developers make design decisions that lead to robust, scalable, and flexible systems. 
+	These design principles contribute to the creation of software that is modular, maintainable, and adaptable to changing requirements. 
+	Following these principles promotes good software design practices and enhances the overall quality of the software
+	Here are some core design principles commonly followed in software engineering:
+		1) SOLID Principles
+		2) DRY (Don't Repeat Yourself)
+		3) KISS (Keep It Simple, Stupid)
+		4) YAGNI (You Ain't Gonna Need It)
+		5) Separation of Concerns
+		6) Composition Over Inheritance
+		7) Law of Demeter (Principle of Least Knowledge)
+		8) Open Design
+		9) Consistency
+	  10)	Scalibility
+	  11) GRASP(General Responsibility Assignment Software Patterns)
+
+
+1)SOLID Principles:
+	Single Responsibility Principle (SRP): 
+		A class should have only one reason to change, meaning it should have only one responsibility.
+	Open/Closed Principle (OCP): 
+		Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+	Liskov Substitution Principle (LSP): 
+		Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+	Interface Segregation Principle (ISP): 
+		A class should not be forced to implement interfaces it does not use, and clients should not be forced to depend on interfaces they do not use.
+	Dependency Inversion Principle (DIP): 
+		High-level modules should not depend on low-level modules. 
+		Both should depend on abstractions. 
+		Abstractions should not depend on details; details should depend on abstractions.
+
+2)DRY (Don't Repeat Yourself):
+	Avoid duplicating code by organizing it in reusable modules or functions. 
+	Repetition increases the likelihood of errors and makes maintenance more difficult.
+
+3)KISS (Keep It Simple, Stupid):
+	Simplicity is a key goal in design. 
+	Keep the design and implementation as simple as possible without sacrificing functionality or performance.
+
+4)YAGNI (You Ain't Gonna Need It):
+	Only implement features when they are actually needed. Avoid adding functionality based on speculative future requirements.
+
+5)Separation of Concerns:
+	Divide the software into distinct sections, each addressing a specific concern or responsibility. 
+	This makes the system more modular and easier to understand.
+
+6)Composition Over Inheritance:
+	Prefer composition (building components by combining simpler ones) over inheritance (creating new classes by inheriting properties and behaviors). 
+	Composition is often more flexible and avoids some of the issues associated with deep inheritance hierarchies.
+
+7)Law of Demeter (Principle of Least Knowledge):
+	A module should not be aware of the internal details of the objects it interacts with. It should only have knowledge of its immediate neighbors.
+
+8)Open Design:
+	Design modules and components in a way that allows for extension and modification without affecting the existing system. 
+	Embrace open-source and open standards where applicable.
+
+9)Consistency:
+	Maintain consistency in naming conventions, coding style, and design patterns throughout the codebase. 
+	Consistency improves readability and reduces cognitive load.
+
+10)Scalability:
+	Design the system to scale horizontally (adding more instances) or vertically (increasing resources on a single instance) as needed. 
+	Consider potential bottlenecks and plan for growth.
+	
+11)GRASP(General Responsibility Assignment Software Patterns)
+	It is a set of design principles and guidelines that help in creating an object-oriented design with a focus on assigning responsibilities to classes and objects. 
+	These principles are intended to guide the allocation of responsibilities in a way that promotes flexibility, maintainability, and reuse. 
+	Applying these principles contributes to a more maintainable and adaptable system architecture.
+	The GRASP principles are as follows:
+			Information Expert:
+				Assign a responsibility to the class that has the required information to fulfill it. 
+				This principle helps in promoting encapsulation and ensures that the class responsible for a task has the necessary data.
+			Creator:
+				Assign the responsibility of creating an instance of a class to the class itself or to a related class. 
+				This principle helps in ensuring that the right objects are created at the right time and place.
+			Controller:
+				Assign the responsibility of handling system events (such as user input or external events) to a controller class. 
+				Controllers act as intermediaries between the user interface and the system.
+			Low Coupling:
+				Assign responsibilities to minimize dependencies between classes. 
+				Low coupling enhances the flexibility and maintainability of the system by reducing the impact of changes in one class on other classes.
+			High Cohesion:
+				Assign responsibilities to ensure that a class has a single, well-defined purpose. 
+				High cohesion within a class makes it more understandable and maintainable.
+			Polymorphism:
+				Assign a responsibility to a class that implements an interface or inherits from an abstract class. 
+				This allows for the use of polymorphism, where different classes can be treated uniformly through a common interface.
+			Pure Fabrication:
+				Introduce a class that does not represent a concept in the problem domain but is created solely to achieve low coupling, reuse, or other design objectives. 
+				Pure fabrication classes are introduced when no natural object exists to fulfill a certain responsibility.
+			Indirection:
+				Assign a responsibility to an intermediary object to mediate between other components or services. 
+				Indirection helps in decoupling and allows for changes to be made without affecting the entire system.
+			Protected Variations:
+				Assign the responsibility to shield elements from variations in other elements by using interfaces or abstract classes. 
+				This helps in protecting components from changes in other components and promotes flexibility.
+			Controller (Revisited):
+				Another aspect of the Controller pattern is to assign the responsibility of handling user input and system events to a separate controller class. 
+				This principle emphasizes the separation of concerns in user interface design.
+				

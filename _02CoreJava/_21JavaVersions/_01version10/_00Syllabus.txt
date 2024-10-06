@@ -1,0 +1,8 @@
+var
+Collectors API
+Java 10 garbage colletors
+Java 10 deprecation
+6 month release 
+
+
+

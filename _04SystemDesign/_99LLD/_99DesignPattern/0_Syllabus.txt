@@ -1,0 +1,66 @@
+https://microservices.io/patterns/microservices.html
+Introduction
+	What are design patterns?
+	Why we need design patterns?
+	How Are they identified?
+	Type of design pattern
+		GOF or Core design pattern
+		JEE design pattern
+Core Java(24)
+	Creational
+		Singleton
+		Factory
+		Abstract Factory
+		Builder
+		Prototype
+	Structural
+		Adapter
+		Fly Weight
+		Decorator
+		Bridge
+		Proxy
+	Behavioral
+		Command
+		Interpreter
+		Template Method
+		Observer
+		Visitor
+		Mediator
+		Momento
+		
+JEE
+	Presentation Layer
+		Front Controller Design Pattern
+		MVC design pattern
+	Business/Service Layer
+		Business Delegate/Service Class
+		Businss Object
+	Data Access Layer
+		Data Access Object Design Pattern
+	Integration Layer
+
+
+Dependecny Injection pattern
+
+
+
+
+Builder ( While Writing Unit Tests )
+Prototype ( Cloning )
+Adapter ( asList , toString )
+Chain Of Responsibility ( Exception handling, logging )
+Singleton
+Factory ( Action Mapping )
+Proxy
+Observer ( Event Listener )
+MVC ( Web frameworks )
+Filter ( Criteria )
+Inversion Of Control pattern
+
+circuit breaker DP
+Event Driven Archtirecture
+
+
+Resources
+	Udemy
+	Java Brains

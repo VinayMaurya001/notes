@@ -1,0 +1,120 @@
+History
+	Javascript - Netscape corp
+	Typescript - Microsoft
+	Angular- Google
+	React- Facebook
+
+Some problems with JavaScript
+1)Weak type checking
+		function add(num1,num2){
+			return num1+num2;}
+		console.log(add('2'+'3'));//23 , although in JavaScript itself we have mitigation strategies to avoid this unwanted behaviour at runtime
+2)Function arguments
+3)Cann't enforce structure of an object, No concept of template, Object are loosely structured
+4)Application complexity
+	
+Why JavaScript
+	Browsers support only JavaScript
+	Browser & NodeJS environment cann't execute type script.
+
+What is TypeScript
+	A programming langugae
+	Free & Open-source
+	Developed & maintained by Microsoft
+	TypeScript=JavaScript+Some additional feature(like types)
+	TypeScript is superset of JavaScript.
+	Makes building complex apps more manageable.
+	Frameworks like Angular2+ is using it.
+	A tool tsc
+	
+How TypeScript works
+	During development time
+		TypeScript can't be executed by JavaScript Environment like browsers.
+		We can technically run the TypeScript compilation on browsers too. But it is very inefficient.
+		TypeScript Code-->TypeScriptCompiler-->JavaScript code-->Browser/NodeJS environment
+		
+		How can TypeScript add new features if what you get in the end is regular JavaScript?
+		And the answer is, the TypeScript compiler compiles these new features to JavaScript workarounds, 
+		so in the end it might give you a nicer syntax, an easier way of doing something, and it will then compile that nicer, easier way
+		to a more complex JavaScript snippet, which you would have to write otherwise.
+		So it's not magic, of course it can't add what's not possible at all in the JavaScript language,
+		but it can add new features that simply are easier to use, nicer syntax.
+
+	
+TypeScript Advantages
+	Types 
+		More types
+		JavaScript uses dynamically type(resolved at runtime) while Typescript uses Static type(resolved at development time).
+			Strong type checking in TS.It is type safe
+	Next-gen JavaScript features(like Bable do)(Compiled down for older browser )
+	Non-JavaScript features  OOPs (Interfaces or Generices during development)
+	Meta-programming features like Decorators
+	Rich configuration options
+	Modern tooling(like Visual Studeo Code) that helps even in non-TypeScript projects
+	Typescript is simpler than javascript coding
+	
+
+Ex:
+Using JavaScript-
+const button = document.querySelector("button");
+const input1 = document.getElementById("num1");
+const input2 = document.getElementById("num2");
+function add(num1, num2) {
+  return num1 + num2;
+}
+button.addEventListener("click", function() {
+  console.log(add(input1.value, input2.value));
+});
+
+Using TypeScript:
+const button = document.querySelector("button");
+const input1 = document.getElementById("num1")! as HTMLInputElement;
+const input2 = document.getElementById("num2")! as HTMLInputElement;
+function add(num1: number, num2: number) {
+  return num1 + num2;
+}
+button.addEventListener("click", function() {
+  console.log(add(+input1.value, +input2.value));  //+ here to convert String to number
+});
+
+
+
+TypeScript
+	TypeScript=JavaScript+Strong Typing
+	
+ECMAScrpt vs Javascript
+	ECMAScrpt  is standard.
+	Javascript is implementation
+	
+JavaScript Versions
+	ES3-1999
+	ES5-2009
+	ES6-2015-ES2015
+	ES7-2016-ES2016
+	ES8-2017-ES2017
+
+	Modernn JavaScript(ES6+) helps us to write modularized, maintainable code.
+	
+	
+Basics of TypeScript
+	Typescript is case sensitive
+	Angular packages are implemented  using typescript.
+	Typescript supports datatypes/ oops/ namespaces,....
+	Typescript file extension is .ts
+	Every statement we should terminate with ; or new line
+	tsc is a command to compile typescript program
+	tsc filename.ts
+	
+Compiler: 
+	is an umbrella term to describe a program that takes source code written in one language and produce a (or many) output file in some other language. 
+	In practice we mostly use this term to describe a compiler such as gcc which takes in C code as input and produces a binary executable (machine code) as output.
+
+Transpilers 
+	are also known as source-to-source compilers. So in essence they are a subset of compilers which take in a source code file and convert it to another source code file in some other language or a different version of the same language. 
+	The ouput is generally understandable by a human. This output still has to go through a compiler or interpreter to be able to run on the machine.
+	Some examples of transpilers:
+		Emscripten: Transpiles C/C++ to JavaScript
+		Babel: Transpiles ES6+ code to ES5 (ES6 and ES5 are different versions or generations of the JavaScript language)
+		
+		
+		

@@ -1,0 +1,59 @@
+https://www.shanebart.com/coggle
+
+Introduction
+
+Certifications
+	AWS Certifications
+		Cloud Practitioner
+		Associate 
+			Architect
+			Developer
+			Operations
+		Professional
+			Architect
+			DevOps
+		Speciality
+			Database
+			Machine Learning
+			Security
+			Networking
+			Data Analytics
+			Alexa Skill Builder
+			
+	AWS Cloud Practitioner Exam-CLF-C02
+	Sample paper-
+		https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Sample-Questions.pdf
+		https://explore.skillbuilder.aws/learn/course/external/view/elearning/14050/aws-certified-cloud-practitioner-official-practice-question-set-clf-c02-english
+		
+	Plan
+		Set a target Date
+		
+	Download code & slides
+		https://courses.datacumulus.com/downloads/certified-cloud-practitioner-zb2/
+			code
+			Slides
+			6 practical exams
+				https://www.udemy.com/course/practice-exams-aws-certified-cloud-practitioner/?couponCode=SEP_21_GET_STARTED
+		
+		
+	Create AWS account
+		https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
+		
+	    
+	Support Center- AWS
+	
+	AWS budget setup???????????
+	AWS Free Tier
+		https://aws.amazon.com/free
+	
+	Download
+		Try using a VPN service such as TunnelBear (https://www.tunnelbear.com/, it's free!) 
+			to VPN into another country where you should be able to download the course content	
+	
+	Pricing
+		https://calculator.s3.amazonaws.com/index.html
+		https://www.ec2instances.info/?region=ap-south-1
+		
+	AWS Budget Setup
+		Acount Name>>Billing & Cost Management>>Budget & Planning>>Budget
+		

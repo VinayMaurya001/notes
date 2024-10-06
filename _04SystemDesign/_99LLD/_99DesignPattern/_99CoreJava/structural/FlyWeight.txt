@@ -1,0 +1,133 @@
+Flyweight Desing pattern
+	to reuse already existing similar kind of objects by storing them and create new object when no matching object is found.
+
+Advantage of Flyweight Pattern
+It reduces the number of objects.
+It reduces the amount of memory and storage devices required if the objects are persisted
+
+Usage of Flyweight Pattern
+When an application uses number of objects
+When the storage cost is high because of the quantity of objects.
+When the application does not depend on object identity.
+
+Extrinsic and intrinsic attributes
+A flyweight objects essentially has two kind of attributes – intrinsic and extrinsic.
+An intrinsic state attribute is stored/shared in the flyweight object, and it is independent of flyweight’s context. As the best practice, we should make intrinsic states immutable.
+An extrinsic state varies with flyweight’s context, which is why they cannot be shared. Client objects maintain the extrinsic state, and they need to pass this to a flyweight object during object creation.
+
+Is intrinsic and extrinsic data shareable?
+The intrinsic data is shareable as it is common to all contexts. The extrinsic data is not shared. Client need to pass the information (states) to the flyweights which is unique to it’s context.
+
+
+Real world example of flyweight pattern
+Suppose we have a pen which can exist with/without refill. A refill can be of any color thus a pen can be used to create drawings having N number of colors.
+Here Pen can be flyweight object with refill as extrinsic attribute. All other attributes such as pen body, pointer etc. can be intrinsic attributes which will be common to all pens. A pen will be distinguished by its refill color only, nothing else.
+All application modules which need to access a red pen – can use the same instance of red pen (shared object). Only when a different color pen is needed, application module will ask for another pen from flyweight factory.
+In programming, we can see java.lang.String constants as flyweight objects. All strings are stored in string pool and if we need a string with certain content then runtime return the reference to already existing string constant from the pool – if available.
+In browsers, we can use an image in multiple places in a webpage. Browsers will load the image only one time, and for other times browsers will reuse the image from cache. Now image is same but used in multiple places. It’s URL is intrinsic attribute because it’s fixed and shareable. Images position coordinates, height and width are extrinsic attributes which vary according to place (context) where they have to be rendered.
+
+
+Difference between singleton pattern and flyweight pattern
+	The flyweight pattern is used when we have to create large number of similar objects which are different based on client provided extrinsic attribute.
+	
+
+	
+	
+public class FlyWightDesignPattern {
+
+	public static void main(String[] args) {
+
+		Pen yellowThinPen1 = PenFactory.getThickPen("YELLOW"); // created new pen
+		yellowThinPen1.draw("Hello World !!");
+
+		Pen yellowThinPen2 = PenFactory.getThickPen("YELLOW"); // pen is shared
+		yellowThinPen2.draw("Hello World !!");
+
+		Pen blueThinPen = PenFactory.getThickPen("BLUE"); // created new pen
+		blueThinPen.draw("Hello World !!");
+
+		System.out.println(yellowThinPen1.hashCode());
+		System.out.println(yellowThinPen2.hashCode());
+
+		System.out.println(blueThinPen.hashCode());
+	}
+
+}
+
+interface Pen {
+	public void setColor(String color);
+
+	public void draw(String content);
+}
+
+enum BrushSize {
+	THIN, THICK
+}
+
+class ThickPen implements Pen {
+
+	final BrushSize brushSize = BrushSize.THICK; // intrinsic state - shareable
+	private String color = null; // extrinsic state - supplied by client
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	@Override
+	public void draw(String content) {
+		System.out.println("Drawing THICK content in color : " + color);
+	}
+}
+
+class ThinPen implements Pen {
+
+	final BrushSize brushSize = BrushSize.THIN;
+	private String color = null;
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	@Override
+	public void draw(String content) {
+		System.out.println("Drawing THIN content in color : " + color);
+	}
+}
+
+class PenFactory {
+	private static final HashMap<String, Pen> pensMap = new HashMap<>();
+
+	public static Pen getThickPen(String color) {
+		String key = color + "-THICK";
+
+		Pen pen = pensMap.get(key);
+
+		if (pen != null) {
+			return pen;
+		} else {
+			pen = new ThickPen();
+			pen.setColor(color);
+			pensMap.put(key, pen);
+		}
+
+		return pen;
+	}
+
+	public static Pen getThinPen(String color) {
+		String key = color + "-THIN";
+
+		Pen pen = pensMap.get(key);
+
+		if (pen != null) {
+			return pen;
+		} else {
+			pen = new ThinPen();
+			pen.setColor(color);
+			pensMap.put(key, pen);
+		}
+
+		return pen;
+	}
+
+}
+	

@@ -14,3 +14,9 @@ Java Versions
 
 Resources
 	https://github.com/eugenp/tutorials/tree/master/core-java-modules
+	
+	
+	
+	
+Migration from Java 8 to Java 9 projects
+	https://www.udemy.com/course/java-the-complete-java-developer-course/learn/lecture/9400946#overview

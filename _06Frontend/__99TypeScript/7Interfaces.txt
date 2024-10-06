@@ -1,0 +1,173 @@
+Interfaces
+	Interface can be used as a contract a class can implement & a class has to adhere to.
+	We can inherit multiple interfaces but cann't extends multiple class.
+	Interface can be used as a simple Custom type but not as a Complex type.
+	
+ interface Person {
+  name: string;
+  age: number;
+
+  greet(phrase: string): void;
+}
+
+let user1: Person;
+user1 = {
+  name: 'Max',
+  age: 30,
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+};
+user1.greet('Hi there - I am');
+
+
+Interface & custom type
+type Greetable ={
+    name: string;
+    greet(phrase: string): void;
+  }
+interface & custom type are not exactly same.
+
+Well, one major difference is that interfaces can only be used to describe the structure of an object.
+You can use type for that as well, but instead of a custom type, you can also store other things like
+union types and so on.
+
+What we did early in the course, that sounds like type is therefore more flexible.
+But the other side of the coin is that interface is clearer.
+When you define something as an interface, it's super clear that you want to define the structure of
+an object with that. 
+  
+
+Using Interfaces with Classes
+interface Greetable {
+    name: string;
+    greet(phrase: string): void;
+  }
+  
+  class Person implements Greetable {
+    name: string;
+    age = 30;
+ 
+    constructor(n: string) {
+      this.name = n;
+    } 
+    greet(phrase: string) {
+      console.log(phrase + ' ' + this.name);
+    }
+  }
+  let user1: Greetable;
+  user1 = new Person('Max');
+  user1.greet('Hi there - I am');
+  console.log(user1);
+
+
+
+
+Why Interfaces?
+ Interfaces describe objects (or function types) but can't store/ describe arbitrary types like union types.
+
+
+Readonly Interface Properties
+	interface Named {
+  		readonly name: string;
+	}
+	
+	
+Extending Interfaces
+	interface Named {
+  	readonly name: string;
+	}
+
+	interface Greetable extends Named {
+  	greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name: string;//Necessary
+  age = 30;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+}
+let user1: Greetable;
+user1 = new Person('Max');
+// user1.name = 'Manu';
+user1.greet('Hi there - I am');
+console.log(user1);
+	
+
+Interfaces as Function Types
+// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+    (a: number, b: number): number;
+  }
+  let add: AddFn;
+  add = (n1: number, n2: number) => {
+    return n1 + n2;
+  };
+  
+
+Optional Parameters & Properties
+	We can mark method as Optional 	optional!=>myMethos?(){.....}
+	
+ 	// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+    (a: number, b: number): number;
+  }
+  
+  let add: AddFn;
+  add = (n1: number, n2: number) => {
+    return n1 + n2;
+  };
+  
+  interface Named {
+    readonly name?: string;  //Optional properties by marking ?, 
+    outputName?: string;
+  }
+  
+  interface Greetable extends Named {
+    greet(phrase: string): void;
+  }
+  
+  class Person implements Greetable {
+    name?: string;
+    age = 30;
+  
+    constructor(n?: string) {
+      if (n) {
+        this.name = n;
+      }
+    }
+  
+    greet(phrase: string) {
+      if (this.name) {
+        console.log(phrase + ' ' + this.name);
+      } else {
+        console.log('Hi!');
+      }
+    }
+  }
+ 
+  let user1: Greetable;
+  user1 = new Person();
+  // user1.name = 'Manu';
+  user1.greet('Hi there - I am');
+  console.log(user1);
+  
+  
+Compiling Interfaces to JavaScript
+	Interface is a purely TypeScript feature.
+	Interfaces are not compiled to JavaScript in ES5.
+	
+	Q)Which of the following example is NOT a valid use-case for an interface?
+	A)We want to store a Union type. Interfaces describe objects (or function types) 
+		but can't store/ describe arbitrary types like union types.
+		
+Useful Resources & Links	
+	More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+	More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/2/objects.html
