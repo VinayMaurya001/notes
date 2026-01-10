@@ -37,3 +37,9 @@ See [Spring Boot Basics](#spring-boot-basics)
 ## Architecture Overview
 
 ![Service Architecture](images/service-architecture.png)
+
+| Layer | Technology |
+|------|-----------|
+| API | Spring MVC |
+| Service | Spring Core |
+| DB | JPA / Hibernate |
