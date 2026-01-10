@@ -45,3 +45,13 @@ See [Spring Boot Basics](#spring-boot-basics)
 | DB | JPA / Hibernate |
 
 > This endpoint should not be exposed publicly.
+
+---
+
+> **Note:** Always externalize configuration using `application.yml`.
+
+---
+
+> **Note:** Health endpoints should be lightweight and fast.
+
+---
