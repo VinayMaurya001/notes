@@ -20,3 +20,7 @@ Next lesson: **links & references (connecting knowledge)**.
 
 See [REST API basics](rest-api.md)
 [Database section](#database-layer)
+
+Spring Boot docs are available [here][spring-docs].
+
+[spring-docs]: https://spring.io/projects/spring-boot
