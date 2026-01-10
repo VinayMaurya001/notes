@@ -43,3 +43,5 @@ See [Spring Boot Basics](#spring-boot-basics)
 | API | Spring MVC |
 | Service | Spring Core |
 | DB | JPA / Hibernate |
+
+> This endpoint should not be exposed publicly.
