@@ -8,3 +8,10 @@ Key features:
 - Opinionated defaults
 ## REST API Design
 ## Database Layer
+---
+
+### One check question
+👉 When viewing on GitHub, do you see **colored Java syntax**?
+
+Reply **yes/no**.  
+Next lesson: **links & references (connecting knowledge)**.
