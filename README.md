@@ -33,3 +33,7 @@ Spring Boot docs are available [here][spring-docs].
 See [Spring Boot Basics](#spring-boot-basics)
 
 ![JVM Memory](https://example.com/jvm-memory.png)
+
+## Architecture Overview
+
+![Service Architecture](images/service-architecture.png)
