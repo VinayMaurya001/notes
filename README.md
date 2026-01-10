@@ -31,3 +31,5 @@ Spring Boot docs are available [here][spring-docs].
 - [REST API Guide](https://restfulapi.net/)
 
 See [Spring Boot Basics](#spring-boot-basics)
+
+![JVM Memory](https://example.com/jvm-memory.png)
