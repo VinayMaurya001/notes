@@ -24,3 +24,10 @@ See [REST API basics](rest-api.md)
 Spring Boot docs are available [here][spring-docs].
 
 [spring-docs]: https://spring.io/projects/spring-boot
+
+## References
+
+- [Spring Boot Docs](https://spring.io/projects/spring-boot)
+- [REST API Guide](https://restfulapi.net/)
+
+See [Spring Boot Basics](#spring-boot-basics)
