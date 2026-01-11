@@ -66,7 +66,7 @@ One-line explanation.
 
 ### Example
 
-```java
+
 // example
 
 This works because:
