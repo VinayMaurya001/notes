@@ -55,3 +55,16 @@ See [Spring Boot Basics](#spring-boot-basics)
 > **Note:** Health endpoints should be lightweight and fast.
 
 ---
+
+## Concept Name
+
+One-line explanation.
+
+### Why it matters
+- Reason 1
+- Reason 2
+
+### Example
+
+```java
+// example
