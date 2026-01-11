@@ -131,3 +131,10 @@ Never reverse this order.
 ## Mini exercise (important)
 
 Pick **one section** in your `README.md` and rewrite it using this structure:
+
+
+// code
+public static 
+
+
+public static 
