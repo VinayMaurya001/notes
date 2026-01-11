@@ -147,3 +147,5 @@ public static
 Reply **yes/no**.
 
 Next lesson: **structuring a full tutorial repo (folders, files, naming)**.
+
+← [Previous](01-spring-boot-basics.md) | [Next](03-database-layer.md)
