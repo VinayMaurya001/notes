@@ -138,3 +138,12 @@ public static
 
 
 public static 
+
+---
+
+### Check question
+👉 After rewriting, does the section feel **easier to scan** than before?
+
+Reply **yes/no**.
+
+Next lesson: **structuring a full tutorial repo (folders, files, naming)**.
