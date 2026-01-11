@@ -68,3 +68,66 @@ One-line explanation.
 
 ```java
 // example
+
+This works because:
+- Readers skim first
+- Code anchors understanding
+- Bullets reinforce memory
+
+---
+
+## 2. Paragraph discipline (mobile-first)
+
+**Bad:**
+- Long paragraphs
+- Mixed ideas
+- No visual breaks
+
+**Good:**
+- 1–2 lines max
+- Lists over prose
+- Headings every 6–8 lines
+
+Remember: most readers are on **mobile**.
+
+---
+
+## 3. Naming sections properly
+
+Use **noun phrases**, not sentences.
+
+Good:
+- `## Exception Handling`
+- `## Database Transactions`
+
+Bad:
+- `## How to handle exceptions in Spring Boot`
+
+Why: better TOC, better SEO, cleaner navigation.
+
+---
+
+## 4. Explain *after* the code
+
+Always:
+1. Show code
+2. Explain behavior
+3. List caveats
+
+Never reverse this order.
+
+---
+
+## 5. Anti-patterns to avoid
+- “As we know…”
+- Huge code blocks without explanation
+- Screenshots of code
+- Mixing multiple concepts in one section
+
+0
+
+---
+
+## Mini exercise (important)
+
+Pick **one section** in your `README.md` and rewrite it using this structure:
